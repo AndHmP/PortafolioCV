@@ -1,0 +1,63 @@
+.DesplegableProfile{
+    height: auto;
+
+    &>.ContenedorDesplegable{
+        width: calc(100% - 15px);
+        height: auto;
+        border-radius: 12px;
+        padding: 0px 0px 10px 0px;
+        border: 1.5px solid var(--var-color-03-perfil);
+        overflow: hidden;
+        text-align: start !important;
+
+        &>.BtnActiveDesplegable{
+            top: -9px;
+            left: 0px;
+            padding: 7px 29px 7px 2px;
+            border-radius: 0px 15px 15px 0px;
+            width: auto;
+            height: auto;
+            border: none;
+            outline: none;
+            background-color: var(--var-color-03-perfil);
+            cursor: pointer;
+            color: var(--var-color-01-perfil);
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.7s;
+
+            &::before{
+                content: '';
+                position: absolute;
+                width: 15px;
+                height: 100%;
+                top: 0px;
+                right: 100%;
+                background-color: var(--var-color-03-perfil);
+                border-radius: 15px 0px 0px 15px;
+                transition: 0.7s;
+
+            }
+            &>svg{
+                right: 12px;
+                transform: rotate(180deg);
+                transition: 0.8s;
+
+                &>path{
+                    stroke: var(--var-color-01-perfil);
+                    transition: 0.7s;
+                }
+            }
+        }
+
+        &>.Contenido{
+            transition: 0.8s;
+            overflow: hidden;
+            width: 90%;
+        }
+    }
+}
+.DesplegableProfile>.ContenedorDesplegable.active>legend>svg{
+    transform: rotate(0deg);
+}

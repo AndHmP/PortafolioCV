@@ -1,0 +1,161 @@
+.Dia24 {
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background-color: #57D895;
+
+    &>button {
+        width: 170px;
+        height: 40px;
+        border-radius: 35px;
+        border: 1px solid #fff;
+        background-color: transparent;
+
+        text-transform: uppercase;
+        color: #fff;
+        font-family: "Open Sans", Helvetica, sans-serif;
+        font-size: 15px;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: 0.5s;
+
+        z-index: 4;
+
+        &.active {
+            animation: AnimacionContenedorBoton01 0.5s linear forwards;
+        }
+
+        &:hover {
+            background-color: #37BE77;
+        }
+    }
+}
+
+@keyframes AnimacionContenedorBoton01 {
+    0% {
+        width: 170px;
+        color: #fff;
+        opacity: 1;
+    }
+
+    10% {
+        width: 170px;
+        color: #fff;
+        opacity: 1;
+    }
+
+    50% {
+        color: #ffffff00;
+    }
+
+    100% {
+        width: 40px;
+        color: #ffffff00;
+        opacity: 0;
+    }
+}
+.Dia24>img {
+    z-index: 3;
+    width: 22px;
+    aspect-ratio: 1;
+    object-fit: contain;
+    opacity: 0;
+
+    &.active{
+        animation: AnimacionImg 0.1s linear 1.3s forwards;
+    }
+}
+
+@keyframes AnimacionImg {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.Dia24>.iconUp {
+    z-index: 2;
+
+    &>svg {
+        position: absolute;
+        z-index: 4;
+    }
+
+    &>svg>circle {
+        stroke-width: 1px;
+        stroke-dasharray: 122.5224;
+        transform-origin: 21px 21px;
+        transform: rotate(-90deg);
+        fill: none;
+        stroke: #ffffff00;
+    }
+    &.active>svg>circle {
+        animation: AnimacionCircleP01 1s linear 0.5s forwards;
+    }
+    &.active::after {
+        content: '';
+        width: 38px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        position: absolute;
+        background-color: transparent;
+        border: 1px solid #37be7600;
+        z-index: 2;
+        animation: AnimacionBorder 0.3s linear 0.5s forwards;
+    }
+
+    &.active::before{
+        content: '';
+        position: absolute;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        opacity: 0;
+        border: 2.5px solid #ffffff;
+        animation: AnimacionBorderBefore 0.6s linear 1.3s forwards;
+    }
+}
+@keyframes AnimacionBorderBefore {
+    0%{
+        opacity: 1;
+        width: 35px;
+    }
+    100%{
+        opacity: 0;
+        width: 70px;
+    }
+}
+@keyframes AnimacionBorder {
+    0%{
+        border: 1px solid #37be7600;
+    }
+    100%{
+        border: 1px solid #37BE77;
+    }
+}
+
+@keyframes AnimacionCircleP01 {
+    0% {
+        stroke-dashoffset: 122.5224;
+        stroke: #fff;
+        fill: none;
+    }
+
+    80% {
+        stroke-dashoffset: 0;
+        stroke: #fff;
+        fill: none;
+    }
+
+    90% {
+        stroke-dashoffset: 0;
+        stroke: #37BE77;
+        fill: #fff;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        stroke: #37BE77;
+        fill: #fff;
+    }
+}

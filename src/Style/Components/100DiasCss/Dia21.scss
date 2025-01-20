@@ -1,0 +1,59 @@
+.Dia21{
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background-color: #2C2E2E;
+
+    &>.pacMan{
+        width: 80px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: #F4D146;
+        clip-path: polygon(0% 0%, 100% 0%, 100% 20%, 50% 50%, 100% 80%, 100% 100%, 0% 100%);
+        animation: PacMan 0.8s linear infinite;
+
+        &>.ojo{
+            width: 9px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background-color: #2C2E2E;
+        }
+    }
+}
+
+@keyframes PacMan {
+    0%{
+        clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 50% 50%, 100% 50%, 100% 100%, 0% 100%);
+        padding: 15px 25px 0px 0px;
+    }
+    50%{
+        clip-path: polygon(0% 0%, 100% 0%, 100% 15%, 50% 50%, 100% 85%, 100% 100%, 0% 100%);
+        padding: 12px 29px 0px 0px;
+    }
+    100%{
+        clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 50% 50%, 100% 50%, 100% 100%, 0% 100%);
+        padding: 15px 25px 0px 0px;
+    }
+}
+
+.Dia21 .dots{
+    height: 14px;
+	width: 135px;
+    left: 50%;
+    stroke: #F4D146;
+	stroke-width: 12px;
+    stroke-dasharray: 0px 45px;
+	stroke-linecap: round;
+    stroke-dashoffset: 24;
+    animation: points 0.6s linear infinite;
+
+}
+@keyframes points {
+	0% {
+		stroke-dashoffset: 24;
+		transform: translate3d(0,0,0);
+	}
+	100% {
+		stroke-dashoffset: 70;
+	}
+}

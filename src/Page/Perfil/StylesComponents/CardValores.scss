@@ -1,0 +1,26 @@
+.CardValores{
+    width: 20px;
+    aspect-ratio: 1;
+    background-color: transparent;
+    padding: 15px 12px;
+    overflow: hidden;
+    gap: 6px;
+    transition: 0.7s;
+
+    &>.titulo{
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 15px;
+        color: var(--var-color-05-perfil);
+        text-transform: uppercase;
+        transition: 0.7s;
+    }
+    &>.contenido{
+        height: 100%;
+        font-size: 13px;
+        line-height: 13px;
+        color: var(--var-color-05-perfil);
+        font-weight: 400;
+        transition: 0.7s;
+    }
+}

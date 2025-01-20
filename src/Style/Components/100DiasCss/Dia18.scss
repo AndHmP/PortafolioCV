@@ -1,0 +1,100 @@
+.Dia18 {
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background:
+        linear-gradient(to bottom,
+            #444444 50%,
+            #37D493 50%);
+    background-size: 100%;
+
+
+    &>.circleP {
+        aspect-ratio: 1;
+        overflow: hidden;
+
+        &>.cap-1 {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background-color: #444444;
+            backface-visibility: visible;
+            animation: rotar 4s ease-in-out infinite;
+        }
+
+        &>.cap-2 {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background-color: #37D493;
+            backface-visibility: hidden;
+            box-shadow:  0px 10px 9px #37D493;
+            animation: rotar 4s ease-in-out infinite;
+        }
+    }
+}
+
+@keyframes rotar {
+    0% {
+        transform: rotateX(90deg);
+    }
+
+    10%{
+        transform: rotateX(30deg);
+    }
+    20%{
+        transform: rotateX(150deg);
+    }
+
+    28%{
+        transform: rotateX(60deg);
+    }
+    32%{
+        transform: rotateX(120deg);
+    }
+
+
+    37%{
+        transform: rotateX(80deg);
+    }
+    42%{
+        transform: rotateX(100deg);
+    }
+    45%{
+        transform: rotateX(85deg);
+    }
+
+    50% {
+        transform: rotateX(90deg);
+    }
+
+
+
+
+    60%{
+        transform: rotateX(150deg);
+    }
+    70%{
+        transform: rotateX(30deg);
+    }
+
+    78%{
+        transform: rotateX(120deg);
+    }
+    82%{
+        transform: rotateX(60deg);
+    }
+    87%{
+        transform: rotateX(100deg);
+    }
+    92%{
+        transform: rotateX(80deg);
+    }
+    95%{
+        transform: rotateX(95deg);
+    }
+
+
+
+    100% {
+        transform: rotateX(90deg);
+    }
+}

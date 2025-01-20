@@ -1,0 +1,170 @@
+.Dia22{
+    height: 90%;
+    aspect-ratio:1;
+    border-radius: 4px;
+    background-color: #28404E;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    &>.ContenedorData{
+        width: 160px;
+        height: 210px;
+        display: grid;
+        gap: 10px 15px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+        font-family: "Open Sans", Helvetica, sans-serif;
+
+        
+        &>.titulo{
+            grid-column: 2 span;
+            grid-row: 1 span;
+            padding: 0px 10px;
+            text-transform: uppercase;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 300;
+            line-height: 15px;
+
+            &>strong{
+                font-size: 16px;
+                font-weight: 500;
+            }
+        }
+        &>.grafico01{
+            grid-column: 2 span;
+            grid-row: 4 span;
+            &>svg{
+                position: relative;
+                z-index: 4;
+            }
+            &>svg>circle{
+                stroke-width: 8px;
+                stroke: #27E1AE;
+                fill: none;
+                stroke-linecap: round;
+                stroke-dasharray: 238.76;
+                transform: rotate(-90deg);
+                transform-origin: 60px 45px; 
+                animation: AnimacionCircle01 1.5s ease-in-out forwards;
+            }
+
+            &::before{
+                content: '';
+                position: absolute;
+                width: 84px;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                background-color: #1B2A33;
+                z-index: 2;
+            }
+            &::after{
+                content: '';
+                position: absolute;
+                width: 69px;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                background-color: #233945;
+                z-index: 3;
+            }
+            &>.dataCircle01{
+                padding-top: 8px;
+                z-index: 5;
+                width: 40px;
+                aspect-ratio: 1;
+                font-size: 11px;
+                color: #64817E;
+                line-height: 16px;
+
+                &>strong{
+                    font-size: 18px;
+                    color: #fff;
+                    font-weight: 500;
+                }
+            }
+        }
+        &>.grafico02,
+        &>.grafico03{
+            grid-column: 1 span;
+            grid-row: 3 span;
+            &>svg{
+                position: relative;
+                z-index: 4;
+            }
+            &>svg>circle{
+                stroke-width: 5px;
+                stroke: #5CE1EC;
+                fill: none;
+                stroke-linecap: round;
+                stroke-dasharray: 157.08;
+                transform: rotate(-90deg);
+                transform-origin: 30px 30px;
+
+            }
+            &::before{
+                content: '';
+                position: absolute;
+                width: 55px;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                background-color: #1B2A33;
+                z-index: 2;
+            }
+            &::after{
+                content: '';
+                position: absolute;
+                width: 45px;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                background-color: #233945;
+                z-index: 3;
+            }
+            &>.dataCircle02{
+                padding-top: 5px;
+                z-index: 5;
+                width: 20px;
+                aspect-ratio: 1;
+                font-size: 8px;
+                color: #64817E;
+                line-height: 11px;
+
+                &>strong{
+                    font-size: 13px;
+                    color: #fff;
+                    font-weight: 500;
+                }
+            }
+        }
+        &>.grafico02>svg>circle{
+            animation: AnimacionCircle02 1.5s ease-in-out forwards;
+        }
+        &>.grafico03>svg>circle{
+            animation: AnimacionCircle03 1.5s ease-in-out forwards;
+        }
+    }
+}
+
+@keyframes AnimacionCircle01 {
+    0%{
+        stroke-dashoffset: 238.76;
+    }
+    100%{
+        stroke-dashoffset: 48;
+    } 
+}
+@keyframes AnimacionCircle02 {
+    0%{
+        stroke-dashoffset: 157.08;
+    }
+    100%{
+        stroke-dashoffset: 60;
+    } 
+}
+@keyframes AnimacionCircle03 {
+    0%{
+        stroke-dashoffset: 157.08;
+    }
+    100%{
+        stroke-dashoffset: 95;
+    } 
+}

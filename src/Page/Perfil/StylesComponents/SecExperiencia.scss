@@ -1,0 +1,46 @@
+.SecExperiencia{
+    gap: 8px;
+    min-height: 250px;
+
+    &>.Linea{
+        width: 20px;
+
+        &>.LineaBa{
+            width: 3px;
+            background-color: var(--var-color-01-perfil);
+            transition: 0.7s;
+        }
+        &>.PuntoB{
+            width: 10px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background-color: var(--var-color-01-perfil);
+            transition: 0.7s;
+        }
+    }
+    &>.Contenido{
+        padding: 4% 0px;
+
+        &>.SeccOneExp{
+            width: 100%;
+            padding-bottom: 4px;
+            gap: 3px;
+
+            &>.titulo{
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 15px;
+                color: var(--var-color-01-perfil);
+                transition: 0.7s;
+            }
+            &>.contenido{
+                font-size: 13px;
+                font-weight: 400;
+                color: var(--var-color-01-perfil);
+                height: 100%;
+                overflow: hidden;
+                transition: 0.7s;
+            }
+        }
+    }
+}

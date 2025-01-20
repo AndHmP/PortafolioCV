@@ -1,0 +1,286 @@
+.Dia23 {
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background-color: #E16D6C;
+
+    &>.MarcoAnimado {
+        background-color: #fff;
+        animation: AnimacionMarco 2s linear forwards;
+
+    }
+
+    &>.titulo01{
+        width: 210px;
+        height: 0px;
+        font-size: 36px;
+        line-height: 35px;
+        text-transform: uppercase;
+        font-weight: 1000;
+        font-family: "Open Sans", Helvetica, sans-serif;
+        color: #fff;
+        overflow: hidden;
+        animation: AnimacionTitulo01 0.4s linear 1.4s forwards;
+    }
+
+    &>.subtitulo01{
+        font-family: "Open Sans", Helvetica, sans-serif;
+        color: #fff;
+        font-size: 22px;
+        line-height: 20px;
+        font-weight: 300;
+        text-transform: uppercase;
+        opacity: 0;
+        visibility: hidden;
+        animation: AnimacionSubtitulo01 0.4s linear 1.7s forwards;
+    }
+    
+    &>.subtitulo02{
+        transform: translateY(31px);
+        font-family: "Open Sans", Helvetica, sans-serif;
+        color: #fff;
+        font-size: 22px;
+        line-height: 20px;
+        font-weight: 300;
+        opacity: 0;
+        visibility: hidden;
+        text-transform: uppercase;
+        animation: AnimacionSubtitulo02 0.4s ease-in-out 1.7s forwards;
+    }
+}
+
+@keyframes AnimacionTitulo01 {
+    0%{
+        height: 0px;
+    }
+    100%{
+        height: 40px;
+    }
+    
+}
+@keyframes AnimacionSubtitulo01 {
+    0%{
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-33px) translateX(-20px);
+    }
+    100%{
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-33px) translateX(0px);
+    }
+}
+@keyframes AnimacionSubtitulo02 {
+    0%{
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(33px) translateX(20px);
+    }
+    100%{
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(33px) translateX(0px);
+    }
+}
+
+@keyframes AnimacionMarco {
+    0% {
+        height: 6px;
+        width: 6px;
+        border-radius: 50%;
+        transform: scale(6);
+    }
+
+    15% {
+        height: 6px;
+        width: 6px;
+        border-radius: 50%;
+        transform: scale(6);
+    }
+
+    19% {
+        height: 6px;
+        width: 6px;
+        border-radius: 50%;
+        transform: scale(7);
+    }
+
+    33% {
+        height: 6px;
+        width: 6px;
+        border-radius: 50%;
+        transform: scale(0);
+    }
+
+    33.001% {
+        height: 3px;
+        width: 0px;
+        border-radius: 0px;
+        transform: scale(1);
+    }
+
+    47% {
+        height: 3px;
+        width: 220px;
+        border-radius: 0px;
+        transform: scale(1);
+    }
+
+    53% {
+        height: 3px;
+        width: 220px;
+        border-radius: 0px;
+        transform: scale(1);
+        clip-path: polygon(0% 0%,
+                50% 0%,
+                50% 100%,
+                50% 100%,
+                50% 0%,
+                100% 0%,
+                100% 100%,
+                0% 100%);
+    }
+
+    70% {
+        height: 3px;
+        width: 220px;
+        border-radius: 0px;
+        transform: scale(1);
+        clip-path: polygon(0% 0%,
+                0% 0%,
+                0% 100%,
+
+                100% 100%,
+                100% 0%,
+                100% 0%,
+                100% 100%,
+                0% 100%);
+    }
+
+    70.001% {
+        height: 50px;
+        width: 220px;
+        border-radius: 0px;
+        transform: scale(1);
+        clip-path: polygon(0% 50%,
+                3px 50%,
+                3px 50%,
+                3px 50%,
+
+
+                3px 50%,
+                217px 50%,
+                217px 50%,
+                217px 50%,
+                217px 50%,
+                100% 50%,
+
+                100% 50%,
+                217px 50%,
+                217px 50%,
+                217px 50%,
+                217px 50%,
+
+
+                3px 50%,
+                3px 50%,
+                3px 50%,
+                3px 50%,
+                0% 50%);
+    }
+    80% {
+        height: 50px;
+        width: 220px;
+        border-radius: 0px;
+        transform: scale(1);
+        clip-path: polygon(0% 0%,
+                3px 0%,
+                3px 3px,
+                3px 3px,
+                3px 50%,
+
+
+                217px 50%,
+                217px 3px,
+                217px 3px,
+                217px 0%,
+                100% 0%,
+
+                100% 100%,
+                217px 100%,
+                217px 47px,
+                217px 47px,
+                217px 50%,
+
+
+                3px 50%,
+                3px 47px,
+                3px 47px,
+                3px 100%,
+                0% 100%);
+    }
+    90% {
+        height: 50px;
+        width: 220px;
+        border-radius: 0px;
+        transform: scale(1);
+        clip-path: polygon(0% 0%,
+                3px 0%,
+                3px 3px,
+                3px 3px,
+                3px 50%,
+
+
+                217px 50%,
+                217px 3px,
+                217px 3px,
+                217px 0%,
+                100% 0%,
+
+                100% 100%,
+                217px 100%,
+                217px 47px,
+                217px 47px,
+                217px 50%,
+
+
+                3px 50%,
+                3px 47px,
+                3px 47px,
+                3px 100%,
+                0% 100%);
+    }
+
+    100% {
+        height: 50px;
+        width: 220px;
+        border-radius: 0px;
+        transform: scale(1);
+        clip-path: polygon(0% 0%,
+                20px 0%,
+                20px 3px,
+                3px 3px,
+
+
+                3px 50%,
+                217px 50%,
+                217px 3px,
+                200px 3px,
+                200px 0%,
+                100% 0%,
+
+                100% 100%,
+                200px 100%,
+                200px 47px,
+                217px 47px,
+                217px 50%,
+
+
+                3px 50%,
+                3px 47px,
+                20px 47px,
+                20px 100%,
+                0% 100%);
+    }
+
+}

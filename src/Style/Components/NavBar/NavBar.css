@@ -1,0 +1,350 @@
+.NavBar-S {
+    width: 55px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px #0000005f;
+    transition: width 1s;
+    z-index: 50;
+}
+
+.NavBar-S.Active {
+    width: 200px;
+}
+
+.NavBar-S::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: var(--var-back-ground-nav-bar);
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 10;
+    transition: background-color 0.7s;
+}
+
+
+
+
+
+/* BOTON NAVBAR */
+.NavBar-S .BtnActiveNav {
+    width: 28px;
+    aspect-ratio: 1;
+    border: 0px solid transparent;
+    right: -14px;
+    top: 14px;
+    border-radius: 50%;
+    display: flex;
+    background-color: var(--var-back-ground-nav-bar);
+    box-shadow: 0px 0px 10px #0000005f;
+    z-index: 9;
+    cursor: pointer;
+    padding-left: 15px;
+    font-size: 11px;
+    font-weight: bolder;
+    color: var(--var-color-02-nav-bar);
+    transition: background-color 0.7s;
+}
+
+.NavBar-S .BtnActiveNav i {
+    transform: rotate(0deg);
+    transition: 1s;
+}
+
+.NavBar-S .BtnActiveNav i.Active {
+    transform: rotate(180deg);
+
+}
+
+
+
+
+
+/* CONTENIDO */
+
+.NavBar-S .ContenidoNavbar {
+    z-index: 11;
+    height: 100%;
+    width: 100%;
+    padding: 18px 10px 10px 10px;
+}
+
+
+
+
+
+/* SECCION 01 LOGO */
+.NavBar-S .ContenidoNavbar .Sec01Log {
+    overflow: hidden;
+    gap: 10px;
+    padding: 0px 10px;
+    min-height: 35px;
+    color: var(--var-color-02-nav-bar);
+    transition: color 0.7s;
+}
+
+.NavBar-S .ContenidoNavbar .Sec01Log i {
+    font-size: 20px;
+}
+
+.NavBar-S .ContenidoNavbar .Sec01Log h5 {
+    margin: 0px;
+    white-space: nowrap;
+}
+
+
+/* SECCION 02 SEARCH */
+.NavBar-S .ContenidoNavbar .InputSearch {
+    margin: 15px 0px;
+    border-radius: 5px;
+    border: 1px solid var(--var-color-01-nav-bar);
+    color: var(--var-color-01-nav-bar);
+    transition: 1s;
+    overflow: hidden;
+    min-height: 35px;
+}
+
+.NavBar-S .ContenidoNavbar .InputSearch input {
+    font-size: 12px;
+    outline: 0px solid transparent;
+    border: 0px solid transparent;
+    background-color: transparent;
+    color: var(--var-color-01-nav-bar);
+    height: 80%;
+    left: 36px;
+    max-width: 80%;
+    font-weight: 500;
+    transition: 0.7s;
+}
+
+.NavBar-S .ContenidoNavbar .InputSearch i {
+    font-size: 12px;
+    width: 35px;
+    height: 28px;
+    border-radius: 4px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0px
+}
+
+
+
+
+/* SECCION RUTA 01 */
+.NavBar-S .ContenidoNavbar>div:nth-child(3) {
+    overflow-y: auto;
+    height: 100%;
+}
+
+.NavBar-S .ContenidoNavbar .SecionEnvioRuta {
+    margin: 2px 0px;
+    border-radius: 5px;
+    transition: 1s;
+    overflow: hidden;
+    height: 35px;
+    min-height: 35px;
+    color: var(--var-color-02-nav-bar);
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.NavBar-S .ContenidoNavbar .SecionEnvioRuta:hover {
+    background-color: var(--var-color-03-nav-bar);
+    color: var(--var-color-01-nav-bar);
+}
+
+.NavBar-S .ContenidoNavbar .SecionEnvioRuta i:nth-child(1) {
+    font-size: 13px;
+    min-width: 35px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.NavBar-S .ContenidoNavbar .SecionEnvioRuta p {
+    font-size: 12px;
+    background-color: transparent;
+    height: min-content;
+    font-weight: 600;
+    margin: 0px;
+    min-width: 60%;
+}
+
+.NavBar-S .ContenidoNavbar .SecionEnvioRuta i:nth-child(3) {
+    font-size: 13px;
+    min-width: 35px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(0deg);
+    transition: 1s;
+}
+
+.NavBar-S .ContenidoNavbar .SecionEnvioRuta i:nth-child(3).Active {
+    transform: rotate(180deg);
+}
+
+
+
+
+/* SUBSECCION */
+.NavBar-S .ContenidoNavbar .SubSecionContenedor {
+    overflow: hidden;
+    min-height: 0px;
+    max-height: 0px;
+    transition: 1s;
+}
+
+.NavBar-S .ContenidoNavbar .SubSecionContenedor>div {
+    font-size: 11.5px;
+    background-color: transparent;
+    height: min-content;
+    font-weight: 600;
+    color: var(--var-color-02-nav-bar);
+}
+
+.NavBar-S .ContenidoNavbar .SubSecionContenedor>div>div:nth-child(1) {
+    min-width: 35px;
+    height: 30px;
+    background-color: transparent;
+}
+
+.NavBar-S .ContenidoNavbar .SubSecionContenedor>div>div:nth-child(1)::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background-color: var(--var-color-04);
+}
+
+.NavBar-S .ContenidoNavbar .SubSecionContenedor>div>div:nth-child(2) {
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 10.5px;
+    transition: 1s;
+}
+
+.NavBar-S .ContenidoNavbar .SubSecionContenedor>div>div:nth-child(2):hover {
+    font-size: 11px;
+}
+
+
+
+
+/* SECCION FINAL */
+.NavBar-S .ContenidoNavbar>div:nth-child(4) {
+    border-top: 2px solid var(--var-color-02-nav-bar);
+    margin: 15px 0px 0px 0px;
+}
+
+.NavBar-S .ContenidoNavbar>div:nth-child(4)>div.Alterb {
+    margin: 2px 0px;
+    border-radius: 5px;
+    transition: 1s;
+    overflow: hidden;
+    height: 35px;
+    min-height: 35px;
+    color: var(--var-color-02-nav-bar);
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.NavBar-S .ContenidoNavbar>div:nth-child(4)>div.Alterb:hover {
+    background-color: var(--var-color-03-nav-bar);
+    color: var(--var-color-01-nav-bar);
+}
+
+.NavBar-S .ContenidoNavbar>div:nth-child(4)>div.Alterb i:nth-child(1) {
+    font-size: 13px;
+    min-width: 35px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.NavBar-S .ContenidoNavbar>div:nth-child(4)>div.Alterb p {
+    font-size: 12px;
+    background-color: transparent;
+    height: min-content;
+    font-weight: 600;
+    margin: 0px;
+    min-width: 60%;
+}
+
+
+/* SECCION PROFILE */
+.NavBar-S .ContenidoNavbar>div:nth-child(4) .ProfileSecNav {
+    overflow: hidden;
+    padding: 5px 0px;
+    background-color: transparent;
+    transition: 1s;
+    border-radius: 5px;
+    color: var(--var-color-02-nav-bar);
+}
+
+.NavBar-S .ContenidoNavbar>div:nth-child(4) .ProfileSecNav:hover {
+    background-color: var(--var-color-03-nav-bar);
+    color: var(--var-color-01-nav-bar);
+}
+
+.NavBar-S .ContenidoNavbar>div:nth-child(4) .ProfileSecNav>div:nth-child(1) {
+    min-width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.NavBar-S .ContenidoNavbar>div:nth-child(4) .ProfileSecNav>div:nth-child(2) {
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.NavBar-S .ContenidoNavbar>div:nth-child(4) .ProfileSecNav>div:nth-child(1) img {
+    width: 26px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.NavBar-S .ContenidoNavbar>div:nth-child(4) .ProfileSecNav p {
+    margin: 0px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.NavBar-S .ContenidoNavbar>div:nth-child(4) .ProfileSecNav p:nth-child(2) {
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.NavBar-S .ContenidoNavbar>div:nth-child(4) .ProfileSecNav>i {
+    min-width: 26px;
+    height: 35px;
+    font-size: 13px;
+    border-radius: 4px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.NavBar-S .ContenidoNavbar>div:nth-child(4) .ProfileSecNav .iconLoad {
+    font-size: 15px;
+    background-color: var(--var-color-05);
+    border-radius: 5px;
+}

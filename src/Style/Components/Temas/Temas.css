@@ -1,0 +1,26 @@
+.Temas{
+    bottom: 20px;
+    right: 20px;
+    background-color: #fff;
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 80;
+}
+.Temas>div{
+    width: 100%;
+    transition: 1s;
+    top: 0px;
+}
+.Temas.Active>div{
+    top: -40px;
+}
+.Temas>div>i{
+    width: 100%;
+    font-size: 17px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

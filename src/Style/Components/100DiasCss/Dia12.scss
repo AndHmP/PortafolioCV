@@ -1,0 +1,109 @@
+.Dia12 {
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background-color: #4CB6DE;
+    padding: 20px;
+    position: relative;
+
+    &::before{
+        content: '„';
+        position: absolute;
+        z-index: 2;
+        font-family:Arial;
+        font-size: 180px;
+        line-height: 0px;
+        color: #6AC2E3;
+        left: 3px;
+        top: 0%;
+    }
+
+    &>.cita {
+        text-align: left;
+        padding-top: 20px;
+        width: 100%;
+        margin: 0px !important;
+        font-family: "Open Sans", Helvetica, sans-serif;
+        color: #fff;
+        font-size: 15.8px;
+        display: inline;
+        position: relative;
+        z-index: 12;
+
+        &>section {
+            background-color: #286F8A;
+            display: inline;
+            padding: 0px 5px 3px 5px;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            
+            &:hover>.extraDate{
+                top: -350%;
+                visibility: visible;
+                opacity: 1;
+            }
+
+            &>.extraDate {
+                position: absolute;
+                top: -390%;
+                left: 50%;
+                transform: translate(-50%, -0%);
+                width: 225%;
+                height: 87px;
+                z-index: 4;
+                visibility: hidden;
+                opacity: 0;
+                transition: 1s;
+                cursor: text;
+
+                &>div:nth-child(1){
+                    background-color: #fff;
+                    font-size: 10px;
+                    padding: 4px 8px;
+                    color: #286F8A;
+                    gap: 4px;
+
+                    &>i{
+                        position: relative;
+                        bottom: -1.5px;
+                        font-size: 10px;
+                        transform: scale(0.8);
+                        transition: 0.5s;
+
+                        &:hover{
+                            transform: scale(1);
+                        }
+                    }
+                }
+                &>div:nth-child(2){
+                    background-color: #286F8A;
+                    font-size: 10px;
+                    padding: 7px 8px;
+                    color: #fff;
+                    position: relative;
+                    &>strong{
+                        font-weight: 700;
+                    }
+                    &::before{
+                        content: '';
+                        width: 14px;
+                        height: 7px;
+                        background-color: #286F8A;
+                        position: absolute;
+                        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+                        top: 98%;
+                        left: calc(50% - 7px);
+                    }
+                }
+            }
+        }
+
+        &>cite {
+            margin: 10px 0px;
+            width: 100%;
+            display: flex;
+        }
+    }
+
+}

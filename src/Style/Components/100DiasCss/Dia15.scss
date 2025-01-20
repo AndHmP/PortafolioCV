@@ -1,0 +1,192 @@
+.Dia15 {
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background: linear-gradient(45deg, #3B93AE, #5BA05C);
+
+    &>.ContenedorInput {
+        width: 80%;
+        aspect-ratio: 1/0.9;
+        box-shadow: 2px 2px 6px #00000082;
+        background-color: #fff;
+        font-family: "Open Sans", Helvetica, sans-serif;
+
+
+        &>.titulo {
+            padding: 8px;
+            font-size: 11px;
+            color: #484848;
+        }
+
+        &>.input {
+            width: 100%;
+            border-top: 0.5px solid #D8D8D8;
+            display: flex;
+            flex: 1;
+
+            &>input[type="file"] {
+                width: 35%;
+                aspect-ratio: 1/0.75;
+                position: relative;
+                z-index: 7;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+            &>.border {
+                width: 35%;
+                aspect-ratio: 1/0.75;
+                border: 0.9px dashed #b0b0b0;
+                color: #b0b0b0;
+                font-size: 10px;
+                line-height: 11px;
+                border-radius: 3px;
+                overflow: hidden;
+                word-wrap: break-word;
+                opacity: 1;
+                z-index:6;
+                &.active {
+                    animation: animacion03 3s linear forwards;
+                }
+            }
+
+            &>.load {
+                height: 1.7px;
+                background-color: #6ECE3B;
+                z-index: 8;
+                top: -0.8px;
+                left: 0px;
+
+                &.active {
+                    animation: activarBarra 5s linear forwards;
+                }
+            }
+        }
+
+        &>.btnEnvio {
+            padding: 0px 11px 11px 11px;
+
+            &>button {
+                background-color: #6ECE3B;
+                color: #fff;
+                padding: 8px 25px;
+                font-size: 9.5px;
+                border-radius: 3px;
+                border: none;
+                outline: none;
+                border-bottom: 2px solid #498C25;
+                box-shadow: 0px 0px 1px #0000005a;
+                transition: 0.5s;
+                cursor: pointer;
+
+                &:hover {
+                    box-shadow: 0px 0px 6px #0000005a;
+                }
+            }
+        }
+    }
+}
+
+
+.Dia15>.ContenedorInput>.input{
+    &>img.img01{
+        width: 40px;
+        height: 30px;
+    }
+    &>.img02{
+        width: 36%;
+        aspect-ratio: 1/0.78;
+        transform-origin: center;
+        opacity: 0;
+        z-index: 6;
+        background-color: white;
+
+        &.active{
+            animation: animacion01 5s linear forwards;
+        }
+        
+        &>img{
+            height: 23px;
+            width: auto;
+            object-fit: cover;
+            animation: animacionRotarImg 2s linear infinite;
+        }
+    }
+    &>.img03{
+        width: 36%;
+        aspect-ratio: 1/0.78;
+        transform-origin: center;
+        z-index: 3;
+        opacity: 0;
+        background-color: white;
+        
+        &.active{
+            animation: animacion02 1s linear 5s forwards;
+        }
+
+        &>img{
+            height: 23px;
+            width: auto;
+            object-fit: cover;
+        }
+    }
+}
+
+@keyframes animacionRotarImg{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+
+@keyframes activarBarra{
+    0%{
+        width: 0%;
+    }
+    100%{
+        width: 100%;
+    }
+}
+
+
+@keyframes animacion01 {
+    0%{
+        opacity: 0;
+        z-index: 4;
+    }
+    10%{
+        opacity: 1;
+        z-index: 8;
+    }
+    95%{
+        opacity: 1;
+        z-index: 8;
+    }
+    100%{
+        opacity: 0;
+        z-index: 8;
+    }
+}
+@keyframes animacion02 {
+    0%{
+        opacity: 0;
+        z-index: 4;
+    }
+    100%{
+        opacity: 1;
+        z-index: 8;
+    }
+}
+@keyframes animacion03 {
+    0%{
+        opacity: 1;
+        z-index: 6;
+    }
+    100%{
+        opacity: 0;
+        z-index: 8;
+    }
+}

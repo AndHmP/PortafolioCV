@@ -1,0 +1,210 @@
+.Dia20 {
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background-color: #2C3E50;
+    gap: 20px;
+    z-index: 1;
+
+    &>.Secc {
+        background-size: 100%;
+        border: 3px solid #354A5F;
+        width: 140px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+
+
+        &.active {
+            animation: IconAnimacion01 0.8s linear forwards;
+
+        }
+
+        &::before {
+            content: '';
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background-color: #354A5F;
+        }
+
+    }
+
+    &>button {
+        width: 140px;
+        height: 30px;
+        border-radius: 20px;
+        border: none;
+        font-size: 11px;
+        font-weight: 600;
+        outline: none;
+        background-color: #ECF0F1;
+        color: #2C3E50;
+        font-family: "Open Sans", Helvetica, sans-serif;
+        text-transform: uppercase;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #1ABC9C;
+            color: #fff;
+        }
+
+        &.active {
+            animation: AnimacionBoton 2s linear 1s forwards;
+
+            &.active02:hover {
+                background-color: #1ABC9C !important;
+                color: #fff !important;
+            }
+        }
+    }
+
+    &>.mail {
+        width: 85px;
+        height: 55px;
+        transform: translateY(-20px);
+        fill: none;
+        stroke-width: 2px;
+        stroke: #ecf0f1;
+        stroke-dasharray: 325 325;
+        z-index: 2;
+
+
+        &.active {
+            animation: AnimacionMail 0.8s linear 0.3s forwards;
+        }
+    }
+
+    &>.plane {
+        width: 85px;
+        height: 80px;
+        transform: translateY(-7px);
+        fill: none;
+        stroke-width: 2px;
+        stroke: #ecf0f1;
+        stroke-dasharray: 325 325;
+        transition: 1s ease-in-out;
+        stroke-dashoffset: 325;
+        z-index: 3;
+
+        &.active {
+            animation: AnimacionPlane 1.2s linear 1.2s forwards;
+        }
+    }
+}
+
+@keyframes IconAnimacion01 {
+    0% {
+        transform: scale(1);
+        padding: 0px;
+    }
+
+    25% {
+        transform: scale(1.1);
+        padding: 0px;
+    }
+
+    50% {
+        transform: scale(1.1);
+        padding: 15px;
+    }
+
+    100% {
+        padding: 0px;
+        transform: scale(0);
+    }
+}
+
+@keyframes AnimacionMail {
+    0% {
+        stroke-dashoffset: 0;
+
+    }
+
+    100% {
+        stroke-dashoffset: 325;
+
+    }
+}
+
+@keyframes AnimacionPlane {
+    0% {
+        stroke-dashoffset: 325;
+        transform: translateY(-7px) translateX(0px) scale(1);
+        opacity: 1;
+    }
+
+    65% {
+        stroke-dashoffset: 0;
+        transform: translateY(-7px) translateX(0px) scale(1);
+        opacity: 1;
+    }
+
+    70% {
+        stroke-dashoffset: 0;
+        transform: translateY(-4px) translateX(-3px) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        transform: translateY(-64px) translateX(66px) scale(0.6);
+        opacity: 0;
+    }
+}
+
+@keyframes AnimacionBoton {
+    0% {
+        color: #2C3E50;
+        width: 140px;
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    20% {
+        color: #ffffff00;
+        width: 140px;
+        transform: scale(1);
+        opacity: 1;
+        background-color: #1ABC9C;
+    }
+
+    40% {
+        color: #ffffff00;
+        width: 30px;
+        transform: scale(1);
+        opacity: 1;
+        background-color: #1ABC9C;
+    }
+
+    45% {
+        color: #ffffff00;
+        width: 30px;
+        transform: scale(1.1);
+        opacity: 1;
+        background-color: #1ABC9C;
+    }
+
+    75% {
+        color: #ffffff00;
+        width: 30px;
+        transform: scale(0);
+        opacity: 1;
+        background-color: #1ABC9C;
+    }
+
+    76% {
+        color: #ffffff00;
+        width: 30px;
+        transform: scale(0);
+        opacity: 0;
+        background-color: #1ABC9C;
+    }
+
+    100% {
+        color: #2C3E50;
+        width: 140px;
+        transform: scale(1);
+        opacity: 1;
+        background-color: #fff;
+    }
+}

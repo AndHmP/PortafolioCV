@@ -1,0 +1,261 @@
+.Dia07 {
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background-color: #264057;
+    overflow: hidden;
+    font-family: "Open Sans", Helvetica, sans-serif;
+}
+
+.Dia07 .ContenedorPrinDia07 {
+    height: 80%;
+    aspect-ratio: 1;
+    box-shadow: 8px 8px 12px #0000005b;
+    background-color: white;
+    position: relative;
+    transition: 0.5s;
+    z-index: 20;
+    margin-left: 0%;
+
+    &.active{
+        margin-left: 80%;
+    }
+
+    &>.navbar {
+        background-color: #5F98CD;
+        padding: 12px;
+    }
+}
+
+.Dia07 .ContenedorPrinDia07 .navbar .iconNavbar {
+    width: 22px;
+    height: 12px;
+    position: relative;
+    z-index: 9;
+    cursor: pointer;
+
+    &>.iconC {
+        width: 100%;
+        height: 2.3px;
+        position: absolute;
+        top: 0px;
+        border-radius: 3px;
+        background-color: #B2DAFF;
+        z-index: 10;
+        transition: 0.5s;
+    }
+
+    &>.iconC::before {
+        content: '';
+        width: 5px;
+        aspect-ratio: 1;
+        position: absolute;
+        right: -1.5px;
+        top: -2.5px;
+        border-radius: 50%;
+        background-color: #B2DAFF;
+        border: 1.5px solid #5F98CD;
+        z-index: 11;
+        transition: 0.5s;
+    }
+
+    &>.iconC::after {
+        content: '';
+        width: 100%;
+        height: 2.3px;
+        position: absolute;
+        top: 9px;
+        left: 0px;
+        border-radius: 3px;
+        background-color: #B2DAFF;
+        z-index: 10;
+        transition: 0.5s;
+    }
+
+    &:hover .iconC {
+        background-color: #fff;
+    }
+
+    &:hover .iconC::after {
+        background-color: #fff;
+    }
+
+    &:hover .iconC::before {
+        background-color: #fff;
+    }
+}
+
+.Dia07 .ContenedorPrinDia07 .navbar .tituloNavbar {
+    color: #B2DAFF;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 0px;
+}
+
+.Dia07 .ContenedorPrinDia07 .navbar .secSearch {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &>input {
+        position: absolute;
+        right: 100%;
+        width: 165px;
+        opacity: 1;
+        pointer-events: none;
+        right: 5px;
+        opacity: 0;
+        transition: 0.5s;
+        font-size: 10.5px;
+        outline: 0px solid transparent;
+        border: 0px solid transparent;
+        padding: 6px 8px;
+        border-radius: 12px;
+        color: #666;
+    }
+
+    &>input.active {
+        position: absolute;
+        right: 100%;
+        opacity: 1;
+        pointer-events: all;
+        opacity: 1;
+        right: 18px;
+    }
+
+
+    &>.iconS {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        cursor: pointer;
+    }
+
+    &>.iconS::before {
+        content: '';
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        height: 60%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 2.3px solid #B2DAFF;
+        transition: 0.5s;
+    }
+
+    &>.iconS::after {
+        content: '';
+        position: absolute;
+        bottom: -1.5px;
+        right: 2px;
+        height: 7px;
+        width: 2.3px;
+        background-color: #B2DAFF;
+        border-radius: 1.5px;
+        transform: rotate(-40deg);
+        transition: 0.5s;
+    }
+
+    &>.iconS:hover::after,
+    &.active>.iconS::after {
+        background-color: #fff;
+    }
+
+
+    &>.iconS:hover::before,
+    &.active>.iconS::before {
+        border: 2.3px solid #fff;
+    }
+}
+
+
+.Dia07 .ContenedorBack {
+    height: 70%;
+    width: 50%;
+    background-color: #43627D;
+    z-index: 19;
+    margin-right: 20%;
+    transition: 0.5s;
+    gap: 3px;
+
+    &.active{
+        margin-right: 30%;
+    }
+    &>.oneSeccion{
+        font-size: 11px;
+        padding: 8px 10px;
+        background-color: transparent;
+        color: #93B2CD;
+        transition: 0.5s;
+        cursor: pointer;
+        gap: 5px;
+    }
+    &>.oneSeccion>i{
+        font-size: 9px;
+        margin-top: 1.5px;
+    }
+    &>.oneSeccion:hover{
+        background-color: #385269;
+        color: #fff;
+    }
+}
+
+.Dia07 .ContenedorPrinDia07 .contenedorNotify{
+    padding: 0px 12px;
+    overflow: hidden;
+    z-index: 10;
+
+    &::before{
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 2.5px;
+        background-color: #EBEBEB;
+        left: 17px;
+        z-index: 9;
+    }
+    &>.notifyOne{
+        width: calc(100% - 16px);
+        margin-left: 16px;
+        height: 40px;
+        position: relative;
+        z-index: 10;
+        text-align: start;
+        color: #666666;
+        gap: 3px;
+        cursor: pointer;
+        transition: 0.5s;
+    }
+    &>.notifyOne:hover{
+        color: #5F98CD;
+    }
+    &>.notifyOne::before{
+        content: '';
+        position: absolute;
+        width: 5px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 2px solid #5F98CD;
+        background-color: white;
+        box-shadow: 0px 0px 0px 2px #fff;
+        top: 0px;
+        left: -14.5px;
+    }
+    &>.notifyOne .contenido{
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 13px;
+    }
+    &>.notifyOne .contenido strong{
+        font-weight: 600;
+    }
+    &>.notifyOne .fecha{
+        font-size: 7.5px;
+        font-weight: 400;
+        line-height: 7px;
+    }
+}

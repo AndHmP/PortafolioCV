@@ -1,0 +1,286 @@
+.Dia09 {
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 2px 2px 4px 4px;
+    background-color: transparent;
+    box-shadow: 3px 3px 6px #00000071;
+    overflow: hidden;
+
+    &>.IlustracionD09 {
+        height: 75%;
+        border-radius: 2px 2px 0px 0px;
+        background-color: #1A2238;
+        overflow: hidden;
+    }
+
+    &>.DatosInfoD09 {
+        height: 25%;
+        background-color: #fff;
+    }
+}
+
+@for $i from 1 through 10 {
+    .Dia09 .IlustracionD09>.gota01-#{$i} {
+        border-radius: 50%;
+        background-color: #385272;
+        z-index: 8;
+        animation: AnimacionKeyGota01-#{$i} 2s infinite (random(300)/100)+s linear;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 70%;
+            left: 20%;
+            width: 90%;
+            height: 100%;
+            transform: rotate(15deg);
+            background-color: #385272;
+            clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+
+        }
+    }
+
+    @keyframes AnimacionKeyGota01-#{$i} {
+        0% {
+            top: -2%;
+            left: calc((10% * $i) + 1%);
+            opacity: 1;
+            width: 3px;
+            height: 3px;
+        }
+
+        90% {
+            top: 98.5%;
+            left: calc((10% * $i) - 8.5%);
+            opacity: 1;
+            width: 3px;
+            height: 3px;
+        }
+
+        100% {
+            top: 100%;
+            left: calc((10% * $i) - 8.5%);
+            opacity: 1;
+            width: 6px;
+            height: 1.5px;
+        }
+    }
+}
+
+@for $i from 1 through 10 {
+    .Dia09 .IlustracionD09>.gota02-#{$i} {
+        border-radius: 50%;
+        background-color: #5781AC;
+
+        animation: AnimacionKeyGota02-#{$i} 1.5s infinite (random(600)/100)+s linear;
+        z-index: 9;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 70%;
+            left: 22%;
+            width: 90%;
+            height: 100%;
+            transform: rotate(15deg);
+            background-color: #5781AC;
+            clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+
+        }
+    }
+
+    @keyframes AnimacionKeyGota02-#{$i} {
+        0% {
+            top: -2%;
+            left: calc((10% * $i) + 1%);
+            opacity: 1;
+            width: 4px;
+            height: 5px;
+        }
+
+        80% {
+            top: 98%;
+            left: calc((10% * $i) - 8.5%);
+            opacity: 1;
+            width: 4px;
+            height: 5px;
+        }
+
+        100% {
+            top: 99.5%;
+            left: calc((10% * $i) - 8.5%);
+            opacity: 0;
+            width: 12px;
+            height: 0px;
+        }
+    }
+}
+
+
+@for $i from 1 through 10 {
+    .Dia09 .IlustracionD09>.gota03-#{$i} {
+        border-radius: 50%;
+        background-color: #7FC1F9;
+        animation: AnimacionKeyGota03-#{$i} 0.9s infinite (random(900)/100)+s linear;
+        z-index: 10;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 70%;
+            left: 22%;
+            width: 95%;
+            height: 100%;
+            transform: rotate(15deg);
+            background-color: #7FC1F9;
+            clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+
+        }
+    }
+
+    @keyframes AnimacionKeyGota03-#{$i} {
+        0% {
+            top: -5%;
+            left: calc((10% * $i) + 5%);
+            opacity: 1;
+            width: 6px;
+            height: 9px;
+        }
+
+        80% {
+            top: 98%;
+            left: calc((10% * $i) - 8.5%);
+            opacity: 1;
+            width: 6px;
+            height: 9px;
+        }
+
+        100% {
+            top: 99%;
+            left: calc((10% * $i) - 8.5%);
+            opacity: 0;
+            width: 15px;
+            height: 0px;
+        }
+    }
+}
+
+.Dia09 .IlustracionD09>.montana01 {
+    background-color: #303C5D;
+    z-index: 7;
+    border-radius: 50%;
+
+    &.ver01 {
+        width: 90%;
+        aspect-ratio: 1;
+        bottom: -100%;
+        left: -40%;
+    }
+
+    &.ver02 {
+        width: 110%;
+        aspect-ratio: 1;
+        bottom: -116%;
+        left: 0%;
+    }
+
+    &.ver03 {
+        width: 90%;
+        aspect-ratio: 1;
+        bottom: -103%;
+        left: 60%;
+    }
+}
+
+.Dia09 .IlustracionD09>.montana02 {
+    background-color: #26314F;
+    z-index: 6;
+    border-radius: 50%;
+    width: 80%;
+    aspect-ratio: 1;
+    bottom: -70%;
+
+    &.ver01 {
+        left: -15%;
+    }
+
+    &.ver02 {
+        left: 45%;
+    }
+}
+
+.Dia09 .IlustracionD09>.luna {
+    width: 50px;
+    z-index: 5;
+    top: 14%;
+    left: 16%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #F6EDBD;
+    overflow: hidden;
+    box-shadow: 0 0 10px 0 #F6EDBD;
+    background-image:
+        radial-gradient(circle, #ECE1A8 11%, transparent 0%),
+        radial-gradient(circle, #ECE1A8 13%, transparent 0%),
+        radial-gradient(circle, #ECE1A8 7%, transparent 2%),
+        radial-gradient(circle, #ECE1A8 7%, transparent 2%),
+        radial-gradient(circle, #ECE1A8 4%, transparent 2%),
+        radial-gradient(circle, #ECE1A8 7%, transparent 2%),
+        radial-gradient(circle, #ECE1A8 4%, transparent 2%),
+        radial-gradient(circle, #ECE1A8 7%, transparent 2%),
+        radial-gradient(circle, #ECE1A8 7%, transparent 2%),
+        radial-gradient(circle, #ECE1A8 7%, transparent 2%),
+        radial-gradient(circle, #ECE1A8 11%, transparent 0%);
+    background-size: 100% 100%;
+    background-position:
+        -21px -11.5px,
+        0px -15px,
+        13px -11px,
+        23px -5px,
+        -13px -6px,
+        -3.5px -3px,
+        5px 2px,
+        14px 4px,
+        -10px 6px,
+        2px 16px,
+        -13px 19px;
+    animation: AnimacionLuna 0.8s ease-out;
+}
+
+@keyframes AnimacionLuna {
+    0%{
+        top: 50%;
+    }
+    100%{
+        top: 14%;
+    }
+}
+
+.Dia09 .DatosInfoD09{
+    padding: 3px 15px;
+    font-family: "Open Sans", Helvetica, sans-serif;
+    font-weight: 100;
+    color: #394568;
+    gap: 5px;
+
+    &>span{
+        font-size: 34px;
+        font-weight: 300;
+        line-height: 20px;
+    }
+    &>div{
+        font-size: 12px;
+
+        &>div{
+            line-height: 14px;
+            display: flex;
+
+            &>div{
+                font-weight: 500;
+                width: 54px;
+                display: flex;
+                justify-content: end;
+            }
+        }
+    }
+}

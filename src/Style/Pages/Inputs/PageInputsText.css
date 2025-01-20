@@ -1,0 +1,25 @@
+.PageInputsText {
+    transition: 1s;
+    padding: 20px;
+    gap: 10px;
+}
+
+.PageInputsText .TituloInputs {
+    height: 200px;
+    background-color: var(--var-color-01-inputs-back);
+    width: 100%;
+    transition: 0.7s;
+}
+
+.PageInputsText .ContentInputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 10px;
+}
+
+.PageInputsText .ContentInputs .SeccionInput {
+    height: 100px;
+    background-color: var(--var-color-02-inputs-back);
+    transition: 0.7s;
+    box-shadow: 2px 2px 4px 0px var(--var-color-02-nav-bar);
+}

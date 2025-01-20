@@ -1,0 +1,386 @@
+.Dia16 {
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background-color: #46A6DA;
+    overflow: hidden;
+
+    &>.figura {
+        width: 70px;
+        aspect-ratio: 1;
+        background-color: #fff;
+        animation: animacionShape 4s ease infinite;
+        transform-origin: center;
+        z-index: 9;
+    }
+}
+
+@keyframes animacionShape {
+
+    // 0%-20%
+    0% {
+        clip-path: circle(50%);
+        bottom: calc(100% - 70px);
+        transform: scaleY(1) scaleX(1);
+    }
+
+    5% {
+        clip-path: circle(50%);
+        bottom: calc(50% - 80px);
+        transform: scaleY(0.8) scaleX(1.1);
+    }
+
+    10% {
+        clip-path: circle(50%);
+        bottom: calc(50% - 10px);
+        transform: scaleY(1) scaleX(1);
+    }
+
+    15% {
+        clip-path: circle(50%);
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+    }
+
+    20% {
+        clip-path: circle(50%);
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+    }
+
+    // 20%-40%
+
+    28% {
+        clip-path: circle(1%);
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+    }
+
+    28.002% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+        clip-path: polygon(48% 50%,
+                49% 49%,
+                50% 48%,
+                51% 49%,
+                52% 50%,
+                51% 51%,
+                50% 52%,
+                49% 51%);
+    }
+
+    33% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1.34) scaleX(1.34);
+        clip-path: polygon(0% 50%,
+                15% 15%,
+                50% 0%,
+                85% 15%,
+                100% 50%,
+                85% 85%,
+                50% 100%,
+                15% 85%);
+    }
+
+    39% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+        clip-path: polygon(0% 50%,
+                15% 15%,
+                50% 0%,
+                85% 15%,
+                100% 50%,
+                85% 85%,
+                50% 100%,
+                15% 85%);
+    }
+
+    40% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+        clip-path: polygon(0% 50%,
+                15% 15%,
+                50% 0%,
+                85% 15%,
+                100% 50%,
+                85% 85%,
+                50% 100%,
+                15% 85%);
+    }
+
+    // 40%-60%
+
+
+    48% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+        clip-path: polygon(48% 50%,
+                49% 49%,
+                50% 48%,
+                51% 49%,
+                52% 50%,
+                51% 51%,
+                50% 52%,
+                49% 51%);
+    }
+
+    48.002% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+        clip-path: polygon(50% 49%,
+                51% 51%,
+                49% 51%, );
+    }
+
+    53% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1.34) scaleX(1.34);
+        clip-path: polygon(50% 0%,
+                100% 100%,
+                0% 100%, );
+    }
+
+    59% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+        clip-path: polygon(50% 0%,
+                100% 100%,
+                0% 100%, );
+    }
+
+    60% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+        clip-path: polygon(50% 0%,
+                100% 100%,
+                0% 100%, );
+    }
+
+
+    // 60%-80%
+    68% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+        clip-path: polygon(50% 49%,
+                51% 51%,
+                49% 51%, );
+    }
+
+    68.002% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+        clip-path: circle(1%);
+
+    }
+
+    73% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1.34) scaleX(1.34);
+        clip-path: circle(50%);
+
+    }
+
+    79% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+        clip-path: circle(50%);
+
+    }
+
+    80% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+        clip-path: circle(50%);
+
+    }
+
+
+    85% {
+        bottom: calc(50% - 35px);
+        transform: scaleY(1) scaleX(1);
+        clip-path: circle(50%);
+
+    }
+
+
+
+    92% {
+        clip-path: circle(50%);
+        bottom: calc(50% + 5px);
+        transform: scaleY(0.9) scaleX(1.1);
+    }
+
+    96% {
+
+        transform: scaleY(1) scaleX(1);
+    }
+
+    100% {
+        clip-path: circle(50%);
+        bottom: calc(0% - 70px);
+        transform: scaleY(1) scaleX(1);
+    }
+
+}
+
+.Dia16 .linesOcta {
+    width: 1px;
+    aspect-ratio: 1;
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @for $i from 0 through 7 {
+        &>.line-#{$i} {
+            position: absolute;
+            transform-origin: center;
+            border: none;
+            width: 3px;
+            transform: rotate(#{(360 / 8) * $i}deg);
+            overflow: hidden;
+            display: flex;
+            align-items: start;
+            justify-content: center;
+            animation: activarRayosOcta 4s linear infinite;
+
+            &::before {
+                content: '';
+                width: 2px;
+                height: 15px;
+                border-radius: 2px;
+                background-color: #fff;
+            }
+        }
+    }
+}
+
+@keyframes activarRayosOcta {
+    0% {
+        height: 80px;
+        opacity: 0;
+    }
+
+    32% {
+        height: 80px;
+        opacity: 0;
+    }
+
+    36% {
+        opacity: 1;
+    }
+
+    40% {
+        height: 160px;
+        opacity: 0;
+    }
+
+    100% {
+        height: 160px;
+        opacity: 0;
+    }
+}
+
+
+.Dia16 .linesTrian {
+    width: 30px;
+    aspect-ratio: 1;
+    border: none;
+    z-index: 11;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @for $i from 0 through 2 {
+        &>.line-#{$i} {
+            position: absolute;
+            width: 3px;
+            height: 150px;
+            overflow: hidden;
+            display: flex;
+            align-items: start;
+            justify-content: center;
+            animation: activarRayosTrian 4s linear infinite;
+
+            &::before {
+                content: '';
+                width: 2px;
+                height: 15px;
+                border-radius: 2px;
+                background-color: #fff;
+                
+            }
+        }
+    }
+    &>.line-0 {
+        bottom: -80px;
+    }
+    &>.line-1 {
+        transform: rotate(135deg);
+    }
+
+    &>.line-2 {
+        transform: rotate(225deg);
+    }
+}
+
+@keyframes activarRayosTrian {
+    0% {
+        height: 150px;
+        opacity: 0;
+    }
+
+    52% {
+        height: 150px;
+        opacity: 0;
+    }
+
+    56% {
+        opacity: 1;
+    }
+
+    60% {
+        height: 180px;
+        opacity: 0;
+    }
+
+    100% {
+        height: 180px;
+        opacity: 0;
+    }
+}
+
+.Dia16 .lineCirle{
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    z-index: 12;
+    animation: activarRayosCircle 4s linear infinite;
+}
+
+@keyframes activarRayosCircle {
+    0% {
+        width: 90px;
+        opacity: 0;
+    }
+
+    72% {
+        width: 90px;
+        opacity: 0;
+    }
+
+    76% {
+        opacity: 1;
+    }
+
+    80% {
+        width: 110px;
+        opacity: 0;
+    }
+
+    100% {
+        width: 110px;
+        opacity: 0;
+    }
+}

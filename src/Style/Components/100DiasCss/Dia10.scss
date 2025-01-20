@@ -1,0 +1,131 @@
+.Dia10 {
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background-color: #4C4C4C;
+}
+
+.Dia10 .Temporizador {
+    background-color: #242424;
+    width: 178px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 7px solid #3A3A3A;
+    position: relative;
+    z-index: 10;
+}
+
+.Dia10 .Temporizador svg {
+    width: 180px;
+    aspect-ratio: 1;
+    position: absolute;
+}
+
+.Dia10 .Temporizador svg circle {
+    stroke: #F85B5B;
+    stroke-width: 3;
+    fill: none;
+    stroke-dasharray: 509;
+    animation: AnimacionCircle 4s infinite linear;
+    transform-origin: center;
+}
+
+@keyframes AnimacionCircle {
+    0% {
+        stroke-dashoffset: 509;
+        transform: rotate(-90deg) scaleY(1);
+    }
+
+    50% {
+        stroke-dashoffset: 0;
+        transform: rotate(-90deg) scaleY(1);
+    }
+
+    50.001% {
+        stroke-dashoffset: 0;
+        transform: rotate(-90deg) scaleY(-1);
+    }
+
+    100% {
+        stroke-dashoffset: 509;
+        transform: rotate(-90deg) scaleY(-1);
+    }
+}
+
+@for $i from 0 through 12 {
+    .secondBorder-#{$i} {
+        width: 160px;
+        aspect-ratio: 1;
+        background-image:
+            radial-gradient(circle, #fff 0.8%, transparent 0%),
+            radial-gradient(circle, #fff 0.8%, transparent 0%),
+            radial-gradient(circle, #fff 0.8%, transparent 0%),
+            radial-gradient(circle, #fff 0.8%, transparent 0%);
+        background-size: 100%;
+        background-position: 0px -72px, 0px 72px, 72px 0px, -72px 0px;
+        transform: rotate((90/12)* $i + deg);
+    }
+}
+
+.Dia10 .Temporizador .datosTemporizador {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(13, 1fr);
+    gap: 4.5px 3px;
+    color: white;
+    font-family: "Open Sans", Helvetica, sans-serif;
+    text-transform: uppercase;
+
+    &>div {
+        font-size: 10px;
+        line-height: 7px;
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &>div.date {
+        grid-row: span 3;
+        grid-column: span 5;
+    }
+
+    &>div.time {
+        grid-row: span 7;
+        grid-column: span 5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 20px;
+    }
+
+    &>div.ritmo {
+        grid-row: span 3;
+        grid-column: span 2;
+        gap: 2px;
+
+        &>span{
+            color: #F85B5B;
+            animation:  AnimacionCorazon 1s infinite linear;
+        }
+    }
+
+    &>div.peso {
+        grid-row: span 3;
+        grid-column: span 3;
+    }
+}
+
+@keyframes AnimacionCorazon {
+    0%{
+        transform: scale(1.1);
+    }
+    50%{
+        transform: scale(0.8);
+    }
+    100%{
+        transform: scale(1.1);
+    }
+}

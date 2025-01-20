@@ -1,0 +1,211 @@
+.Dia13 {
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    box-shadow: 3px 3px 6px #00000071;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 3px;
+    padding: 3px;
+    overflow: hidden;
+
+    &>div {
+        grid-row: span 1;
+        grid-column: span 1;
+        background-color: red;
+        z-index: 3;
+        position: relative;
+        cursor: pointer;
+
+        &>img,
+        &::before,
+        &::after {
+            transition: 0.8s;
+        }
+
+        &>img {
+            width: 100%;
+            height: 100%;
+            object-fit: 1;
+            filter: brightness(1);
+            position: relative;
+            z-index: 4;
+
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            line-height: 10px;
+            width: 100px;
+            aspect-ratio: 1;
+            background: #EC6565;
+            color: #fff;
+            border-radius: 50%;
+            z-index: 5;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 2px 2px 8px #000000;
+        }
+
+        &::after {
+            content: '+';
+            position: absolute;
+            font-size: 20px;
+            line-height: 10px;
+            margin-bottom: 2px;
+            color: #fff;
+            z-index: 6;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &:hover {
+            &>img {
+                filter: brightness(0.6);
+            }
+
+            &::before {
+                width: 40px;
+                opacity: 1;
+                visibility: visible;
+            }
+
+            &::after {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    &>div.SeccTop {
+        background-color: transparent;
+        z-index: 6;
+        top: -100%;
+        transition: 1.4s;
+        cursor: auto;
+        height: 45%;
+        border: 1px solid;
+
+        &>img.fondo {
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1) !important;
+        }
+
+        &>div.profile {
+            width: 25%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 1.5px solid #fff;
+            box-shadow: 0px 0px 7px #000000;
+            bottom: 0%;
+            transform: translate(0% , 50%);
+            z-index: 7;
+            overflow: hidden;
+
+            &>img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                opacity: 1 !important;
+                visibility: visible !important;
+                z-index: 8 !important;
+            }
+        }
+
+        &.active {
+            top: 0%;
+        }
+
+        &>.BtnClose {
+            z-index: 7;
+            width: 12%;
+            aspect-ratio: 1;
+            font-size: 18px;
+            border-radius: 50%;
+            transform: rotate(45deg);
+            border: none;
+            outline: none;
+            background-color: #EC6565;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            right: 7px;
+            top: 7px;
+            cursor: pointer;
+            transition: 0.5s;
+
+            &:focus,
+            &:hover {
+                background-color: #e64a4a;
+            }
+        }
+    }
+
+    &>div.SeccBottom {
+        background-color: transparent;
+        z-index: 5;
+        bottom: -100%;
+        transition: 1.4s;
+
+        &.active {
+            bottom: 0%;
+        }
+
+        &>div {
+            background-color: #EC6565;
+            height: 55%;
+            color: #fff;
+            font-family: "Open Sans", Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            gap: 14px;
+            position: relative;
+            cursor: auto !important;
+
+            &>div {
+                gap: 16px;
+                width: 100%;
+                &>button {
+                    width: 10%;
+                    aspect-ratio: 1;
+                    background-color: transparent;
+                    border-radius: 50%;
+                    border: 1px solid white;
+                    cursor: pointer !important;
+                    color: #fff;
+                    font-size: 10px;
+                    position: relative;
+                    z-index: 10;
+                    transition: 0.5s;
+
+                    &:hover{
+                        background-color: #fff;
+                        color: #EC6565;
+                    }
+
+                }
+            }
+        }
+
+    }
+
+    &>div.SeccTop,
+    &>div.SeccBottom {
+
+        &::after,
+        &::before {
+            content: '';
+            width: 0px;
+            height: 0px;
+        }
+    }
+}

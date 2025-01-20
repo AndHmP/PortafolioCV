@@ -1,0 +1,41 @@
+.ContenedorInputType02{
+    width: 85%;
+    height: min-content;
+    margin: auto;
+    font-family: "Poiret One", serif;
+    background-color: transparent;
+    border-radius: 10px;
+    position: relative;
+    text-align: start !important;
+    z-index: 10;
+    padding: 0px;
+}
+.ContenedorInputType02 legend{
+    font-size: 12px;
+    width: 0px;
+    transition: 0.5s;
+    font-weight: 700;
+    margin-left: 14px;
+    height: 14px;
+    color: transparent;
+    padding: 0px;
+}
+.ContenedorInputType02 .InputType02{
+    width: 100%;
+    background-color: transparent;
+    border: 0px solid transparent;
+    outline: 0px solid transparent;
+    font-family: "Poiret One", serif;
+    color: var(--var-color-02-nav-bar);
+    padding: 7px 14px 12px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.7s;
+    position: relative;
+    z-index: 12;
+}
+.ContenedorInputType02 .PlaceholdeVar02{
+    z-index: 11;
+    transition: 0.7s;
+    font-weight: 700;
+}

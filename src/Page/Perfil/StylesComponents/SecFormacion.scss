@@ -1,0 +1,109 @@
+.SecFormacion {
+    gap: 10px;
+
+    &>.LineaHistorial {
+
+        width: 100%;
+        height: 20px;
+        margin-top: 45px;
+
+        &>.Linea {
+            width: 100%;
+            height: 3px;
+            background-color: var(--var-color-01-perfil);
+            transition: 0.7s;
+
+        }
+
+        &>.Punto {
+            width: 10px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background-color: var(--var-color-01-perfil);
+            transition: 0.7s;
+            cursor: pointer;
+
+            &>.Icon {
+                position: absolute;
+                width: 30px;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                background-color: var(--var-color-01-perfil);
+                transition: 0.7s;
+                transform: translateY(-25px);
+                opacity: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: auto;
+
+                &>svg {
+                    height: 70%;
+                    fill: var(--var-color-03-perfil);
+                    transition: 0.7s;
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    width: 13px;
+                    height: 8px;
+                    top: 90%;
+                    background-color: var(--var-color-01-perfil);
+                    transition: 0.7s;
+                    clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+                }
+
+            }
+
+            &.Select>.Icon,
+            &.Select>.Icon:hover,
+            &:hover>.Icon {
+                transform: translateY(-35px);
+                opacity: 1;
+            }
+
+            &>.Icon:hover {
+                transform: translateY(-25px);
+                opacity: 0;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 14px;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                border: 2px solid var(--var-color-01-perfil);
+                transform: scale(0.7);
+                opacity: 0;
+                transition: 0.7s;
+            }
+
+            &.Select::before {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    }
+
+    &>.Informacion {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        gap: 3px;
+
+        &>.Titulo {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--var-color-01-perfil);
+            transition: 0.7s;
+        }
+
+        &>.Contenido {
+            font-size: 13px;
+            color: var(--var-color-01-perfil);
+            transition: 0.7s;
+        }
+    }
+}

@@ -1,0 +1,95 @@
+.PagePerfil {
+    transition: 1s;
+    overflow: hidden;
+    font-family: "Kulim Park", serif;
+
+    &>.ContenedorP {
+        width: 100%;
+        max-width: 1200px;
+        height: auto;
+        gap: 15px;
+
+        &>.Seccion01 {
+            height: 200px;
+            width: 100%;
+            min-width: 1300px;
+
+            &>svg {
+                fill: var(--var-color-01-perfil);
+                transition: 0.7s;
+            }
+
+            &>.FotoProfile {
+                width: 160px;
+                border-radius: 50%;
+                aspect-ratio: 1;
+                background-color: var(--var-color-01-perfil);
+                transform: translateX(-176px) translateY(10px);
+                transition: backgroundColor 0.7s;
+
+                &>img{
+                    width: 95%;
+                    height: 95%;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+
+            &>.NombreProfile {
+                width: 280px;
+                font-weight: 600;
+                font-size: 22px;
+                text-transform: uppercase;
+                line-height: 25px;
+                text-align: end;
+                color: var(--var-color-02-perfil);
+                transform: translateX(190px) translateY(-20px);
+                transition: color 0.7s;
+            }
+        }
+    }
+}
+
+.PagePerfil>.ContenedorP>.Seccion02 {
+    width: 95%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px 15px;
+
+
+
+    &>.CuadStyle01 {
+        grid-column: 2 span;
+        grid-row: 1 span;
+    }
+
+    &>.CuadStyle02 {
+        grid-column: 3 span;
+        grid-row: 1 span;
+    }
+
+    &>.CuadStyle03 {
+        grid-column: 2 span;
+        grid-row: 2 span;
+    }
+}
+
+@media(max-width: 868px) {
+    .PagePerfil>.ContenedorP>.Seccion02 {
+        &>.CuadStyle01 {
+            grid-column: 5 span;
+            grid-row: 1 span;
+        }
+
+        &>.CuadStyle02 {
+            grid-column: 5 span;
+            grid-row: 1 span;
+        }
+
+        &>.CuadStyle03 {
+            grid-column: 5 span;
+            grid-row: 3 span;
+        }
+    }
+}

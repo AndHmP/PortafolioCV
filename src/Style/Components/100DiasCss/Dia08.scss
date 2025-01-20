@@ -1,0 +1,66 @@
+.Dia08 {
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background-color: #000000;
+}
+
+.Dia08 .ball01 {
+    width: 70px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: white;
+    filter: blur(0.5px);
+}
+
+@for $i from 1 through 8 {
+    .Dia08 .ball02.ver#{$i}{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotate((random(250)) + deg);
+
+        &::before{
+            content: '';
+            width: 40px;
+            aspect-ratio: 1;
+            background-color: white;
+            border-radius: 50%;
+            transform-origin: (24 -  ($i /4) )+px (32 - ($i /5) )+px;
+            animation: rotate (3.5 + $i / 5) + s ease-in-out ($i / 5) + s infinite;
+            filter: blur(0.8px);
+        }
+    }
+}
+
+
+@for $i from 1 through 10 {
+    .Dia08 .ball03.ver#{$i} {
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotate((random(300)) + deg);
+    }
+
+    .Dia08 .ball03.ver#{$i}::before {
+        content: '';
+        width: calc(2px + (1.4 * #{$i}px));
+        aspect-ratio: 1;
+        background-color: white;
+        border-radius: 50%;
+        transform-origin: (40 -  ($i /2) )+px (40 - ($i /2) )+px;
+        animation: rotate (3.5 + $i / 5) + s ease-in-out ($i / 5) + s infinite;
+        filter: blur(0.5px);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg) translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: rotate(360deg) translate3d(0, 0, 0);
+    }
+}
