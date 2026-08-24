@@ -73,8 +73,12 @@ export const contacto: DatoContacto[] = [
   },
 ];
 
-/** Ruta del CV en PDF dentro de `public/`. */
-export const RUTA_CV = '/cv-anderson-huamancaja.pdf';
+/**
+ * Ruta del CV en PDF dentro de `public/`.
+ * El nombre del archivo es también el que ve la persona al descargarlo, así
+ * que se mantiene tal cual: `CV_Anderson_Huamancaja_Porras.pdf`.
+ */
+export const RUTA_CV = '/CV_Anderson_Huamancaja_Porras.pdf';
 
 export const formacion: Formacion[] = [
   {
