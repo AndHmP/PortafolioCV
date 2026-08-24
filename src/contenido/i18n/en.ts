@@ -113,6 +113,7 @@ export const en: Diccionario = {
     nivelBasico: 'Basic',
     aniosDeUso: 'of use',
     logros: 'What I did',
+    idiomas: 'Languages',
   },
 
   laboratorio: {

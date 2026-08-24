@@ -63,6 +63,17 @@ export const tecnologias: Tecnologia[] = [
     },
   },
   {
+    clave: 'microfrontends',
+    nombre: 'Microfrontends',
+    categoria: 'frontend',
+    nivel: 'intermedio',
+    anios: 1,
+    descripcion: {
+      es: 'Módulos de interfaz desplegables por separado, para bajar el acoplamiento entre equipos.',
+      en: 'Independently deployable interface modules, to lower coupling between teams.',
+    },
+  },
+  {
     clave: 'react-query',
     nombre: 'React Query',
     categoria: 'frontend',
@@ -157,16 +168,6 @@ export const tecnologias: Tecnologia[] = [
     descripcion: {
       es: 'Servicios desacoplados que se comunican por REST, con un gateway al frente.',
       en: 'Decoupled services communicating over REST, behind a gateway.',
-    },
-  },
-  {
-    clave: 'nodejs',
-    nombre: 'Node.js',
-    categoria: 'backend',
-    nivel: 'intermedio',
-    descripcion: {
-      es: 'Herramientas de build, scripts y APIs ligeras.',
-      en: 'Build tooling, scripts and lightweight APIs.',
     },
   },
 
@@ -291,26 +292,37 @@ export const tecnologias: Tecnologia[] = [
     },
   },
 
-  /* ---------------- Diseño ---------------- */
+  /* ---------------- Desarrollo asistido por IA ---------------- */
+  {
+    clave: 'claude-code',
+    nombre: 'Claude Code',
+    categoria: 'ia',
+    nivel: 'intermedio',
+    descripcion: {
+      es: 'Desarrollo asistido por IA con planificación previa de tareas y documentación técnica en Markdown.',
+      en: 'AI-assisted development with upfront task planning and technical documentation in Markdown.',
+    },
+  },
+  /* ---------------- Diseño y UI/UX ---------------- */
+  {
+    clave: 'prototipado',
+    nombre: 'Prototipado',
+    categoria: 'diseno',
+    nivel: 'intermedio',
+    descripcion: {
+      es: 'Diseño de interfaces responsivas y prototipos antes de escribir la primera línea.',
+      en: 'Responsive interface design and prototypes before writing the first line of code.',
+    },
+  },
   {
     clave: 'illustrator',
-    nombre: 'Illustrator',
+    nombre: 'Adobe Illustrator',
     categoria: 'diseno',
     nivel: 'avanzado',
     anios: 4,
     descripcion: {
       es: 'Gráficos vectoriales, iconografía y recursos para interfaz.',
       en: 'Vector graphics, iconography and UI assets.',
-    },
-  },
-  {
-    clave: 'figma',
-    nombre: 'Figma',
-    categoria: 'diseno',
-    nivel: 'intermedio',
-    descripcion: {
-      es: 'Maquetas y sistemas de diseño antes de escribir la primera línea.',
-      en: 'Mockups and design systems before writing the first line of code.',
     },
   },
 ];
@@ -327,7 +339,8 @@ export const etiquetasCategoria: Record<CategoriaTecnologia, Texto> = {
   datos: { es: 'Datos', en: 'Data' },
   infraestructura: { es: 'Infraestructura', en: 'Infrastructure' },
   calidad: { es: 'Calidad', en: 'Quality' },
-  diseno: { es: 'Diseño', en: 'Design' },
+  diseno: { es: 'Diseño y UI/UX', en: 'Design & UI/UX' },
+  ia: { es: 'Desarrollo asistido por IA', en: 'AI-assisted development' },
 };
 
 export const ordenCategorias: CategoriaTecnologia[] = [
@@ -338,6 +351,7 @@ export const ordenCategorias: CategoriaTecnologia[] = [
   'infraestructura',
   'calidad',
   'diseno',
+  'ia',
 ];
 
 /** Devuelve el nombre legible de una clave; útil en tarjetas de proyecto. */

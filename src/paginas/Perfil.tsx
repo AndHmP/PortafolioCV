@@ -8,13 +8,16 @@ import { experiencias } from '@/contenido/experiencia';
 import {
   calcularEdad,
   contacto,
+  especialidad,
   formacion,
+  idiomas,
   NOMBRE_COMPLETO,
   rol,
   sobreMi,
   ubicacion,
   valores,
 } from '@/contenido/perfil';
+import { nombreTecnologia } from '@/contenido/stack';
 import { useIdioma } from '@/hooks/useIdioma';
 import { useMeta } from '@/hooks/useMeta';
 import fotoPerfil from '@/recursos/foto-perfil.jpg';
@@ -65,6 +68,7 @@ export default function Perfil() {
               {NOMBRE_COMPLETO}
             </h1>
             <p className="mt-1 text-sm opacity-80 sm:text-base">{tr(rol)}</p>
+            <p className="mt-1 text-xs opacity-60 sm:text-sm">{tr(especialidad)}</p>
           </div>
         </div>
       </header>
@@ -192,13 +196,28 @@ export default function Perfil() {
                   <div className="mt-3 flex flex-wrap gap-1.5">
                     {exp.stack.map((clave) => (
                       <Etiqueta key={clave} tono="contorno">
-                        {clave}
+                        {nombreTecnologia(clave)}
                       </Etiqueta>
                     ))}
                   </div>
                 </li>
               ))}
             </ol>
+          </Desplegable>
+
+          {/* Idiomas */}
+          <Desplegable titulo={t.perfil.idiomas} inicialAbierto={false}>
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {idiomas.map((idioma) => (
+                <li
+                  key={idioma.clave}
+                  className="flex items-center justify-between gap-3 rounded-lg bg-base-alt p-4"
+                >
+                  <span className="font-display font-semibold">{tr(idioma.nombre)}</span>
+                  <span className="text-sm text-texto-suave">{tr(idioma.nivel)}</span>
+                </li>
+              ))}
+            </ul>
           </Desplegable>
 
           {/* Valores */}

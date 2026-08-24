@@ -9,6 +9,7 @@ import { experiencias } from '@/contenido/experiencia';
 import {
   calcularAniosExperiencia,
   contacto,
+  especialidad,
   NOMBRE_COMPLETO,
   rol,
   RUTA_CV,
@@ -16,7 +17,12 @@ import {
   ubicacion,
 } from '@/contenido/perfil';
 import { proyectosDestacados, proyectosPublicados } from '@/contenido/proyectos';
-import { etiquetasCategoria, ordenCategorias, tecnologias } from '@/contenido/stack';
+import {
+  etiquetasCategoria,
+  nombreTecnologia,
+  ordenCategorias,
+  tecnologias,
+} from '@/contenido/stack';
 import { useIdioma } from '@/hooks/useIdioma';
 import { useMeta } from '@/hooks/useMeta';
 import fotoPerfil from '@/recursos/foto-perfil.jpg';
@@ -61,6 +67,7 @@ export default function Inicio() {
             </h1>
 
             <p className="mt-3 text-xl font-medium text-acento md:text-2xl">{tr(rol)}</p>
+            <p className="mt-1 text-sm text-texto-suave md:text-base">{tr(especialidad)}</p>
 
             <p className="mt-5 max-w-xl text-base leading-relaxed text-texto-suave md:text-lg">
               {tr(titular)}
@@ -206,7 +213,7 @@ export default function Inicio() {
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {exp.stack.map((clave) => (
                   <Etiqueta key={clave} tono="contorno">
-                    {clave}
+                    {nombreTecnologia(clave)}
                   </Etiqueta>
                 ))}
               </div>

@@ -24,7 +24,8 @@ export type CategoriaTecnologia =
   | 'datos'
   | 'infraestructura'
   | 'calidad'
-  | 'diseno';
+  | 'diseno'
+  | 'ia';
 
 export type NivelTecnologia = 'avanzado' | 'intermedio' | 'basico';
 
@@ -142,6 +143,12 @@ export interface Formacion {
   periodo: Texto;
   descripcion: Texto;
   icono: ClaveIcono;
+}
+
+export interface Idiomahablado {
+  clave: string;
+  nombre: Texto;
+  nivel: Texto;
 }
 
 export interface Valor {

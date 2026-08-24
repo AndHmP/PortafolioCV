@@ -154,9 +154,10 @@ La integración continua ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)
 
 ## Pendientes antes de publicar
 
-- [ ] Reemplazar los marcadores `TODO_` en [`src/contenido/perfil.ts`](src/contenido/perfil.ts): correo, teléfono y LinkedIn reales (`npm run verificar` los lista).
-- [ ] Añadir `public/cv-anderson-huamancaja.pdf`.
+- [ ] Añadir `public/cv-anderson-huamancaja.pdf` (el botón «Descargar CV» ya apunta ahí).
 - [ ] Añadir `public/og-portada.png` (1200×630) para las tarjetas de redes sociales.
-- [ ] Confirmar las fechas de [`src/contenido/experiencia.ts`](src/contenido/experiencia.ts) contra LinkedIn.
-- [ ] Ajustar `SITIO_URL` en `perfil.ts` al dominio definitivo.
-- [ ] Añadir capturas de los proyectos en `public/proyectos/<slug>/`.
+- [ ] Añadir capturas de los proyectos propios en `public/proyectos/<slug>/`.
+- [ ] Para los casos de DACTA, KYB IMPORT, CONDO CLEANER y GETBYTE: pedir autorización antes de publicar cualquier captura de sistemas internos.
+- [ ] Confirmar que el dominio `www.portafolio-virtual.com` apunta al despliegue (`SITIO_URL` en `perfil.ts`).
+
+`npm run verificar` comprueba que no queden marcadores sin completar en el contenido.

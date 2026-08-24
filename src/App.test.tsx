@@ -72,10 +72,17 @@ describe('App', () => {
   it('carga el laboratorio con sus piezas', async () => {
     montar('/laboratorio');
 
+    // El laboratorio carga 35 componentes de forma perezosa, con sus hojas de
+    // estilo. Bajo la suite completa en paralelo supera el timeout por defecto
+    // de findBy (1 s), así que aquí se le da margen explícito.
     expect(
-      await screen.findByRole('heading', { level: 1, name: 'Laboratorio UI' }),
+      await screen.findByRole(
+        'heading',
+        { level: 1, name: 'Laboratorio UI' },
+        { timeout: 5000 },
+      ),
     ).toBeInTheDocument();
-  });
+  }, 15000);
 
   it('responde con 404 en una ruta inexistente', async () => {
     montar('/una-ruta-que-no-existe');

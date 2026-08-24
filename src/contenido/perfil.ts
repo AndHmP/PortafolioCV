@@ -1,33 +1,34 @@
-import type { DatoContacto, Formacion, Texto, Valor } from '@/tipos';
+import type { DatoContacto, Formacion, Idiomahablado, Texto, Valor } from '@/tipos';
 
 /*
- * ATENCIÓN — datos pendientes de completar.
- *
- * Los valores marcados con TODO_ son marcadores de posición. Reemplázalos por
- * tus datos reales antes de publicar; el test de integridad del perfil
- * (`perfil.test.ts`) falla mientras alguno siga presente, para que no se
- * escape a producción.
+ * Datos del perfil, alineados con el CV oficial.
  *
  * Se retiraron a propósito el DNI y la dirección domiciliaria que tenía la
- * versión anterior: son datos sensibles que no deben estar en un sitio
- * público indexable.
+ * versión anterior del portafolio: son datos sensibles que no deben estar en
+ * un sitio público indexable. El teléfono y el correo sí figuran, porque ya
+ * están en el CV que se envía a las empresas.
  */
 
 export const NOMBRE_COMPLETO = 'Anderson Huamancaja Porras';
 export const FECHA_NACIMIENTO = '2005-08-06';
-/** Año en que empezó a trabajar profesionalmente. Alimenta "X años de experiencia". */
+/** Inicio de la trayectoria profesional (GETBYTE, junio 2023). */
 export const INICIO_CARRERA = 2023;
 
-export const SITIO_URL = 'https://anderson-huamancaja.vercel.app';
+export const SITIO_URL = 'https://www.portafolio-virtual.com';
 
 export const rol: Texto = {
   es: 'Desarrollador Full Stack',
   en: 'Full Stack Developer',
 };
 
+export const especialidad: Texto = {
+  es: 'React · TypeScript · Python (FastAPI)',
+  en: 'React · TypeScript · Python (FastAPI)',
+};
+
 export const titular: Texto = {
-  es: 'Construyo aplicaciones web y móviles que resuelven problemas reales de negocio, de la interfaz a la base de datos.',
-  en: 'I build web and mobile applications that solve real business problems, from the interface down to the database.',
+  es: 'Construyo plataformas web en producción con React y TypeScript, y las APIs que las sostienen con Python y FastAPI.',
+  en: 'I build production web platforms with React and TypeScript, and the APIs that back them with Python and FastAPI.',
 };
 
 export const ubicacion: Texto = {
@@ -36,28 +37,28 @@ export const ubicacion: Texto = {
 };
 
 export const sobreMi: Texto = {
-  es: 'Desarrollador Full Stack con 3 años de experiencia construyendo productos para empresas peruanas. Trabajo el frontend con React, TypeScript y Next.js, y el backend con Python y FastAPI sobre arquitecturas de microservicios contenerizadas con Docker. También desarrollo aplicaciones Android nativas en Java. Me interesa el código que se puede mantener: tipado estricto, pruebas donde importan y decisiones técnicas que quedan documentadas para quien venga después.',
-  en: 'Full Stack developer with 3 years of experience building products for Peruvian companies. I work on the frontend with React, TypeScript and Next.js, and on the backend with Python and FastAPI over containerised microservice architectures. I also build native Android applications in Java. I care about maintainable code: strict typing, tests where they matter, and technical decisions documented for whoever comes next.',
+  es: 'Desarrollador Full Stack con 3 años de experiencia, enfocado en frontend con React y TypeScript y con base sólida en backend con Python y FastAPI. He trabajado en plataformas web en producción bajo arquitecturas de microfrontends y microservicios, con pruebas unitarias, bases de datos SQL Server, desarrollo móvil Android nativo con Java y despliegue de contenedores con Docker y NGINX. Me especializo en construir interfaces responsivas y mantenibles centradas en la experiencia de usuario.',
+  en: 'Full Stack developer with 3 years of experience, focused on the frontend with React and TypeScript and with a solid backend foundation in Python and FastAPI. I have worked on production web platforms under microfrontend and microservice architectures, with unit testing, SQL Server databases, native Android development in Java, and container deployment with Docker and NGINX. I specialise in building responsive, maintainable interfaces centred on the user experience.',
 };
 
 export const contacto: DatoContacto[] = [
   {
     icono: 'correo',
     etiqueta: { es: 'Correo', en: 'Email' },
-    valor: 'TODO_CORREO@ejemplo.com',
-    url: 'mailto:TODO_CORREO@ejemplo.com',
+    valor: 'ahuamancajaporras@gmail.com',
+    url: 'mailto:ahuamancajaporras@gmail.com',
   },
   {
     icono: 'whatsapp',
     etiqueta: { es: 'WhatsApp', en: 'WhatsApp' },
-    valor: '+51 TODO_TELEFONO',
-    url: 'https://wa.me/51TODO_TELEFONO',
+    valor: '(+51) 908 822 952',
+    url: 'https://wa.me/51908822952',
   },
   {
     icono: 'linkedin',
     etiqueta: { es: 'LinkedIn', en: 'LinkedIn' },
-    valor: 'Anderson Huamancaja',
-    url: 'https://www.linkedin.com/in/TODO_LINKEDIN',
+    valor: 'anderson-huamancaja-porras',
+    url: 'https://www.linkedin.com/in/anderson-huamancaja-porras',
   },
   {
     icono: 'github',
@@ -80,48 +81,28 @@ export const formacion: Formacion[] = [
     clave: 'senati',
     institucion: 'SENATI',
     titulo: {
-      es: 'Ingeniería de Software con mención en Inteligencia Artificial',
-      en: 'Software Engineering, specialisation in Artificial Intelligence',
+      es: 'Carrera Técnica: Ingeniería de Software con Inteligencia Artificial',
+      en: 'Technical Degree: Software Engineering with Artificial Intelligence',
     },
-    periodo: { es: '2022 — 2024', en: '2022 — 2024' },
+    periodo: { es: '2022 — 2024 · Lima, Perú', en: '2022 — 2024 · Lima, Peru' },
     descripcion: {
-      es: 'Formación técnica en desarrollo de software: programación orientada a objetos, bases de datos relacionales, arquitectura de aplicaciones y fundamentos de inteligencia artificial. Es la etapa donde pasé de escribir código a diseñar sistemas.',
-      en: 'Technical training in software development: object-oriented programming, relational databases, application architecture and AI fundamentals. This is where I moved from writing code to designing systems.',
+      es: 'Formación técnica en desarrollo de software: programación orientada a objetos, bases de datos relacionales, arquitectura de aplicaciones y fundamentos de inteligencia artificial.',
+      en: 'Technical training in software development: object-oriented programming, relational databases, application architecture and AI fundamentals.',
     },
     icono: 'senati',
   },
+];
+
+export const idiomas: Idiomahablado[] = [
   {
-    clave: 'secundaria',
-    institucion: 'I.E.E. Carlos Wiesse',
-    titulo: { es: 'Educación secundaria', en: 'Secondary education' },
-    periodo: { es: '2016 — 2021', en: '2016 — 2021' },
-    descripcion: {
-      es: 'Educación secundaria completa, manteniéndome de forma consistente entre los tres primeros puestos de mi promoción.',
-      en: 'Completed secondary education, consistently ranking among the top three students of my year.',
-    },
-    icono: 'secundaria',
+    clave: 'espanol',
+    nombre: { es: 'Español', en: 'Spanish' },
+    nivel: { es: 'Nativo', en: 'Native' },
   },
   {
-    clave: 'primaria',
-    institucion: 'I.E. 2059 Suecia',
-    titulo: { es: 'Educación primaria', en: 'Primary education' },
-    periodo: { es: '2011 — 2016', en: '2011 — 2016' },
-    descripcion: {
-      es: 'Educación primaria en Comas, Lima. Reconocido en concursos de dibujo en el primer y el último año.',
-      en: 'Primary education in Comas, Lima. Awarded in drawing competitions in my first and final year.',
-    },
-    icono: 'primaria',
-  },
-  {
-    clave: 'inicial',
-    institucion: 'Colegio Luis Enrique',
-    titulo: { es: 'Educación inicial', en: 'Early education' },
-    periodo: { es: '2008 — 2011', en: '2008 — 2011' },
-    descripcion: {
-      es: 'Educación inicial, donde desarrollé las habilidades básicas y sociales de los primeros años.',
-      en: 'Early education, where I developed the basic and social skills of the first years.',
-    },
-    icono: 'inicial',
+    clave: 'ingles',
+    nombre: { es: 'Inglés', en: 'English' },
+    nivel: { es: 'Básico — en proceso de mejora', en: 'Basic — actively improving' },
   },
 ];
 
@@ -146,8 +127,8 @@ export const valores: Valor[] = [
     clave: 'organizacion',
     titulo: { es: 'Organización', en: 'Organisation' },
     contenido: {
-      es: 'Divido el trabajo en piezas verificables y priorizo lo que desbloquea al resto del equipo.',
-      en: 'I break work into verifiable pieces and prioritise what unblocks the rest of the team.',
+      es: 'Planifico la tarea antes de escribirla y documento las decisiones técnicas en Markdown, para que el equipo pueda seguir el razonamiento sin preguntarme.',
+      en: 'I plan the task before writing it and document technical decisions in Markdown, so the team can follow the reasoning without asking me.',
     },
   },
   {
@@ -162,8 +143,8 @@ export const valores: Valor[] = [
     clave: 'respeto',
     titulo: { es: 'Respeto', en: 'Respect' },
     contenido: {
-      es: 'Reviso código buscando entender la intención antes de proponer cambios. Las revisiones son sobre el código, no sobre la persona.',
-      en: 'I review code seeking to understand the intent before proposing changes. Reviews are about the code, not the person.',
+      es: 'Reviso Pull Requests buscando entender la intención antes de proponer cambios. Las revisiones son sobre el código, no sobre la persona.',
+      en: 'I review pull requests seeking to understand the intent before proposing changes. Reviews are about the code, not the person.',
     },
   },
   {

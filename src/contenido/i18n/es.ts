@@ -111,6 +111,7 @@ export const es = {
     nivelBasico: 'Básico',
     aniosDeUso: 'de uso',
     logros: 'Lo que hice',
+    idiomas: 'Idiomas',
   },
 
   laboratorio: {
