@@ -134,7 +134,8 @@ export const es = {
     volverLaboratorio: 'Volver al laboratorio',
     seccionNoEncontrada: 'Esa sección no existe',
     seccionNoEncontradaDetalle: 'Puede que el enlace esté mal escrito.',
-    tramo: 'Tramo',
+    paginacion: 'Paginación de piezas',
+    paginaDe: 'Página {actual} de {total}',
     verTodos: 'Ver todos',
   },
 

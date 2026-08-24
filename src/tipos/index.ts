@@ -183,8 +183,8 @@ export interface SeccionLab {
   icono: string;
   /** Categorías que ofrece como filtro secundario dentro de la sección. */
   filtros?: CategoriaLab[];
-  /** Divide una sección larga en tramos navegables (el caso de los 100 días). */
-  tramos?: number;
+  /** Pagina una sección larga. Sin valor, se muestra completa. */
+  porPagina?: number;
 }
 
 export interface PiezaLab {

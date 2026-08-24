@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 
 import Icono from '@/componentes/iconos/Icono';
 import Boton from '@/componentes/ui/Boton';
 import Etiqueta from '@/componentes/ui/Etiqueta';
+import Paginacion from '@/componentes/ui/Paginacion';
 import { piezasPorSeccion } from '@/contenido/lab';
 import { buscarSeccion } from '@/contenido/secciones-lab';
 import { useIdioma } from '@/hooks/useIdioma';
@@ -24,10 +25,11 @@ function claseChip(activo: boolean) {
 export default function LaboratorioSeccion() {
   const { seccion: slug } = useParams<{ seccion: string }>();
   const { t, tr } = useIdioma();
+  const [parametros, fijarParametros] = useSearchParams();
+  const inicioRejilla = useRef<HTMLDivElement>(null);
 
   const seccion = buscarSeccion(slug);
   const [categoria, setCategoria] = useState<CategoriaLab | null>(null);
-  const [tramo, setTramo] = useState(0);
 
   useMeta({
     titulo: seccion
@@ -44,13 +46,42 @@ export default function LaboratorioSeccion() {
     [todas, categoria],
   );
 
-  /* Los 100 días se recorren por tramos de 25 para no montar cien
-     animaciones a la vez. El resto de secciones se muestran completas. */
-  const porTramo = seccion?.tramos ?? 0;
-  const totalTramos = porTramo ? Math.ceil(filtradas.length / porTramo) : 0;
-  const visibles = porTramo
-    ? filtradas.slice(tramo * porTramo, (tramo + 1) * porTramo)
+  const porPagina = seccion?.porPagina ?? 0;
+  const totalPaginas = porPagina ? Math.max(1, Math.ceil(filtradas.length / porPagina)) : 1;
+
+  /* La página vive en la URL: el enlace se puede compartir y el botón
+     «atrás» del navegador recorre las páginas como se espera. */
+  const solicitada = Number(parametros.get('pagina') ?? 1);
+  const pagina = Number.isFinite(solicitada)
+    ? Math.min(Math.max(1, Math.trunc(solicitada)), totalPaginas)
+    : 1;
+
+  const visibles = porPagina
+    ? filtradas.slice((pagina - 1) * porPagina, pagina * porPagina)
     : filtradas;
+
+  const irAPagina = (siguiente: number) => {
+    const nuevos = new URLSearchParams(parametros);
+    if (siguiente <= 1) nuevos.delete('pagina');
+    else nuevos.set('pagina', String(siguiente));
+    fijarParametros(nuevos);
+  };
+
+  /* Al cambiar de página el navegador conserva el scroll, que deja al
+     visitante a mitad de la rejilla nueva. Se sube al inicio de la lista,
+     no al de la página, para no perder de vista los controles. */
+  useEffect(() => {
+    if (pagina > 1) {
+      inicioRejilla.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
+  }, [pagina]);
+
+  /* Cambiar de categoría reordena la lista: la página anterior deja de
+     tener sentido. */
+  const cambiarCategoria = (siguiente: CategoriaLab | null) => {
+    setCategoria(siguiente);
+    irAPagina(1);
+  };
 
   if (!seccion) {
     return (
@@ -66,7 +97,11 @@ export default function LaboratorioSeccion() {
   }
 
   const contador =
-    visibles.length === 1 ? t.laboratorio.contadorUno : t.laboratorio.contadorVarios;
+    filtradas.length === 1 ? t.laboratorio.contadorUno : t.laboratorio.contadorVarios;
+
+  const textoPagina = t.laboratorio.paginaDe
+    .replace('{actual}', String(pagina))
+    .replace('{total}', String(totalPaginas));
 
   return (
     <div className="contenedor py-12 md:py-16">
@@ -90,7 +125,7 @@ export default function LaboratorioSeccion() {
         <div className="mb-6 flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => setCategoria(null)}
+            onClick={() => cambiarCategoria(null)}
             className={claseChip(categoria === null)}
             aria-pressed={categoria === null}
           >
@@ -103,7 +138,7 @@ export default function LaboratorioSeccion() {
               <button
                 key={cat}
                 type="button"
-                onClick={() => setCategoria(cat)}
+                onClick={() => cambiarCategoria(cat)}
                 className={claseChip(categoria === cat)}
                 aria-pressed={categoria === cat}
               >
@@ -114,75 +149,72 @@ export default function LaboratorioSeccion() {
         </div>
       )}
 
-      {/* Tramos: 1-25, 26-50, … */}
-      {totalTramos > 1 && (
-        <div className="mb-6 flex flex-wrap items-center gap-2">
-          <span className="mr-1 text-xs font-medium uppercase tracking-wide text-texto-suave">
-            {t.laboratorio.tramo}
-          </span>
-          {Array.from({ length: totalTramos }, (_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setTramo(i)}
-              className={claseChip(tramo === i)}
-              aria-pressed={tramo === i}
-            >
-              {i * porTramo + 1}–{Math.min((i + 1) * porTramo, filtradas.length)}
-            </button>
-          ))}
-        </div>
-      )}
-
-      <p className="mb-6 text-sm text-texto-suave" aria-live="polite">
-        {visibles.length} {contador}
-        {totalTramos > 1 ? ` · ${filtradas.length} en total` : ''}
-      </p>
+      <div ref={inicioRejilla} className="mb-6 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <p className="text-sm text-texto-suave" aria-live="polite">
+          {filtradas.length} {contador}
+        </p>
+        {totalPaginas > 1 && (
+          <p className="text-sm text-texto-suave">· {textoPagina}</p>
+        )}
+      </div>
 
       {visibles.length === 0 ? (
         <p className="rounded-xl border border-borde bg-superficie p-8 text-center text-texto-suave">
           {t.laboratorio.sinResultados}
         </p>
       ) : (
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {visibles.map((pieza) => (
-            <li
-              key={pieza.slug}
-              className={`overflow-hidden rounded-xl border border-borde bg-superficie ${
-                pieza.categoria === 'formularios' ? 'sm:col-span-2 lg:col-span-3' : ''
-              }`}
-            >
-              {/* Lienzo: aísla la pieza para que sus estilos no afecten a la página */}
-              <div
-                className="lab-heredado flex items-center justify-center overflow-hidden border-b border-borde"
-                style={{
-                  height: pieza.alto ?? ALTO_POR_DEFECTO,
-                  backgroundColor:
-                    pieza.fondoFijo === 'oscuro' ? '#1b1b24' : 'var(--color-superficie-alt)',
-                  /* El navegador se salta el pintado de las piezas fuera de
-                     pantalla, que con animaciones continuas ahorra bastante. */
-                  contentVisibility: 'auto',
-                  containIntrinsicSize: `${pieza.alto ?? ALTO_POR_DEFECTO}px`,
-                }}
+        <>
+          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {visibles.map((pieza) => (
+              <li
+                key={pieza.slug}
+                className={`overflow-hidden rounded-xl border border-borde bg-superficie ${
+                  pieza.categoria === 'formularios' ? 'sm:col-span-2 lg:col-span-3' : ''
+                }`}
               >
-                {pieza.componente}
-              </div>
-
-              <div className="p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <h2 className="font-display font-semibold">{tr(pieza.titulo)}</h2>
-                  <Etiqueta tono="contorno">{t.laboratorio[pieza.categoria]}</Etiqueta>
+                {/* Lienzo: aísla la pieza para que sus estilos no afecten a la página */}
+                <div
+                  className="lab-heredado flex items-center justify-center overflow-hidden border-b border-borde"
+                  style={{
+                    height: pieza.alto ?? ALTO_POR_DEFECTO,
+                    backgroundColor:
+                      pieza.fondoFijo === 'oscuro' ? '#1b1b24' : 'var(--color-superficie-alt)',
+                    /* El navegador se salta el pintado de las piezas fuera de
+                       pantalla, que con animaciones continuas ahorra bastante. */
+                    contentVisibility: 'auto',
+                    containIntrinsicSize: `${pieza.alto ?? ALTO_POR_DEFECTO}px`,
+                  }}
+                >
+                  {pieza.componente}
                 </div>
-                <p className="mt-2 text-xs leading-relaxed text-texto-suave">
-                  <span className="font-semibold uppercase tracking-wide">
-                    {t.laboratorio.tecnica}:
-                  </span>{' '}
-                  {tr(pieza.tecnica)}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
+
+                <div className="p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <h2 className="font-display font-semibold">{tr(pieza.titulo)}</h2>
+                    <Etiqueta tono="contorno">{t.laboratorio[pieza.categoria]}</Etiqueta>
+                  </div>
+                  <p className="mt-2 text-xs leading-relaxed text-texto-suave">
+                    <span className="font-semibold uppercase tracking-wide">
+                      {t.laboratorio.tecnica}:
+                    </span>{' '}
+                    {tr(pieza.tecnica)}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          {totalPaginas > 1 && (
+            <div className="mt-10">
+              <Paginacion
+                pagina={pagina}
+                totalPaginas={totalPaginas}
+                alCambiar={irAPagina}
+                etiqueta={t.laboratorio.paginacion}
+              />
+            </div>
+          )}
+        </>
       )}
     </div>
   );

@@ -99,8 +99,9 @@ describe('App', () => {
     expect(
       await screen.findByRole('heading', { level: 1, name: '100 días de CSS' }, { timeout: 5000 }),
     ).toBeInTheDocument();
-    // El tramo inicial son 25 piezas, no las 100.
-    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(25);
+    // La primera página son 12 piezas, no las 100.
+    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(12);
+    expect(screen.getByRole('navigation', { name: /Paginación/i })).toBeInTheDocument();
   }, 15000);
 
   it('muestra un aviso cuando la sección no existe', async () => {

@@ -136,7 +136,8 @@ export const en: Diccionario = {
     volverLaboratorio: 'Back to the lab',
     seccionNoEncontrada: 'That section does not exist',
     seccionNoEncontradaDetalle: 'The link may be misspelled.',
-    tramo: 'Range',
+    paginacion: 'Piece pagination',
+    paginaDe: 'Page {actual} of {total}',
     verTodos: 'View all',
   },
 

@@ -15,8 +15,9 @@ export const seccionesLab: SeccionLab[] = [
       en: 'The full challenge: one piece a day for a hundred days, solving each day’s official brief with CSS alone.',
     },
     icono: 'estrella',
-    /* Cien piezas en una sola pantalla son inmanejables: se navegan por tramos. */
-    tramos: 25,
+    /* Cien animaciones simultáneas son inmanejables: se paginan de 12 en 12,
+       que llena cuatro filas de tres en escritorio. */
+    porPagina: 12,
   },
   {
     slug: 'componentes',
