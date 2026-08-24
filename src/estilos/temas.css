@@ -1,0 +1,68 @@
+/*
+ * Paleta única del portafolio.
+ * El tema se aplica con el atributo data-tema en <html> (ver index.html),
+ * no inyectando <style> en tiempo de render como hacía la versión anterior.
+ */
+
+:root,
+[data-tema='claro'] {
+  --color-fondo: #ffffff;
+  --color-fondo-alt: #f4f5f8;
+  --color-superficie: #ffffff;
+  --color-superficie-alt: #eef0f4;
+  --color-borde: #dfe3ea;
+  --color-texto: #13131a;
+  --color-texto-suave: #5a6070;
+  --color-acento: #4338ca;
+  --color-acento-hover: #3730a3;
+  --color-acento-contraste: #ffffff;
+  --color-acento-suave: #eef0ff;
+  --sombra-sutil: 0 1px 2px rgb(19 19 26 / 6%), 0 6px 20px rgb(19 19 26 / 6%);
+  --sombra-elevada: 0 2px 4px rgb(19 19 26 / 8%), 0 16px 40px rgb(19 19 26 / 10%);
+}
+
+[data-tema='oscuro'] {
+  --color-fondo: #0e0e13;
+  --color-fondo-alt: #13131a;
+  --color-superficie: #191922;
+  --color-superficie-alt: #21212c;
+  --color-borde: #2e2e3b;
+  --color-texto: #f2f3f7;
+  --color-texto-suave: #9a9daf;
+  --color-acento: #a5b4fc;
+  --color-acento-hover: #c7d2fe;
+  --color-acento-contraste: #13131a;
+  --color-acento-suave: #1c1d33;
+  --sombra-sutil: 0 1px 2px rgb(0 0 0 / 40%), 0 6px 20px rgb(0 0 0 / 30%);
+  --sombra-elevada: 0 2px 4px rgb(0 0 0 / 50%), 0 16px 40px rgb(0 0 0 / 45%);
+}
+
+/*
+ * Alias heredados. El SCSS del Perfil y del Laboratorio todavía referencia
+ * estos nombres; apuntarlos a la paleta nueva evita reescribir ~40 hojas de
+ * estilo y mantiene la identidad visual original.
+ */
+:root {
+  --var-color-01: var(--color-texto);
+  --var-color-02: var(--color-fondo);
+  --var-color-03: var(--color-borde);
+  --var-color-04: var(--color-texto-suave);
+  --var-color-05: var(--color-superficie-alt);
+
+  --var-back-ground-nav-bar: var(--color-superficie);
+  --var-color-01-nav-bar: var(--color-texto);
+  --var-color-02-nav-bar: var(--color-texto-suave);
+  --var-color-03-nav-bar: var(--color-borde);
+
+  --var-color-01-inputs-back: var(--color-superficie);
+  --var-color-02-inputs-back: var(--color-borde);
+
+  /* La ola SVG del perfil toma el color del texto; lo que va encima, el del fondo. */
+  --var-color-01-perfil: var(--color-texto);
+  --var-color-02-perfil: var(--color-fondo);
+  --var-color-03-perfil: var(--color-superficie-alt);
+  --var-color-03-perfil-hover: var(--color-borde);
+  --var-color-04-perfil: var(--color-texto);
+  --var-color-04-perfil-hover: var(--color-acento);
+  --var-color-05-perfil: var(--color-fondo);
+}
