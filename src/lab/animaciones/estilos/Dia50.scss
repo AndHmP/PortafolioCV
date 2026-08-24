@@ -1,0 +1,120 @@
+/*
+ * El principio de squash and stretch: el objeto se estira en la dirección del
+ * movimiento cuando cae y se aplasta al chocar. Conservar el volumen aparente
+ * (lo que se gana en alto se pierde en ancho) es lo que lo hace creíble.
+ */
+$salto: 1.4s;
+
+.Dia50 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #241f3d, #14121f);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  .Dia50-pista {
+    position: relative;
+    width: 120px;
+    height: 170px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .Dia50-huevo {
+    position: relative;
+    width: 56px;
+    height: 72px;
+    border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+    background: linear-gradient(150deg, #ffe3a3, #ffb703);
+    transform-origin: center bottom;
+    animation: Dia50Saltar $salto cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    overflow: hidden;
+  }
+
+  .Dia50-mancha {
+    position: absolute;
+    border-radius: 50%;
+    background: rgb(214 64 69 / 85%);
+
+    &.m1 {
+      top: 16px;
+      left: 8px;
+      width: 14px;
+      height: 14px;
+    }
+
+    &.m2 {
+      top: 38px;
+      right: 9px;
+      width: 10px;
+      height: 10px;
+    }
+
+    &.m3 {
+      bottom: 10px;
+      left: 20px;
+      width: 8px;
+      height: 8px;
+    }
+  }
+
+  .Dia50-sombra {
+    position: absolute;
+    bottom: -6px;
+    width: 66px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgb(0 0 0 / 45%);
+    filter: blur(5px);
+    animation: Dia50Sombra $salto cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  }
+
+  .Dia50-etiqueta {
+    margin: 0;
+    color: #6b6a8c;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+}
+
+@keyframes Dia50Saltar {
+  0% {
+    transform: translateY(-95px) scale(0.94, 1.08);
+  }
+  38% {
+    /* En caída libre se estira. */
+    transform: translateY(-10px) scale(0.9, 1.14);
+  }
+  46% {
+    /* Impacto: se aplasta y se ensancha. */
+    transform: translateY(0) scale(1.24, 0.72);
+  }
+  56% {
+    transform: translateY(-14px) scale(0.92, 1.12);
+  }
+  100% {
+    transform: translateY(-95px) scale(0.94, 1.08);
+  }
+}
+
+@keyframes Dia50Sombra {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.25;
+  }
+  46% {
+    transform: scale(1.15);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(0.6);
+    opacity: 0.25;
+  }
+}

@@ -1,0 +1,133 @@
+/*
+ * Cuatro cuadrados que se separan, giran y vuelven a encajar formando el
+ * logo. Toda la animación es una sola secuencia compartida: lo que cambia
+ * entre piezas es el desfase y el sentido del giro.
+ */
+
+.Dia38 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #16161f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+
+  .Dia38-logo {
+    position: relative;
+    width: 84px;
+    height: 84px;
+  }
+
+  .Dia38-pieza {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    animation: Dia38Encajar 4s cubic-bezier(0.68, -0.35, 0.27, 1.35) infinite;
+
+    &.p1 {
+      top: 0;
+      left: 0;
+      background: #ff6b6b;
+    }
+
+    &.p2 {
+      top: 0;
+      right: 0;
+      background: #ffd166;
+      animation-delay: 0.12s;
+    }
+
+    &.p3 {
+      bottom: 0;
+      left: 0;
+      background: #4ecdc4;
+      animation-delay: 0.24s;
+    }
+
+    &.p4 {
+      bottom: 0;
+      right: 0;
+      background: #5f6bff;
+      animation-delay: 0.36s;
+    }
+  }
+
+  .Dia38-nombre {
+    margin: 0;
+    display: flex;
+    gap: 10px;
+    font-family: 'Kulim Park', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 4px;
+
+    span {
+      color: #fff;
+      opacity: 0;
+      animation: Dia38Aparecer 4s ease infinite;
+
+      @for $i from 1 through 3 {
+        &:nth-child(#{$i}) {
+          animation-delay: $i * 0.12s;
+        }
+      }
+    }
+  }
+}
+
+@keyframes Dia38Encajar {
+  0%,
+  12% {
+    transform: translate(0, 0) rotate(0deg);
+    border-radius: 6px;
+  }
+  40%,
+  55% {
+    transform: translate(var(--x, 26px), var(--y, 26px)) rotate(135deg);
+    border-radius: 50%;
+  }
+  85%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    border-radius: 6px;
+  }
+}
+
+@keyframes Dia38Aparecer {
+  0%,
+  20% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  45%,
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* Cada esquina se aleja hacia su propio lado. */
+.Dia38 .Dia38-pieza.p1 {
+  --x: -22px;
+  --y: -22px;
+}
+.Dia38 .Dia38-pieza.p2 {
+  --x: 22px;
+  --y: -22px;
+}
+.Dia38 .Dia38-pieza.p3 {
+  --x: -22px;
+  --y: 22px;
+}
+.Dia38 .Dia38-pieza.p4 {
+  --x: 22px;
+  --y: 22px;
+}

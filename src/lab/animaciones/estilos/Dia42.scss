@@ -1,0 +1,87 @@
+/*
+ * Las 46 estrellas no se escriben una por una: un bucle de Sass reparte
+ * posición, tamaño y desfase usando dos multiplicadores primos entre sí, de
+ * modo que el patrón no se repita visiblemente.
+ */
+
+$estrellas: 46;
+
+.Dia42 {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #05060f 0%, #0d1030 55%, #1b1f4b 100%);
+  overflow: hidden;
+
+  .Dia42-estrella {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    animation: Dia42Titilar ease-in-out infinite;
+
+    @for $i from 0 through $estrellas - 1 {
+      &.e#{$i} {
+        top: (($i * 37) % 88) * 1%;
+        left: (($i * 53) % 96) * 1%;
+        width: 1px + ($i % 3);
+        height: 1px + ($i % 3);
+        opacity: 0.35 + ($i % 5) * 0.13;
+        animation-duration: 1.8s + ($i % 7) * 0.45s;
+        animation-delay: -($i % 11) * 0.37s;
+      }
+    }
+  }
+
+  .Dia42-fugaz {
+    position: absolute;
+    top: 18%;
+    left: -12%;
+    width: 92px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #fff);
+    opacity: 0;
+    transform: rotate(18deg);
+    animation: Dia42Fugaz 7s ease-in infinite;
+  }
+
+  .Dia42-horizonte {
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: -46px;
+    height: 110px;
+    border-radius: 50% 50% 0 0;
+    background: #070812;
+    box-shadow: 0 -1px 24px rgb(120 140 255 / 22%);
+  }
+}
+
+@keyframes Dia42Titilar {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.7);
+    filter: brightness(1.9);
+  }
+}
+
+@keyframes Dia42Fugaz {
+  0%,
+  62% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(18deg);
+  }
+  68% {
+    opacity: 1;
+  }
+  86%,
+  100% {
+    opacity: 0;
+    transform: translate(300px, 96px) rotate(18deg);
+  }
+}

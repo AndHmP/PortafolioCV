@@ -1,0 +1,73 @@
+.Dia36 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #262633;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  font-family: 'Open Sans', sans-serif;
+
+  .Dia36-barra {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid #3b3b4f;
+
+    button {
+      padding: 12px 0;
+      border: none;
+      background: transparent;
+      color: #7b7d9e;
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      transition: color 0.25s;
+
+      &:hover {
+        color: #b9bad6;
+      }
+
+      &.activa {
+        color: #fff;
+      }
+    }
+  }
+
+  .Dia36-indicador {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: calc(100% / 3);
+    height: 2px;
+    border-radius: 2px;
+    background: #5f6bff;
+    transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .Dia36-panel {
+    flex: 1;
+    overflow: hidden;
+
+    p {
+      margin: 0;
+      color: #c9cade;
+      font-size: 13px;
+      line-height: 1.7;
+      /* La `key` en React remonta el nodo, y eso reinicia la animación. */
+      animation: Dia36Entrar 0.35s ease;
+    }
+  }
+}
+
+@keyframes Dia36Entrar {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,160 @@
+.Dia33 {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #4fc3f7 0%, #b3e5fc 65%, #e1f5fe 100%);
+  overflow: hidden;
+
+  .Dia33-sol {
+    position: absolute;
+    top: 46px;
+    left: 50%;
+    width: 54px;
+    height: 54px;
+    margin-left: -27px;
+    border-radius: 50%;
+    background: #ffd54f;
+    box-shadow: 0 0 26px 6px rgb(255 213 79 / 60%);
+    animation: Dia33Girar 22s linear infinite;
+  }
+
+  /* Los ocho rayos son el mismo elemento rotado; el contenedor los gira. */
+  .Dia33-rayo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 78px;
+    margin: -39px 0 0 -2px;
+    border-radius: 2px;
+    background: rgb(255 213 79 / 75%);
+
+    @for $i from 0 through 7 {
+      &.r#{$i} {
+        transform: rotate($i * 45deg);
+      }
+    }
+  }
+
+  .Dia33-nube {
+    position: absolute;
+    height: 22px;
+    border-radius: 22px;
+    background: #fff;
+    animation: Dia33Derivar linear infinite;
+
+    /* Los dos bultos que convierten la píldora en nube. */
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    &::before {
+      left: 14%;
+      width: 26px;
+      height: 26px;
+    }
+
+    &::after {
+      right: 18%;
+      width: 18px;
+      height: 18px;
+    }
+
+    &.n1 {
+      top: 40px;
+      width: 74px;
+      animation-duration: 26s;
+      animation-delay: -4s;
+    }
+
+    &.n2 {
+      top: 96px;
+      width: 56px;
+      opacity: 0.85;
+      animation-duration: 34s;
+      animation-delay: -18s;
+    }
+
+    &.n3 {
+      top: 148px;
+      width: 92px;
+      opacity: 0.7;
+      animation-duration: 44s;
+      animation-delay: -30s;
+    }
+  }
+
+  /* Cada pájaro es un borde superior en "v" que se abre y cierra. */
+  .Dia33-pajaro {
+    position: absolute;
+    width: 14px;
+    height: 6px;
+    border-top: 2px solid #37474f;
+    border-radius: 50%;
+    opacity: 0.55;
+    animation:
+      Dia33Volar 18s linear infinite,
+      Dia33Aletear 0.6s ease-in-out infinite;
+
+    &.p1 {
+      top: 74px;
+      animation-delay: -2s, 0s;
+    }
+
+    &.p2 {
+      top: 92px;
+      transform: scale(0.75);
+      animation-delay: -6s, -0.3s;
+    }
+  }
+
+  .Dia33-colina {
+    position: absolute;
+    left: -20%;
+    right: -20%;
+    bottom: -60px;
+    height: 130px;
+    border-radius: 50% 50% 0 0;
+    background: #66bb6a;
+  }
+}
+
+@keyframes Dia33Girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes Dia33Derivar {
+  from {
+    left: -110px;
+  }
+  to {
+    left: 105%;
+  }
+}
+
+@keyframes Dia33Volar {
+  from {
+    left: 108%;
+  }
+  to {
+    left: -30px;
+  }
+}
+
+@keyframes Dia33Aletear {
+  0%,
+  100% {
+    height: 6px;
+  }
+  50% {
+    height: 2px;
+  }
+}

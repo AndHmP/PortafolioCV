@@ -1,0 +1,97 @@
+.Dia32 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #23233a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  font-family: 'Open Sans', sans-serif;
+
+  .Dia32-etiqueta {
+    margin: 0;
+    color: #7b7d9e;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* El recorte es lo que hace que el número entre y salga por los bordes. */
+  .Dia32-marcador {
+    position: relative;
+    width: 140px;
+    height: 86px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .Dia32-numero {
+    position: absolute;
+    color: #fff;
+    font-size: 60px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+
+    &.sube {
+      animation: Dia32Sube 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &.baja {
+      animation: Dia32Baja 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  }
+
+  .Dia32-controles {
+    display: flex;
+    gap: 12px;
+
+    button {
+      width: 46px;
+      height: 46px;
+      border: none;
+      border-radius: 14px;
+      background: #32324f;
+      color: #cfd0f0;
+      font-size: 22px;
+      cursor: pointer;
+      transition:
+        background-color 0.2s,
+        transform 0.12s;
+
+      &:hover {
+        background: #5f6bff;
+        color: #fff;
+      }
+
+      &:active {
+        transform: scale(0.92);
+      }
+    }
+  }
+}
+
+@keyframes Dia32Sube {
+  from {
+    transform: translateY(70px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes Dia32Baja {
+  from {
+    transform: translateY(-70px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

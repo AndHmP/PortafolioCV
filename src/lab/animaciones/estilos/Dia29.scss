@@ -1,0 +1,96 @@
+.Dia29 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #20202c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia29-campo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    padding: 0 16px;
+    border-radius: 28px;
+    background: #2c2c3c;
+    cursor: text;
+    overflow: hidden;
+    transition:
+      width 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+      background-color 0.45s;
+
+    /* La lupa se encoge y cede el sitio al texto al enfocar. */
+    &:focus-within {
+      width: 210px;
+      background: #34344a;
+    }
+  }
+
+  .Dia29-lupa {
+    flex: none;
+    display: flex;
+
+    svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: #8a8ca6;
+      stroke-width: 2;
+      stroke-linecap: round;
+      transition:
+        stroke 0.45s,
+        transform 0.45s;
+    }
+  }
+
+  .Dia29-campo:focus-within .Dia29-lupa svg {
+    stroke: #6ee7c8;
+    transform: scale(0.85);
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    margin-left: 12px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #eef0ff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.15s;
+
+    &::placeholder {
+      color: #6f7089;
+    }
+
+    /* Oculta la X nativa de Chrome, que rompe el diseño. */
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+
+  .Dia29-campo:focus-within input {
+    opacity: 1;
+  }
+
+  .Dia29-linea {
+    position: absolute;
+    left: 50px;
+    right: 16px;
+    bottom: 14px;
+    height: 1.5px;
+    background: #6ee7c8;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease 0.2s;
+  }
+
+  .Dia29-campo:focus-within .Dia29-linea {
+    transform: scaleX(1);
+  }
+}

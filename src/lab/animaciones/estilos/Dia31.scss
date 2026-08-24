@@ -1,0 +1,72 @@
+/*
+ * La onda no la produce ninguna animación especial: los 12 péndulos oscilan
+ * igual, pero cada uno tarda una fracción menos que el anterior. La diferencia
+ * acumulada es la que dibuja el patrón. Ese es todo el truco matemático.
+ */
+
+$pendulos: 12;
+$base: 3.6s;
+
+.Dia31 {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #1d1b32, #120f22);
+  overflow: hidden;
+
+  .Dia31-barra {
+    position: absolute;
+    top: 34px;
+    left: 24px;
+    right: 24px;
+    height: 3px;
+    border-radius: 2px;
+    background: #4b4a6b;
+  }
+
+  .Dia31-pendulo {
+    position: absolute;
+    top: 34px;
+    transform-origin: top center;
+    animation: Dia31Oscilar $base ease-in-out infinite;
+  }
+
+  .Dia31-hilo {
+    display: block;
+    width: 1px;
+    height: 120px;
+    margin: 0 auto;
+    background: rgb(255 255 255 / 22%);
+  }
+
+  .Dia31-bola {
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: -2px auto 0;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 1px currentcolor;
+    background: currentcolor;
+  }
+
+  @for $i from 0 through $pendulos - 1 {
+    .Dia31-pendulo.p#{$i} {
+      left: 24px + $i * 19px;
+      /* Cada péndulo completa un ciclo un 4 % más rápido que el anterior. */
+      animation-duration: $base - $i * 0.09s;
+      /* El tono recorre el espectro junto con la posición. */
+      color: hsl(180deg + $i * 14, 85%, 62%);
+    }
+  }
+}
+
+@keyframes Dia31Oscilar {
+  0%,
+  100% {
+    transform: rotate(28deg);
+  }
+  50% {
+    transform: rotate(-28deg);
+  }
+}
