@@ -209,6 +209,7 @@ export const proyectos: Proyecto[] = [
   {
     slug: 'laboratorio-ui',
     estado: 'publicado',
+    destacado: true,
     tipo: 'laboratorio',
     periodo: '2025-06',
     titulo: {

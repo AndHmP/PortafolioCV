@@ -38,13 +38,21 @@ export default function Perfil() {
 
   return (
     <div className="pb-16">
-      {/* Encabezado con la ola heredada del diseño original */}
-      <header className="relative overflow-hidden">
-        <div className="absolute inset-0" aria-hidden="true">
+      {/*
+        Encabezado: banda sólida con la ola heredada como borde inferior.
+        El contenido va sobre la banda, nunca sobre la ola, para que el
+        contraste del texto no dependa de la silueta.
+      */}
+      <header className="relative overflow-hidden pb-10 md:pb-14">
+        <div
+          className="absolute inset-x-0 top-0 bottom-10 bg-[var(--color-texto)] md:bottom-14"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-x-0 bottom-0 h-10 md:h-14" aria-hidden="true">
           <OlaPerfil />
         </div>
 
-        <div className="contenedor relative flex flex-col items-center gap-4 py-12 text-center sm:flex-row sm:justify-center sm:gap-8 sm:text-left md:py-16">
+        <div className="contenedor relative flex flex-col items-center gap-4 py-10 text-center text-[var(--color-fondo)] sm:flex-row sm:justify-center sm:gap-8 sm:text-left md:py-14">
           <img
             src={fotoPerfil}
             alt={`Retrato de ${NOMBRE_COMPLETO}`}
@@ -52,7 +60,7 @@ export default function Perfil() {
             height={160}
             className="aspect-square w-28 shrink-0 rounded-full border-4 border-[var(--color-fondo)] object-cover sm:w-36 md:w-40"
           />
-          <div className="text-[var(--color-fondo)]">
+          <div>
             <h1 className="font-display text-2xl font-bold uppercase leading-tight tracking-wide sm:text-3xl md:text-4xl">
               {NOMBRE_COMPLETO}
             </h1>

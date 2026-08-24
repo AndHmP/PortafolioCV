@@ -1,17 +1,21 @@
 /**
  * Ola decorativa del encabezado del perfil, heredada del diseño original.
  *
- * Antes se posicionaban la foto y el nombre encima con `translateX` en píxeles
- * fijos y un `min-width: 1300px` en el contenedor, lo que rompía la página en
- * cualquier pantalla menor. Ahora la ola es solo fondo: el contenido va encima
- * con flexbox y se acomoda solo.
+ * Cambió su papel. Antes era un fondo irregular con la foto y el nombre
+ * posicionados encima mediante `translateX` en píxeles fijos: el texto blanco
+ * caía sobre los huecos claros de la ola y se volvía ilegible, y el
+ * `min-width: 1300px` del contenedor rompía la página en pantallas pequeñas.
+ *
+ * Ahora es el borde inferior de una banda sólida. El contenido va sobre la
+ * banda, donde el contraste está garantizado, y la ola solo marca la
+ * transición hacia el resto de la página.
  */
 export default function OlaPerfil() {
   return (
     <svg
       viewBox="0 0 1109.91 177.07"
       preserveAspectRatio="none"
-      className="absolute inset-x-0 bottom-0 h-full w-full fill-[var(--color-texto)]"
+      className="h-full w-full fill-[var(--color-texto)]"
       aria-hidden="true"
       focusable="false"
     >

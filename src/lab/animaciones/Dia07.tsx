@@ -1,4 +1,6 @@
 import { useState } from "react";
+
+import Icono from "@/componentes/iconos/Icono";
 import './estilos/Dia07.css';
 
 export default function Dia07() {
@@ -11,22 +13,22 @@ export default function Dia07() {
 
             <div className={`ContenedorBack absolute flex flex-column align-items-center justify-content-center ${activarMenu ? 'active' : ''}`}>
                 <div className="oneSeccion w-full flex align-items-center">
-                    <i className="fa-solid fa-gauge"></i>
+                    <Icono nombre="medidor" tamano={18} />
                     <div className="name">Dashboard</div>
                 </div>
                 <div className="oneSeccion w-full flex align-items-center">
-                    <i className="fa-solid fa-user"></i>
+                    <Icono nombre="usuario" tamano={18} />
                     <div className="name">Profile</div>
                 </div>
                 <div className="oneSeccion w-full flex align-items-center">
-                    <i className="fa-solid fa-bell"></i>
+                    <Icono nombre="campana" tamano={18} />
                     <div className="name">Notifications</div>
                 </div>
                 <div className="oneSeccion w-full flex align-items-center">
-                    <i className="fa-solid fa-comments"></i>                    <div className="name">Messages</div>
+                    <Icono nombre="comentario" tamano={18} />                    <div className="name">Messages</div>
                 </div>
                 <div className="oneSeccion w-full flex align-items-center">
-                    <i className="fa-solid fa-gear"></i>
+                    <Icono nombre="engranaje" tamano={18} />
                     <div className="name">Settings</div>
                 </div>
             </div>

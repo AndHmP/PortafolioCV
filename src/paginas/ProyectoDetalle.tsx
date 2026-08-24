@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Icono from '@/componentes/iconos/Icono';
 import Boton from '@/componentes/ui/Boton';
 import Etiqueta from '@/componentes/ui/Etiqueta';
+import TextoRico from '@/componentes/ui/TextoRico';
 import { buscarProyecto } from '@/contenido/proyectos';
 import { nombreTecnologia } from '@/contenido/stack';
 import { useIdioma } from '@/hooks/useIdioma';
@@ -132,11 +133,15 @@ export default function ProyectoDetalle() {
       {/* Cuerpo del caso de estudio */}
       <div className="contenedor max-w-3xl pt-10">
         <Bloque titulo={t.detalle.problema}>
-          <p className="leading-relaxed text-texto-suave">{tr(proyecto.problema)}</p>
+          <p className="leading-relaxed text-texto-suave">
+            <TextoRico>{tr(proyecto.problema)}</TextoRico>
+          </p>
         </Bloque>
 
         <Bloque titulo={t.detalle.solucion}>
-          <p className="leading-relaxed text-texto-suave">{tr(proyecto.solucion)}</p>
+          <p className="leading-relaxed text-texto-suave">
+            <TextoRico>{tr(proyecto.solucion)}</TextoRico>
+          </p>
         </Bloque>
 
         {proyecto.arquitectura && (
@@ -156,7 +161,9 @@ export default function ProyectoDetalle() {
                   className="rounded-xl border border-borde bg-superficie p-5"
                 >
                   <h3 className="mb-2 font-semibold">{tr(decision.titulo)}</h3>
-                  <p className="text-sm leading-relaxed text-texto-suave">{tr(decision.detalle)}</p>
+                  <p className="text-sm leading-relaxed text-texto-suave">
+                    <TextoRico>{tr(decision.detalle)}</TextoRico>
+                  </p>
                 </div>
               ))}
             </div>
@@ -165,7 +172,9 @@ export default function ProyectoDetalle() {
 
         {proyecto.retos && (
           <Bloque titulo={t.detalle.retos}>
-            <p className="leading-relaxed text-texto-suave">{tr(proyecto.retos)}</p>
+            <p className="leading-relaxed text-texto-suave">
+              <TextoRico>{tr(proyecto.retos)}</TextoRico>
+            </p>
           </Bloque>
         )}
 
@@ -175,7 +184,9 @@ export default function ProyectoDetalle() {
               {trs(proyecto.resultados).map((resultado) => (
                 <li key={resultado} className="flex gap-3 text-texto-suave">
                   <Icono nombre="chevron-derecha" tamano={18} className="mt-0.5 shrink-0 text-acento" />
-                  <span className="leading-relaxed">{resultado}</span>
+                  <span className="leading-relaxed">
+                    <TextoRico>{resultado}</TextoRico>
+                  </span>
                 </li>
               ))}
             </ul>

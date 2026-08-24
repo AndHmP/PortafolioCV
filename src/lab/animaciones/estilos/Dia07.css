@@ -194,7 +194,8 @@
         cursor: pointer;
         gap: 5px;
     }
-    &>.oneSeccion>i{
+    &>.oneSeccion>i,
+    &>.oneSeccion>svg{
         font-size: 9px;
         margin-top: 1.5px;
     }
