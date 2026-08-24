@@ -1,0 +1,55 @@
+/*
+ * No hay ninguna espiral dibujada: son 22 cuadrados apilados, cada uno un
+ * poco más pequeño, un poco más arriba y girado unos grados más que el
+ * anterior. La espiral aparece sola al acumular esas diferencias.
+ */
+
+$capas: 22;
+
+.Dia44 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: radial-gradient(circle at 50% 65%, #262445, #0d0c1a 72%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 900px;
+
+  .Dia44-torre {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    transform-style: preserve-3d;
+    transform: rotateX(64deg);
+    animation: Dia44Rotar 14s linear infinite;
+  }
+
+  .Dia44-capa {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 3px;
+
+    @for $i from 0 through $capas - 1 {
+      &.c#{$i} {
+        $lado: 118px - $i * 4px;
+        width: $lado;
+        height: $lado;
+        margin: -$lado * 0.5 0 0 (-$lado * 0.5);
+        transform: translateZ($i * 9px) rotate($i * 11deg);
+        background: hsl(196deg + $i * 7, 78%, 42% + $i * 1.4%);
+        opacity: 0.92;
+      }
+    }
+  }
+}
+
+@keyframes Dia44Rotar {
+  from {
+    transform: rotateX(64deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(64deg) rotateZ(360deg);
+  }
+}

@@ -1,0 +1,68 @@
+/*
+ * Un solo elemento: lo que cambia es `border-radius` y el giro. La curva
+ * con rebote (valores fuera del rango 0-1) es lo que convierte una
+ * transición correcta en un momento de alegría.
+ */
+
+.Dia99 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #12121e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+
+  .Dia99-figura {
+    width: 120px;
+    height: 120px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      border-radius 0.55s cubic-bezier(0.68, -0.6, 0.27, 1.6),
+      transform 0.55s cubic-bezier(0.68, -0.6, 0.27, 1.6),
+      background 0.55s;
+
+    &.circulo {
+      border-radius: 50%;
+      background: linear-gradient(140deg, #ff9a8b, #ff6a88);
+      transform: rotate(0deg);
+    }
+
+    &.cuadrado {
+      border-radius: 18px;
+      background: linear-gradient(140deg, #43e97b, #38f9d7);
+      transform: rotate(135deg);
+    }
+  }
+
+  .Dia99-interior {
+    width: 42px;
+    height: 42px;
+    background: rgb(255 255 255 / 85%);
+    transition: border-radius 0.55s cubic-bezier(0.68, -0.6, 0.27, 1.6);
+
+    .Dia99-figura.circulo & {
+      border-radius: 12px;
+    }
+
+    .Dia99-figura.cuadrado & {
+      border-radius: 50%;
+    }
+  }
+
+  .Dia99-etiqueta {
+    margin: 0;
+    color: #55566f;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+}

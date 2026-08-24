@@ -1,0 +1,96 @@
+$lado: 96px;
+$mitad: $lado * 0.5;
+
+.Dia48 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: radial-gradient(circle at 50% 40%, #2a2a44, #101018 72%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 620px;
+
+  .Dia48-escena {
+    position: relative;
+    width: $lado;
+    height: $lado;
+    transform-style: preserve-3d;
+  }
+
+  .Dia48-cubo {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    animation: Dia48Girar 11s linear infinite;
+  }
+
+  /* Las seis caras parten del mismo cuadrado: lo que las separa es a qué eje
+     se rotan y cuánto se empujan hacia afuera con translateZ. */
+  .Dia48-cara {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgb(255 255 255 / 14%);
+    background: rgb(95 107 255 / 26%);
+    backdrop-filter: blur(2px);
+
+    &.frente {
+      transform: translateZ($mitad);
+      background: rgb(95 107 255 / 34%);
+    }
+    &.atras {
+      transform: rotateY(180deg) translateZ($mitad);
+      background: rgb(160 107 255 / 30%);
+    }
+    &.derecha {
+      transform: rotateY(90deg) translateZ($mitad);
+      background: rgb(78 205 196 / 28%);
+    }
+    &.izquierda {
+      transform: rotateY(-90deg) translateZ($mitad);
+      background: rgb(255 107 107 / 26%);
+    }
+    &.arriba {
+      transform: rotateX(90deg) translateZ($mitad);
+      background: rgb(255 209 102 / 26%);
+    }
+    &.abajo {
+      transform: rotateX(-90deg) translateZ($mitad);
+      background: rgb(255 255 255 / 12%);
+    }
+  }
+
+  .Dia48-sombra {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 110px;
+    height: 22px;
+    margin: 44px 0 0 -55px;
+    border-radius: 50%;
+    background: rgb(0 0 0 / 45%);
+    filter: blur(9px);
+    animation: Dia48Sombra 11s linear infinite;
+  }
+}
+
+@keyframes Dia48Girar {
+  from {
+    transform: rotateX(-24deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-24deg) rotateY(360deg);
+  }
+}
+
+@keyframes Dia48Sombra {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scaleX(0.78);
+    opacity: 0.3;
+  }
+}

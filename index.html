@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es" data-tema="claro">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/logo192.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#13131a" />
+
+  <title>Anderson Huamancaja — Desarrollador Full Stack</title>
+  <meta name="description"
+    content="Portafolio de Anderson Huamancaja Porras, desarrollador Full Stack con 3 años de experiencia en React, TypeScript, Next.js, Python/FastAPI y Docker." />
+  <meta name="author" content="Anderson Huamancaja Porras" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Anderson Huamancaja" />
+  <meta property="og:title" content="Anderson Huamancaja — Desarrollador Full Stack" />
+  <meta property="og:description"
+    content="Proyectos reales, decisiones técnicas explicadas y un laboratorio de interfaces. React, TypeScript, FastAPI y Docker." />
+  <meta property="og:image" content="/og-portada.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Kulim+Park:wght@200;300;400;600;700&display=swap"
+    rel="stylesheet" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Anderson Huamancaja Porras",
+      "jobTitle": "Desarrollador Full Stack",
+      "url": "https://anderson-huamancaja.vercel.app",
+      "sameAs": ["https://github.com/AndHmP"],
+      "address": { "@type": "PostalAddress", "addressLocality": "Lima", "addressCountry": "PE" },
+      "knowsAbout": ["React", "TypeScript", "Next.js", "Python", "FastAPI", "Docker", "Android"]
+    }
+  </script>
+
+  <script>
+    // Aplica el tema guardado antes del primer pintado para evitar el parpadeo
+    // de fondo claro en usuarios con tema oscuro.
+    (function () {
+      try {
+        var guardado = localStorage.getItem('portafolio:tema');
+        var tema = guardado || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oscuro' : 'claro');
+        document.documentElement.setAttribute('data-tema', tema);
+      } catch (e) { /* modo privado: se queda con el tema por defecto */ }
+      try {
+        var idioma = localStorage.getItem('portafolio:idioma');
+        if (idioma) document.documentElement.setAttribute('lang', idioma);
+      } catch (e) { /* idem */ }
+    })();
+  </script>
+</head>
+
+<body>
+  <noscript>Necesitas habilitar JavaScript para ver este portafolio.</noscript>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

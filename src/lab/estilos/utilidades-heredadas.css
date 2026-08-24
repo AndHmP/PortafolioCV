@@ -1,0 +1,95 @@
+/*
+ * Utilidades heredadas del Laboratorio.
+ *
+ * Las piezas de "100 días CSS", los campos y los botones se escribieron contra
+ * un conjunto de clases con nombres al estilo PrimeFlex que vivían en App.css
+ * y llevaban `!important`. Ese archivo desapareció al migrar el sitio a
+ * Tailwind, pero reescribir 35 componentes probados y funcionando solo para
+ * renombrar clases sería trabajo sin beneficio, y arriesgaría romper
+ * animaciones muy afinadas.
+ *
+ * La solución es acotarlas: todas cuelgan de `.lab-heredado`, el contenedor
+ * que envuelve cada pieza en la galería. Así el resto del portafolio usa
+ * Tailwind sin interferencias, y las piezas conservan exactamente la
+ * maquetación con la que se diseñaron.
+ */
+
+.lab-heredado .overflow-hidden {
+  overflow: hidden !important;
+}
+
+.lab-heredado .w-full {
+  width: 100% !important;
+}
+
+.lab-heredado .h-full {
+  height: 100% !important;
+}
+
+.lab-heredado .h-screen {
+  height: 100vh !important;
+}
+
+.lab-heredado .relative {
+  position: relative !important;
+}
+
+.lab-heredado .absolute {
+  position: absolute !important;
+}
+
+.lab-heredado .fixed {
+  position: fixed !important;
+}
+
+.lab-heredado .flex {
+  display: flex !important;
+}
+
+.lab-heredado .flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.lab-heredado .flex-1 {
+  flex: 1 !important;
+}
+
+.lab-heredado .flex-column {
+  flex-direction: column !important;
+}
+
+.lab-heredado .justify-content-center {
+  justify-content: center !important;
+}
+
+.lab-heredado .justify-content-start {
+  justify-content: start !important;
+}
+
+.lab-heredado .justify-content-end {
+  justify-content: end !important;
+}
+
+.lab-heredado .justify-content-between {
+  justify-content: space-between !important;
+}
+
+.lab-heredado .justify-content-around {
+  justify-content: space-around !important;
+}
+
+.lab-heredado .justify-content-evenly {
+  justify-content: space-evenly !important;
+}
+
+.lab-heredado .align-items-center {
+  align-items: center !important;
+}
+
+.lab-heredado .align-items-start {
+  align-items: start !important;
+}
+
+.lab-heredado .align-items-end {
+  align-items: end !important;
+}

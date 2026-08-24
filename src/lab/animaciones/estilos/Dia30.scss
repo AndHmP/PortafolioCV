@@ -1,0 +1,70 @@
+.Dia30 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: radial-gradient(circle at 50% 50%, #1e1e30, #0e0e18 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* `transform-box: view-box` hace que el origen del giro sea el centro del
+     viewBox y no la caja del propio trazo, que es lo que descuadraba las
+     órbitas al rotarlas. */
+  .Dia30-grupo {
+    transform-box: view-box;
+    transform-origin: center;
+  }
+
+  .Dia30-linea {
+    fill: none;
+    stroke-width: 1.4;
+    opacity: 0.55;
+    /* La línea se dibuja sola: el guion recorre todo el perímetro. */
+    stroke-dasharray: 60 460;
+    animation: Dia30Trazar 7s linear infinite;
+  }
+
+  .Dia30-grupo:nth-child(2) .Dia30-linea {
+    animation-duration: 5s;
+  }
+
+  .Dia30-grupo:nth-child(3) .Dia30-linea {
+    animation-duration: 9s;
+  }
+
+  .Dia30-punto {
+    filter: drop-shadow(0 0 5px currentcolor);
+  }
+
+  .Dia30-astro {
+    filter: drop-shadow(0 0 18px rgb(255 209 102 / 55%));
+    transform-box: view-box;
+    transform-origin: center;
+    animation: Dia30Latido 4s ease-in-out infinite;
+  }
+}
+
+@keyframes Dia30Trazar {
+  from {
+    stroke-dashoffset: 520;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes Dia30Latido {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}

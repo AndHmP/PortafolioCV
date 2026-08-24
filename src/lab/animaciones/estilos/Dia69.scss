@@ -1,0 +1,133 @@
+$pestanas: 9;
+
+.Dia69 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #1a1226;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia69-ojo {
+    position: relative;
+    width: 200px;
+    height: 110px;
+  }
+
+  /* La forma de ojo sale de dos esquinas redondeadas opuestas al 100 %:
+     border-radius con dos radios distintos da la almendra. */
+  .Dia69-globo {
+    position: absolute;
+    inset: 0;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: #fdf6ff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 -6px 14px rgb(90 60 120 / 22%);
+  }
+
+  .Dia69-iris {
+    position: relative;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 36%, #7dd3fc, #1e5f8f 62%, #123a5c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* La mirada recorre de lado a lado, con pausas en los extremos. */
+    animation: Dia69Mirar 6s ease-in-out infinite;
+  }
+
+  .Dia69-pupila {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #0a0a12;
+    animation: Dia69Dilatar 6s ease-in-out infinite;
+  }
+
+  .Dia69-brillo {
+    position: absolute;
+    top: 11px;
+    left: 13px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 85%);
+  }
+
+  /* El parpadeo se hace bajando una tapa del color del fondo. */
+  .Dia69-parpado {
+    position: absolute;
+    inset: 0;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: #1a1226;
+    transform-origin: top center;
+    animation: Dia69Parpadear 6s ease-in-out infinite;
+  }
+
+  .Dia69-pestana {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 34px;
+    margin: -55px 0 0 -2px;
+    border-radius: 2px;
+    background: #f0abfc;
+    transform-origin: center 55px;
+
+    @for $i from 0 through $pestanas - 1 {
+      &.p#{$i} {
+        /* Abanico de 150°, centrado arriba. */
+        transform: rotate(-75deg + $i * (150deg / ($pestanas - 1)))
+          translateY(-6px)
+          scaleY(0.7 + (abs(4 - $i) * 0.075));
+      }
+    }
+  }
+}
+
+@keyframes Dia69Mirar {
+  0%,
+  16% {
+    transform: translateX(-34px);
+  }
+  40%,
+  56% {
+    transform: translateX(34px);
+  }
+  80%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes Dia69Dilatar {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(0.72);
+  }
+}
+
+@keyframes Dia69Parpadear {
+  0%,
+  28%,
+  34%,
+  72%,
+  78%,
+  100% {
+    transform: scaleY(0);
+  }
+  31%,
+  75% {
+    transform: scaleY(1);
+  }
+}

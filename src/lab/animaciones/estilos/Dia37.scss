@@ -1,0 +1,107 @@
+$ciclo: 12s;
+
+.Dia37 {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: linear-gradient(150deg, #2b2b45, #1a1a2b);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Open Sans', sans-serif;
+
+  .Dia37-pista {
+    display: flex;
+    width: 300%;
+    animation: Dia37Avanzar $ciclo cubic-bezier(0.83, 0, 0.17, 1) infinite;
+  }
+
+  .Dia37-cita {
+    flex: 0 0 calc(100% / 3);
+    margin: 0;
+    padding: 0 34px;
+    text-align: center;
+
+    blockquote {
+      margin: 0 0 16px;
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.6;
+      font-style: italic;
+
+      &::before {
+        content: '“';
+        display: block;
+        color: #5f6bff;
+        font-size: 46px;
+        line-height: 0.6;
+        margin-bottom: 12px;
+      }
+    }
+
+    figcaption {
+      color: #8a8ca6;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  }
+
+  .Dia37-puntos {
+    position: absolute;
+    bottom: 26px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4a4b63;
+      animation: Dia37Punto $ciclo linear infinite;
+
+      /* Cada punto se enciende en su tercio del ciclo. */
+      @for $i from 1 through 3 {
+        &:nth-child(#{$i}) {
+          animation-delay: -$ciclo + ($i - 1) * ($ciclo / 3);
+        }
+      }
+    }
+  }
+}
+
+@keyframes Dia37Avanzar {
+  0%,
+  26% {
+    transform: translateX(0);
+  }
+  33%,
+  59% {
+    transform: translateX(-33.333%);
+  }
+  66%,
+  92% {
+    transform: translateX(-66.666%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes Dia37Punto {
+  0%,
+  30% {
+    background: #5f6bff;
+    transform: scale(1.25);
+  }
+  34%,
+  100% {
+    background: #4a4b63;
+    transform: scale(1);
+  }
+}

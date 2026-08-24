@@ -1,0 +1,49 @@
+/*
+ * No es una esfera real: son 18 aros planos girados cada uno 10° sobre el eje
+ * vertical. Al superponerse, el ojo completa el volumen. Es el mismo truco de
+ * los globos de alambre.
+ */
+
+$anillos: 18;
+
+.Dia58 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #0b0b15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 800px;
+
+  .Dia58-esfera {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    transform-style: preserve-3d;
+    animation: Dia58Girar 18s linear infinite;
+  }
+
+  .Dia58-anillo {
+    position: absolute;
+    inset: 0;
+    border: 1px solid;
+    border-radius: 50%;
+
+    @for $i from 0 through $anillos - 1 {
+      &.a#{$i} {
+        transform: rotateY($i * (180deg / $anillos));
+        border-color: hsla(190deg + $i * 6, 90%, 62%, 0.55);
+      }
+    }
+  }
+}
+
+@keyframes Dia58Girar {
+  from {
+    transform: rotateX(-18deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-18deg) rotateY(360deg);
+  }
+}

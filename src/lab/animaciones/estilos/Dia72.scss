@@ -1,0 +1,60 @@
+/*
+ * Nueve circunferencias del mismo tamaño repartidas en corona. Al girar el
+ * conjunto y desfasar el latido de cada una, aparece el patrón floral que
+ * se ve en los mandalas.
+ */
+
+$anillos: 9;
+
+.Dia72 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #0a0a14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia72-conjunto {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    animation: Dia72Girar 26s linear infinite;
+  }
+
+  .Dia72-anillo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 104px;
+    height: 104px;
+    margin: -52px 0 0 -52px;
+    border: 1.5px solid;
+    border-radius: 50%;
+    animation: Dia72Respirar 5s ease-in-out infinite;
+
+    @for $i from 0 through $anillos - 1 {
+      &.a#{$i} {
+        --giro: #{$i * (360deg / $anillos)};
+        border-color: hsla(168deg + $i * 14, 82%, 62%, 0.6);
+        animation-delay: -$i * 0.28s;
+      }
+    }
+  }
+}
+
+@keyframes Dia72Girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes Dia72Respirar {
+  0%,
+  100% {
+    transform: rotate(var(--giro)) translateX(18px) scale(0.86);
+  }
+  50% {
+    transform: rotate(var(--giro)) translateX(46px) scale(1.06);
+  }
+}

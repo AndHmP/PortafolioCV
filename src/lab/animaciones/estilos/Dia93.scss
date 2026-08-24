@@ -1,0 +1,122 @@
+/*
+ * El relieve del metal no usa imágenes: son varias box-shadow apiladas. Una
+ * clara arriba a la izquierda y otra oscura abajo a la derecha simulan la luz,
+ * y una tercera exterior proyecta la sombra sobre el fondo.
+ */
+
+.Dia93 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #171724;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  transition: background-color 0.5s;
+
+  &.abierto {
+    background: #16241f;
+  }
+
+  .Dia93-candado {
+    position: relative;
+    width: 120px;
+    height: 150px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  /* El arco es un borde en "u" invertida: solo los lados y la parte superior. */
+  .Dia93-arco {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    width: 62px;
+    height: 66px;
+    margin-left: -31px;
+    border: 13px solid #9ca3af;
+    border-bottom: none;
+    border-radius: 32px 32px 0 0;
+    box-shadow:
+      inset 2px 2px 3px rgb(255 255 255 / 45%),
+      inset -2px -2px 3px rgb(0 0 0 / 35%);
+    transform-origin: bottom left;
+    transition: transform 0.5s cubic-bezier(0.68, -0.3, 0.27, 1.3);
+  }
+
+  .Dia93-cuerpo {
+    position: relative;
+    width: 112px;
+    height: 88px;
+    border-radius: 14px;
+    background: linear-gradient(150deg, #fcd34d, #f59e0b 55%, #b45309);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      inset 3px 3px 6px rgb(255 255 255 / 40%),
+      inset -3px -4px 8px rgb(0 0 0 / 30%),
+      0 10px 22px rgb(0 0 0 / 45%);
+    transition: box-shadow 0.4s;
+  }
+
+  .Dia93-ojo {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #7c2d12;
+    box-shadow:
+      inset 0 3px 4px rgb(0 0 0 / 55%),
+      0 1px 0 rgb(255 255 255 / 25%);
+
+    /* La ranura de la llave, colgando del ojo. */
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 20px;
+      margin: 4px 0 0 -4px;
+      border-radius: 0 0 3px 3px;
+      background: #7c2d12;
+      box-shadow: inset 0 2px 3px rgb(0 0 0 / 55%);
+    }
+  }
+
+  &.abierto {
+    .Dia93-arco {
+      transform: rotate(-32deg) translateY(-6px);
+    }
+
+    .Dia93-cuerpo {
+      box-shadow:
+        inset 3px 3px 6px rgb(255 255 255 / 40%),
+        inset -3px -4px 8px rgb(0 0 0 / 30%),
+        0 10px 22px rgb(0 0 0 / 45%),
+        0 0 0 4px rgb(74 222 128 / 25%);
+    }
+  }
+
+  .Dia93-estado {
+    margin: 0;
+    color: #6b6d8c;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.4s;
+  }
+
+  &.abierto .Dia93-estado {
+    color: #4ade80;
+  }
+}

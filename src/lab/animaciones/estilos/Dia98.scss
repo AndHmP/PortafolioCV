@@ -1,0 +1,78 @@
+.Dia98 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #14141f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 16px;
+
+  .Dia98-caja {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    border: 2px solid #2f2f45;
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    overflow: hidden;
+  }
+
+  /* Cada bola cae desde arriba y aterriza en el fondo con un rebote corto.
+     La animación es `forwards` para que se quede donde cayó. */
+  .Dia98-bola {
+    position: absolute;
+    bottom: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: inset -4px -4px 8px rgb(0 0 0 / 22%);
+    animation: Dia98Caer 0.6s cubic-bezier(0.5, 0, 0.55, 1.4) backwards;
+  }
+
+  .Dia98-acciones {
+    display: flex;
+    gap: 10px;
+
+    button {
+      padding: 9px 22px;
+      border: none;
+      border-radius: 22px;
+      background: #5f6bff;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 12px;
+      cursor: pointer;
+      transition:
+        filter 0.2s,
+        transform 0.12s;
+
+      &:hover {
+        filter: brightness(1.12);
+      }
+
+      &:active {
+        transform: scale(0.94);
+      }
+
+      &.vaciar {
+        background: #2f2f45;
+        color: #9a9cbb;
+      }
+    }
+  }
+}
+
+@keyframes Dia98Caer {
+  0% {
+    transform: translateY(-240px) scale(1, 1);
+  }
+  70% {
+    transform: translateY(0) scale(1.14, 0.86);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}

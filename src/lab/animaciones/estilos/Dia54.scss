@@ -1,0 +1,72 @@
+/*
+ * Cada ola es un óvalo enorme, mucho más ancho que el lienzo, girando muy
+ * despacio. Al recortarlo por abajo solo se ve su borde superior, y el giro
+ * lo convierte en un oleaje continuo sin dibujar una sola curva a mano.
+ */
+
+.Dia54 {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #0b1a3a 0%, #123a63 55%, #1b5f7a 100%);
+  overflow: hidden;
+
+  .Dia54-luna {
+    position: absolute;
+    top: 34px;
+    right: 44px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fdf4dc;
+    box-shadow: 0 0 34px 10px rgb(253 244 220 / 35%);
+  }
+
+  .Dia54-mar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 52%;
+  }
+
+  .Dia54-ola {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 620px;
+    height: 620px;
+    margin-left: -310px;
+    border-radius: 43%;
+    animation: Dia54Girar linear infinite;
+
+    &.o1 {
+      background: rgb(41 182 246 / 45%);
+      animation-duration: 12s;
+      bottom: -540px;
+    }
+
+    &.o2 {
+      background: rgb(3 105 161 / 55%);
+      animation-duration: 17s;
+      animation-direction: reverse;
+      bottom: -556px;
+    }
+
+    &.o3 {
+      background: rgb(8 47 73 / 75%);
+      animation-duration: 23s;
+      bottom: -572px;
+    }
+  }
+}
+
+@keyframes Dia54Girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

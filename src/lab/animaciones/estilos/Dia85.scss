@@ -1,0 +1,63 @@
+/*
+ * La ambigüedad del reto es intencional y sale de una sola decisión: las
+ * barras solo se mueven en vertical, pero el desfase progresivo entre ellas
+ * hace que el cerebro interprete una rotación. Es la misma ilusión que la
+ * "onda" de un estadio.
+ */
+
+$barras: 24;
+
+.Dia85 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #0d0d1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+
+  .Dia85-figura {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 130px;
+  }
+
+  .Dia85-barra {
+    width: 5px;
+    height: 34px;
+    border-radius: 3px;
+    animation: Dia85Ondear 2.4s ease-in-out infinite;
+
+    @for $i from 0 through $barras - 1 {
+      &.b#{$i} {
+        background: hsl(212deg + $i * 5, 88%, 62%);
+        /* Un ciclo completo repartido entre todas las barras. */
+        animation-delay: -$i * (2.4s / $barras);
+      }
+    }
+  }
+
+  .Dia85-pregunta {
+    margin: 0;
+    color: #3f4058;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+  }
+}
+
+@keyframes Dia85Ondear {
+  0%,
+  100% {
+    height: 22px;
+    opacity: 0.45;
+  }
+  50% {
+    height: 118px;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,63 @@
+/*
+ * Las dos "imágenes" son degradados, para no depender de archivos externos.
+ * El pseudoelemento de cada tira lleva la segunda escena y se desliza sobre
+ * la primera con un retardo escalonado.
+ */
+
+$tiras: 9;
+$ciclo: 5s;
+
+.Dia59 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #0d0d16;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  .Dia59-marco {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 14px 34px rgb(0 0 0 / 45%);
+  }
+
+  .Dia59-tira {
+    position: relative;
+    flex: 1;
+    background-image: linear-gradient(135deg, #ff9a8b, #ff6a88 45%, #ff99ac);
+    background-size: 900% 100%;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(135deg, #43cea2, #185a9d);
+      background-size: 900% 100%;
+      background-position: inherit;
+      transform: translateY(-100%);
+      animation: Dia59Cortina $ciclo cubic-bezier(0.76, 0, 0.24, 1) infinite;
+      animation-delay: inherit;
+    }
+  }
+}
+
+@keyframes Dia59Cortina {
+  0%,
+  8% {
+    transform: translateY(-100%);
+  }
+  42%,
+  58% {
+    transform: translateY(0);
+  }
+  92%,
+  100% {
+    transform: translateY(100%);
+  }
+}

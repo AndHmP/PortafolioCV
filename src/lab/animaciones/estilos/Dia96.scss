@@ -1,0 +1,83 @@
+/*
+ * Variante del día 50, pero sobre un cuadrado y con giro: aquí el squash se
+ * combina con una rotación de 90° por salto, así que la deformación tiene que
+ * respetar el eje que toca el suelo en cada momento.
+ */
+
+$salto: 1.6s;
+
+.Dia96 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #101822;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+
+  .Dia96-pista {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .Dia96-cuadrado {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 22px;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #6ee7c8, #22d3ee);
+    box-shadow: 0 0 22px rgb(34 211 238 / 35%);
+    transform-origin: center bottom;
+    animation: Dia96Saltar $salto cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  }
+
+  .Dia96-marca {
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: rgb(255 255 255 / 12%);
+  }
+
+  .Dia96-nota {
+    margin: 0;
+    color: #3d4d5c;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+}
+
+@keyframes Dia96Saltar {
+  0% {
+    transform: translateY(0) scale(1, 1) rotate(0deg);
+  }
+  8% {
+    /* Anticipación: se agacha antes de despegar. */
+    transform: translateY(0) scale(1.22, 0.76) rotate(0deg);
+  }
+  22% {
+    transform: translateY(-46px) scale(0.86, 1.2) rotate(30deg);
+  }
+  50% {
+    transform: translateY(-96px) scale(1, 1) rotate(90deg);
+  }
+  78% {
+    transform: translateY(-46px) scale(0.86, 1.2) rotate(150deg);
+  }
+  92% {
+    transform: translateY(0) scale(1.26, 0.72) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1) rotate(180deg);
+  }
+}

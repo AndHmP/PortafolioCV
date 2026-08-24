@@ -1,0 +1,105 @@
+/*
+ * La "trampa" es visual: al entrar el cursor, cuatro paredes se cierran sobre
+ * la zona. CSS no puede mover el puntero, así que lo que se atrapa es la
+ * atención, no el ratón. Es la lectura honesta del reto.
+ */
+
+.Dia90 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #14141f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia90-zona {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    border: 2px dashed #2f2f45;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    overflow: hidden;
+    cursor: crosshair;
+    transition: border-color 0.3s;
+
+    &:hover {
+      border-color: transparent;
+    }
+  }
+
+  .Dia90-queso {
+    width: 52px;
+    height: 46px;
+    border-radius: 6px 6px 26px 26px / 6px 6px 18px 18px;
+    background: linear-gradient(160deg, #ffd166, #f59e0b);
+    box-shadow:
+      inset -8px -6px 0 -3px rgb(0 0 0 / 12%),
+      inset 10px 12px 0 -6px rgb(0 0 0 / 10%);
+    transition: transform 0.35s cubic-bezier(0.68, -0.4, 0.27, 1.4);
+  }
+
+  .Dia90-zona:hover .Dia90-queso {
+    transform: scale(0.72) rotate(-8deg);
+  }
+
+  .Dia90-aviso {
+    margin: 0;
+    color: #4a4b63;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: opacity 0.25s;
+  }
+
+  .Dia90-zona:hover .Dia90-aviso {
+    opacity: 0;
+  }
+
+  .Dia90-pared {
+    position: absolute;
+    background: #ef4444;
+    transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+
+    &.arriba,
+    &.abajo {
+      left: 0;
+      width: 100%;
+      height: 16px;
+    }
+
+    &.izquierda,
+    &.derecha {
+      top: 0;
+      width: 16px;
+      height: 100%;
+    }
+
+    &.arriba {
+      top: 0;
+      transform: translateY(-100%);
+    }
+    &.abajo {
+      bottom: 0;
+      transform: translateY(100%);
+    }
+    &.izquierda {
+      left: 0;
+      transform: translateX(-100%);
+    }
+    &.derecha {
+      right: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  .Dia90-zona:hover .Dia90-pared {
+    transform: translate(0, 0);
+  }
+}

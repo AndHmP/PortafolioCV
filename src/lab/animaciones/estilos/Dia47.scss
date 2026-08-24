@@ -1,0 +1,66 @@
+.Dia47 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #0c0c14;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  .Dia47-lienzo {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 2px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #16161f;
+  }
+
+  .Dia47-pixel {
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    border: none;
+    border-radius: 2px;
+    background: #22222f;
+    cursor: pointer;
+    transition:
+      background-color 0.18s,
+      transform 0.18s;
+
+    &:hover {
+      background: #33334a;
+      transform: scale(1.18);
+    }
+
+    &.activo {
+      background: #4ade80;
+      box-shadow: 0 0 8px rgb(74 222 128 / 55%);
+      /* Rebote corto al encender, para que el clic se sienta. */
+      animation: Dia47Encender 0.28s ease;
+    }
+  }
+
+  .Dia47-pista {
+    margin: 0;
+    color: #4a4b63;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+  }
+}
+
+@keyframes Dia47Encender {
+  0% {
+    transform: scale(0.5);
+  }
+  60% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

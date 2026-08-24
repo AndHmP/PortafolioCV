@@ -1,0 +1,72 @@
+/*
+ * Nueve hojas repartidas cada 40°. Cada una gira sobre el centro del iris,
+ * no sobre sí misma: por eso el conjunto se abre y cierra como un obturador
+ * en lugar de girar en bloque.
+ */
+
+$hojas: 9;
+
+.Dia46 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #0f0f18;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia46-iris {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: #1a1a26;
+    box-shadow:
+      inset 0 0 30px rgb(0 0 0 / 70%),
+      0 0 0 6px #23233a;
+    overflow: hidden;
+  }
+
+  .Dia46-hoja {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    /* El origen fuera del propio elemento es lo que produce el barrido. */
+    transform-origin: 0 0;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    animation: Dia46Obturar 5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+
+    @for $i from 0 through $hojas - 1 {
+      &.h#{$i} {
+        background: hsl(178deg + $i * 9, 72%, 46% + $i * 1.6%);
+        --giro: #{$i * (360deg / $hojas)};
+        animation-delay: $i * 0.045s;
+      }
+    }
+  }
+
+  .Dia46-centro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 26px;
+    height: 26px;
+    margin: -13px 0 0 -13px;
+    border-radius: 50%;
+    background: #0f0f18;
+    box-shadow: 0 0 18px 4px rgb(0 0 0 / 80%);
+  }
+}
+
+@keyframes Dia46Obturar {
+  0%,
+  100% {
+    transform: rotate(var(--giro)) scale(1.55);
+  }
+  45%,
+  62% {
+    transform: rotate(calc(var(--giro) + 40deg)) scale(0.35);
+  }
+}

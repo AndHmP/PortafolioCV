@@ -1,0 +1,161 @@
+/*
+ * Todo son círculos, óvalos y triángulos recortados: ni una sola imagen.
+ * Es el ejercicio de reducir una figura reconocible a formas primitivas.
+ */
+
+.Dia95 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #ffe3ec, #fff1f5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia95-cerdo {
+    position: relative;
+    width: 170px;
+    height: 150px;
+    animation: Dia95Rebotar 2.6s ease-in-out infinite;
+  }
+
+  .Dia95-oreja {
+    position: absolute;
+    top: 2px;
+    width: 42px;
+    height: 42px;
+    background: #f48fb1;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+
+    &.izq {
+      left: 16px;
+      transform: rotate(-18deg);
+    }
+
+    &.der {
+      right: 16px;
+      transform: rotate(18deg);
+    }
+  }
+
+  .Dia95-cara {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    width: 152px;
+    height: 122px;
+    margin-left: -76px;
+    border-radius: 50%;
+    background: #f8bbd0;
+    box-shadow: inset 0 -8px 16px rgb(0 0 0 / 6%);
+  }
+
+  .Dia95-ojo {
+    position: absolute;
+    top: 38px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #3e2723;
+    animation: Dia95Parpadear 4s ease-in-out infinite;
+
+    &.izq {
+      left: 38px;
+    }
+
+    &.der {
+      right: 38px;
+    }
+  }
+
+  .Dia95-mejilla {
+    position: absolute;
+    top: 62px;
+    width: 20px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgb(244 143 177 / 75%);
+
+    &.izq {
+      left: 20px;
+    }
+
+    &.der {
+      right: 20px;
+    }
+  }
+
+  .Dia95-hocico {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    width: 56px;
+    height: 40px;
+    margin-left: -28px;
+    border-radius: 50%;
+    background: #f48fb1;
+    box-shadow: inset 0 -3px 6px rgb(0 0 0 / 10%);
+  }
+
+  .Dia95-fosa {
+    position: absolute;
+    top: 12px;
+    width: 9px;
+    height: 15px;
+    border-radius: 50%;
+    background: #ad1457;
+
+    &.izq {
+      left: 13px;
+    }
+
+    &.der {
+      right: 13px;
+    }
+  }
+
+  /* El rabo en espiral: un borde parcial girado. */
+  .Dia95-rabo {
+    position: absolute;
+    top: 74px;
+    right: -14px;
+    width: 26px;
+    height: 26px;
+    border: 5px solid #f48fb1;
+    border-color: #f48fb1 #f48fb1 transparent transparent;
+    border-radius: 50%;
+    transform: rotate(45deg);
+    animation: Dia95Menear 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes Dia95Rebotar {
+  0%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  50% {
+    transform: translateY(-8px) scale(0.99, 1.02);
+  }
+}
+
+@keyframes Dia95Parpadear {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.12);
+  }
+}
+
+@keyframes Dia95Menear {
+  0%,
+  100% {
+    transform: rotate(45deg);
+  }
+  50% {
+    transform: rotate(75deg);
+  }
+}

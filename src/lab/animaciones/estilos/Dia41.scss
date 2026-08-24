@@ -1,0 +1,140 @@
+.Dia41 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #0f0f18;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+
+  .Dia41-modal {
+    width: 100%;
+    padding: 26px 22px;
+    border-radius: 14px;
+    background: #fff;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    box-shadow: 0 18px 40px rgb(0 0 0 / 45%);
+    animation: Dia41Entrar 4s ease-in-out infinite;
+
+    h3 {
+      margin: 16px 0 8px;
+      color: #1b1b28;
+      font-size: 17px;
+    }
+
+    p {
+      margin: 0 0 20px;
+      color: #6b7280;
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+  }
+
+  .Dia41-icono svg {
+    width: 58px;
+    height: 58px;
+    fill: none;
+    stroke-linecap: round;
+  }
+
+  /* El círculo y las dos aspas se dibujan en secuencia con stroke-dashoffset. */
+  .Dia41-aro {
+    stroke: #ef4444;
+    stroke-width: 2.5;
+    stroke-dasharray: 152;
+    stroke-dashoffset: 152;
+    animation: Dia41Trazar 4s ease-in-out infinite;
+  }
+
+  .Dia41-aspa {
+    stroke: #ef4444;
+    stroke-width: 3.5;
+    stroke-dasharray: 26;
+    stroke-dashoffset: 26;
+    animation: Dia41Aspa 4s ease-in-out infinite 0.35s;
+
+    &.dos {
+      animation-delay: 0.5s;
+    }
+  }
+
+  .Dia41-acciones {
+    display: flex;
+    gap: 10px;
+
+    button {
+      flex: 1;
+      padding: 10px 0;
+      border: none;
+      border-radius: 9px;
+      background: #ef4444;
+      color: #fff;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition:
+        filter 0.2s,
+        transform 0.12s;
+
+      &:hover {
+        filter: brightness(1.08);
+      }
+
+      &:active {
+        transform: scale(0.97);
+      }
+
+      &.secundario {
+        background: #f1f2f6;
+        color: #4b5563;
+      }
+    }
+  }
+}
+
+@keyframes Dia41Entrar {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.94);
+  }
+  12%,
+  88% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.94);
+  }
+}
+
+@keyframes Dia41Trazar {
+  0%,
+  8% {
+    stroke-dashoffset: 152;
+  }
+  35%,
+  92% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 152;
+  }
+}
+
+@keyframes Dia41Aspa {
+  0%,
+  10% {
+    stroke-dashoffset: 26;
+  }
+  30%,
+  88% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 26;
+  }
+}

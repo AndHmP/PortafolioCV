@@ -1,0 +1,95 @@
+/*
+ * Sin JavaScript no se puede leer la posición del líder, así que el rastro no
+ * "sigue" nada: todos recorren exactamente el mismo camino y cada uno arranca
+ * un poco más tarde. Visualmente es indistinguible de una persecución.
+ */
+
+$seguidores: 7;
+$ruta: 6s;
+
+.Dia49 {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #101019;
+  overflow: hidden;
+
+  .Dia49-guia,
+  .Dia49-seguidor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    /* La misma curva para todos: sin ella el rastro se desordenaría. */
+    animation: Dia49Recorrido $ruta cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+
+  .Dia49-guia {
+    width: 22px;
+    height: 22px;
+    margin: -11px 0 0 -11px;
+    background: #ffd166;
+    box-shadow: 0 0 18px 4px rgb(255 209 102 / 55%);
+    z-index: 2;
+  }
+
+  .Dia49-seguidor {
+    @for $i from 0 through $seguidores - 1 {
+      &.s#{$i} {
+        $tam: 17px - $i * 1.6px;
+        width: $tam;
+        height: $tam;
+        margin: (-$tam * 0.5) 0 0 (-$tam * 0.5);
+        background: hsl(38deg + $i * 16, 88%, 60%);
+        opacity: 1 - $i * 0.1;
+        animation-delay: -$ruta + ($i + 1) * 0.1s;
+      }
+    }
+  }
+
+  .Dia49-pista {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 16px;
+    margin: 0;
+    text-align: center;
+    color: #3c3d52;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+}
+
+/* Un ocho tumbado: dos lóbulos que se cruzan en el centro. */
+@keyframes Dia49Recorrido {
+  0% {
+    transform: translate(0, 0);
+  }
+  12.5% {
+    transform: translate(58px, -50px);
+  }
+  25% {
+    transform: translate(84px, 0);
+  }
+  37.5% {
+    transform: translate(58px, 50px);
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+  62.5% {
+    transform: translate(-58px, -50px);
+  }
+  75% {
+    transform: translate(-84px, 0);
+  }
+  87.5% {
+    transform: translate(-58px, 50px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}

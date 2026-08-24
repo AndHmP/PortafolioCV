@@ -1,0 +1,69 @@
+/*
+ * Cada estrella sale del centro hacia afuera alargándose. Al combinar el
+ * escalado en X con la traslación radial, las estrellas cercanas se estiran
+ * más que las lejanas: eso es lo que se lee como velocidad.
+ */
+
+$estelas: 60;
+
+.Dia83 {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: radial-gradient(circle at 50% 50%, #101a3a 0%, #03040c 70%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia83-tunel {
+    position: absolute;
+    inset: 0;
+  }
+
+  .Dia83-estela {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 42px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #cfe4ff);
+    transform-origin: left center;
+    animation: Dia83Salir 1.6s linear infinite;
+
+    @for $i from 0 through $estelas - 1 {
+      &.e#{$i} {
+        /* Ángulos y desfases con multiplicadores primos, para que el patrón
+           no se repita de forma visible. */
+        --angulo: #{($i * 137) % 360}deg;
+        animation-delay: -($i % 16) * 0.1s;
+        animation-duration: 1.2s + (($i % 5) * 0.18s);
+      }
+    }
+  }
+
+  .Dia83-nucleo {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 26px 8px rgb(190 220 255 / 65%);
+  }
+}
+
+@keyframes Dia83Salir {
+  0% {
+    transform: rotate(var(--angulo)) translateX(6px) scaleX(0.05);
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--angulo)) translateX(180px) scaleX(1.9);
+    opacity: 0;
+  }
+}

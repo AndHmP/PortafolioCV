@@ -1,0 +1,74 @@
+/*
+ * La sensación de túnel sale de escalar cada aro y desvanecerlo al mismo
+ * tiempo: los que "vienen de lejos" son pequeños y tenues. El desfase entre
+ * aros es lo que produce el avance continuo.
+ */
+
+$aros: 14;
+$puntos: 16;
+$ciclo: 4s;
+
+.Dia63 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #07070f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  .Dia63-tunel {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+
+  .Dia63-aro {
+    position: absolute;
+    inset: 0;
+    animation: Dia63Acercar $ciclo linear infinite;
+
+    @for $a from 0 through $aros - 1 {
+      &.a#{$a} {
+        animation-delay: -$a * ($ciclo / $aros);
+      }
+    }
+  }
+
+  .Dia63-punto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 50%;
+    background: #7dd3fc;
+
+    /* Cada punto se coloca en su ángulo y se empuja al radio del aro. */
+    @for $p from 0 through $puntos - 1 {
+      &.p#{$p} {
+        transform: rotate($p * (360deg / $puntos)) translateX(96px);
+        background: hsl(196deg + $p * 8, 92%, 66%);
+      }
+    }
+  }
+}
+
+@keyframes Dia63Acercar {
+  0% {
+    transform: scale(0.06);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}

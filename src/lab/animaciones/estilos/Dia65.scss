@@ -1,0 +1,60 @@
+/*
+ * Dieciséis elipses idénticas, cada una girada 11.25° más que la anterior.
+ * Es exactamente lo que se hacía con un compás y un transportador: la figura
+ * emerge de repetir una forma simple con un incremento constante.
+ */
+
+$elipses: 16;
+
+.Dia65 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #0e0d18;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia65-figura {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    animation: Dia65Rotar 20s linear infinite;
+  }
+
+  .Dia65-elipse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 190px;
+    height: 70px;
+    margin: -35px 0 0 -95px;
+    border: 1px solid;
+    border-radius: 50%;
+    animation: Dia65Respirar 6s ease-in-out infinite;
+
+    @for $i from 0 through $elipses - 1 {
+      &.e#{$i} {
+        --giro: #{$i * (180deg / $elipses)};
+        border-color: hsla(280deg + $i * 8, 85%, 66%, 0.5);
+        animation-delay: -$i * 0.16s;
+      }
+    }
+  }
+}
+
+@keyframes Dia65Rotar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes Dia65Respirar {
+  0%,
+  100% {
+    transform: rotate(var(--giro)) scale(0.72);
+  }
+  50% {
+    transform: rotate(var(--giro)) scale(1);
+  }
+}

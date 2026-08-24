@@ -1,0 +1,95 @@
+.Dia76 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #131322;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-family: 'Open Sans', sans-serif;
+  transition: background-color 0.6s;
+
+  &.resuelto {
+    background: #16233a;
+  }
+
+  .Dia76-instruccion {
+    margin: 0;
+    color: #6b6d8c;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    transition: color 0.4s;
+  }
+
+  &.resuelto .Dia76-instruccion {
+    color: #6ee7c8;
+  }
+
+  .Dia76-tablero {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .Dia76-ficha {
+    position: relative;
+    width: 46px;
+    height: 52px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+
+    &.girada {
+      transform: rotateY(180deg);
+    }
+  }
+
+  .Dia76-cara {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    font-size: 19px;
+    font-weight: 700;
+    /* Sin esto se verían las dos caras superpuestas. */
+    backface-visibility: hidden;
+
+    &.frente {
+      background: #23233a;
+      color: #4a4b63;
+    }
+
+    &.dorso {
+      background: linear-gradient(150deg, #5f6bff, #6ee7c8);
+      color: #0f0f1a;
+      transform: rotateY(180deg);
+    }
+  }
+
+  .Dia76-reiniciar {
+    padding: 8px 20px;
+    border: 1px solid #2f2f45;
+    border-radius: 20px;
+    background: transparent;
+    color: #6b6d8c;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    transition:
+      border-color 0.25s,
+      color 0.25s;
+
+    &:hover {
+      border-color: #6ee7c8;
+      color: #6ee7c8;
+    }
+  }
+}
