@@ -9,13 +9,14 @@ import Inicio from '@/paginas/Inicio';
 
 /*
  * Solo la portada entra en el bundle inicial. El Laboratorio pesa
- * (34 componentes con sus hojas de estilo) y no tiene por qué costarle
+ * (109 componentes con sus hojas de estilo) y no tiene por qué costarle
  * descarga a quien solo viene a ver los proyectos.
  */
 const Proyectos = lazy(() => import('@/paginas/Proyectos'));
 const ProyectoDetalle = lazy(() => import('@/paginas/ProyectoDetalle'));
 const Perfil = lazy(() => import('@/paginas/Perfil'));
 const Laboratorio = lazy(() => import('@/paginas/Laboratorio'));
+const LaboratorioSeccion = lazy(() => import('@/paginas/LaboratorioSeccion'));
 const NoEncontrado = lazy(() => import('@/paginas/NoEncontrado'));
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="/proyectos/:slug" element={<ProyectoDetalle />} />
             <Route path="/perfil" element={<Perfil />} />
             <Route path="/laboratorio" element={<Laboratorio />} />
+            <Route path="/laboratorio/:seccion" element={<LaboratorioSeccion />} />
             <Route path="*" element={<NoEncontrado />} />
           </Routes>
         </Suspense>

@@ -132,6 +132,12 @@ export const en: Diccionario = {
     contadorUno: 'piece',
     contadorVarios: 'pieces',
     sinResultados: 'No pieces in this category.',
+    explorarSeccion: 'Explore section',
+    volverLaboratorio: 'Back to the lab',
+    seccionNoEncontrada: 'That section does not exist',
+    seccionNoEncontradaDetalle: 'The link may be misspelled.',
+    tramo: 'Range',
+    verTodos: 'View all',
   },
 
   tipos: {

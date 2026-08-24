@@ -14,7 +14,8 @@ Portafolio profesional bilingüe (español / inglés) de un desarrollador Full S
 | `/proyectos` | Catálogo filtrable por tecnología y por tipo de proyecto |
 | `/proyectos/:slug` | Caso de estudio: problema → solución → arquitectura → decisiones técnicas → retos → resultados |
 | `/perfil` | Perfil completo: datos, trayectoria, formación, conocimientos y valores |
-| `/laboratorio` | 35 piezas de interfaz construidas con CSS, cada una indicando qué técnica demuestra |
+| `/laboratorio` | Índice de secciones del laboratorio |
+| `/laboratorio/:seccion` | Piezas de una sección: los 100 días de CSS, la librería de componentes o las pantallas completas |
 
 ---
 

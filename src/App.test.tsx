@@ -84,6 +84,33 @@ describe('App', () => {
     ).toBeInTheDocument();
   }, 15000);
 
+  it('lista las secciones del laboratorio en el índice', async () => {
+    montar('/laboratorio');
+
+    expect(
+      await screen.findByRole('link', { name: /100 días de CSS/i }, { timeout: 5000 }),
+    ).toHaveAttribute('href', '/laboratorio/100-dias-css');
+    expect(screen.getByRole('link', { name: /Librería de componentes/i })).toBeInTheDocument();
+  }, 15000);
+
+  it('abre una sección del laboratorio con sus piezas', async () => {
+    montar('/laboratorio/100-dias-css');
+
+    expect(
+      await screen.findByRole('heading', { level: 1, name: '100 días de CSS' }, { timeout: 5000 }),
+    ).toBeInTheDocument();
+    // El tramo inicial son 25 piezas, no las 100.
+    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(25);
+  }, 15000);
+
+  it('muestra un aviso cuando la sección no existe', async () => {
+    montar('/laboratorio/no-existe');
+
+    expect(
+      await screen.findByRole('heading', { name: /no existe/i }, { timeout: 5000 }),
+    ).toBeInTheDocument();
+  }, 15000);
+
   it('responde con 404 en una ruta inexistente', async () => {
     montar('/una-ruta-que-no-existe');
 

@@ -130,6 +130,12 @@ export const es = {
     contadorUno: 'pieza',
     contadorVarios: 'piezas',
     sinResultados: 'No hay piezas en esta categoría.',
+    explorarSeccion: 'Explorar sección',
+    volverLaboratorio: 'Volver al laboratorio',
+    seccionNoEncontrada: 'Esa sección no existe',
+    seccionNoEncontradaDetalle: 'Puede que el enlace esté mal escrito.',
+    tramo: 'Tramo',
+    verTodos: 'Ver todos',
   },
 
   tipos: {

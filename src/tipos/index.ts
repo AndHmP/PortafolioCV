@@ -169,9 +169,28 @@ export interface Valor {
 
 export type CategoriaLab = 'animaciones' | 'inputs' | 'botones' | 'formularios';
 
+/**
+ * Agrupación de primer nivel del Laboratorio. Cada sección es una ruta
+ * propia (`/laboratorio/<slug>`), para no volcar 109 piezas en una sola
+ * pantalla.
+ */
+export type ClaveSeccionLab = '100-dias-css' | 'componentes' | 'pantallas';
+
+export interface SeccionLab {
+  slug: ClaveSeccionLab;
+  titulo: Texto;
+  descripcion: Texto;
+  icono: string;
+  /** Categorías que ofrece como filtro secundario dentro de la sección. */
+  filtros?: CategoriaLab[];
+  /** Divide una sección larga en tramos navegables (el caso de los 100 días). */
+  tramos?: number;
+}
+
 export interface PiezaLab {
   slug: string;
   titulo: Texto;
+  seccion: ClaveSeccionLab;
   categoria: CategoriaLab;
   /** Qué técnica demuestra la pieza. */
   tecnica: Texto;

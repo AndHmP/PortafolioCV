@@ -185,6 +185,7 @@ dias.forEach((d) => {
   lineas.push('  {');
   lineas.push(`    slug: 'animacion-${nn}',`);
   lineas.push(`    titulo: { es: ${JSON.stringify(tituloEs)}, en: ${JSON.stringify(tituloEn)} },`);
+  lineas.push("    seccion: '100-dias-css',");
   lineas.push("    categoria: 'animaciones',");
   lineas.push(`    tecnica: { es: ${JSON.stringify(tecEs)}, en: ${JSON.stringify(tecEn)} },`);
   lineas.push(`    componente: <${d.base} />,`);
@@ -197,6 +198,7 @@ INPUTS.forEach(([te, ten, tece, tecen], i) => {
   lineas.push('  {');
   lineas.push(`    slug: 'campo-0${n}',`);
   lineas.push(`    titulo: { es: ${JSON.stringify(te)}, en: ${JSON.stringify(ten)} },`);
+  lineas.push("    seccion: 'componentes',");
   lineas.push("    categoria: 'inputs',");
   lineas.push(`    tecnica: { es: ${JSON.stringify(tece)}, en: ${JSON.stringify(tecen)} },`);
   lineas.push(
@@ -211,6 +213,7 @@ BOTONES.forEach(([te, ten, tece, tecen], i) => {
   lineas.push('  {');
   lineas.push(`    slug: 'boton-0${n}',`);
   lineas.push(`    titulo: { es: ${JSON.stringify(te)}, en: ${JSON.stringify(ten)} },`);
+  lineas.push("    seccion: 'componentes',");
   lineas.push("    categoria: 'botones',");
   lineas.push(`    tecnica: { es: ${JSON.stringify(tece)}, en: ${JSON.stringify(tecen)} },`);
   lineas.push(`    componente: <ButtonType0${n} />,`);
@@ -221,6 +224,7 @@ BOTONES.forEach(([te, ten, tece, tecen], i) => {
 lineas.push('  {');
 lineas.push("    slug: 'formulario-autenticacion',");
 lineas.push("    titulo: { es: 'Pantalla de autenticación', en: 'Authentication screen' },");
+lineas.push("    seccion: 'pantallas',");
 lineas.push("    categoria: 'formularios',");
 lineas.push('    tecnica: {');
 lineas.push(
@@ -235,10 +239,17 @@ lineas.push('    alto: 620,');
 lineas.push('  },');
 lineas.push('];');
 lineas.push('');
-lineas.push("/** Piezas de una categoría, o todas si no se indica ninguna. */");
-lineas.push("export function piezasPorCategoria(categoria: PiezaLab['categoria'] | null): PiezaLab[] {");
-lineas.push('  if (!categoria) return piezasLab;');
-lineas.push('  return piezasLab.filter((pieza) => pieza.categoria === categoria);');
+lineas.push("/** Piezas de una sección, en el orden en que se registraron. */");
+lineas.push("export function piezasPorSeccion(seccion: PiezaLab['seccion']): PiezaLab[] {");
+lineas.push('  return piezasLab.filter((pieza) => pieza.seccion === seccion);');
+lineas.push('}');
+lineas.push('');
+lineas.push("/** Cuántas piezas tiene cada sección, para el índice del Laboratorio. */");
+lineas.push("export function conteoPorSeccion(): Record<string, number> {");
+lineas.push('  return piezasLab.reduce<Record<string, number>>((acumulado, pieza) => {');
+lineas.push('    acumulado[pieza.seccion] = (acumulado[pieza.seccion] ?? 0) + 1;');
+lineas.push('    return acumulado;');
+lineas.push('  }, {});');
 lineas.push('}');
 
 writeFileSync('src/contenido/lab.tsx', `${lineas.join('\n')}\n`, 'utf8');
