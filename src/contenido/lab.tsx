@@ -54,6 +54,56 @@ import Dia47 from '@/lab/animaciones/Dia47';
 import Dia48 from '@/lab/animaciones/Dia48';
 import Dia49 from '@/lab/animaciones/Dia49';
 import Dia50 from '@/lab/animaciones/Dia50';
+import Dia51 from '@/lab/animaciones/Dia51';
+import Dia52 from '@/lab/animaciones/Dia52';
+import Dia53 from '@/lab/animaciones/Dia53';
+import Dia54 from '@/lab/animaciones/Dia54';
+import Dia55 from '@/lab/animaciones/Dia55';
+import Dia56 from '@/lab/animaciones/Dia56';
+import Dia57 from '@/lab/animaciones/Dia57';
+import Dia58 from '@/lab/animaciones/Dia58';
+import Dia59 from '@/lab/animaciones/Dia59';
+import Dia60 from '@/lab/animaciones/Dia60';
+import Dia61 from '@/lab/animaciones/Dia61';
+import Dia62 from '@/lab/animaciones/Dia62';
+import Dia63 from '@/lab/animaciones/Dia63';
+import Dia64 from '@/lab/animaciones/Dia64';
+import Dia65 from '@/lab/animaciones/Dia65';
+import Dia66 from '@/lab/animaciones/Dia66';
+import Dia67 from '@/lab/animaciones/Dia67';
+import Dia68 from '@/lab/animaciones/Dia68';
+import Dia69 from '@/lab/animaciones/Dia69';
+import Dia70 from '@/lab/animaciones/Dia70';
+import Dia71 from '@/lab/animaciones/Dia71';
+import Dia72 from '@/lab/animaciones/Dia72';
+import Dia73 from '@/lab/animaciones/Dia73';
+import Dia74 from '@/lab/animaciones/Dia74';
+import Dia75 from '@/lab/animaciones/Dia75';
+import Dia76 from '@/lab/animaciones/Dia76';
+import Dia77 from '@/lab/animaciones/Dia77';
+import Dia78 from '@/lab/animaciones/Dia78';
+import Dia79 from '@/lab/animaciones/Dia79';
+import Dia80 from '@/lab/animaciones/Dia80';
+import Dia81 from '@/lab/animaciones/Dia81';
+import Dia82 from '@/lab/animaciones/Dia82';
+import Dia83 from '@/lab/animaciones/Dia83';
+import Dia84 from '@/lab/animaciones/Dia84';
+import Dia85 from '@/lab/animaciones/Dia85';
+import Dia86 from '@/lab/animaciones/Dia86';
+import Dia87 from '@/lab/animaciones/Dia87';
+import Dia88 from '@/lab/animaciones/Dia88';
+import Dia89 from '@/lab/animaciones/Dia89';
+import Dia90 from '@/lab/animaciones/Dia90';
+import Dia91 from '@/lab/animaciones/Dia91';
+import Dia92 from '@/lab/animaciones/Dia92';
+import Dia93 from '@/lab/animaciones/Dia93';
+import Dia94 from '@/lab/animaciones/Dia94';
+import Dia95 from '@/lab/animaciones/Dia95';
+import Dia96 from '@/lab/animaciones/Dia96';
+import Dia97 from '@/lab/animaciones/Dia97';
+import Dia98 from '@/lab/animaciones/Dia98';
+import Dia99 from '@/lab/animaciones/Dia99';
+import Dia100 from '@/lab/animaciones/Dia100';
 
 import InputType01 from '@/lab/inputs/InputType01';
 import InputType02 from '@/lab/inputs/InputType02';
@@ -465,6 +515,406 @@ export const piezasLab: PiezaLab[] = [
     categoria: 'animaciones',
     tecnica: { es: "Animaciones por fotogramas, filtros CSS, degradados.", en: "Keyframe animations, CSS filters, gradients." },
     componente: <Dia50 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-51',
+    titulo: { es: "Día 51 · Contador CSS", en: "Day 51 · CSS Counter" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, degradados, sombras compuestas.", en: "Keyframe animations, gradients, layered shadows." },
+    componente: <Dia51 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-52',
+    titulo: { es: "Día 52 · Onda de puntos", en: "Day 52 · Dot Wave" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, sombras compuestas, CSS Grid.", en: "Keyframe animations, layered shadows, CSS Grid." },
+    componente: <Dia52 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-53',
+    titulo: { es: "Día 53 · Control deslizante", en: "Day 53 · Range Slider" },
+    categoria: 'animaciones',
+    tecnica: { es: "Degradados, sombras compuestas, estados de interacción.", en: "Gradients, layered shadows, interaction states." },
+    componente: <Dia53 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-54',
+    titulo: { es: "Día 54 · Olas", en: "Day 54 · Waves" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, degradados, sombras compuestas.", en: "Keyframe animations, gradients, layered shadows." },
+    componente: <Dia54 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-55',
+    titulo: { es: "Día 55 · Termostato", en: "Day 55 · Thermostat" },
+    categoria: 'animaciones',
+    tecnica: { es: "Degradados, estados de interacción, transiciones.", en: "Gradients, interaction states, transitions." },
+    componente: <Dia55 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-56',
+    titulo: { es: "Día 56 · Flor", en: "Day 56 · Flower" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, generación de reglas con Sass, degradados.", en: "Keyframe animations, rule generation with Sass, gradients." },
+    componente: <Dia56 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-57',
+    titulo: { es: "Día 57 · Icosaedro", en: "Day 57 · Icosahedron" },
+    categoria: 'animaciones',
+    tecnica: { es: "Transformaciones 3D, animaciones por fotogramas, recortes con clip-path.", en: "3D transforms, keyframe animations, clip-path masking." },
+    componente: <Dia57 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-58',
+    titulo: { es: "Día 58 · Esfera 3D", en: "Day 58 · 3D Sphere" },
+    categoria: 'animaciones',
+    tecnica: { es: "Transformaciones 3D, animaciones por fotogramas, generación de reglas con Sass.", en: "3D transforms, keyframe animations, rule generation with Sass." },
+    componente: <Dia58 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-59',
+    titulo: { es: "Día 59 · Transición en tiras", en: "Day 59 · Slice Transition" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, degradados, sombras compuestas.", en: "Keyframe animations, gradients, layered shadows." },
+    componente: <Dia59 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-60',
+    titulo: { es: "Día 60 · Superficie desenfocada", en: "Day 60 · Blurry Overlay" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, desenfoque de fondo, filtros CSS.", en: "Keyframe animations, backdrop blur, CSS filters." },
+    componente: <Dia60 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-61',
+    titulo: { es: "Día 61 · Transición de degradado", en: "Day 61 · Gradient Transition" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, modos de fusión, degradados.", en: "Keyframe animations, blend modes, gradients." },
+    componente: <Dia61 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-62',
+    titulo: { es: "Día 62 · Tabla de precios", en: "Day 62 · Price Table" },
+    categoria: 'animaciones',
+    tecnica: { es: "Degradados, sombras compuestas, curvas de aceleración propias.", en: "Gradients, layered shadows, custom easing curves." },
+    componente: <Dia62 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-63',
+    titulo: { es: "Día 63 · Anillo hipnótico", en: "Day 63 · Hypnotic Ring" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, generación de reglas con Sass, posicionamiento absoluto.", en: "Keyframe animations, rule generation with Sass, absolute positioning." },
+    componente: <Dia63 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-64',
+    titulo: { es: "Día 64 · Botón con efecto", en: "Day 64 · Button" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, degradados, transiciones.", en: "Keyframe animations, gradients, transitions." },
+    componente: <Dia64 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-65',
+    titulo: { es: "Día 65 · Elipses", en: "Day 65 · Ellipses Animation" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, generación de reglas con Sass, posicionamiento absoluto.", en: "Keyframe animations, rule generation with Sass, absolute positioning." },
+    componente: <Dia65 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-66',
+    titulo: { es: "Día 66 · Casilla con destello", en: "Day 66 · Sparkle Checkbox" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, generación de reglas con Sass, trazado de SVG animado.", en: "Keyframe animations, rule generation with Sass, animated SVG stroke." },
+    componente: <Dia66 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-67',
+    titulo: { es: "Día 67 · Sombrilla 3D", en: "Day 67 · 3D Parasol" },
+    categoria: 'animaciones',
+    tecnica: { es: "Transformaciones 3D, animaciones por fotogramas, recortes con clip-path.", en: "3D transforms, keyframe animations, clip-path masking." },
+    componente: <Dia67 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-68',
+    titulo: { es: "Día 68 · Grabación", en: "Day 68 · Recording" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, sombras compuestas, curvas de aceleración propias.", en: "Keyframe animations, layered shadows, custom easing curves." },
+    componente: <Dia68 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-69',
+    titulo: { es: "Día 69 · Ojo", en: "Day 69 · Eye" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, generación de reglas con Sass, degradados.", en: "Keyframe animations, rule generation with Sass, gradients." },
+    componente: <Dia69 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-70',
+    titulo: { es: "Día 70 · Días del calendario", en: "Day 70 · Calendar Days" },
+    categoria: 'animaciones',
+    tecnica: { es: "Sombras compuestas, CSS Grid, curvas de aceleración propias.", en: "Layered shadows, CSS Grid, custom easing curves." },
+    componente: <Dia70 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-71',
+    titulo: { es: "Día 71 · Teclado morse", en: "Day 71 · Morse Code Keyboard" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, sombras compuestas.", en: "Keyframe animations, layered shadows." },
+    componente: <Dia71 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-72',
+    titulo: { es: "Día 72 · Los anillos", en: "Day 72 · The Rings" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, generación de reglas con Sass, posicionamiento absoluto.", en: "Keyframe animations, rule generation with Sass, absolute positioning." },
+    componente: <Dia72 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-73',
+    titulo: { es: "Día 73 · Carrusel de palabras", en: "Day 73 · Word Carousel" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, curvas de aceleración propias.", en: "Keyframe animations, custom easing curves." },
+    componente: <Dia73 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-74',
+    titulo: { es: "Día 74 · Paginación", en: "Day 74 · Pagination" },
+    categoria: 'animaciones',
+    tecnica: { es: "CSS Grid, curvas de aceleración propias, estados de interacción.", en: "CSS Grid, custom easing curves, interaction states." },
+    componente: <Dia74 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-75',
+    titulo: { es: "Día 75 · Discos giratorios", en: "Day 75 · Spinning Discs" },
+    categoria: 'animaciones',
+    tecnica: { es: "Transformaciones 3D, animaciones por fotogramas, generación de reglas con Sass.", en: "3D transforms, keyframe animations, rule generation with Sass." },
+    componente: <Dia75 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-76',
+    titulo: { es: "Día 76 · Clave oculta", en: "Day 76 · Reveal Key" },
+    categoria: 'animaciones',
+    tecnica: { es: "Transformaciones 3D, degradados, CSS Grid.", en: "3D transforms, gradients, CSS Grid." },
+    componente: <Dia76 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-77',
+    titulo: { es: "Día 77 · Desenfoque de movimiento", en: "Day 77 · Motion Blur" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, generación de reglas con Sass, filtros CSS.", en: "Keyframe animations, rule generation with Sass, CSS filters." },
+    componente: <Dia77 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-78',
+    titulo: { es: "Día 78 · Sombra al pasar", en: "Day 78 · Hover Shadow" },
+    categoria: 'animaciones',
+    tecnica: { es: "Sombras compuestas, curvas de aceleración propias, estados de interacción.", en: "Layered shadows, custom easing curves, interaction states." },
+    componente: <Dia78 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-79',
+    titulo: { es: "Día 79 · Líneas", en: "Day 79 · Lines Animation" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, generación de reglas con Sass, curvas de aceleración propias.", en: "Keyframe animations, rule generation with Sass, custom easing curves." },
+    componente: <Dia79 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-80',
+    titulo: { es: "Día 80 · Acordeón con Flexbox", en: "Day 80 · Flexbox Accordeon" },
+    categoria: 'animaciones',
+    tecnica: { es: "Filtros CSS, curvas de aceleración propias, estados de interacción.", en: "CSS filters, custom easing curves, interaction states." },
+    componente: <Dia80 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-81',
+    titulo: { es: "Día 81 · Pelota que rebota", en: "Day 81 · Jumping Ball" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, filtros CSS, degradados.", en: "Keyframe animations, CSS filters, gradients." },
+    componente: <Dia81 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-82',
+    titulo: { es: "Día 82 · Botón de acción", en: "Day 82 · Action Button" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, trazado de SVG animado, curvas de aceleración propias.", en: "Keyframe animations, animated SVG stroke, custom easing curves." },
+    componente: <Dia82 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-83',
+    titulo: { es: "Día 83 · Velocidad de la luz", en: "Day 83 · Warp Drive" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, generación de reglas con Sass, degradados.", en: "Keyframe animations, rule generation with Sass, gradients." },
+    componente: <Dia83 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-84',
+    titulo: { es: "Día 84 · Portada de libro", en: "Day 84 · Book Cover" },
+    categoria: 'animaciones',
+    tecnica: { es: "Transformaciones 3D, animaciones por fotogramas, degradados.", en: "3D transforms, keyframe animations, gradients." },
+    componente: <Dia84 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-85',
+    titulo: { es: "Día 85 · Algo", en: "Day 85 · It's something" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, generación de reglas con Sass.", en: "Keyframe animations, rule generation with Sass." },
+    componente: <Dia85 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-86',
+    titulo: { es: "Día 86 · Péndulo de Newton", en: "Day 86 · Newton's Cradle" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, generación de reglas con Sass, degradados.", en: "Keyframe animations, rule generation with Sass, gradients." },
+    componente: <Dia86 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-87',
+    titulo: { es: "Día 87 · Rubí", en: "Day 87 · Ruby" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, recortes con clip-path, generación de reglas con Sass.", en: "Keyframe animations, clip-path masking, rule generation with Sass." },
+    componente: <Dia87 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-88',
+    titulo: { es: "Día 88 · Vela", en: "Day 88 · Candle" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, filtros CSS, degradados.", en: "Keyframe animations, CSS filters, gradients." },
+    componente: <Dia88 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-89',
+    titulo: { es: "Día 89 · Patrón animado", en: "Day 89 · Animated Pattern" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, filtros CSS, degradados.", en: "Keyframe animations, CSS filters, gradients." },
+    componente: <Dia89 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-90',
+    titulo: { es: "Día 90 · Trampa para el cursor", en: "Day 90 · Mouse Trap" },
+    categoria: 'animaciones',
+    tecnica: { es: "Degradados, sombras compuestas, curvas de aceleración propias.", en: "Gradients, layered shadows, custom easing curves." },
+    componente: <Dia90 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-91',
+    titulo: { es: "Día 91 · Cargador de cubos", en: "Day 91 · Cube Loader" },
+    categoria: 'animaciones',
+    tecnica: { es: "Transformaciones 3D, animaciones por fotogramas, generación de reglas con Sass.", en: "3D transforms, keyframe animations, rule generation with Sass." },
+    componente: <Dia91 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-92',
+    titulo: { es: "Día 92 · Puntos danzantes", en: "Day 92 · Dancing Points" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, posicionamiento absoluto, formas circulares.", en: "Keyframe animations, absolute positioning, circular shapes." },
+    componente: <Dia92 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-93',
+    titulo: { es: "Día 93 · Candado", en: "Day 93 · Padlock" },
+    categoria: 'animaciones',
+    tecnica: { es: "Degradados, sombras compuestas, curvas de aceleración propias.", en: "Gradients, layered shadows, custom easing curves." },
+    componente: <Dia93 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-94',
+    titulo: { es: "Día 94 · Árbol", en: "Day 94 · Tree" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, generación de reglas con Sass, degradados.", en: "Keyframe animations, rule generation with Sass, gradients." },
+    componente: <Dia94 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-95',
+    titulo: { es: "Día 95 · Cerdito", en: "Day 95 · Pig" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, recortes con clip-path, degradados.", en: "Keyframe animations, clip-path masking, gradients." },
+    componente: <Dia95 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-96',
+    titulo: { es: "Día 96 · Cuadrado saltarín", en: "Day 96 · Jumping Square" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, degradados, sombras compuestas.", en: "Keyframe animations, gradients, layered shadows." },
+    componente: <Dia96 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-97',
+    titulo: { es: "Día 97 · Marioneta", en: "Day 97 · Puppet" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, degradados, sombras compuestas.", en: "Keyframe animations, gradients, layered shadows." },
+    componente: <Dia97 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-98',
+    titulo: { es: "Día 98 · Plopp", en: "Day 98 · Plopp" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, filtros CSS, sombras compuestas.", en: "Keyframe animations, CSS filters, layered shadows." },
+    componente: <Dia98 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-99',
+    titulo: { es: "Día 99 · Círculo-cuadrado", en: "Day 99 · Circle-Square" },
+    categoria: 'animaciones',
+    tecnica: { es: "Degradados, curvas de aceleración propias, transiciones.", en: "Gradients, custom easing curves, transitions." },
+    componente: <Dia99 />,
+    fondoFijo: 'oscuro',
+  },
+  {
+    slug: 'animacion-100',
+    titulo: { es: "Día 100 · Luz de neón", en: "Day 100 · Neon Light" },
+    categoria: 'animaciones',
+    tecnica: { es: "Animaciones por fotogramas, filtros CSS, degradados.", en: "Keyframe animations, CSS filters, gradients." },
+    componente: <Dia100 />,
     fondoFijo: 'oscuro',
   },
   {

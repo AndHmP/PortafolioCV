@@ -17,7 +17,14 @@ export default defineConfig({
       scss: {
         // Las hojas heredadas del ejercicio de 100 días usan sintaxis previa a
         // Dart Sass 2. Se silencian los avisos para no tapar errores reales.
-        silenceDeprecations: ['legacy-js-api', 'slash-div', 'global-builtin', 'import'],
+        silenceDeprecations: [
+          'legacy-js-api',
+          'slash-div',
+          'global-builtin',
+          'import',
+          'if-function',
+          'strict-unary',
+        ],
       },
     },
   },

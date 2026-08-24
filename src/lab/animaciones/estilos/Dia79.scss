@@ -1,0 +1,61 @@
+/*
+ * El cuadrado inicial se descompone en 18 franjas que se separan, se
+ * desplazan a distinta velocidad y vuelven a formarlo. La animación es la
+ * misma para todas: cambia el retardo y la distancia.
+ */
+
+$lineas: 18;
+$ciclo: 4.4s;
+
+.Dia79 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #0c0c16;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia79-caja {
+    position: relative;
+    width: 170px;
+    height: 170px;
+  }
+
+  .Dia79-linea {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 170px / $lineas;
+    animation: Dia79Dispersar $ciclo cubic-bezier(0.76, 0, 0.24, 1) infinite;
+
+    @for $i from 0 through $lineas - 1 {
+      &.l#{$i} {
+        top: $i * (170px / $lineas);
+        background: hsl(258deg + $i * 6, 82%, 58% + ($i % 5) * 4%);
+        /* Alterna el sentido para que se abran como una persiana. */
+        @if $i % 2 == 0 {
+          --salida: #{-1 * (46px + ($i % 4) * 26px)};
+        } @else {
+          --salida: #{46px + ($i % 4) * 26px};
+        }
+        animation-delay: -$i * 0.045s;
+      }
+    }
+  }
+}
+
+@keyframes Dia79Dispersar {
+  0%,
+  14% {
+    transform: translateX(0) scaleX(1);
+  }
+  46%,
+  58% {
+    transform: translateX(var(--salida)) scaleX(0.42);
+  }
+  90%,
+  100% {
+    transform: translateX(0) scaleX(1);
+  }
+}

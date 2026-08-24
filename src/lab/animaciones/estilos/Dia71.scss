@@ -1,0 +1,103 @@
+$ciclo: 5.2s;
+
+.Dia71 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #101827;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  font-family: 'Open Sans', sans-serif;
+
+  .Dia71-titulo {
+    margin: 0;
+    color: #4ade80;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 10px;
+    text-indent: 10px;
+  }
+
+  .Dia71-cinta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 26px;
+  }
+
+  /* Cada signo se enciende en su turno; el retardo escalonado que llega desde
+     el componente es lo que reproduce el ritmo del morse. */
+  .Dia71-signo {
+    height: 12px;
+    border-radius: 6px;
+    background: #1f2b3f;
+    animation: Dia71Emitir $ciclo linear infinite;
+
+    &.punto {
+      width: 12px;
+    }
+
+    &.raya {
+      width: 30px;
+    }
+
+    &.espacio {
+      width: 10px;
+      background: transparent;
+      animation: none;
+    }
+  }
+
+  .Dia71-teclas {
+    display: flex;
+    gap: 12px;
+  }
+
+  .Dia71-tecla {
+    width: 46px;
+    height: 34px;
+    border-radius: 8px;
+    background: #1f2b3f;
+    box-shadow: 0 3px 0 #16202f;
+    animation: Dia71Pulsar $ciclo ease-in-out infinite;
+
+    &.larga {
+      width: 74px;
+      animation-delay: $ciclo / 3;
+    }
+  }
+}
+
+@keyframes Dia71Emitir {
+  0%,
+  6% {
+    background: #1f2b3f;
+    box-shadow: none;
+  }
+  9%,
+  16% {
+    background: #4ade80;
+    box-shadow: 0 0 12px rgb(74 222 128 / 60%);
+  }
+  20%,
+  100% {
+    background: #1f2b3f;
+    box-shadow: none;
+  }
+}
+
+@keyframes Dia71Pulsar {
+  0%,
+  10%,
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 3px 0 #16202f;
+  }
+  4% {
+    transform: translateY(3px);
+    box-shadow: 0 0 0 #16202f;
+  }
+}

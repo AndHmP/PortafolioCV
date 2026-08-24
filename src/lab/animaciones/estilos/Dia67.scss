@@ -1,0 +1,84 @@
+/*
+ * Doce gajos triangulares, cada uno girado sobre el mástil y volcado hacia
+ * abajo. Al inclinarlos todos el mismo ángulo, los bordes coinciden y el
+ * conjunto deja de parecer plano.
+ */
+
+$gajos: 12;
+
+.Dia67 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #ffe0b2 0%, #ffcc80 55%, #ffb74d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 700px;
+
+  .Dia67-escena {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    transform-style: preserve-3d;
+    transform: rotateX(64deg);
+    animation: Dia67Girar 18s linear infinite;
+  }
+
+  .Dia67-gajo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 86px;
+    margin: -86px 0 0 -24px;
+    transform-origin: center bottom;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+
+    @for $i from 0 through $gajos - 1 {
+      &.g#{$i} {
+        transform: rotate($i * (360deg / $gajos)) rotateX(-32deg);
+        /* Alterna dos tonos para que se distinga cada gajo. */
+        @if $i % 2 == 0 {
+          background: #e53935;
+        } @else {
+          background: #fdfdfd;
+        }
+      }
+    }
+  }
+
+  .Dia67-mastil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 96px;
+    margin: -4px 0 0 -2.5px;
+    border-radius: 3px;
+    background: #6d4c41;
+    transform: rotateX(-90deg);
+    transform-origin: top center;
+  }
+
+  .Dia67-base {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    border-radius: 50%;
+    background: rgb(109 76 65 / 35%);
+    filter: blur(3px);
+  }
+}
+
+@keyframes Dia67Girar {
+  from {
+    transform: rotateX(64deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(64deg) rotateZ(360deg);
+  }
+}

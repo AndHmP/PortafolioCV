@@ -423,13 +423,13 @@ export const proyectos: Proyecto[] = [
     tipo: 'laboratorio',
     periodo: '2025-06',
     titulo: {
-      es: 'Laboratorio UI — 35 piezas de interfaz',
-      en: 'UI Lab — 35 interface pieces',
+      es: 'Laboratorio UI — 109 piezas de interfaz',
+      en: 'UI Lab — 109 interface pieces',
     },
     contexto: { es: 'Proyecto propio', en: 'Personal project' },
     resumen: {
-      es: 'Colección de componentes e interacciones construidos solo con CSS: animaciones, campos de formulario y botones, cada uno con su código a la vista.',
-      en: 'A collection of components and interactions built with CSS alone: animations, form fields and buttons, each with its source on display.',
+      es: 'Los 100 retos del challenge de 100 días de CSS, más campos de formulario, botones y una pantalla de autenticación. Cada pieza indica qué técnica demuestra.',
+      en: 'All 100 challenges from the 100 Days of CSS challenge, plus form fields, buttons and an authentication screen. Each piece states which technique it demonstrates.',
     },
     problema: {
       es: 'Decir "domino CSS" en un CV no demuestra nada. Hacía falta evidencia concreta y revisable de técnicas específicas: animaciones por fotogramas, transformaciones 3D, recortes con clip-path, estados de foco sin JavaScript, layouts que se sostienen sin librerías.',

@@ -1,0 +1,76 @@
+/*
+ * Un degradado no se puede interpolar entre dos valores distintos, así que la
+ * transición se finge apilando tres capas y cruzando su opacidad. Es el
+ * "truco" clásico mientras `@property` no esté disponible en todas partes.
+ */
+
+$ciclo: 12s;
+
+.Dia61 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #0c0c14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+
+  .Dia61-lienzo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .Dia61-capa {
+    position: absolute;
+    inset: 0;
+    animation: Dia61Cruzar $ciclo ease-in-out infinite;
+
+    &.c1 {
+      background: linear-gradient(135deg, #ff9a8b, #ff6a88, #ff99ac);
+    }
+
+    &.c2 {
+      background: linear-gradient(135deg, #43cea2, #185a9d);
+      animation-delay: -$ciclo / 3;
+    }
+
+    &.c3 {
+      background: linear-gradient(135deg, #f6d365, #fda085, #a06bff);
+      animation-delay: -$ciclo / 3 * 2;
+    }
+  }
+
+  .Dia61-texto {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    color: rgb(255 255 255 / 92%);
+    font-family: 'Kulim Park', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    mix-blend-mode: overlay;
+  }
+}
+
+@keyframes Dia61Cruzar {
+  0%,
+  22% {
+    opacity: 1;
+  }
+  38%,
+  88% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

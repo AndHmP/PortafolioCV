@@ -1,0 +1,117 @@
+$hojas: 26;
+
+.Dia94 {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #bfe4ff 0%, #e8f6ff 62%, #f4fbe8 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  .Dia94-arbol {
+    position: relative;
+    width: 180px;
+    height: 200px;
+    margin-bottom: 34px;
+    transform-origin: bottom center;
+    animation: Dia94Mecer 5s ease-in-out infinite;
+  }
+
+  /* Tres masas superpuestas dan una copa irregular sin dibujar contornos. */
+  .Dia94-copa {
+    position: absolute;
+    border-radius: 50%;
+
+    &.c1 {
+      top: 4px;
+      left: 44px;
+      width: 92px;
+      height: 92px;
+      background: #4caf50;
+    }
+
+    &.c2 {
+      top: 44px;
+      left: 12px;
+      width: 84px;
+      height: 84px;
+      background: #43a047;
+    }
+
+    &.c3 {
+      top: 46px;
+      right: 10px;
+      width: 88px;
+      height: 88px;
+      background: #388e3c;
+    }
+  }
+
+  /* Hojas sueltas que caen: el desfase y la posición vienen de dos
+     multiplicadores primos para que no se vea la repetición. */
+  .Dia94-hoja {
+    position: absolute;
+    width: 7px;
+    height: 5px;
+    border-radius: 0 100% 0 100%;
+    animation: Dia94Caer linear infinite;
+
+    @for $i from 0 through $hojas - 1 {
+      &.h#{$i} {
+        top: 18px + (($i * 29) % 100);
+        left: 16px + (($i * 47) % 150);
+        background: hsl(96deg + ($i % 5) * 8, 52%, 42% + ($i % 4) * 6%);
+        animation-duration: 4s + ($i % 6) * 0.7s;
+        animation-delay: -($i % 9) * 0.8s;
+      }
+    }
+  }
+
+  .Dia94-tronco {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 22px;
+    height: 84px;
+    margin-left: -11px;
+    border-radius: 4px 4px 2px 2px;
+    background: linear-gradient(90deg, #6d4c41, #8d6e63 45%, #5d4037);
+  }
+
+  .Dia94-suelo {
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: -40px;
+    height: 100px;
+    border-radius: 50% 50% 0 0;
+    background: #8bc34a;
+  }
+}
+
+@keyframes Dia94Mecer {
+  0%,
+  100% {
+    transform: rotate(-1.6deg);
+  }
+  50% {
+    transform: rotate(1.6deg);
+  }
+}
+
+@keyframes Dia94Caer {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-34px, 150px) rotate(320deg);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,36 @@
+.Dia52 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #0b0b14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia52-malla {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    gap: 7px;
+  }
+
+  .Dia52-punto {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #5f6bff;
+    animation: Dia52Onda 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes Dia52Onda {
+  0%,
+  100% {
+    transform: scale(0.35);
+    background: #2a2c55;
+  }
+  45% {
+    transform: scale(1.15);
+    background: #7dd3fc;
+    box-shadow: 0 0 10px rgb(125 211 252 / 60%);
+  }
+}

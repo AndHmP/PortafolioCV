@@ -1,0 +1,97 @@
+/*
+ * El neón son sombras de texto apiladas: dos o tres capas blancas muy
+ * cerradas para el tubo, y varias del color a mayor radio para el resplandor
+ * que tiñe el aire alrededor.
+ */
+
+$neon: #ff2d95;
+$neon2: #22d3ee;
+
+.Dia100 {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: radial-gradient(circle at 50% 45%, #1a0f22, #07050c 74%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  overflow: hidden;
+
+  .Dia100-rotulo {
+    margin: 0;
+    display: flex;
+    font-family: 'Kulim Park', sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 3px;
+
+    span {
+      color: #fff;
+      text-shadow:
+        0 0 4px #fff,
+        0 0 10px #{$neon},
+        0 0 22px #{$neon},
+        0 0 42px #{$neon};
+      animation: Dia100Titilar 7s linear infinite;
+    }
+
+    .espacio {
+      width: 12px;
+      text-shadow: none;
+      animation: none;
+    }
+  }
+
+  .Dia100-pie {
+    margin: 0;
+    color: $neon2;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow:
+      0 0 4px #{$neon2},
+      0 0 14px #{$neon2};
+    animation: Dia100Zumbar 3s ease-in-out infinite;
+  }
+
+  /* Charco de luz sobre el suelo, como en los rótulos reales. */
+  .Dia100-reflejo {
+    position: absolute;
+    bottom: -40px;
+    width: 200px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgb(255 45 149 / 22%), transparent 68%);
+    filter: blur(6px);
+    animation: Dia100Zumbar 3s ease-in-out infinite;
+  }
+}
+
+/* Fallos breves, no un desvanecido suave: así parpadea un tubo gastado. */
+@keyframes Dia100Titilar {
+  0%,
+  88%,
+  90.5%,
+  92%,
+  100% {
+    opacity: 1;
+  }
+  89%,
+  91% {
+    opacity: 0.22;
+  }
+}
+
+@keyframes Dia100Zumbar {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,38 @@
+.Dia89 {
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #0a0a12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  .Dia89-malla {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 4px;
+  }
+
+  .Dia89-celda {
+    width: 24px;
+    height: 24px;
+    background: conic-gradient(from 0deg, #5f6bff 0deg 90deg, transparent 90deg 360deg);
+    animation: Dia89Girar 3s ease-in-out infinite;
+  }
+}
+
+@keyframes Dia89Girar {
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.6);
+    filter: hue-rotate(90deg);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    filter: hue-rotate(0deg);
+  }
+}

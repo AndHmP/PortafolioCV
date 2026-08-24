@@ -1,0 +1,100 @@
+$petalos: 12;
+
+.Dia56 {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #cdeafd, #eaf7ff);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia56-tallo {
+    position: absolute;
+    bottom: 0;
+    width: 6px;
+    height: 130px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #4caf50, #2e7d32);
+    transform-origin: bottom center;
+    animation: Dia56Mecer 4.5s ease-in-out infinite;
+  }
+
+  .Dia56-hoja {
+    position: absolute;
+    bottom: 52px;
+    left: 50%;
+    width: 46px;
+    height: 24px;
+    margin-left: 2px;
+    border-radius: 0 100% 0 100%;
+    background: #43a047;
+    transform-origin: left center;
+    animation: Dia56Mecer 4.5s ease-in-out infinite;
+  }
+
+  .Dia56-flor {
+    position: absolute;
+    bottom: 118px;
+    width: 130px;
+    height: 130px;
+    transform-origin: center bottom;
+    animation: Dia56Mecer 4.5s ease-in-out infinite;
+  }
+
+  /* Los pétalos parten del centro y se abren en abanico. El origen desplazado
+     hacia abajo es lo que los reparte en corona. */
+  .Dia56-petalo {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    width: 22px;
+    height: 52px;
+    margin-left: -11px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: linear-gradient(180deg, #fff, #ffe9f2);
+    transform-origin: center 59px;
+    animation: Dia56Abrir 5s ease-in-out infinite;
+
+    @for $i from 0 through $petalos - 1 {
+      &.p#{$i} {
+        --giro: #{$i * (360deg / $petalos)};
+        animation-delay: $i * 0.05s;
+      }
+    }
+  }
+
+  .Dia56-corazon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 34%, #ffe082, #f9a825);
+    box-shadow: inset 0 -3px 8px rgb(0 0 0 / 12%);
+  }
+}
+
+@keyframes Dia56Mecer {
+  0%,
+  100% {
+    transform: rotate(-3.5deg);
+  }
+  50% {
+    transform: rotate(3.5deg);
+  }
+}
+
+@keyframes Dia56Abrir {
+  0%,
+  100% {
+    transform: rotate(var(--giro)) scaleY(0.94);
+  }
+  50% {
+    transform: rotate(calc(var(--giro) + 6deg)) scaleY(1.06);
+  }
+}

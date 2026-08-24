@@ -29,3 +29,6 @@ yarn-error.log*
 
 # Vercel
 .vercel
+
+# Caché incremental de TypeScript
+tsconfig.tsbuildinfo

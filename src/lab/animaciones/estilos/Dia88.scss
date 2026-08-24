@@ -1,0 +1,122 @@
+/*
+ * La llama es un cuadrado con tres esquinas redondeadas al 50 % y la
+ * superior en punta, girado 45°. No hace falta SVG: `border-radius` con
+ * radios distintos por esquina da la forma de gota.
+ */
+
+.Dia88 {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: radial-gradient(circle at 50% 42%, #2a2013, #0c0a08 68%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia88-halo {
+    position: absolute;
+    top: 26%;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(255 176 59 / 22%), transparent 62%);
+    animation: Dia88Titilar 2.4s ease-in-out infinite;
+  }
+
+  .Dia88-conjunto {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 18px;
+  }
+
+  .Dia88-llama {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    border-radius: 50% 50% 50% 50% / 68% 68% 32% 32%;
+    background: linear-gradient(180deg, #ffd166 0%, #ff9f1c 45%, #ef4444 100%);
+    transform: rotate(-45deg) scale(1, 1.55);
+    transform-origin: center bottom;
+    box-shadow: 0 0 24px 6px rgb(255 159 28 / 45%);
+    animation: Dia88Ondear 1.5s ease-in-out infinite;
+  }
+
+  .Dia88-nucleo {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    width: 14px;
+    height: 16px;
+    margin-left: -7px;
+    border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+    background: rgb(147 197 253 / 75%);
+    filter: blur(1px);
+  }
+
+  .Dia88-mecha {
+    width: 3px;
+    height: 12px;
+    margin-top: -2px;
+    border-radius: 2px;
+    background: #3f3f46;
+  }
+
+  .Dia88-vela {
+    position: relative;
+    width: 68px;
+    height: 118px;
+    border-radius: 8px 8px 6px 6px;
+    background: linear-gradient(90deg, #e8dcc8 0%, #fdf8ee 35%, #d9cbb2 100%);
+    box-shadow: inset 0 6px 10px rgb(0 0 0 / 10%);
+  }
+
+  /* Cera derramada por el borde: dos gotas de distinto largo. */
+  .Dia88-cera {
+    position: absolute;
+    top: -2px;
+    left: 12px;
+    width: 10px;
+    height: 34px;
+    border-radius: 0 0 6px 6px;
+    background: #fdf8ee;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 26px;
+      width: 8px;
+      height: 20px;
+      border-radius: 0 0 5px 5px;
+      background: #fdf8ee;
+    }
+  }
+}
+
+@keyframes Dia88Ondear {
+  0%,
+  100% {
+    transform: rotate(-45deg) scale(1, 1.55);
+  }
+  30% {
+    transform: rotate(-42deg) scale(0.94, 1.68);
+  }
+  60% {
+    transform: rotate(-48deg) scale(1.06, 1.46);
+  }
+}
+
+@keyframes Dia88Titilar {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}

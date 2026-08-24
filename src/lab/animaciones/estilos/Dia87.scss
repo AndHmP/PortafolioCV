@@ -1,0 +1,90 @@
+$facetas: 6;
+
+.Dia87 {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: radial-gradient(circle at 50% 50%, #2a0f1c, #0d0509 72%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Dia87-gema {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    /* El hexágono se recorta una sola vez y todas las facetas heredan la
+       silueta al quedar dentro. */
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+    background: #7f1d3a;
+    overflow: hidden;
+    animation: Dia87Latir 4s ease-in-out infinite;
+  }
+
+  .Dia87-corona {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #ff4d6d, #b0143b 55%, #6b0f2a);
+  }
+
+  .Dia87-faceta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140px;
+    height: 140px;
+    margin: -70px 0 0 -70px;
+    clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+
+    @for $i from 0 through $facetas - 1 {
+      &.f#{$i} {
+        transform: rotate($i * (360deg / $facetas));
+        background: rgba(255, 255, 255, 0.04 + ($i % 3) * 0.05);
+      }
+    }
+  }
+
+  /* El "pulido": un destello que cruza la piedra en diagonal. */
+  .Dia87-pulido {
+    position: absolute;
+    top: -40%;
+    left: -60%;
+    width: 45%;
+    height: 180%;
+    background: linear-gradient(100deg, transparent, rgb(255 255 255 / 55%), transparent);
+    transform: rotate(18deg);
+    animation: Dia87Pulir 4s ease-in-out infinite;
+  }
+
+  .Dia87-resplandor {
+    position: absolute;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(255 77 109 / 26%), transparent 66%);
+    animation: Dia87Latir 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+@keyframes Dia87Latir {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes Dia87Pulir {
+  0%,
+  55% {
+    left: -60%;
+  }
+  85%,
+  100% {
+    left: 130%;
+  }
+}
