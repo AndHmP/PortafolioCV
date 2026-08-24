@@ -154,7 +154,6 @@ La integración continua ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)
 
 ## Pendientes antes de publicar
 
-- [ ] Añadir `public/cv-anderson-huamancaja.pdf` (el botón «Descargar CV» ya apunta ahí).
 - [ ] Añadir `public/og-portada.png` (1200×630) para las tarjetas de redes sociales.
 - [ ] Añadir capturas de los proyectos propios en `public/proyectos/<slug>/`.
 - [ ] Para los casos de DACTA, KYB IMPORT, CONDO CLEANER y GETBYTE: pedir autorización antes de publicar cualquier captura de sistemas internos.
