@@ -93,6 +93,9 @@ export const en: Diccionario = {
     arquitectura: 'Architecture',
     capturas: 'Screenshots',
     stack: 'Stack',
+    codigoPrivado: 'Source code owned by the company',
+    codigoPrivadoDetalle:
+      'This work was carried out under an employment relationship, so the source code belongs to the company and cannot be published. The case study describes my contribution, the technical decisions I made and the outcomes.',
     noEncontrado: 'That project does not exist',
     noEncontradoDetalle: 'The link may be wrong, or the project may no longer be published.',
   },

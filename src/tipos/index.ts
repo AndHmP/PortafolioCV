@@ -106,6 +106,12 @@ export interface Proyecto {
   periodo: string;
   /** Contexto: cliente, empresa o proyecto propio. */
   contexto?: Texto;
+  /**
+   * Trabajo hecho en una empresa, cuyo código es propiedad del cliente.
+   * Muestra una nota explicando por qué no hay repositorio público, en vez de
+   * dejar el vacío sin explicación.
+   */
+  codigoPrivado?: boolean;
 }
 
 /* ---------------------------------------------------------------- */

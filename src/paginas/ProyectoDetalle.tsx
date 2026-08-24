@@ -78,6 +78,18 @@ export default function ProyectoDetalle() {
             ))}
           </div>
 
+          {proyecto.codigoPrivado && (
+            /* Sin esta nota, la ausencia de repositorio se lee como falta de
+               respaldo. Decir por qué no lo hay es más creíble que callar. */
+            <p className="mt-7 flex items-start gap-2.5 rounded-lg border border-borde bg-superficie p-3.5 text-sm text-texto-suave">
+              <Icono nombre="candado" tamano={16} className="mt-0.5 shrink-0 text-acento" />
+              <span>
+                <strong className="font-semibold text-texto">{t.detalle.codigoPrivado}.</strong>{' '}
+                {t.detalle.codigoPrivadoDetalle}
+              </span>
+            </p>
+          )}
+
           {proyecto.enlaces && (
             <div className="mt-7 flex flex-wrap gap-3">
               {proyecto.enlaces.demo &&

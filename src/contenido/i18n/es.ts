@@ -91,6 +91,9 @@ export const es = {
     arquitectura: 'Arquitectura',
     capturas: 'Capturas',
     stack: 'Stack',
+    codigoPrivado: 'Código propiedad de la empresa',
+    codigoPrivadoDetalle:
+      'Este trabajo se realizó en el marco de una relación laboral, así que el código fuente pertenece a la empresa y no puede publicarse. El caso describe mi participación, las decisiones técnicas que tomé y los resultados.',
     noEncontrado: 'Ese proyecto no existe',
     noEncontradoDetalle: 'Puede que el enlace esté mal o que el proyecto ya no esté publicado.',
   },

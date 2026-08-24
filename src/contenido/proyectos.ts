@@ -40,6 +40,7 @@ export const proyectos: Proyecto[] = [
   {
     slug: 'plataforma-microfrontends',
     estado: 'publicado',
+    codigoPrivado: true,
     destacado: true,
     tipo: 'fullstack',
     periodo: '2025-01',
@@ -137,6 +138,7 @@ export const proyectos: Proyecto[] = [
   {
     slug: 'app-android-nativa',
     estado: 'publicado',
+    codigoPrivado: true,
     destacado: true,
     tipo: 'movil',
     periodo: '2025-06',
@@ -268,6 +270,7 @@ export const proyectos: Proyecto[] = [
   {
     slug: 'gestion-productos-kyb',
     estado: 'publicado',
+    codigoPrivado: true,
     tipo: 'fullstack',
     periodo: '2024-11',
     titulo: {
@@ -325,6 +328,7 @@ export const proyectos: Proyecto[] = [
   {
     slug: 'web-corporativa-condo-cleaner',
     estado: 'publicado',
+    codigoPrivado: true,
     tipo: 'web',
     periodo: '2024-12',
     titulo: {
@@ -375,6 +379,7 @@ export const proyectos: Proyecto[] = [
   {
     slug: 'interfaces-getbyte',
     estado: 'publicado',
+    codigoPrivado: true,
     tipo: 'web',
     periodo: '2024-06',
     titulo: {
@@ -442,23 +447,33 @@ export const proyectos: Proyecto[] = [
 
   /* ═══════════════════════════════════════════════════════════════════════ */
   /*  EN DESARROLLO                                                          */
-  /*  Registrados y ocultos. Cambiar `estado` a 'publicado' al terminarlos.  */
-  /*  Corresponden al plan de PROMP_PORTAFOLIO_VIRTUAL.md                    */
+  /*                                                                         */
+  /*  Un solo proyecto a la vez. Registrado y oculto: cambiar `estado` a     */
+  /*  'publicado' cuando esté desplegado y con su repositorio abierto.       */
+  /*                                                                         */
+  /*  Dominio deliberadamente ajeno al de cualquier empleador: se demuestra  */
+  /*  la capacidad técnica sin rozar código, esquemas ni lógica de negocio   */
+  /*  que pertenezcan a una empresa.                                         */
+  /*                                                                         */
+  /*  Siguiente paso, una vez que este esté en línea: una app Android nativa */
+  /*  en Java sobre esta misma API. Reutilizar los contratos evita mantener  */
+  /*  una capa de datos paralela, y cubre la parte móvil del CV.             */
   /* ═══════════════════════════════════════════════════════════════════════ */
 
   {
-    slug: 'gestion-ferreteria',
+    slug: 'gestion-veterinaria',
     estado: 'en-desarrollo',
+    destacado: true,
     tipo: 'fullstack',
-    periodo: '2026-09',
+    periodo: '2026-10',
     titulo: {
-      es: 'Sistema de gestión de inventario y pedidos',
-      en: 'Inventory and order management system',
+      es: 'Sistema de gestión para una veterinaria',
+      en: 'Management system for a veterinary clinic',
     },
     contexto: { es: 'Proyecto propio', en: 'Personal project' },
     resumen: {
-      es: 'Sistema completo para una ferretería: catálogo de productos, clientes, pedidos y un panel con métricas de operación.',
-      en: 'Complete system for a hardware store: product catalogue, customers, orders and an operations metrics dashboard.',
+      es: 'Historia clínica, pacientes y citas para una veterinaria pequeña: API en FastAPI sobre SQL Server, interfaz en React con React Query, y todo el sistema levantándose con un solo comando.',
+      en: 'Medical records, patients and appointments for a small veterinary clinic: a FastAPI service over SQL Server, a React interface with React Query, and the whole system starting with a single command.',
     },
     problema: {
       es: 'Pendiente de redactar al construir el proyecto.',
@@ -471,89 +486,17 @@ export const proyectos: Proyecto[] = [
     stack: [
       'react',
       'typescript',
-      'tailwind',
       'react-query',
+      'material-ui',
       'python',
       'fastapi',
-      'postgresql',
+      'sqlserver',
+      'docker',
+      'nginx',
       'jest',
       'testing-library',
+      'git',
     ],
-  },
-
-  {
-    slug: 'app-tecnicos-campo',
-    estado: 'en-desarrollo',
-    tipo: 'movil',
-    periodo: '2026-10',
-    titulo: {
-      es: 'App Android para técnicos de campo',
-      en: 'Android app for field technicians',
-    },
-    contexto: { es: 'Proyecto propio', en: 'Personal project' },
-    resumen: {
-      es: 'Aplicación Android nativa para gestión de tareas en campo, con persistencia local para operar sin conexión y sincronización con una API REST.',
-      en: 'Native Android application for field task management, with local persistence for offline operation and REST API sync.',
-    },
-    problema: {
-      es: 'Pendiente de redactar al construir el proyecto.',
-      en: 'To be written when the project is built.',
-    },
-    solucion: {
-      es: 'Pendiente de redactar al construir el proyecto.',
-      en: 'To be written when the project is built.',
-    },
-    stack: ['android', 'java', 'fastapi', 'python'],
-  },
-
-  {
-    slug: 'microservicios-docker',
-    estado: 'en-desarrollo',
-    tipo: 'microservicios',
-    periodo: '2026-11',
-    titulo: {
-      es: 'Sistema de microservicios con Docker y NGINX',
-      en: 'Microservices system with Docker and NGINX',
-    },
-    contexto: { es: 'Proyecto propio', en: 'Personal project' },
-    resumen: {
-      es: 'Tres servicios independientes en FastAPI comunicándose por REST, con NGINX como gateway y todo el sistema levantándose con un solo comando.',
-      en: 'Three independent FastAPI services communicating over REST, with NGINX as gateway and the whole system starting with a single command.',
-    },
-    problema: {
-      es: 'Pendiente de redactar al construir el proyecto.',
-      en: 'To be written when the project is built.',
-    },
-    solucion: {
-      es: 'Pendiente de redactar al construir el proyecto.',
-      en: 'To be written when the project is built.',
-    },
-    stack: ['python', 'fastapi', 'microservicios', 'docker', 'nginx', 'postgresql'],
-  },
-
-  {
-    slug: 'landing-nextjs',
-    estado: 'en-desarrollo',
-    tipo: 'web',
-    periodo: '2026-12',
-    titulo: {
-      es: 'Landing corporativa con Next.js',
-      en: 'Corporate landing page with Next.js',
-    },
-    contexto: { es: 'Proyecto propio', en: 'Personal project' },
-    resumen: {
-      es: 'Sitio de una página con formulario de contacto funcional, SEO técnico y diseño responsive.',
-      en: 'Single-page site with a working contact form, technical SEO and responsive design.',
-    },
-    problema: {
-      es: 'Pendiente de redactar al construir el proyecto.',
-      en: 'To be written when the project is built.',
-    },
-    solucion: {
-      es: 'Pendiente de redactar al construir el proyecto.',
-      en: 'To be written when the project is built.',
-    },
-    stack: ['nextjs', 'typescript', 'tailwind', 'html'],
   },
 ];
 

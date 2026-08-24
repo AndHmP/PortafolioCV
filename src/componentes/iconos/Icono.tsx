@@ -22,6 +22,7 @@ export type ClaveIconoUI =
   | 'calendario'
   | 'usuario'
   | 'documento'
+  | 'candado'
   | 'luna'
   | 'sol'
   | 'idioma'
@@ -71,6 +72,7 @@ const TRAZOS: Record<ClaveIconoUI, { d: string[]; relleno?: boolean }> = {
   calendario: { d: ['M4.5 5.5h15v15h-15z', 'M4.5 10h15', 'M8.5 3v4', 'M15.5 3v4'] },
   usuario: { d: ['M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z', 'M4.5 20.5a7.5 7.5 0 0 1 15 0'] },
   documento: { d: ['M6 3h7l5 5v13H6z', 'M13 3v5h5', 'M9 13h6', 'M9 17h6'] },
+  candado: { d: ['M5 11h14v10H5z', 'M8 11V7.5a4 4 0 0 1 8 0V11', 'M12 15v2.5'] },
   luna: { d: ['M20 14.3A8.5 8.5 0 0 1 9.7 4 8.5 8.5 0 1 0 20 14.3Z'] },
   sol: {
     d: ['M12 16.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Z', 'M12 2v2.5', 'M12 19.5V22', 'M2 12h2.5', 'M19.5 12H22', 'M4.9 4.9l1.8 1.8', 'M17.3 17.3l1.8 1.8', 'M19.1 4.9l-1.8 1.8', 'M6.7 17.3l-1.8 1.8'],
