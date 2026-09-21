@@ -15,6 +15,33 @@ const DIR_ESTILOS = join(DIR_ANIM, 'estilos');
 
 /** Nombre oficial del reto de cada día en 100dayscss.com. */
 const TITULOS = {
+  1: ['100 Days CSS', '100 Days CSS'],
+  2: ['Icono de menú', 'Menu Icon'],
+  // El reto escribe "Pyramide"; se respeta tal cual en la columna en inglés.
+  3: ['La pirámide', 'The Pyramide'],
+  4: ['Cargando', 'Loading'],
+  5: ['Estadística', 'Statistic'],
+  6: ['Perfil', 'Profile'],
+  7: ['Notificaciones, búsqueda y menú', 'Notifications, Search and Menu'],
+  8: ['Metaballs', 'Metaballs'],
+  9: ['Noche lluviosa', 'Rainy Night'],
+  10: ['Reloj', 'Watch'],
+  11: ['Botas de senderismo', 'Walking Boots'],
+  12: ['Tooltip', 'Tooltip'],
+  13: ['Galería de usuarios', 'User Gallery'],
+  14: ['Byciclopter', 'Byciclopter'],
+  15: ['Subir archivo', 'Upload'],
+  16: ['Blobby', 'Blobby'],
+  17: ['Triángulo de Penrose', 'Penrose Triangle'],
+  18: ['Elástico', 'Elastic'],
+  19: ['Carrusel con botones de radio', 'Slider with Radio Buttons'],
+  20: ['Enviar correo', 'Send Mail'],
+  21: ['Pac-Man', 'Pac-Man'],
+  22: ['Pulsera de actividad', 'Fitness Tracker'],
+  23: ['Tipografía animada', 'Animated Typography'],
+  24: ['Botón', 'Button'],
+  25: ['Marcador de mapa', 'Map Marker'],
+  26: ['Modal motivacional', 'Motivational Modal'],
   27: ['Checklist', 'Checklist'],
   28: ['Ring Ring', 'Ring Ring'],
   29: ['Campo de búsqueda', 'Search Field'],
@@ -49,7 +76,7 @@ const TITULOS = {
   58: ['Esfera 3D', '3D Sphere'],
   59: ['Transición en tiras', 'Slice Transition'],
   60: ['Superficie desenfocada', 'Blurry Overlay'],
-  61: ['Transición de degradado', 'Gradient Transition'],
+  61: ['Transición de degradado CSS', 'CSS Gradient Transition'],
   62: ['Tabla de precios', 'Price Table'],
   63: ['Anillo hipnótico', 'Hypnotic Ring'],
   64: ['Botón con efecto', 'Button'],
@@ -155,6 +182,112 @@ const BOTONES = [
   ['Botón con relleno progresivo', 'Progressive fill button', 'Relleno que avanza desde un borde usando pseudoelementos.', 'Fill advancing from one edge using pseudo-elements.'],
 ];
 
+/**
+ * Galería de cards: cada pieza es un tipo de card dentro de un carrusel con
+ * varios ejemplos. Aquí la técnica se escribe a mano y no se deduce del CSS:
+ * a diferencia de las animaciones, lo que distingue a cada card no es una
+ * propiedad suelta sino cómo reparte el trabajo entre CSS y estado de React.
+ */
+const CARDS = [
+  {
+    slug: 'card-01',
+    titulo: ['Producto con inclinación 3D', 'Product card with 3D tilt'],
+    tecnica: [
+      'Transformaciones 3D según la posición del cursor y brillo radial pasado como variable CSS.',
+      '3D transforms driven by cursor position, with a radial highlight passed as a CSS variable.',
+    ],
+    coleccion: 'zapatillas',
+    componente: 'CardTipo01',
+    prop: 'elemento',
+    clave: 'id',
+  },
+  {
+    slug: 'card-02',
+    titulo: ['Ficha de persona con secciones', 'Profile card with sections'],
+    tecnica: [
+      'Panel deslizante entre secciones y color de la ficha propagado como variable CSS.',
+      'Sliding panel between sections, with the card colour propagated as a CSS variable.',
+    ],
+    coleccion: 'empleados',
+    componente: 'CardTipo02',
+    prop: 'ficha',
+    clave: 'nombre',
+  },
+  {
+    slug: 'card-03',
+    titulo: ['Perfil sobre imagen', 'Profile over an image'],
+    tecnica: [
+      'Zoom del fondo al pasar el cursor, capa de contraste y acciones al pie.',
+      'Background zoom on hover, contrast layer and footer actions.',
+    ],
+    coleccion: 'perfilesRed',
+    componente: 'CardTipo03',
+    prop: 'perfil',
+    clave: 'nombre',
+  },
+  {
+    slug: 'card-04',
+    titulo: ['Producto con ficha desplegable', 'Product card with unfolding details'],
+    tecnica: [
+      'Círculo que se expande y panel de tallas y colores que aparece al pasar el cursor.',
+      'Expanding circle and a sizes-and-colours panel revealed on hover.',
+    ],
+    coleccion: 'zapatillas',
+    componente: 'CardTipo04',
+    prop: 'producto',
+    clave: 'id',
+  },
+  {
+    slug: 'card-05',
+    titulo: ['Producto de tienda con variantes', 'Store product with variants'],
+    tecnica: [
+      'Selector de color que intercambia la imagen, valoración en SVG y texto recortado a dos líneas.',
+      'Colour picker swapping the image, SVG rating and text clamped to two lines.',
+    ],
+    coleccion: 'productos',
+    componente: 'CardTipo05',
+    prop: 'producto',
+    clave: 'nombre',
+  },
+  {
+    slug: 'card-06',
+    titulo: ['Lámina de coleccionable', 'Collectible poster'],
+    tecnica: [
+      'Perspectiva 3D: el fondo se tumba y la figura sale del marco al pasar el cursor.',
+      '3D perspective: the backdrop tilts and the figure steps out of the frame on hover.',
+    ],
+    coleccion: 'coleccionables',
+    componente: 'CardTipo06',
+    prop: 'pieza',
+    clave: 'imgFondo',
+    alto: 340,
+  },
+  {
+    slug: 'card-07',
+    titulo: ['Destino de viaje', 'Travel destination'],
+    tecnica: [
+      'Panel que asciende, subrayado que entra desde un lado y texto revelado con retardo.',
+      'Rising panel, underline sliding in from one side and a delayed text reveal.',
+    ],
+    coleccion: 'destinos',
+    componente: 'CardTipo07',
+    prop: 'destino',
+    clave: 'lugar',
+  },
+  {
+    slug: 'card-08',
+    titulo: ['Promoción con óvalo', 'Promo card with an oval'],
+    tecnica: [
+      'Óvalo que sube al pasar el cursor y franja de descuento que responde al rótulo.',
+      'Oval rising on hover and a discount band reacting to the label.',
+    ],
+    coleccion: 'promociones',
+    componente: 'CardTipo08',
+    prop: 'promocion',
+    clave: 'img',
+  },
+];
+
 const lineas = [];
 lineas.push("import type { PiezaLab } from '@/tipos';");
 lineas.push('');
@@ -172,6 +305,13 @@ for (let n = 1; n <= 2; n += 1) {
   lineas.push(`import ButtonType0${n} from '@/lab/botones/ButtonType0${n}';`);
 }
 lineas.push("import LoginDemo from '@/lab/login/LoginDemo';");
+lineas.push('');
+lineas.push("import Carrusel from '@/lab/cards/Carrusel';");
+for (let n = 1; n <= CARDS.length; n += 1) {
+  lineas.push(`import CardTipo0${n} from '@/lab/cards/CardTipo0${n}';`);
+}
+const COLECCIONES = [...new Set(CARDS.map((c) => c.coleccion))].sort();
+lineas.push(`import { ${COLECCIONES.join(', ')} } from '@/lab/cards/datos';`);
 lineas.push('');
 lineas.push('export const piezasLab: PiezaLab[] = [');
 
@@ -237,6 +377,29 @@ lineas.push('    },');
 lineas.push('    componente: <LoginDemo />,');
 lineas.push('    alto: 620,');
 lineas.push('  },');
+
+CARDS.forEach((card) => {
+  lineas.push('  {');
+  lineas.push(`    slug: ${JSON.stringify(card.slug)},`);
+  lineas.push(
+    `    titulo: { es: ${JSON.stringify(card.titulo[0])}, en: ${JSON.stringify(card.titulo[1])} },`,
+  );
+  lineas.push("    seccion: 'cards',");
+  lineas.push("    categoria: 'cards',");
+  lineas.push(
+    `    tecnica: { es: ${JSON.stringify(card.tecnica[0])}, en: ${JSON.stringify(card.tecnica[1])} },`,
+  );
+  lineas.push('    componente: (');
+  lineas.push('      <Carrusel>');
+  lineas.push(`        {${card.coleccion}.map((elemento) => (`);
+  lineas.push(`          <${card.componente} key={elemento.${card.clave}} ${card.prop}={elemento} />`);
+  lineas.push('        ))}');
+  lineas.push('      </Carrusel>');
+  lineas.push('    ),');
+  lineas.push(`    alto: ${card.alto ?? 320},`);
+  lineas.push('  },');
+});
+
 lineas.push('];');
 lineas.push('');
 lineas.push("/** Piezas de una sección, en el orden en que se registraron. */");
@@ -253,4 +416,6 @@ lineas.push('  }, {});');
 lineas.push('}');
 
 writeFileSync('src/contenido/lab.tsx', `${lineas.join('\n')}\n`, 'utf8');
-console.log(`lab.tsx generado: ${dias.length} animaciones + ${INPUTS.length + BOTONES.length + 1} piezas de UI`);
+console.log(
+  `lab.tsx generado: ${dias.length} animaciones + ${INPUTS.length + BOTONES.length + 1} piezas de UI + ${CARDS.length} cards`,
+);

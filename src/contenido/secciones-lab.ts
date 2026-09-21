@@ -30,6 +30,15 @@ export const seccionesLab: SeccionLab[] = [
     filtros: ['inputs', 'botones'],
   },
   {
+    slug: 'cards',
+    titulo: { es: 'Galería de cards', en: 'Card gallery' },
+    descripcion: {
+      es: 'Ocho tipos de card con su propia interacción —inclinación en 3D, paneles que se despliegan, selectores de color—, cada uno en un carrusel con varios ejemplos.',
+      en: 'Eight card types, each with its own interaction —3D tilt, unfolding panels, colour pickers—, shown in a carousel with several examples.',
+    },
+    icono: 'documento',
+  },
+  {
     slug: 'pantallas',
     titulo: { es: 'Pantallas completas', en: 'Full screens' },
     descripcion: {

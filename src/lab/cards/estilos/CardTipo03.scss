@@ -1,0 +1,118 @@
+.ContenedorCard03 {
+    padding: 0px 10px;
+
+    &:hover {
+        &>.CardTipo03 {
+            background-size: 120%;
+
+            &>.ImgProfile>img {
+                width: 65%;
+            }
+        }
+    }
+
+    &>.CardTipo03 {
+        width: 160px;
+        height: 250px;
+        border-radius: 20px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 6px;
+        position: relative;
+        overflow: hidden;
+        transition: 0.5s;
+
+        &::before {
+            content: '';
+            top: 0px;
+            left: 0px;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #00000038;
+            z-index: 1;
+        }
+
+        & p {
+            margin: 0px;
+        }
+
+        &>div {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        &>.NameUser {
+            padding: 3px;
+            font-family: "Archivo Black", serif;
+            font-size: 10px;
+            color: #fff;
+            gap: 4px;
+
+            &>svg {
+                width: 10px;
+                height: auto;
+                fill: #fff;
+            }
+        }
+
+        &>.State {
+            padding: 0px;
+            font-size: 10px;
+            line-height: 9px;
+            color: #fff;
+            letter-spacing: 0.3px;
+        }
+
+        &>.ImgProfile {
+            gap: 15px;
+
+            &>img {
+                width: 55%;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                object-fit: cover;
+                transition: 0.5s;
+            }
+
+            &>p {
+                font-size: 9px;
+                line-height: 8px;
+                color: #fff;
+                letter-spacing: 0.3px;
+                font-weight: 100;
+            }
+        }
+
+        &>.FotterButtons {
+
+            &>button {
+                border: none;
+                outline: none;
+                background-color: transparent;
+                padding: 3px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                cursor: pointer;
+
+                &>svg {
+                    height: 13px;
+                    width: auto;
+                    fill: #fff;
+                }
+
+                &>p {
+                    font-size: 9px;
+                    line-height: 10px;
+                    color: #fff;
+                    letter-spacing: 0.3px;
+                    font-weight: 200;
+                }
+            }
+        }
+    }
+}

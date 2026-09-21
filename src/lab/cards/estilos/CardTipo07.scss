@@ -1,0 +1,98 @@
+.ContenedorCardTipo07 {
+    padding: 0px 15px;
+
+    &>.CardTipo07 {
+        width: 190px;
+        height: 240px;
+        background-size: auto 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0px 0px 10px #000;
+
+        &>.Datos {
+            height: 130px;
+            background: linear-gradient(180deg, transparent 0%, #000000d5 45%);
+            gap: 8px;
+            bottom: -85px;
+            transition: 0.8s;
+
+            & p {
+                margin: 0px;
+                font-size: 9px;
+                text-align: start;
+                color: #fff;
+                font-weight: 300;
+                padding: 0px 10px;
+                line-height: 11px;
+                max-height: 35px;
+                overflow: hidden;
+                position: relative;
+
+                &.contenido {
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: 0.4s;
+                    transition-delay: 0.5s;
+                }
+
+                &.titulo {
+                    font-size: 22px;
+                    font-weight: 600;
+                    line-height: 18px;
+                    padding: 0px 4px 8px 10px;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        width: 110%;
+                        height: 3px;
+                        border-radius: 2px;
+                        background-color: #ffc400;
+                        bottom: 0px;
+                        left: -110%;
+                        transition: 0.8s;
+                    }
+                }
+            }
+
+            &>button {
+                font-size: 9px;
+                font-weight: 700;
+                padding: 8px 10px;
+                border: none;
+                outline: none;
+                border-radius: 4px;
+                background-color: #ffc400;
+                margin-left: 10px;
+                cursor: pointer;
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.4s;
+                transition-delay: 0.5s;
+            }
+
+        }
+
+        &:hover {
+            &>.Datos {
+                bottom: 0px;
+
+                &>p.contenido {
+                    opacity: 1;
+                    visibility: visible;
+                }
+                &>p.titulo::before {
+                    left: 0%;
+                }
+
+                &>button {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+
+        }
+    }
+}
