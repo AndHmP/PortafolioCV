@@ -302,6 +302,17 @@ export const tecnologias: Tecnologia[] = [
     },
   },
 
+  /* ---------------- Desarrollo asistido por IA ---------------- */
+  {
+    clave: 'claude-code',
+    nombre: 'Claude Code',
+    categoria: 'ia',
+    nivel: 'intermedio',
+    descripcion: {
+      es: 'Desarrollo asistido por IA con planificación previa de tareas y documentación técnica en Markdown.',
+      en: 'AI-assisted development with upfront task planning and technical documentation in Markdown.',
+    },
+  },
   /* ---------------- Diseño y UI/UX ---------------- */
   {
     clave: 'figma',
@@ -370,6 +381,7 @@ export const ordenCategorias: CategoriaTecnologia[] = [
   'infraestructura',
   'calidad',
   'diseno',
+  'ia',
 ];
 
 /** Devuelve el nombre legible de una clave; útil en tarjetas de proyecto. */

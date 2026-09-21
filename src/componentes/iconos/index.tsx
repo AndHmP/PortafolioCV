@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import AndroidIcono from './marcas/AndroidIcono';
 import AngularIcono from './marcas/AngularIcono';
 import BalsamiqIcono from './marcas/BalsamiqIcono';
+import ClaudeCodeIcono from './marcas/ClaudeCodeIcono';
 import CssIcono from './marcas/CssIcono';
 import DockerIcono from './marcas/DockerIcono';
 import FastApiIcono from './marcas/FastApiIcono';
@@ -90,6 +91,7 @@ const REGISTRO: Record<string, ReactNode> = {
   'testing-library': <TestingLibraryIcono />,
 
   /* IA y diseño */
+  'claude-code': <ClaudeCodeIcono />,
   figma: <FigmaIcono />,
   balsamiq: <BalsamiqIcono />,
   prototipado: <PrototipadoIcono />,
