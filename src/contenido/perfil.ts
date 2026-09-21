@@ -14,7 +14,14 @@ export const FECHA_NACIMIENTO = '2005-08-06';
 /** Inicio de la trayectoria profesional (GETBYTE, junio 2023). */
 export const INICIO_CARRERA = 2023;
 
-export const SITIO_URL = 'https://www.portafolio-virtual.com';
+/**
+ * Dirección pública del sitio. De aquí salen el sitemap, el robots.txt y las
+ * etiquetas canónicas y de Open Graph, así que tiene que ser una URL que
+ * exista de verdad: si apunta a un dominio sin resolver, los buscadores y las
+ * vistas previas al compartir el enlace se van a un sitio que no está.
+ * Al contratar un dominio propio, se cambia aquí y se añade en Vercel.
+ */
+export const SITIO_URL = 'https://portafolio-cv-steel.vercel.app';
 
 export const rol: Texto = {
   es: 'Desarrollador Full Stack',
