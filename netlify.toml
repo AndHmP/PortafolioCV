@@ -1,0 +1,26 @@
+# Configuración de despliegue en Netlify.
+#
+# Equivale a lo que ya hacía `vercel.json`, para que el sitio se comporte
+# igual en los dos proveedores.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# El portafolio es una SPA: cualquier ruta la resuelve el router en el
+# cliente. Sin esta regla, entrar directo a /laboratorio/cards devolvería un
+# 404 del servidor en vez de la página.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Los archivos de /assets llevan un hash en el nombre: cuando cambia el
+# contenido cambia la URL, así que se pueden cachear para siempre.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
