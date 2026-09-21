@@ -1,100 +1,193 @@
+/*
+ * Día 68 — Recording.
+ *
+ * Medidas del pen de referencia, sobre 400×400: aro de 100 en 150,150 y
+ * micrófono de 24×66. Aquí el lienzo mide 270, así que las cajas van por 0,675;
+ * el trazo y los guiones viven en el viewBox y se escalan solos.
+ */
+
+$escala: 0.675;
+$morado: #684595;
+
 .Dia68 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #131320;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 26px;
-  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+  background: $morado;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
 
-  .Dia68-onda {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    height: 64px;
+  .Dia68-microfono {
+    position: absolute;
+    top: 150px * $escala;
+    left: 150px * $escala;
+    width: 100px * $escala;
+    height: 100px * $escala;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
   }
 
-  .Dia68-barra {
-    width: 3px;
-    height: 5px;
-    border-radius: 2px;
-    background: #33344a;
-    transition: background-color 0.3s;
+  .Dia68-aro {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 3;
+    stroke-linecap: round;
+    transform-origin: 50% 50%;
   }
 
-  .Dia68-boton {
-    width: 66px;
-    height: 66px;
-    padding: 0;
-    border: 3px solid #33344a;
-    border-radius: 50%;
-    background: transparent;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: border-color 0.3s;
-  }
-
-  /* El círculo se convierte en cuadrado al grabar: es el gesto universal de
-     grabar/detener, y se consigue solo con border-radius y escala. */
   .Dia68-icono {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: #ef4444;
-    transition:
-      border-radius 0.3s cubic-bezier(0.65, 0, 0.35, 1),
-      transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+    position: absolute;
+    top: 16px * $escala;
+    left: 38px * $escala;
+    width: 24px * $escala;
+    height: 66px * $escala;
   }
 
-  .Dia68-estado {
-    margin: 0;
-    color: #6b6d8c;
-    font-size: 12px;
-    letter-spacing: 1px;
-    transition: color 0.3s;
+  .Dia68-cuerpo {
+    position: relative;
+    width: 24px * $escala;
+    height: 52px * $escala;
+    border-radius: 12px * $escala;
+    background: #fff;
+  }
+
+  /* El hueco del color del fondo: la rejilla del micrófono. */
+  .Dia68-hueco {
+    position: relative;
+    top: 7px * $escala;
+    left: 9px * $escala;
+    width: 6px * $escala;
+    height: 16px * $escala;
+    border-radius: 3px * $escala;
+    background: $morado;
+  }
+
+  .Dia68-pie-v {
+    position: absolute;
+    top: 51px * $escala;
+    left: 10px * $escala;
+    width: 4px * $escala;
+    height: 15px * $escala;
+    background: #fff;
+  }
+
+  .Dia68-pie-h {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 24px * $escala;
+    height: 4px * $escala;
+    border-radius: 2px * $escala;
+    background: #fff;
+  }
+
+  .Dia68-puntos {
+    position: absolute;
+    top: 45px * $escala;
+    left: 25px * $escala;
+    width: 50px * $escala;
+    height: 10px * $escala;
+    opacity: 0;
+  }
+
+  .Dia68-punto {
+    float: left;
+    width: 10px * $escala;
+    height: 10px * $escala;
+    border-radius: 50%;
+    background: #fff;
+
+    &.p2 {
+      margin: 0 10px * $escala;
+    }
   }
 
   &.grabando {
-    .Dia68-barra {
-      background: #ef4444;
-      animation: Dia68Pulso ease-in-out infinite alternate;
-    }
-
-    .Dia68-boton {
-      border-color: #ef4444;
-      animation: Dia68Halo 1.6s ease-out infinite;
+    .Dia68-aro {
+      animation: Dia68Aro 5s linear infinite;
     }
 
     .Dia68-icono {
-      border-radius: 6px;
-      transform: scale(0.62);
+      animation: Dia68Icono 0.7s ease-in-out both;
     }
 
-    .Dia68-estado {
-      color: #ef4444;
+    .Dia68-puntos {
+      animation: Dia68Puntos 1s ease-in-out both;
+    }
+
+    .Dia68-punto.p1 {
+      animation: Dia68Punto 1s ease-in-out infinite;
+    }
+
+    .Dia68-punto.p2 {
+      animation: Dia68Punto 1s ease-in-out -0.2s infinite;
+    }
+
+    .Dia68-punto.p3 {
+      animation: Dia68Punto 1s ease-in-out -0.4s infinite;
     }
   }
 }
 
-@keyframes Dia68Pulso {
-  from {
-    height: 5px;
-  }
-  to {
-    height: 58px;
-  }
-}
-
-@keyframes Dia68Halo {
+/* 296 es 2π·47: el perímetro exacto. Medio lleno, medio vacío, y a girar. */
+@keyframes Dia68Aro {
   0% {
-    box-shadow: 0 0 0 0 rgb(239 68 68 / 40%);
+    stroke-dasharray: 296, 296;
+    stroke-dashoffset: 0;
+    transform: rotate(0deg);
   }
   100% {
-    box-shadow: 0 0 0 18px rgb(239 68 68 / 0%);
+    stroke-dasharray: 296, 296;
+    stroke-dashoffset: -592;
+    transform: rotate(360deg);
   }
 }
+
+@keyframes Dia68Icono {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* Los puntos esperan al 60 % del ciclo: hasta que el micro se ha ido. */
+@keyframes Dia68Puntos {
+  0%,
+  60% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes Dia68Punto {
+  0% {
+    transform: translateY(5px * $escala);
+  }
+  50% {
+    transform: translateY(-5px * $escala);
+  }
+  100% {
+    transform: translateY(5px * $escala);
+  }
+}
+

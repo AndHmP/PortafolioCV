@@ -1,49 +1,178 @@
 /*
- * No es una esfera real: son 18 aros planos girados cada uno 10° sobre el eje
- * vertical. Al superponerse, el ojo completa el volumen. Es el mismo truco de
- * los globos de alambre.
+ * Día 58 — 3D Sphere.
+ *
+ * Medidas del pen de referencia, sobre 400×400: caja de 200 con perspectiva de
+ * 350. Aquí el lienzo mide 270, así que todo va multiplicado por 0,675.
+ *
+ * Los anchos y las alturas de cada rodaja salen de la fórmula del pen, así que
+ * el bucle los genera en vez de traer 19 bloques a mano.
  */
 
-$anillos: 18;
+@use 'sass:math';
+
+$escala: 0.675;
+$rojo: #d33526;
+
+@function ancho($k) {
+  @return (200px - 2 * $k * $k) * $escala;
+}
+
+@function altura($k) {
+  @return (14.5px * $k - math.div($k * ($k - 1), 2) * 1px) * $escala;
+}
 
 .Dia58 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #0b0b15;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 800px;
+  overflow: hidden;
+  background: $rojo;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia58-esfera {
-    position: relative;
-    width: 160px;
-    height: 160px;
-    transform-style: preserve-3d;
-    animation: Dia58Girar 18s linear infinite;
+  .Dia58-centro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    perspective: 350px * $escala;
   }
 
-  .Dia58-anillo {
-    position: absolute;
-    inset: 0;
-    border: 1px solid;
-    border-radius: 50%;
+  .Dia58-forma {
+    width: 200px * $escala;
+    height: 200px * $escala;
+    transform-style: preserve-3d;
+    transform: rotateX(-25deg);
+    transition: 1s ease-in-out;
 
-    @for $i from 0 through $anillos - 1 {
-      &.a#{$i} {
-        transform: rotateY($i * (180deg / $anillos));
-        border-color: hsla(190deg + $i * 6, 90%, 62%, 0.55);
-      }
+    /* Al pasar el ratón la esfera se mira desde el otro lado. */
+    &:hover {
+      transform: rotateX(25deg);
+    }
+  }
+
+  .Dia58-rodaja {
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px * $escala solid $rojo;
+    background: #fff;
+    opacity: 1;
+    transition: 1s ease-in-out;
+  }
+
+  /* El ecuador no viaja: aparece de golpe con un pequeño rebote de escala. */
+  .ecuador {
+    top: 0;
+    left: 0;
+    width: 200px * $escala;
+    height: 200px * $escala;
+    transform: rotateX(90deg);
+    animation: Dia58Ecuador 6s ease-in-out infinite;
+  }
+
+  @for $k from 1 through 9 {
+    .Dia58-rodaja.r#{$k},
+    .Dia58-rodaja.r#{$k + 9} {
+      top: ($k * $k) * 1px * $escala;
+      left: ($k * $k) * 1px * $escala;
+      width: ancho($k);
+      height: ancho($k);
+    }
+
+    .Dia58-rodaja.r#{$k} {
+      transform: translateY(altura($k)) rotateX(90deg);
+      animation: Dia58Subir#{$k} 6s ease-in-out infinite;
+    }
+
+    .Dia58-rodaja.r#{$k + 9} {
+      transform: translateY(-#{altura($k)}) rotateX(90deg);
+      animation: Dia58Bajar#{$k} 6s ease-in-out infinite;
     }
   }
 }
 
-@keyframes Dia58Girar {
-  from {
-    transform: rotateX(-18deg) rotateY(0deg);
+/* El mismo vuelo para las dieciocho: sale del centro, se pasa 4k, corrige
+   restando la mitad cada vez, se asienta y al final vuelve. */
+@mixin Dia58Vuelo($k, $signo) {
+  $y: altura($k) * $signo;
+  $d: 4px * $k * $escala * $signo;
+
+  0%,
+  19% {
+    transform: translateY(0) rotateX(90deg);
+    opacity: 0;
   }
-  to {
-    transform: rotateX(-18deg) rotateY(360deg);
+  20% {
+    transform: translateY(0) rotateX(90deg);
+    opacity: 1;
+    border-color: #fff;
+  }
+  30% {
+    transform: translateY($y + $d) rotateX(90deg);
+    border-color: $rojo;
+  }
+  35% {
+    transform: translateY($y - $d * 0.5) rotateX(90deg);
+  }
+  40% {
+    transform: translateY($y + $d * 0.25) rotateX(90deg);
+  }
+  45% {
+    transform: translateY($y - $d * 0.125) rotateX(90deg);
+  }
+  50%,
+  65% {
+    transform: translateY($y) rotateX(90deg);
+  }
+  70% {
+    transform: translateY($y + $d) rotateX(90deg);
+    border-color: $rojo;
+  }
+  80% {
+    transform: translateY(0) rotateX(90deg);
+    opacity: 1;
+    border-color: #fff;
+  }
+  81%,
+  100% {
+    transform: translateY(0) rotateX(90deg);
+    opacity: 0;
   }
 }
+
+@for $k from 1 through 9 {
+  @keyframes Dia58Subir#{$k} {
+    @include Dia58Vuelo($k, 1);
+  }
+
+  @keyframes Dia58Bajar#{$k} {
+    @include Dia58Vuelo($k, -1);
+  }
+}
+
+@keyframes Dia58Ecuador {
+  0% {
+    transform: rotateX(90deg) scale(0);
+  }
+  10% {
+    transform: rotateX(90deg) scale(1.2);
+  }
+  15% {
+    transform: rotateX(90deg) scale(0.9);
+  }
+  20%,
+  75% {
+    transform: rotateX(90deg) scale(1);
+  }
+  80% {
+    transform: rotateX(90deg) scale(1.2);
+  }
+  90%,
+  100% {
+    transform: rotateX(90deg) scale(0);
+  }
+}
+

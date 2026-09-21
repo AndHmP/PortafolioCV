@@ -1,37 +1,79 @@
 /**
- * Ola decorativa del encabezado del perfil, heredada del diseño original.
+ * Ola del encabezado del perfil.
  *
- * Cambió su papel. Antes era un fondo irregular con la foto y el nombre
- * posicionados encima mediante `translateX` en píxeles fijos: el texto blanco
- * caía sobre los huecos claros de la ola y se volvía ilegible, y el
- * `min-width: 1300px` del contenedor rompía la página en pantallas pequeñas.
+ * Es el borde inferior de la banda oscura: un único trazo sólido del mismo
+ * color, sin capas ni transparencias. El contenido va sobre la banda, donde el
+ * contraste está garantizado, y la ola solo marca la transición hacia el resto
+ * de la página.
  *
- * Ahora es el borde inferior de una banda sólida. El contenido va sobre la
- * banda, donde el contraste está garantizado, y la ola solo marca la
- * transición hacia el resto de la página.
+ * El perfil no es una sinusoide repetida —se notaba el patrón— sino la suma de
+ * tres ondas de distinto periodo, amplitud y fase. Como los tres periodos
+ * dividen el ancho del mosaico, la suma vale lo mismo en los extremos y el
+ * dibujo encaja consigo mismo; pero por el camino no se repite, así que el
+ * borde parece irregular.
+ *
+ * Se dibuja el doble del mosaico y se arrastra exactamente un mosaico: al
+ * terminar coincide con el principio y el bucle no se ve. El movimiento es
+ * lento a propósito; es un fondo, no un reclamo.
+ *
+ * La animación se detiene sola con `prefers-reduced-motion`, cubierto en
+ * `global.css`.
  */
+
+/** Ancho del mosaico. Se dibuja el doble y se arrastra justo esta distancia. */
+const MOSAICO = 1440;
+const ALTO = 140;
+/** Un punto cada 12 unidades: a este tamaño el trazo ya se ve continuo. */
+const PASO = 12;
+/**
+ * Línea base de la ola dentro del `viewBox`.
+ *
+ * La onda oscila como mucho la suma de las amplitudes, así que BASE tiene que
+ * ser mayor que esa suma y BASE + suma no puede pasar de ALTO. Si se incumple,
+ * la cresta o el valle se recortan contra el borde y aparece un tramo recto
+ * que se ve como una costura.
+ */
+const BASE = 60;
+
+/** Periodos divisores de MOSAICO, para que el mosaico cierre sin costura. */
+const ARMONICOS = [
+  { periodo: 1440, amplitud: 26, fase: 0.12 },
+  { periodo: 720, amplitud: 17, fase: 0.58 },
+  { periodo: 480, amplitud: 9, fase: 0.31 },
+];
+
+const SUMA = ARMONICOS.reduce((t, a) => t + a.amplitud, 0);
+if (SUMA > BASE || BASE + SUMA > ALTO) {
+  throw new Error(`Dia de olas: la onda se saldría del viewBox (suma ${SUMA}, base ${BASE}).`);
+}
+
+function perfil() {
+  const puntos: string[] = [];
+  for (let x = 0; x <= MOSAICO * 2; x += PASO) {
+    const y = ARMONICOS.reduce(
+      (suma, a) => suma + a.amplitud * Math.sin(2 * Math.PI * (x / a.periodo + a.fase)),
+      BASE,
+    );
+    puntos.push(`${x},${y.toFixed(2)}`);
+  }
+  return `M${puntos.join('L')}L${MOSAICO * 2},0L0,0Z`;
+}
+
 export default function OlaPerfil() {
   return (
     <svg
-      viewBox="0 0 1109.91 177.07"
+      viewBox={`0 0 ${MOSAICO} ${ALTO}`}
       preserveAspectRatio="none"
       className="h-full w-full fill-[var(--color-texto)]"
       aria-hidden="true"
       focusable="false"
     >
-      <path
-        d="M503.55,81.23c-6.62,2.22-13.24,4.74-19.85,7.62a235.68,235.68,0,0,1-32.36,11.29c-38.74,10.52-123,11.17-155-36,0,0,28,84.09,112.81,92.81,25.62,2.63,58.2-4.44,81.26-15.89,12-6,13.35-5.93,19.85-9.7a74.87,74.87,0,0,1-6.68-50.15Z"
-        transform="translate(-171.63 0.14)"
-      />
-      <path
-        d="M651.38,102.87c38.48,3.6,82.15,15.54,130.62,40-26.65-22.79-75-52-133.14-66A75,75,0,0,1,651.63,97C651.63,99,651.53,100.93,651.38,102.87Z"
-        transform="translate(-171.63 0.14)"
-      />
-      <path d="M1266,0h15.55C1276.24-.19,1271.06-.18,1266,0Z" transform="translate(-171.63 0.14)" />
-      <path
-        d="M1266,0H171.63c76.58,0,106.71,30.15,115.94,42.71,1.11,1.85,2.25,3.65,3.41,5.38h0c57.94,86.42,186,32.11,186,32.11,8.69-3,18.61-6.54,29.76-9.83a74.88,74.88,0,0,1,138.66-3.22C685.63,77.38,731.73,98.41,784,137c87.71,64.76,189.34,36.92,247.9,12.53A140.5,140.5,0,0,0,1065.11,130a226.62,226.62,0,0,0,32.74-31.78h0v0a204,204,0,0,0,16.52-22.66C1138.16,47.4,1187.93,2.73,1266,0Z"
-        transform="translate(-171.63 0.14)"
-      />
+      <g className="ola-perfil">
+        <path d={perfil()} />
+      </g>
     </svg>
   );
 }
+
+
+

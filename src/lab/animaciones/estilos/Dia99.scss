@@ -1,68 +1,107 @@
 /*
- * Un solo elemento: lo que cambia es `border-radius` y el giro. La curva
- * con rebote (valores fuera del rango 0-1) es lo que convierte una
- * transición correcta en un momento de alegría.
+ * Día 99 — Ripple.
+ *
+ * Medidas del pen de referencia, sobre 400×400: fondo de 600 en −100,−100, aro
+ * de 150 en 125,125, rayas de 4×26 a 120 px del centro y punto de 30 en
+ * 185,185. Aquí el lienzo mide 270, así que todo va multiplicado por 0,675 —el
+ * giro de las rayas lo pone el componente, ya escalado a 81 px.
  */
 
+$escala: 0.675;
+
 .Dia99 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #12121e;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
+  overflow: hidden;
+  background: #27ae60;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
 
-  .Dia99-figura {
-    width: 120px;
-    height: 120px;
-    padding: 0;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* Más grande que el lienzo: al crecer desde el centro, lo cubre entero. */
+  .Dia99-fondo {
+    position: absolute;
+    top: -100px * $escala;
+    left: -100px * $escala;
+    width: 600px * $escala;
+    height: 600px * $escala;
+    border-radius: 50%;
+    background: #2ecc71;
+    transform: scale(0);
+    transition: 0.6s ease-in-out;
+  }
+
+  .Dia99-punto {
+    position: absolute;
+    top: 185px * $escala;
+    left: 185px * $escala;
+    width: 30px * $escala;
+    height: 30px * $escala;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 1px 2px 4px rgb(0 0 0 / 20%);
+    transition: 0.6s ease-in-out;
+  }
+
+  .Dia99-aro {
+    box-sizing: border-box;
+    position: absolute;
+    top: 125px * $escala;
+    left: 125px * $escala;
+    width: 150px * $escala;
+    height: 150px * $escala;
+    border: 5px * $escala solid #fff;
+    border-radius: 50%;
+    transform: scale(0);
     transition:
-      border-radius 0.55s cubic-bezier(0.68, -0.6, 0.27, 1.6),
-      transform 0.55s cubic-bezier(0.68, -0.6, 0.27, 1.6),
-      background 0.55s;
-
-    &.circulo {
-      border-radius: 50%;
-      background: linear-gradient(140deg, #ff9a8b, #ff6a88);
-      transform: rotate(0deg);
-    }
-
-    &.cuadrado {
-      border-radius: 18px;
-      background: linear-gradient(140deg, #43e97b, #38f9d7);
-      transform: rotate(135deg);
-    }
+      transform 0.6s ease-in,
+      opacity 0.3s ease-in;
   }
 
-  .Dia99-interior {
-    width: 42px;
-    height: 42px;
-    background: rgb(255 255 255 / 85%);
-    transition: border-radius 0.55s cubic-bezier(0.68, -0.6, 0.27, 1.6);
-
-    .Dia99-figura.circulo & {
-      border-radius: 12px;
-    }
-
-    .Dia99-figura.cuadrado & {
-      border-radius: 50%;
-    }
+  .Dia99-rayas {
+    position: absolute;
+    top: 50px * $escala;
+    left: 50px * $escala;
+    width: 300px * $escala;
+    height: 300px * $escala;
+    transform: scale(0);
+    transition:
+      transform 0.6s ease-in,
+      opacity 0.3s ease-in;
   }
 
-  .Dia99-etiqueta {
-    margin: 0;
-    color: #55566f;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
+  .Dia99-raya {
+    position: absolute;
+    top: 137px * $escala;
+    left: 148px * $escala;
+    width: 4px * $escala;
+    height: 26px * $escala;
+    background: #fff;
+  }
+
+  &.activo {
+    .Dia99-fondo {
+      transform: scale(1);
+    }
+
+    /* Se expanden y se apagan a destiempo: primero crecen, luego desaparecen. */
+    .Dia99-aro,
+    .Dia99-rayas {
+      opacity: 0;
+      transform: scale(1);
+      transition:
+        transform 0.6s ease-out,
+        opacity 0.3s ease-out 0.3s;
+    }
+
+    .Dia99-punto {
+      border-radius: 0;
+      transform: rotate(180deg) scale(1.1);
+      box-shadow: -4px -8px 16px rgb(0 0 0 / 20%);
+    }
   }
 }
+

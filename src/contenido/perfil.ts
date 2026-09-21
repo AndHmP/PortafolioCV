@@ -27,8 +27,8 @@ export const especialidad: Texto = {
 };
 
 export const titular: Texto = {
-  es: 'Construyo plataformas web en producción con React y TypeScript, y las APIs que las sostienen con Python y FastAPI.',
-  en: 'I build production web platforms with React and TypeScript, and the APIs that back them with Python and FastAPI.',
+  es: 'Profesional Técnico titulado en Ingeniería de Software con IA. Construyo plataformas web en producción con React y TypeScript, y las APIs que las sostienen con Python y FastAPI.',
+  en: 'Certified Technical Professional in Software Engineering with AI. I build production web platforms with React and TypeScript, and the APIs that back them with Python and FastAPI.',
 };
 
 export const ubicacion: Texto = {
@@ -37,8 +37,8 @@ export const ubicacion: Texto = {
 };
 
 export const sobreMi: Texto = {
-  es: 'Desarrollador Full Stack con 3 años de experiencia, enfocado en frontend con React y TypeScript y con base sólida en backend con Python y FastAPI. He trabajado en plataformas web en producción bajo arquitecturas de microfrontends y microservicios, con pruebas unitarias, bases de datos SQL Server, desarrollo móvil Android nativo con Java y despliegue de contenedores con Docker y NGINX. Me especializo en construir interfaces responsivas y mantenibles centradas en la experiencia de usuario.',
-  en: 'Full Stack developer with 3 years of experience, focused on the frontend with React and TypeScript and with a solid backend foundation in Python and FastAPI. I have worked on production web platforms under microfrontend and microservice architectures, with unit testing, SQL Server databases, native Android development in Java, and container deployment with Docker and NGINX. I specialise in building responsive, maintainable interfaces centred on the user experience.',
+  es: 'Profesional Técnico titulado en Ingeniería de Software con Inteligencia Artificial (SENATI) y desarrollador Full Stack con 3 años de experiencia, enfocado en frontend con React y TypeScript y con base sólida en backend con Python y FastAPI. He trabajado en plataformas web en producción bajo arquitecturas de microfrontends y microservicios, con pruebas unitarias, bases de datos SQL Server, desarrollo móvil Android nativo con Java y despliegue de contenedores con Docker y NGINX. Me especializo en construir interfaces responsivas y mantenibles centradas en la experiencia de usuario.',
+  en: 'Certified Technical Professional in Software Engineering with Artificial Intelligence (SENATI) and Full Stack developer with 3 years of experience, focused on the frontend with React and TypeScript and with a solid backend foundation in Python and FastAPI. I have worked on production web platforms under microfrontend and microservice architectures, with unit testing, SQL Server databases, native Android development in Java, and container deployment with Docker and NGINX. I specialise in building responsive, maintainable interfaces centred on the user experience.',
 };
 
 export const contacto: DatoContacto[] = [
@@ -83,19 +83,36 @@ export const RUTA_CV = '/CV_Anderson_Huamancaja_Porras.pdf';
 export const formacion: Formacion[] = [
   {
     clave: 'senati',
-    institucion: 'SENATI',
+    institucion: 'SENATI — Centro de Formación Profesional Independencia',
     titulo: {
-      es: 'Carrera Técnica: Ingeniería de Software con Inteligencia Artificial',
-      en: 'Technical Degree: Software Engineering with Artificial Intelligence',
+      es: 'Título Profesional Técnico en Ingeniería de Software con Inteligencia Artificial',
+      en: 'Professional Technical Degree in Software Engineering with Artificial Intelligence',
     },
-    periodo: { es: '2022 — 2024 · Lima, Perú', en: '2022 — 2024 · Lima, Peru' },
+    periodo: {
+      es: '2022 — 2024 · Titulado en septiembre de 2026 · Lima, Perú',
+      en: '2022 — 2024 · Graduated September 2026 · Lima, Peru',
+    },
     descripcion: {
-      es: 'Formación técnica en desarrollo de software: programación orientada a objetos, bases de datos relacionales, arquitectura de aplicaciones y fundamentos de inteligencia artificial.',
-      en: 'Technical training in software development: object-oriented programming, relational databases, application architecture and AI fundamentals.',
+      es: 'Formación técnica en desarrollo de software: programación orientada a objetos, bases de datos relacionales, arquitectura de aplicaciones y fundamentos de inteligencia artificial. Título conferido por la Dirección Nacional de SENATI, Dirección Zonal Lima-Callao, bajo la Ley 29672.',
+      en: 'Technical training in software development: object-oriented programming, relational databases, application architecture and AI fundamentals. Degree conferred by the National Directorate of SENATI, Lima-Callao Zonal Directorate, under Law 29672.',
     },
     icono: 'senati',
+    estado: 'titulado',
+    /* Solo la resolución directoral: es el dato con el que la institución
+       verifica el título. El DNI que figura en el diploma no se publica. */
+    credencial: {
+      es: 'R.D. N.º RD-482143-2026 · Modalidad Regular',
+      en: 'Resolution No. RD-482143-2026 · Regular programme',
+    },
+    expedido: '2026-09-13',
   },
 ];
+
+/**
+ * Distintivo de titulación para la portada. Se deriva de `formacion` en vez de
+ * repetirse a mano, para que no queden dos versiones del mismo dato.
+ */
+export const titulacion = formacion.find((etapa) => etapa.estado === 'titulado');
 
 export const idiomas: Idiomahablado[] = [
   {

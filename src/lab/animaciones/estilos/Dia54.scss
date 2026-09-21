@@ -1,72 +1,120 @@
 /*
- * Cada ola es un óvalo enorme, mucho más ancho que el lienzo, girando muy
- * despacio. Al recortarlo por abajo solo se ve su borde superior, y el giro
- * lo convierte en un oleaje continuo sin dibujar una sola curva a mano.
+ * Día 54 — Waves.
+ *
+ * Medidas del pen de referencia, sobre 400×400: franjas de 500×150 en left −50
+ * con diez círculos de 50. Aquí el lienzo mide 270, así que todo va
+ * multiplicado por 0,675 — el ancho de sobra también, que es el margen del que
+ * tira el vaivén.
  */
+
+$escala: 0.675;
+$noche: #263a4d;
+$fondo: #406384;
+$medio: #5d90bf;
+$frente: #7eb3e6;
 
 .Dia54 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: linear-gradient(180deg, #0b1a3a 0%, #123a63 55%, #1b5f7a 100%);
   overflow: hidden;
-
-  .Dia54-luna {
-    position: absolute;
-    top: 34px;
-    right: 44px;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: #fdf4dc;
-    box-shadow: 0 0 34px 10px rgb(253 244 220 / 35%);
-  }
-
-  .Dia54-mar {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 52%;
-  }
+  background: $noche;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
   .Dia54-ola {
     position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 620px;
-    height: 620px;
-    margin-left: -310px;
-    border-radius: 43%;
-    animation: Dia54Girar linear infinite;
+    left: -50px * $escala;
+    width: 500px * $escala;
+    height: 150px * $escala;
+    background: #fff;
+  }
 
-    &.o1 {
-      background: rgb(41 182 246 / 45%);
-      animation-duration: 12s;
-      bottom: -540px;
+  .Dia54-circulo {
+    position: relative;
+    float: left;
+    top: -24px * $escala;
+    width: 50px * $escala;
+    height: 50px * $escala;
+    border-radius: 50%;
+
+    /* Los pares 2 px más abajo: el festón deja de ser simétrico. */
+    &:nth-child(2n + 2) {
+      top: -26px * $escala;
+    }
+  }
+
+  .fondo {
+    top: 225px * $escala;
+    background: $fondo;
+    animation: Dia54Fondo 4s ease-in-out infinite alternate;
+
+    .Dia54-circulo {
+      background: $fondo;
     }
 
-    &.o2 {
-      background: rgb(3 105 161 / 55%);
-      animation-duration: 17s;
-      animation-direction: reverse;
-      bottom: -556px;
+    /* Del color del cielo: ahí la ola está hueca. */
+    .Dia54-circulo:nth-child(2n + 2) {
+      background: $noche;
+    }
+  }
+
+  .medio {
+    top: 280px * $escala;
+    background: $medio;
+    animation: Dia54Medio 4s ease-in-out infinite alternate;
+
+    .Dia54-circulo {
+      background: $medio;
     }
 
-    &.o3 {
-      background: rgb(8 47 73 / 75%);
-      animation-duration: 23s;
-      bottom: -572px;
+    .Dia54-circulo:nth-child(2n + 2) {
+      background: $fondo;
+    }
+  }
+
+  .frente {
+    top: 335px * $escala;
+    background: $frente;
+    animation: Dia54Frente 4s ease-in-out infinite alternate;
+
+    .Dia54-circulo {
+      background: $frente;
+    }
+
+    .Dia54-circulo:nth-child(2n + 2) {
+      background: $medio;
     }
   }
 }
 
-@keyframes Dia54Girar {
-  from {
-    transform: rotate(0deg);
+@keyframes Dia54Fondo {
+  0% {
+    transform: translate3d(-20px * $escala, 0, 0);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: translate3d(20px * $escala, 0, 0);
   }
 }
+
+/* La del medio va al revés que las otras dos. */
+@keyframes Dia54Medio {
+  0% {
+    transform: translate3d(10px * $escala, 0, 0);
+  }
+  100% {
+    transform: translate3d(-10px * $escala, 0, 0);
+  }
+}
+
+@keyframes Dia54Frente {
+  0% {
+    transform: translate3d(-50px * $escala, 0, 0);
+  }
+  100% {
+    transform: translate3d(50px * $escala, 0, 0);
+  }
+}
+

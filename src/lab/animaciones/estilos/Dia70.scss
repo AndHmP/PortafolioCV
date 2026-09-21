@@ -1,83 +1,53 @@
 /*
- * La "profundidad" es el punto del reto: el día sin elegir está hundido
- * (sombra interior), y al elegirlo sale hacia el usuario con sombra exterior.
- * El recorrido entre ambos estados es lo que sustituye al feedback háptico.
+ * Día 70 — Calendar Days.
+ *
+ * Medidas del pen de referencia, sobre 400×400: cuatro cuadrados de 200 que
+ * llenan el lienzo. Aquí mide 270, así que la rejilla va en `grid` de dos
+ * columnas iguales —como en el 40 y el 47— para que no se caiga una por
+ * redondeo, y las tipografías van por 0,675.
  */
 
+$escala: 0.675;
+
 .Dia70 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #e8eaf2;
-  padding: 18px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+  background: #512626;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia70-mes {
-    margin: 0;
-    color: #3d4160;
-    font-size: 14px;
-    font-weight: 600;
+  .Dia70-tarjeta {
+    box-sizing: border-box;
+    position: relative;
+    padding-top: 55px * $escala;
+    background: #e27474;
     text-align: center;
-  }
-
-  .Dia70-cabecera {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-
-    span {
-      color: #9498b5;
-      font-size: 9.5px;
-      text-align: center;
-      text-transform: uppercase;
-    }
-  }
-
-  .Dia70-rejilla {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-  }
-
-  .Dia70-dia {
-    aspect-ratio: 1;
-    border: none;
-    border-radius: 8px;
-    background: #e8eaf2;
-    color: #5b6080;
-    font-family: inherit;
-    font-size: 11px;
     cursor: pointer;
-    /* Neumorfismo: la doble sombra opuesta simula el relieve. */
-    box-shadow:
-      inset 2px 2px 5px rgb(163 168 190 / 55%),
-      inset -2px -2px 5px rgb(255 255 255 / 90%);
-    transition:
-      box-shadow 0.28s cubic-bezier(0.65, 0, 0.35, 1),
-      color 0.28s,
-      transform 0.28s cubic-bezier(0.65, 0, 0.35, 1);
+    transition: 0.3s ease-in-out;
 
     &:hover {
-      color: #5f6bff;
-    }
-
-    &.elegido {
-      color: #fff;
-      background: #5f6bff;
-      transform: translateY(-2px);
-      box-shadow:
-        4px 4px 10px rgb(95 107 255 / 40%),
-        -2px -2px 6px rgb(255 255 255 / 80%);
-    }
-
-    &:active {
-      transform: translateY(0);
-      box-shadow:
-        inset 3px 3px 6px rgb(163 168 190 / 65%),
-        inset -3px -3px 6px rgb(255 255 255 / 85%);
+      transform: scale(0.95);
+      box-shadow: inset 2px 2px 4px 1px rgb(0 0 0 / 25%);
     }
   }
+
+  .Dia70-texto {
+    display: block;
+    font-size: 16px * $escala;
+    line-height: 120%;
+    font-weight: 400;
+  }
+
+  .Dia70-numero {
+    display: block;
+    font-size: 60px * $escala;
+    line-height: 100%;
+    font-weight: 700;
+  }
 }
+

@@ -3,35 +3,38 @@ import { useState } from 'react';
 import './estilos/Dia66.scss';
 
 /* Día 66 — Sparkle Checkbox
-   "Parece corriente, pero haz clic para llevarte una sorpresa." */
+   "Una casilla que celebra que la marques."
 
-const CHISPAS = 12;
+   La casilla es un aro, no un cuadro: al marcarla el borde pasa de 2 a 14 px
+   —la mitad del radio— y el hueco se cierra hasta quedar un disco verde.
+
+   Las doce chispas son barritas repartidas cada 30°. En reposo están pegadas al
+   centro y con `scaleY(0)`, y sin transición: por eso vuelven de golpe. Al
+   marcar salen disparadas a 50 px y se desvanecen ya con transición de 0,5 s,
+   que es lo que hace que el gesto solo se vea de ida. */
+
+const CHISPAS = Array.from({ length: 12 }, (_, i) => i + 1);
 
 export default function Dia66() {
   const [marcado, setMarcado] = useState(false);
 
   return (
     <div className="Dia66">
-      <button
-        type="button"
-        role="checkbox"
-        aria-checked={marcado}
-        className={`Dia66-caja ${marcado ? 'marcado' : ''}`}
-        onClick={() => setMarcado((v) => !v)}
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M4 12.5 9.5 18 20 6.5" />
-        </svg>
-
-        {/* Las chispas solo existen mientras está marcado: al desmarcar se
-            desmontan y la animación queda lista para volver a dispararse. */}
-        {marcado &&
-          Array.from({ length: CHISPAS }, (_, i) => (
-            <span key={i} className={`Dia66-chispa c${i}`} />
+      <div className={`Dia66-casilla ${marcado ? 'marcada' : ''}`}>
+        <input
+          type="checkbox"
+          checked={marcado}
+          onChange={() => setMarcado((v) => !v)}
+          aria-label="Marcar"
+        />
+        <div className="Dia66-aro" onClick={() => setMarcado((v) => !v)} />
+        <div className="Dia66-chispas">
+          {CHISPAS.map((n) => (
+            <div key={n} className={`Dia66-chispa ch${n}`} />
           ))}
-      </button>
-
-      <p className="Dia66-texto">{marcado ? '¡Listo!' : 'Marcar tarea'}</p>
+        </div>
+      </div>
     </div>
   );
 }
+

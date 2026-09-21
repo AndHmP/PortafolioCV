@@ -1,151 +1,142 @@
+/*
+ * Día 28 — Ring Ring.
+ *
+ * Medidas tomadas del pen de referencia del reto, que dibuja sobre un lienzo
+ * de 400×400: campana de 48,5×53 centrada, seis arcos de 14×60 con su centro a
+ * 37 del eje, que se alejan 60 creciendo al doble. Aquí el lienzo mide 270, así
+ * que todo va multiplicado por 0,675.
+ */
+
+$fondo: #dd3c54;
+
 .Dia28 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: radial-gradient(circle at 50% 40%, #34344a, #1e1e2c 70%);
+  background: $fondo;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 
-  /* El temblor completo se aplica al conjunto para que campanas, cuerpo y
-     patas se muevan como una sola pieza. */
-  .Dia28-reloj {
-    position: relative;
-    width: 120px;
-    height: 130px;
-    animation: Dia28Temblor 0.6s infinite;
+  /* Tres arcos por lado, no una onda que se expande: cada uno sale del borde
+     de la campana, se aleja en horizontal y se apaga. Van escalonados, así que
+     siempre hay varios en vuelo y queda un silencio al final del ciclo. */
+  .Dia28-onda {
+    position: absolute;
+    top: 50%;
+    width: 9.5px;
+    height: 40.5px;
+    margin-top: -20.25px;
+    /* Sin fotogramas aplicados todavía: el retardo de cada arco lo mantiene
+       oculto hasta que le toca salir. */
+    opacity: 0;
+    animation: Dia28Onda 2.5s ease-out infinite;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    path {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    &.der {
+      left: 50%;
+      margin-left: 20.25px;
+      --sentido: 1;
+    }
+
+    &.izq {
+      right: 50%;
+      margin-right: 20.25px;
+      --sentido: -1;
+
+      svg {
+        transform: scaleX(-1);
+      }
+    }
+
+    /* El retardo va por clase y no por posición: los seis arcos son hermanos,
+       así que contar hijos desfasaría el segundo lado. */
+    &.tarda-1 {
+      animation-delay: 0.5s;
+    }
+
+    &.tarda-2 {
+      animation-delay: 1s;
+    }
   }
 
   .Dia28-campana {
-    position: absolute;
-    top: 0;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: linear-gradient(160deg, #ff7a7a, #e63946);
-
-    &.izq {
-      left: 2px;
-      transform: rotate(-18deg);
-    }
-
-    &.der {
-      right: 2px;
-      transform: rotate(18deg);
-    }
-  }
-
-  .Dia28-martillo {
-    position: absolute;
-    top: 6px;
-    left: 50%;
-    width: 34px;
-    height: 8px;
-    margin-left: -17px;
-    border-radius: 4px;
-    background: #b8bad0;
-  }
-
-  .Dia28-cuerpo {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    width: 100px;
-    height: 100px;
-    margin-left: -50px;
-    border-radius: 50%;
-    background: linear-gradient(160deg, #ff7a7a, #e63946);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* El halo rojo pulsa al mismo compás que el temblor. */
-    animation: Dia28Halo 0.6s infinite;
-  }
-
-  .Dia28-esfera {
     position: relative;
-    width: 76px;
-    height: 76px;
-    border-radius: 50%;
-    background: #fdf6f6;
-  }
+    width: 33px;
+    height: 36px;
+    color: #fff;
+    /* Cuelga del pomo, como una campana de verdad. */
+    transform-origin: 50% 0;
+    animation: Dia28Balanceo 2.5s ease infinite;
 
-  .Dia28-aguja {
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
-    transform-origin: bottom center;
-    background: #2b2b3a;
-    border-radius: 2px;
-
-    &.hora {
-      width: 4px;
-      height: 20px;
-      margin-left: -2px;
-      transform: rotate(-40deg);
-    }
-
-    &.minuto {
-      width: 3px;
-      height: 28px;
-      margin-left: -1.5px;
-      transform: rotate(80deg);
-    }
-  }
-
-  .Dia28-centro {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 8px;
-    height: 8px;
-    margin: -4px 0 0 -4px;
-    border-radius: 50%;
-    background: #e63946;
-  }
-
-  .Dia28-pata {
-    position: absolute;
-    bottom: 0;
-    width: 10px;
-    height: 22px;
-    border-radius: 3px;
-    background: #b8bad0;
-
-    &.izq {
-      left: 22px;
-      transform: rotate(20deg);
-    }
-
-    &.der {
-      right: 22px;
-      transform: rotate(-20deg);
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
     }
   }
 }
 
-@keyframes Dia28Temblor {
-  0%,
-  100% {
-    transform: rotate(-6deg);
+@keyframes Dia28Onda {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
   }
-  25% {
+  /* El arco ya se apagó: lo que queda hasta el 100% es el silencio. */
+  50%,
+  100% {
+    transform: translateX(calc(40.5px * var(--sentido))) scale(2);
+    opacity: 0;
+  }
+}
+
+/* Repica durante la primera mitad del ciclo y se queda quieta en la segunda. */
+@keyframes Dia28Balanceo {
+  0%,
+  50%,
+  100% {
+    transform: rotate(0deg);
+  }
+  5%,
+  10%,
+  15%,
+  20%,
+  25%,
+  30%,
+  35%,
+  40% {
     transform: rotate(6deg);
   }
-  50% {
-    transform: rotate(-4deg);
+  7.5%,
+  12.5%,
+  17.5%,
+  22.5%,
+  27.5%,
+  32.5%,
+  37.5%,
+  42.5% {
+    transform: rotate(-6deg);
   }
-  75% {
+  45% {
     transform: rotate(4deg);
   }
-}
-
-@keyframes Dia28Halo {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgb(230 57 70 / 45%);
-  }
-  50% {
-    box-shadow: 0 0 0 16px rgb(230 57 70 / 0%);
+  47.5% {
+    transform: rotate(-2deg);
   }
 }

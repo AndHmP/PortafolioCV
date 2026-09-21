@@ -7,6 +7,7 @@ export const es = {
     inicio: 'Inicio',
     proyectos: 'Proyectos',
     perfil: 'Perfil',
+    credenciales: 'Credenciales',
     laboratorio: 'Laboratorio',
     abrirMenu: 'Abrir menú de navegación',
     cerrarMenu: 'Cerrar menú de navegación',
@@ -106,6 +107,10 @@ export const es = {
     contacto: 'Contacto',
     conocimientos: 'Conocimientos',
     formacion: 'Formación académica',
+    credencial: 'Credencial',
+    estadoTitulado: 'Titulado',
+    estadoEgresado: 'Egresado',
+    estadoEnCurso: 'En curso',
     experiencia: 'Experiencia laboral',
     valores: 'Valores',
     edad: 'años',
@@ -117,6 +122,21 @@ export const es = {
     idiomas: 'Idiomas',
   },
 
+  credenciales: {
+    titulo: 'Credenciales',
+    subtitulo: 'Títulos y certificados, con su comprobación cuando el emisor la ofrece.',
+    titulos: 'Títulos',
+    certificados: 'Certificados',
+    sinCertificados: 'Todavía no hay certificados publicados aquí.',
+    expedido: 'Expedido',
+    codigo: 'Código',
+    verificar: 'Verificar con el emisor',
+    verDocumento: 'Ver documento',
+    abreEnPestana: 'se abre en una pestaña nueva',
+    documentoDe: 'Documento de',
+    desdePerfil: 'Ver títulos y certificados',
+  },
+
   laboratorio: {
     titulo: 'Laboratorio UI',
     subtitulo:
@@ -126,6 +146,7 @@ export const es = {
     inputs: 'Campos',
     botones: 'Botones',
     formularios: 'Formularios',
+    cards: 'Cards',
     tecnica: 'Técnica',
     contadorUno: 'pieza',
     contadorVarios: 'piezas',

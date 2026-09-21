@@ -1,48 +1,48 @@
+/*
+ * Día 92 — Random Balls.
+ *
+ * Medidas del pen de referencia, sobre 400×400: bolas de 10 en 195,195 que se
+ * desplazan 195 px. Aquí el lienzo mide 270, así que las distancias van por
+ * 0,675 y las calcula el componente.
+ *
+ * El pen escribe dieciséis `@keyframes`, uno por bola. Aquí basta con uno: las
+ * variables se resuelven en cada elemento, así que el mismo fotograma sirve
+ * para las dieciséis con extremos distintos.
+ */
+
+$escala: 0.675;
+
 .Dia92 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #0a0a14;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 34px;
+  overflow: hidden;
+  background: #27ae60;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia92-pista {
-    position: relative;
-    width: 200px;
-    height: 130px;
-  }
-
-  .Dia92-punto {
+  .Dia92-bola {
     position: absolute;
-    top: 50%;
-    width: 8px;
-    height: 8px;
-    margin: -4px 0 0 -4px;
+    top: 195px * $escala;
+    left: 195px * $escala;
+    width: 10px * $escala;
+    height: 10px * $escala;
     border-radius: 50%;
-    animation: Dia92Ondear 2.4s ease-in-out infinite;
-  }
-
-  .Dia92-clave {
-    margin: 0;
-    color: #3a3b52;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.8px;
+    background: #fff;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
   }
 }
 
-@keyframes Dia92Ondear {
+@keyframes Dia92Bola {
   0%,
   100% {
-    transform: translateY(-52px) scale(0.55);
-    opacity: 0.45;
+    transform: translate(var(--Dia92-x0), var(--Dia92-y0));
   }
   50% {
-    transform: translateY(52px) scale(1.25);
-    opacity: 1;
+    transform: translate(var(--Dia92-x1), var(--Dia92-y1));
   }
 }
+

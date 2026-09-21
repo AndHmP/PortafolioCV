@@ -142,6 +142,48 @@ export interface Experiencia {
   stack: string[];
 }
 
+/**
+ * Situación de una etapa formativa. `titulado` es el único que obtiene una
+ * credencial verificable, y el que se muestra como distintivo en la portada.
+ */
+export type EstadoFormacion = 'titulado' | 'egresado' | 'en-curso';
+
+/**
+ * Qué clase de credencial es. Los títulos los expide una institución educativa
+ * y habilitan profesionalmente; los certificados acreditan un curso o una
+ * competencia concreta. Se muestran agrupados y no mezclados a propósito: no
+ * pesan lo mismo en una candidatura.
+ */
+export type TipoCredencial = 'titulo' | 'certificado';
+
+export interface Credencial {
+  clave: string;
+  tipo: TipoCredencial;
+  titulo: Texto;
+  emisor: string;
+  /** Fecha de expedición, formato YYYY-MM-DD. Ordena la lista. */
+  expedido: string;
+  descripcion?: Texto;
+  icono?: ClaveIcono;
+  /**
+   * Número de resolución, folio o código con el que el emisor lo identifica.
+   * Nunca el DNI: el registro oficial ya lo cruza.
+   */
+  codigo?: Texto;
+  /**
+   * Enlace al registro del emisor. Es la prueba de verdad —una imagen la
+   * falsifica cualquiera—, así que cuando existe se muestra la primera.
+   */
+  verificacion?: string;
+  /** Archivo en `public/credenciales/`. Imagen o PDF del documento. */
+  documento?: string;
+  /**
+   * Imagen del documento para enseñarlo junto a la ficha. Va aparte de
+   * `documento` porque un PDF no se puede incrustar como `<img>`.
+   */
+  vistaPrevia?: string;
+}
+
 export interface Formacion {
   clave: string;
   institucion: string;
@@ -149,6 +191,14 @@ export interface Formacion {
   periodo: Texto;
   descripcion: Texto;
   icono: ClaveIcono;
+  estado?: EstadoFormacion;
+  /**
+   * Credencial pública que permite verificar el título (en Perú, el número de
+   * resolución directoral). Nunca el DNI: el registro oficial ya lo cruza.
+   */
+  credencial?: Texto;
+  /** Fecha de expedición, formato YYYY-MM-DD. */
+  expedido?: string;
 }
 
 export interface Idiomahablado {
@@ -167,14 +217,14 @@ export interface Valor {
 /* Laboratorio UI                                                    */
 /* ---------------------------------------------------------------- */
 
-export type CategoriaLab = 'animaciones' | 'inputs' | 'botones' | 'formularios';
+export type CategoriaLab = 'animaciones' | 'inputs' | 'botones' | 'formularios' | 'cards';
 
 /**
  * Agrupación de primer nivel del Laboratorio. Cada sección es una ruta
  * propia (`/laboratorio/<slug>`), para no volcar 109 piezas en una sola
  * pantalla.
  */
-export type ClaveSeccionLab = '100-dias-css' | 'componentes' | 'pantallas';
+export type ClaveSeccionLab = '100-dias-css' | 'componentes' | 'pantallas' | 'cards';
 
 export interface SeccionLab {
   slug: ClaveSeccionLab;

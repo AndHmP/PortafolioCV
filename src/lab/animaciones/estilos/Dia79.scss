@@ -1,61 +1,124 @@
 /*
- * El cuadrado inicial se descompone en 18 franjas que se separan, se
- * desplazan a distinta velocidad y vuelven a formarlo. La animación es la
- * misma para todas: cambia el retardo y la distancia.
+ * Día 79 — Lines Animation.
+ *
+ * Medidas del pen de referencia, sobre 400×400: cuadrados de 40 centrados que
+ * se alejan hasta 300 px. Aquí el lienzo mide 270, así que todo va por 0,675;
+ * las escalas y los ángulos no, que son proporciones.
+ *
+ * Los veinte fotogramas son los mismos para las diez piezas: solo cambia el
+ * giro de salida, 36° por pieza. De ahí el mixin.
  */
 
-$lineas: 18;
-$ciclo: 4.4s;
+$escala: 0.675;
+$lineas: 10;
+
+@mixin Dia79Baile($giro) {
+  0% {
+    transform: rotate(0deg) translate(0, 0) scale(0.01);
+  }
+  5% {
+    transform: rotate(0deg) translate(0, 0) scale(1);
+  }
+  15% {
+    transform: rotate($giro) translate(0, 0) scale(1);
+  }
+  20% {
+    transform: rotate($giro) translate(0, -100px * $escala) scale(0.25, 1);
+  }
+  25% {
+    transform: rotate($giro) translate(0, -100px * $escala) scale(0.25, 0.25) rotate(179deg);
+  }
+  30% {
+    transform: rotate($giro) translate(0, -100px * $escala) scale(1, 0.25) rotate(179deg);
+  }
+  35% {
+    transform: rotate($giro) translate(0, -60px * $escala) scale(1, 0.1);
+  }
+  40% {
+    transform: rotate($giro) translate(0, -60px * $escala) scale(1, 0.1) translate(-30px * $escala, 0);
+  }
+  45% {
+    transform: rotate($giro) translate(0, -60px * $escala) scale(1, 0.1) translate(30px * $escala, 0);
+  }
+  50% {
+    transform: rotate($giro) translate(0, -60px * $escala) scale(0.1, 1);
+  }
+  55% {
+    transform: rotate($giro) translate(0, -60px * $escala) scale(0.5, 0.1);
+    border-radius: 0;
+  }
+  60% {
+    transform: rotate($giro) translate(0, -80px * $escala) scale(0.5, 0.5) rotate(179deg);
+    border-radius: 50%;
+  }
+  65% {
+    transform: rotate($giro) translate(0, 0) scale(0.2, 0.2);
+    border-radius: 50%;
+  }
+  70% {
+    transform: rotate($giro) translate(0, -100px * $escala) scale(0.25, 1);
+    border-radius: 0;
+  }
+  75% {
+    transform: rotate($giro) translate(0, -100px * $escala) scale(0.25, 0.25);
+  }
+  80% {
+    transform: rotate($giro) translate(0, -50px * $escala) scale(0.5, 0.5);
+  }
+  85% {
+    transform: rotate($giro) translate(0, -50px * $escala) scale(0.5, 0.5) rotate(179deg) translate(-50px * $escala, 50px * $escala);
+  }
+  90% {
+    transform: rotate($giro) translate(0, -30px * $escala) scale(0.5, 0.1);
+  }
+  95% {
+    transform: rotate($giro) translate(0, -10px * $escala) scale(0.1, 0.5);
+  }
+  100% {
+    transform: rotate($giro) translate(0, -300px * $escala) scale(0.1, 0.5);
+  }
+}
 
 .Dia79 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #0c0c16;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  background: #607d8b;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia79-caja {
-    position: relative;
-    width: 170px;
-    height: 170px;
+  .Dia79-centro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px * $escala;
+    height: 40px * $escala;
+    transform: translate(-50%, -50%);
   }
 
   .Dia79-linea {
+    box-sizing: border-box;
     position: absolute;
+    top: 0;
     left: 0;
-    width: 100%;
-    height: 170px / $lineas;
-    animation: Dia79Dispersar $ciclo cubic-bezier(0.76, 0, 0.24, 1) infinite;
+    width: 40px * $escala;
+    height: 40px * $escala;
+    background: #fff;
+  }
 
-    @for $i from 0 through $lineas - 1 {
-      &.l#{$i} {
-        top: $i * (170px / $lineas);
-        background: hsl(258deg + $i * 6, 82%, 58% + ($i % 5) * 4%);
-        /* Alterna el sentido para que se abran como una persiana. */
-        @if $i % 2 == 0 {
-          --salida: #{-1 * (46px + ($i % 4) * 26px)};
-        } @else {
-          --salida: #{46px + ($i % 4) * 26px};
-        }
-        animation-delay: -$i * 0.045s;
-      }
+  @for $i from 1 through $lineas {
+    .Dia79-linea.l#{$i} {
+      animation: Dia79Linea#{$i} 10s ease-in-out infinite;
     }
   }
 }
 
-@keyframes Dia79Dispersar {
-  0%,
-  14% {
-    transform: translateX(0) scaleX(1);
-  }
-  46%,
-  58% {
-    transform: translateX(var(--salida)) scaleX(0.42);
-  }
-  90%,
-  100% {
-    transform: translateX(0) scaleX(1);
+@for $i from 1 through $lineas {
+  @keyframes Dia79Linea#{$i} {
+    @include Dia79Baile(($i - 1) * 36deg);
   }
 }
+

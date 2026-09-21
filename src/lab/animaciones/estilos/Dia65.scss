@@ -1,60 +1,68 @@
 /*
- * Dieciséis elipses idénticas, cada una girada 11.25° más que la anterior.
- * Es exactamente lo que se hacía con un compás y un transportador: la figura
- * emerge de repetir una forma simple con un incremento constante.
+ * Día 65 — Ellipses Animation.
+ *
+ * Medidas del pen de referencia, sobre 400×400: caja de 300 en 50,50 y elipses
+ * de 90×300 en left 105. Aquí el lienzo mide 270, así que todo va multiplicado
+ * por 0,675. El borde de 1 px y el ensanche de 3,33 no: son trazo y proporción.
  */
 
-$elipses: 16;
+$escala: 0.675;
+$elipses: 18;
 
 .Dia65 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #0e0d18;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  background: #1f91dd;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia65-figura {
-    position: relative;
-    width: 190px;
-    height: 190px;
-    animation: Dia65Rotar 20s linear infinite;
+  .Dia65-forma {
+    position: absolute;
+    top: 50px * $escala;
+    left: 50px * $escala;
+    width: 300px * $escala;
+    height: 300px * $escala;
   }
 
   .Dia65-elipse {
+    box-sizing: border-box;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 190px;
-    height: 70px;
-    margin: -35px 0 0 -95px;
-    border: 1px solid;
+    top: 0;
+    left: 105px * $escala;
+    width: 90px * $escala;
+    height: 300px * $escala;
+    border: 1px solid #fff;
     border-radius: 50%;
-    animation: Dia65Respirar 6s ease-in-out infinite;
+    transition: 0.5s ease-in-out;
+  }
 
-    @for $i from 0 through $elipses - 1 {
-      &.e#{$i} {
-        --giro: #{$i * (180deg / $elipses)};
-        border-color: hsla(280deg + $i * 8, 85%, 66%, 0.5);
-        animation-delay: -$i * 0.16s;
+  @for $i from 1 through $elipses {
+    .Dia65-elipse.e#{$i} {
+      animation: Dia65Elipse#{$i} 5s ease-in-out infinite;
+    }
+
+    /* Sale girada 10°·(n−1) y acaba en el ángulo simétrico: al cruzarse en el
+       cuadrado del 50 % la vuelta cambia de sentido. */
+    @keyframes Dia65Elipse#{$i} {
+      0% {
+        transform: rotate(($i - 1) * 10deg);
+        border-radius: 50%;
+        border-width: 1px;
+      }
+      50% {
+        transform: rotate(0deg) scaleX(3.33333);
+        border-radius: 0;
+      }
+      100% {
+        transform: rotate(360deg - ($i - 1) * 10deg);
+        border-radius: 50%;
+        border-width: 1px;
       }
     }
   }
 }
 
-@keyframes Dia65Rotar {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes Dia65Respirar {
-  0%,
-  100% {
-    transform: rotate(var(--giro)) scale(0.72);
-  }
-  50% {
-    transform: rotate(var(--giro)) scale(1);
-  }
-}

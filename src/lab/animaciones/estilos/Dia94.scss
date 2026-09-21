@@ -1,117 +1,132 @@
-$hojas: 26;
+/*
+ * Día 94 — Tree.
+ *
+ * Medidas del pen de referencia, sobre 400×400: árbol en 120,198, tronco de
+ * 4×200 y copa de 124×204. Aquí el lienzo mide 270, así que todo va por 0,675.
+ */
+
+$escala: 0.675;
+$madera: #e8c87e;
 
 .Dia94 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: linear-gradient(180deg, #bfe4ff 0%, #e8f6ff 62%, #f4fbe8 100%);
   overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  background: #e0f0e5;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
   .Dia94-arbol {
-    position: relative;
-    width: 180px;
-    height: 200px;
-    margin-bottom: 34px;
-    transform-origin: bottom center;
-    animation: Dia94Mecer 5s ease-in-out infinite;
+    position: absolute;
+    z-index: 2;
+    top: 120px * $escala;
+    left: 198px * $escala;
+
+    /* El suelo. */
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: -38px * $escala;
+      width: 80px * $escala;
+      height: 4px * $escala;
+      border-radius: 2px * $escala;
+      background: #b9d6c2;
+      animation: Dia94Ancho 0.7s ease-in-out both;
+    }
   }
 
-  /* Tres masas superpuestas dan una copa irregular sin dibujar contornos. */
+  /* Triángulo de borde; el ::before oscurece la mitad izquierda. */
   .Dia94-copa {
     position: absolute;
-    border-radius: 50%;
+    z-index: -1;
+    top: -60px * $escala;
+    left: -60px * $escala;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 62px * $escala 204px * $escala;
+    border-color: transparent transparent #e84624;
+    animation: Dia94Ancho 1s ease-in-out 0.7s both;
 
-    &.c1 {
-      top: 4px;
-      left: 44px;
-      width: 92px;
-      height: 92px;
-      background: #4caf50;
-    }
-
-    &.c2 {
-      top: 44px;
-      left: 12px;
-      width: 84px;
-      height: 84px;
-      background: #43a047;
-    }
-
-    &.c3 {
-      top: 46px;
-      right: 10px;
-      width: 88px;
-      height: 88px;
-      background: #388e3c;
-    }
-  }
-
-  /* Hojas sueltas que caen: el desfase y la posición vienen de dos
-     multiplicadores primos para que no se vea la repetición. */
-  .Dia94-hoja {
-    position: absolute;
-    width: 7px;
-    height: 5px;
-    border-radius: 0 100% 0 100%;
-    animation: Dia94Caer linear infinite;
-
-    @for $i from 0 through $hojas - 1 {
-      &.h#{$i} {
-        top: 18px + (($i * 29) % 100);
-        left: 16px + (($i * 47) % 150);
-        background: hsl(96deg + ($i % 5) * 8, 52%, 42% + ($i % 4) * 6%);
-        animation-duration: 4s + ($i % 6) * 0.7s;
-        animation-delay: -($i % 9) * 0.8s;
-      }
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: -62px * $escala;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 0 204px * $escala 62px * $escala;
+      border-color: transparent transparent rgb(0 0 0 / 20%);
     }
   }
 
   .Dia94-tronco {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 22px;
-    height: 84px;
-    margin-left: -11px;
-    border-radius: 4px 4px 2px 2px;
-    background: linear-gradient(90deg, #6d4c41, #8d6e63 45%, #5d4037);
+    position: relative;
+    width: 4px * $escala;
+    height: 200px * $escala;
+    border-radius: 2px * $escala;
+    background: $madera;
+    transform-origin: 50% 100%;
+    animation: Dia94Alto 0.7s ease-in-out both;
   }
 
-  .Dia94-suelo {
+  .Dia94-rama {
     position: absolute;
-    left: -10%;
-    right: -10%;
-    bottom: -40px;
-    height: 100px;
-    border-radius: 50% 50% 0 0;
-    background: #8bc34a;
+    width: 4px * $escala;
+    height: 60px * $escala;
+    border-radius: 2px * $escala;
+    background: $madera;
+    transform-origin: 50% 100%;
+    /* Las impares a un lado, las pares al otro. */
+    transform: rotate(-40deg);
+
+    &:nth-child(2n) {
+      transform: rotate(40deg);
+    }
   }
+
+  .r1 { top: 0; height: 20px * $escala; }
+  .r2 { top: 20px * $escala; height: 30px * $escala; }
+  .r3 { top: 40px * $escala; height: 40px * $escala; }
+  .r4 { top: 60px * $escala; height: 50px * $escala; }
+  .r5 { top: 80px * $escala; height: 60px * $escala; }
 }
 
-@keyframes Dia94Mecer {
-  0%,
-  100% {
-    transform: rotate(-1.6deg);
-  }
-  50% {
-    transform: rotate(1.6deg);
-  }
-}
-
-@keyframes Dia94Caer {
+/* Se pasa hasta 1,1 y corrige: el rebote de lo que brota. */
+@keyframes Dia94Alto {
   0% {
-    transform: translate(0, 0) rotate(0deg);
-    opacity: 0;
+    transform: scaleY(0);
   }
-  12% {
-    opacity: 1;
+  60% {
+    transform: scaleY(1.1);
+  }
+  80% {
+    transform: scaleY(0.95);
   }
   100% {
-    transform: translate(-34px, 150px) rotate(320deg);
-    opacity: 0;
+    transform: scaleY(1);
   }
 }
+
+@keyframes Dia94Ancho {
+  0% {
+    transform: scaleX(0);
+  }
+  60% {
+    transform: scaleX(1.1);
+  }
+  80% {
+    transform: scaleX(0.95);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+

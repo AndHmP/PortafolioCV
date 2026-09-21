@@ -1,52 +1,128 @@
 /*
- * Nueve cubos en rejilla isométrica. La inclinación del contenedor
- * (rotateX + rotateZ) es lo que convierte una cuadrícula plana en una vista
- * en perspectiva; los cubos solo suben y bajan.
+ * Día 91 — Loading Cube.
+ *
+ * Medidas del pen de referencia, sobre 400×400: cubo de 120 centrado con
+ * perspectiva de 500. Aquí el lienzo mide 270, así que todo va por 0,675.
  */
 
-$cubos: 9;
+$escala: 0.675;
+$lado: 120px * $escala;
+$medio: 60px * $escala;
+$verde: rgb(46 204 113 / 80%);
 
 .Dia91 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: radial-gradient(circle at 50% 45%, #1c1c33, #0a0a12 72%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 700px;
+  overflow: hidden;
+  background: #34495e;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia91-escena {
-    display: grid;
-    grid-template-columns: repeat(3, 34px);
-    grid-template-rows: repeat(3, 34px);
-    gap: 8px;
-    transform: rotateX(58deg) rotateZ(45deg);
-    transform-style: preserve-3d;
+  .Dia91-centro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    perspective: 500px * $escala;
   }
 
   .Dia91-cubo {
-    border-radius: 4px;
-    background: linear-gradient(150deg, #7dd3fc, #5f6bff);
-    box-shadow: 0 0 14px rgb(95 107 255 / 45%);
-    animation: Dia91Saltar 2.2s ease-in-out infinite;
+    width: $lado;
+    height: $lado;
+    transform-style: preserve-3d;
+    transform: rotateX(-25deg) rotateY(45deg);
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
 
-    @for $i from 0 through $cubos - 1 {
-      &.c#{$i} {
-        /* El retardo por diagonal recorre la rejilla en ola. */
-        animation-delay: (floor($i / 3) + ($i % 3)) * 0.13s;
-      }
+    &:hover {
+      transform: rotateX(-25deg) rotateY(45deg) translateY(-15px * $escala);
+    }
+
+    &:hover .fondo {
+      box-shadow: -22px * $escala -22px * $escala 30px * $escala 0 rgb(0 0 0 / 40%);
     }
   }
+
+  .Dia91-cara {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $lado;
+    height: $lado;
+    background: rgb(0 0 0 / 10%);
+  }
+
+  /* El relleno de cada pared sube desde abajo. */
+  .izquierda::before,
+  .derecha::before,
+  .atras::before,
+  .frente::before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: $verde;
+    transform-origin: 50% 100%;
+    animation: Dia91Llenar 4s ease-in-out infinite alternate;
+  }
+
+  .fondo {
+    background: $verde;
+    box-shadow: -8px * $escala -8px * $escala 10px * $escala 0 rgb(0 0 0 / 40%);
+    transform: rotateX(-90deg) translateZ($medio);
+    transition: 0.5s ease-in-out;
+  }
+
+  .izquierda {
+    transform: rotateY(-90deg) translateZ($medio);
+  }
+
+  .derecha {
+    transform: rotateY(90deg) translateZ($medio);
+  }
+
+  .atras {
+    transform: rotateY(180deg) translateZ($medio);
+  }
+
+  .frente {
+    transform: rotateY(0deg) translateZ($medio);
+  }
+
+  .tapa {
+    opacity: 0.5;
+    transform: rotateX(90deg) translateZ($medio);
+  }
+
+  /* La superficie del líquido: sube dentro del cubo, no es una cara fija. */
+  .nivel {
+    background: $verde;
+    animation: Dia91Nivel 4s ease-in-out infinite alternate;
+  }
 }
 
-@keyframes Dia91Saltar {
+@keyframes Dia91Llenar {
   0%,
-  55%,
-  100% {
-    transform: translateZ(0);
+  25% {
+    transform: scaleY(0);
   }
-  28% {
-    transform: translateZ(38px);
+  75%,
+  100% {
+    transform: scaleY(1);
   }
 }
+
+@keyframes Dia91Nivel {
+  0%,
+  25% {
+    transform: rotateX(90deg) translateZ(-$medio);
+  }
+  75%,
+  100% {
+    transform: rotateX(90deg) translateZ(59px * $escala);
+  }
+}
+

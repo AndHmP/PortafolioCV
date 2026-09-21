@@ -1,95 +1,78 @@
 /*
- * Sin JavaScript no se puede leer la posición del líder, así que el rastro no
- * "sigue" nada: todos recorren exactamente el mismo camino y cada uno arranca
- * un poco más tarde. Visualmente es indistinguible de una persecución.
+ * Día 49 — CSS Follow.
+ *
+ * Medidas del pen de referencia, sobre 400×400: rejilla de 20×20 celdas de
+ * 20 px y un punto de 20 con un aro de 30. Aquí el lienzo mide 270, así que
+ * todo va por 0,675.
+ *
+ * El punto se coloca en porcentajes de su propio tamaño: como cada celda mide
+ * exactamente un punto, 100 % por columna y 50 % de centrado dan el mismo
+ * resultado que los píxeles del original sin depender del lienzo.
  */
 
-$seguidores: 7;
-$ruta: 6s;
+$escala: 0.675;
+$punto: 20px * $escala;
 
 .Dia49 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #101019;
   overflow: hidden;
+  background: #2c3e50;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia49-guia,
-  .Dia49-seguidor {
+  /* Como en el 40 y el 47: grid en vez de flotar, para que las veinte
+     columnas entren aunque el lienzo no mida un múltiplo exacto. */
+  .Dia49-rejilla {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+  }
+
+  .Dia49-celda {
+    opacity: 0;
+  }
+
+  .Dia49-punto {
+    position: absolute;
+    top: -$punto * 0.5;
+    left: -$punto * 0.5;
+    width: $punto;
+    height: $punto;
     border-radius: 50%;
-    /* La misma curva para todos: sin ella el rastro se desordenaría. */
-    animation: Dia49Recorrido $ruta cubic-bezier(0.45, 0, 0.55, 1) infinite;
-  }
+    background: #2ecc71;
+    pointer-events: none;
+    transition: 0.3s ease-out;
 
-  .Dia49-guia {
-    width: 22px;
-    height: 22px;
-    margin: -11px 0 0 -11px;
-    background: #ffd166;
-    box-shadow: 0 0 18px 4px rgb(255 209 102 / 55%);
-    z-index: 2;
-  }
-
-  .Dia49-seguidor {
-    @for $i from 0 through $seguidores - 1 {
-      &.s#{$i} {
-        $tam: 17px - $i * 1.6px;
-        width: $tam;
-        height: $tam;
-        margin: (-$tam * 0.5) 0 0 (-$tam * 0.5);
-        background: hsl(38deg + $i * 16, 88%, 60%);
-        opacity: 1 - $i * 0.1;
-        animation-delay: -$ruta + ($i + 1) * 0.1s;
-      }
+    /* El aro late por su cuenta, independiente del recorrido del punto. */
+    &::after {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      top: -5px * $escala;
+      left: -5px * $escala;
+      display: block;
+      width: 30px * $escala;
+      height: 30px * $escala;
+      border: 2px * $escala solid #2ecc71;
+      border-radius: 50%;
+      animation: Dia49Latido 1.5s ease-out infinite;
     }
   }
-
-  .Dia49-pista {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 16px;
-    margin: 0;
-    text-align: center;
-    color: #3c3d52;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
 }
 
-/* Un ocho tumbado: dos lóbulos que se cruzan en el centro. */
-@keyframes Dia49Recorrido {
+@keyframes Dia49Latido {
   0% {
-    transform: translate(0, 0);
-  }
-  12.5% {
-    transform: translate(58px, -50px);
-  }
-  25% {
-    transform: translate(84px, 0);
-  }
-  37.5% {
-    transform: translate(58px, 50px);
-  }
-  50% {
-    transform: translate(0, 0);
-  }
-  62.5% {
-    transform: translate(-58px, -50px);
-  }
-  75% {
-    transform: translate(-84px, 0);
-  }
-  87.5% {
-    transform: translate(-58px, 50px);
+    transform: scale(0.5);
+    opacity: 1;
   }
   100% {
-    transform: translate(0, 0);
+    transform: scale(2);
+    opacity: 0;
   }
 }
+

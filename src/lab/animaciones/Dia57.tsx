@@ -1,25 +1,30 @@
 import './estilos/Dia57.scss';
 
 /* Día 57 — Icosahedron
-   "Un cuerpo básico algo más complicado. ¿Adivinas cómo se hacen los triángulos?" */
+   "Veinte triángulos y ninguna librería 3D."
 
-/* Dos coronas de 10 triángulos: la de arriba apuntando al polo norte y la de
-   abajo al sur. Es la simplificación habitual del icosaedro. */
-const CARAS = Array.from({ length: 10 }, (_, i) => i);
+   Cada cara es un `div` de tamaño cero con un borde grueso: el truco clásico
+   para dibujar un triángulo en CSS. Las veinte se colocan en el espacio con
+   `translateZ` y dos o tres rotaciones cada una, y el conjunto vive dentro de
+   un contenedor con `preserve-3d`.
+
+   Los ángulos son los del sólido: 159,095° entre caras contiguas, 20,905° de
+   inclinación y 35,264° —el ángulo de la diagonal del cubo— en las ocho caras
+   invertidas. Al pasar el ratón da una vuelta de 360° en cada eje. */
+
+const CARAS = Array.from({ length: 20 }, (_, i) => i + 1);
 
 export default function Dia57() {
   return (
     <div className="Dia57">
-      <div className="Dia57-escena">
-        <div className="Dia57-cuerpo">
-          {CARAS.map((i) => (
-            <span key={`n${i}`} className={`Dia57-cara norte c${i}`} />
-          ))}
-          {CARAS.map((i) => (
-            <span key={`s${i}`} className={`Dia57-cara sur c${i}`} />
+      <div className="Dia57-centro">
+        <div className="Dia57-solido">
+          {CARAS.map((n) => (
+            <div key={n} className={`Dia57-cara c${n}`} />
           ))}
         </div>
       </div>
     </div>
   );
 }
+

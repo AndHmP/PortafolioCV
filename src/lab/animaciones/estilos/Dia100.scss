@@ -1,97 +1,256 @@
 /*
- * El neón son sombras de texto apiladas: dos o tres capas blancas muy
- * cerradas para el tubo, y varias del color a mayor radio para el resplandor
- * que tiñe el aire alrededor.
+ * Día 100 — The End.
+ *
+ * Medidas del pen de referencia, sobre 400×400: rótulo de 400×120 en top 140,
+ * con las letras en left 68, 162 y 274 y trazos de 6 px. Aquí el lienzo mide
+ * 270, así que todo va multiplicado por 0,675.
+ *
+ * El pen lleva además un `<svg>` con el mismo arco de la D encima de la versión
+ * en CSS; aquí sobra, porque el aro recortado ya da la forma.
  */
 
-$neon: #ff2d95;
-$neon2: #22d3ee;
+$escala: 0.675;
+$apagado: #1a1e24;
+$encendido: #f1f4f5;
 
 .Dia100 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: radial-gradient(circle at 50% 45%, #1a0f22, #07050c 74%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
   overflow: hidden;
+  background: #272c34;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia100-rotulo {
-    margin: 0;
-    display: flex;
-    font-family: 'Kulim Park', sans-serif;
-    font-size: 34px;
-    font-weight: 700;
-    letter-spacing: 3px;
-
-    span {
-      color: #fff;
-      text-shadow:
-        0 0 4px #fff,
-        0 0 10px #{$neon},
-        0 0 22px #{$neon},
-        0 0 42px #{$neon};
-      animation: Dia100Titilar 7s linear infinite;
-    }
-
-    .espacio {
-      width: 12px;
-      text-shadow: none;
-      animation: none;
-    }
-  }
-
-  .Dia100-pie {
-    margin: 0;
-    color: $neon2;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    text-shadow:
-      0 0 4px #{$neon2},
-      0 0 14px #{$neon2};
-    animation: Dia100Zumbar 3s ease-in-out infinite;
-  }
-
-  /* Charco de luz sobre el suelo, como en los rótulos reales. */
-  .Dia100-reflejo {
+  .Dia100-palabra {
     position: absolute;
-    bottom: -40px;
-    width: 200px;
-    height: 90px;
+    top: 140px * $escala;
+    left: 0;
+    width: 400px * $escala;
+    height: 120px * $escala;
+  }
+
+  /* Tubo de neón apagado: se enciende solo en su fotograma. */
+  .Dia100-trazo {
+    position: absolute;
+    border-radius: 3px * $escala;
+    background: $apagado;
+    box-shadow: 0 0 6px * $escala 0 $apagado;
+  }
+
+  .Dia100-e,
+  .Dia100-n,
+  .Dia100-d {
+    position: absolute;
+    top: 0;
+    height: 120px * $escala;
+  }
+
+  .Dia100-e {
+    left: 68px * $escala;
+    width: 69px * $escala;
+
+    .izquierda {
+      top: 0;
+      left: 0;
+      width: 6px * $escala;
+      height: 120px * $escala;
+      animation: Dia100Parpadeo 6s ease-in-out 2.73s infinite alternate both;
+    }
+
+    .arriba {
+      top: 0;
+      right: 0;
+      width: 60px * $escala;
+      height: 6px * $escala;
+      animation: Dia100Parpadeo 6s ease-in-out 0.39s infinite alternate both;
+    }
+
+    .medio {
+      top: 56px * $escala;
+      left: 9px * $escala;
+      width: 50px * $escala;
+      height: 6px * $escala;
+      animation: Dia100Parpadeo 6s ease-in-out 0.28s infinite alternate both;
+    }
+
+    .abajo {
+      bottom: 0;
+      right: 0;
+      width: 60px * $escala;
+      height: 6px * $escala;
+      animation: Dia100Parpadeo 6s ease-in-out 3.85s infinite alternate both;
+    }
+  }
+
+  .Dia100-n {
+    left: 162px * $escala;
+    width: 85px * $escala;
+
+    .izquierda {
+      top: 0;
+      left: 0;
+      width: 6px * $escala;
+      height: 120px * $escala;
+      animation: Dia100Parpadeo 6s ease-in-out 0.62s infinite alternate both;
+    }
+
+    /* La diagonal es un trazo largo girado desde su esquina. */
+    .diagonal {
+      top: 0;
+      left: 9px * $escala;
+      width: 135px * $escala;
+      height: 6px * $escala;
+      transform-origin: 3px * $escala 3px * $escala;
+      transform: rotate(62deg);
+      animation: Dia100Parpadeo 6s ease-in-out 0.22s infinite alternate both;
+    }
+
+    .derecha {
+      top: 0;
+      right: 0;
+      width: 6px * $escala;
+      height: 120px * $escala;
+      animation: Dia100Parpadeo 6s ease-in-out 0.97s infinite alternate both;
+    }
+  }
+
+  .Dia100-d {
+    left: 274px * $escala;
+    width: 72px * $escala;
+
+    .izquierda {
+      top: 0;
+      left: 0;
+      width: 6px * $escala;
+      height: 120px * $escala;
+      animation: Dia100Parpadeo 6s ease-in-out 0.33s infinite alternate both;
+    }
+  }
+
+  .Dia100-panza {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 70px * $escala;
+    height: 120px * $escala;
+  }
+
+  /* La caja recorta el aro por la mitad: queda el arco de la derecha. */
+  .Dia100-caja-aro {
+    position: absolute;
+    top: -10px * $escala;
+    right: -10px * $escala;
+    bottom: -10px * $escala;
+    width: 70px * $escala;
+    overflow: hidden;
+  }
+
+  .Dia100-aro {
+    box-sizing: border-box;
+    position: absolute;
+    top: 10px * $escala;
+    right: 10px * $escala;
+    width: 120px * $escala;
+    height: 120px * $escala;
+    border-style: solid;
+    border-width: 6px * $escala;
+    border-color: $apagado $apagado transparent transparent;
     border-radius: 50%;
-    background: radial-gradient(ellipse, rgb(255 45 149 / 22%), transparent 68%);
-    filter: blur(6px);
-    animation: Dia100Zumbar 3s ease-in-out infinite;
+    box-shadow:
+      0 0 10px * $escala 0 $apagado,
+      inset 0 0 10px * $escala 0 $apagado;
+    transform: rotate(45deg);
+    animation: Dia100ParpadeoAro 6s ease-in-out 0.75s infinite alternate both;
+  }
+
+  .Dia100-caja-punto {
+    position: absolute;
+    right: 60px * $escala;
+    width: 26px * $escala;
+    height: 26px * $escala;
+    overflow: hidden;
+
+    &.arriba {
+      top: -10px * $escala;
+    }
+
+    &.abajo {
+      bottom: -10px * $escala;
+    }
+  }
+
+  .Dia100-trazo.punto {
+    top: 10px * $escala;
+    right: -12px * $escala;
+    width: 15px * $escala;
+    height: 6px * $escala;
+    animation: Dia100ParpadeoPunto 6s ease-in-out 0.75s infinite alternate both;
   }
 }
 
-/* Fallos breves, no un desvanecido suave: así parpadea un tubo gastado. */
-@keyframes Dia100Titilar {
+/* Cuatro chispazos seguidos y luego se queda encendido. */
+@keyframes Dia100Parpadeo {
   0%,
-  88%,
-  90.5%,
-  92%,
-  100% {
-    opacity: 1;
+  34%,
+  36%,
+  38%,
+  40% {
+    background: $apagado;
+    box-shadow: 0 0 6px * $escala 0 $apagado;
   }
-  89%,
-  91% {
-    opacity: 0.22;
+  35%,
+  37%,
+  39%,
+  41%,
+  100% {
+    background: $encendido;
+    box-shadow: 0 0 10px * $escala 0 $encendido;
   }
 }
 
-@keyframes Dia100Zumbar {
+@keyframes Dia100ParpadeoAro {
   0%,
-  100% {
-    opacity: 0.8;
+  34%,
+  36%,
+  38%,
+  40% {
+    border-color: $apagado $apagado transparent transparent;
+    box-shadow:
+      0 0 6px * $escala 0 $apagado,
+      inset 0 0 6px * $escala 0 $apagado;
   }
-  50% {
-    opacity: 1;
+  35%,
+  37%,
+  39%,
+  41%,
+  100% {
+    border-color: $encendido $encendido transparent transparent;
+    box-shadow:
+      0 0 10px * $escala 0 $encendido,
+      inset 0 0 10px * $escala 0 $encendido;
   }
 }
+
+@keyframes Dia100ParpadeoPunto {
+  0%,
+  34%,
+  36%,
+  38%,
+  40% {
+    background: $apagado;
+    box-shadow: 0 0 5px * $escala 1px $apagado;
+  }
+  35%,
+  37%,
+  39%,
+  41%,
+  100% {
+    background: $encendido;
+    box-shadow: 0 0 9px * $escala 1px $encendido;
+  }
+}
+

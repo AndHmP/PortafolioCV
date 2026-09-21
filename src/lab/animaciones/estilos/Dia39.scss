@@ -1,103 +1,175 @@
+/*
+ * Día 39 — Menu Toggle.
+ *
+ * Medidas del pen de referencia, sobre 400×400: dos barras de 50×4 dentro de
+ * una caja de 50×26 en 187,175, y la navegación de 300×20 en 190,50. Aquí el
+ * lienzo mide 270, así que las distancias van por 0,675. Las escalas no: son
+ * proporciones del propio elemento.
+ */
+
+$escala: 0.675;
+$salto: 20px * $escala;
+$amago: 3px * $escala;
+
 .Dia39 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #1c1c28;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #4a627a;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia39-boton {
+  .Dia39-icono {
     position: absolute;
-    top: 20px;
-    left: 20px;
     z-index: 2;
-    width: 46px;
-    height: 46px;
-    padding: 0;
-    border: none;
-    border-radius: 12px;
-    background: #2b2b3c;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+    top: 187px * $escala;
+    left: 175px * $escala;
+    width: 50px * $escala;
+    height: 26px * $escala;
     cursor: pointer;
-    transition: background-color 0.3s;
+
+    &.activo {
+      pointer-events: none;
+    }
   }
 
-  .Dia39-barra {
-    width: 20px;
-    height: 2px;
-    border-radius: 2px;
-    background: #eef0ff;
-    transition:
-      transform 0.35s cubic-bezier(0.68, -0.4, 0.27, 1.4),
-      opacity 0.2s;
-  }
-
-  .Dia39-nav {
+  .Dia39-linea-arriba,
+  .Dia39-linea-abajo {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(150deg, #5f6bff, #7c3aed);
-    /* El panel se revela con un círculo que crece desde el botón. */
-    clip-path: circle(0 at 43px 43px);
-    transition: clip-path 0.55s cubic-bezier(0.65, 0, 0.35, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    left: 0;
+    width: 50px * $escala;
+    height: 4px * $escala;
+    background: #fff;
+  }
+
+  .Dia39-linea-arriba {
+    top: 0;
+    animation: Dia39CerrarArriba 1s ease both;
+  }
+
+  .Dia39-linea-abajo {
+    bottom: 0;
+    animation: Dia39CerrarAbajo 1s ease both;
+  }
+
+  .activo .Dia39-linea-arriba {
+    animation: Dia39AbrirArriba 1s ease both;
+  }
+
+  .activo .Dia39-linea-abajo {
+    animation: Dia39AbrirAbajo 1s ease both;
+  }
+
+  /* Primer render: el icono está dibujado, pero nada se mueve todavía. */
+  .quieto .Dia39-linea-arriba,
+  .quieto .Dia39-linea-abajo {
+    animation: none;
+  }
+
+  .Dia39-menu {
+    position: absolute;
+    top: 190px * $escala;
+    left: 50px * $escala;
+    width: 300px * $escala;
+    height: 20px * $escala;
+    padding: 0 10px * $escala;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s ease-in-out;
+
+    /* Al abrir espera medio segundo; al cerrar se va de inmediato. */
+    &.activo {
+      opacity: 1;
+      pointer-events: all;
+      transition: 0.5s ease-in-out 0.5s;
+    }
 
     ul {
-      list-style: none;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      width: 280px * $escala;
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      text-align: center;
+      list-style: none;
+      font-size: 16px * $escala;
+      line-height: 20px * $escala;
+      font-weight: 600;
+      text-transform: uppercase;
     }
 
     li {
-      color: #fff;
-      font-family: 'Kulim Park', sans-serif;
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      opacity: 0;
-      transform: translateY(14px);
-      transition:
-        opacity 0.35s,
-        transform 0.35s;
-    }
-  }
+      position: relative;
+      display: block;
+      flex: 0 1 auto;
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
 
-  &.abierto {
-    .Dia39-boton {
-      background: rgb(255 255 255 / 18%);
-    }
-
-    .Dia39-barra:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-
-    .Dia39-barra:nth-child(2) {
-      opacity: 0;
-    }
-
-    .Dia39-barra:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    .Dia39-nav {
-      clip-path: circle(150% at 43px 43px);
-
-      li {
-        opacity: 1;
-        transform: translateY(0);
+      &:hover {
+        opacity: 0.6;
       }
     }
   }
 }
+
+/* Amago hacia dentro, salto al borde adelgazando, y ahí el estirón. */
+@keyframes Dia39AbrirArriba {
+  0% {
+    transform: translate3d(0, 0, 0) scaleY(1) scaleX(1);
+  }
+  20% {
+    transform: translate3d(0, $amago, 0) scaleY(1) scaleX(1);
+  }
+  40% {
+    transform: translate3d(0, -$salto, 0) scaleY(0.5) scaleX(1);
+  }
+  100% {
+    transform: translate3d(0, -$salto, 0) scaleY(0.5) scaleX(6);
+  }
+}
+
+@keyframes Dia39AbrirAbajo {
+  0% {
+    transform: translate3d(0, 0, 0) scaleY(1) scaleX(1);
+  }
+  20% {
+    transform: translate3d(0, -$amago, 0) scaleY(1) scaleX(1);
+  }
+  40% {
+    transform: translate3d(0, $salto, 0) scaleY(0.5) scaleX(1);
+  }
+  100% {
+    transform: translate3d(0, $salto, 0) scaleY(0.5) scaleX(6);
+  }
+}
+
+@keyframes Dia39CerrarArriba {
+  0% {
+    transform: translate3d(0, -$salto, 0) scaleY(0.5) scaleX(6);
+  }
+  60% {
+    transform: translate3d(0, -$salto, 0) scaleY(0.5) scaleX(1);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes Dia39CerrarAbajo {
+  0% {
+    transform: translate3d(0, $salto, 0) scaleY(0.5) scaleX(6);
+  }
+  60% {
+    transform: translate3d(0, $salto, 0) scaleY(0.5) scaleX(1);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scaleY(1) scaleX(1);
+  }
+}
+

@@ -1,96 +1,121 @@
+/*
+ * Día 29 — Search Field.
+ *
+ * Medidas del pen de referencia, sobre 400×400: barra blanca de 260 en
+ * (70,180), campo de 205×40 y botón de 40×40, con la lista de sugerencias
+ * colgando debajo. Aquí el lienzo mide 270, así que todo va por 0,675.
+ */
+
+$azul: #5ca4ea;
+$azulTexto: #4d8dcb;
+$marcador: #a4b9ce;
+$tipografia: 'Open Sans', Helvetica, sans-serif;
+
 .Dia29 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #20202c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: $azul;
+  color: #fff;
+  font-family: $tipografia;
+  overflow: hidden;
+
+  .Dia29-barra {
+    position: absolute;
+    top: 121.5px;
+    left: 47.25px;
+    width: 175.5px;
+    /* A cero para que campo y botón encajen sin el hueco entre elementos
+       en línea, igual que en el original. */
+    font-size: 0;
+    background: #fff;
+    box-shadow: rgb(0 0 0 / 10%) 2.7px 5.4px 8.1px;
+  }
 
   .Dia29-campo {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 56px;
-    height: 56px;
-    padding: 0 16px;
-    border-radius: 28px;
-    background: #2c2c3c;
-    cursor: text;
-    overflow: hidden;
-    transition:
-      width 0.45s cubic-bezier(0.65, 0, 0.35, 1),
-      background-color 0.45s;
-
-    /* La lupa se encoge y cede el sitio al texto al enfocar. */
-    &:focus-within {
-      width: 210px;
-      background: #34344a;
-    }
-  }
-
-  .Dia29-lupa {
-    flex: none;
-    display: flex;
-
-    svg {
-      width: 22px;
-      height: 22px;
-      fill: none;
-      stroke: #8a8ca6;
-      stroke-width: 2;
-      stroke-linecap: round;
-      transition:
-        stroke 0.45s,
-        transform 0.45s;
-    }
-  }
-
-  .Dia29-campo:focus-within .Dia29-lupa svg {
-    stroke: #6ee7c8;
-    transform: scale(0.85);
-  }
-
-  input {
-    flex: 1;
-    min-width: 0;
-    margin-left: 12px;
+    float: left;
+    box-sizing: content-box;
+    width: 138.4px;
+    height: 27px;
+    padding: 0 0 0 10.1px;
     border: none;
-    outline: none;
-    background: transparent;
-    color: #eef0ff;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    opacity: 0;
-    transition: opacity 0.3s ease 0.15s;
+    border-radius: 0;
+    appearance: none;
+    background: #fff;
+    color: $azulTexto;
+    font-family: $tipografia;
+    font-size: 8.8px;
+    font-weight: 600;
 
     &::placeholder {
-      color: #6f7089;
+      color: $marcador;
     }
 
-    /* Oculta la X nativa de Chrome, que rompe el diseño. */
-    &::-webkit-search-cancel-button {
-      display: none;
+    &:focus {
+      outline: none;
     }
   }
 
-  .Dia29-campo:focus-within input {
-    opacity: 1;
+  .Dia29-boton {
+    position: relative;
+    width: 27px;
+    height: 27px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    appearance: none;
+    background: #fff;
+    color: $azul;
+    cursor: pointer;
+
+    svg {
+      width: 11px;
+      height: 11px;
+      fill: none;
+      stroke: currentcolor;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
   }
 
-  .Dia29-linea {
-    position: absolute;
-    left: 50px;
-    right: 16px;
-    bottom: 14px;
-    height: 1.5px;
-    background: #6ee7c8;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease 0.2s;
-  }
+  .Dia29-sugerencias {
+    clear: both;
+    margin: 0;
+    padding: 0 10.1px;
+    list-style: none;
+    background: #fff;
+    color: #6e6e6e;
+    font-size: 8.8px;
+    font-weight: 400;
+    line-height: 13.5px;
 
-  .Dia29-campo:focus-within .Dia29-linea {
-    transform: scaleX(1);
+    &.activa {
+      border-top: 1px solid $azul;
+    }
+
+    li {
+      margin: 12.15px 0;
+      padding: 0;
+      cursor: pointer;
+
+      &:hover {
+        color: $azulTexto;
+      }
+    }
+
+    b {
+      font-weight: 600;
+    }
   }
+}
+
+/* Etiqueta solo para lectores de pantalla: el diseño del reto no la muestra. */
+.Dia29 .Dia29-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }

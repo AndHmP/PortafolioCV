@@ -33,9 +33,12 @@ export type ClaveIconoUI =
   | 'volumen'
   | 'medidor'
   | 'campana'
+  | 'ojo'
+  | 'buscar'
   | 'engranaje'
   | 'google'
-  | 'facebook';
+  | 'facebook'
+  | 'verificado';
 
 /**
  * Trazados de cada icono. Todos comparten viewBox 0 0 24 24 y se dibujan con
@@ -80,11 +83,20 @@ const TRAZOS: Record<ClaveIconoUI, { d: string[]; relleno?: boolean }> = {
   idioma: { d: ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z', 'M3.5 9h17', 'M3.5 15h17', 'M12 3a14 14 0 0 1 0 18', 'M12 3a14 14 0 0 0 0 18'] },
   filtro: { d: ['M3.5 5.5h17l-6.5 7.5v5.5l-4 2v-7.5Z'] },
   estrella: { d: ['m12 3.5 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 10l6.1-.9Z'] },
+  /* Sello de titulación: la insignia dentada más la marca de verificación. */
+  verificado: {
+    d: [
+      'm12 2.8 2.2 1.7 2.7-.4 1 2.6 2.5 1.1-.8 2.6.8 2.6-2.5 1.1-1 2.6-2.7-.4L12 21.2l-2.2-1.7-2.7.4-1-2.6-2.5-1.1.8-2.6-.8-2.6 2.5-1.1 1-2.6 2.7.4Z',
+      'm8.8 12.1 2.2 2.2 4.2-4.4',
+    ],
+  },
   corazon: { d: ['M12 20.3 4.6 13a4.6 4.6 0 0 1 6.5-6.5l.9.9.9-.9A4.6 4.6 0 1 1 19.4 13Z'] },
   comentario: { d: ['M20.5 5.5h-17v11h4v4l4.5-4h8.5z'] },
   volumen: { d: ['M4 9.5h3.5L12 5.5v13L7.5 14.5H4z', 'M16 9a4 4 0 0 1 0 6', 'M18.5 6.5a7.5 7.5 0 0 1 0 11'] },
   medidor: { d: ['M4 18a8 8 0 1 1 16 0', 'm12 18 4.5-6'] },
   campana: { d: ['M18 8.5a6 6 0 1 0-12 0c0 5-2 6.5-2 6.5h16s-2-1.5-2-6.5Z', 'M13.7 19a2 2 0 0 1-3.4 0'] },
+  ojo: { d: ['M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z', 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z'] },
+  buscar: { d: ['M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z', 'm16.2 16.2 4.3 4.3'] },
   engranaje: {
     d: [
       'M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z',

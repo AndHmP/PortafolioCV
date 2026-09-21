@@ -1,45 +1,37 @@
-import { useState } from 'react';
-
 import './estilos/Dia55.scss';
 
 /* Día 55 — Thermostat
-   "¡Aquí hace calor! La respuesta visual inmediata ayuda a entender la acción." */
+   "El termostato de moda, en dos círculos y un degradado."
 
-const MIN = 15;
-const MAX = 30;
+   El aro de color es un disco con un degradado de morado a rojo; lo que lo
+   convierte en arco es un cuadrado del color del fondo, rotado 45° y con una
+   esquina redondeada, que le tapa la parte de abajo.
+
+   Al pasar el ratón sube un grado: la aguja gira de −50° a −20° y los dos
+   números se cruzan deslizándose, el que sale encogiendo y el que entra desde
+   la derecha. */
 
 export default function Dia55() {
-  const [grados, setGrados] = useState(22);
-
-  /* 0 = frío, 1 = calor. Alimenta el color y el arco del marcador. */
-  const intensidad = (grados - MIN) / (MAX - MIN);
-
   return (
-    <div
-      className="Dia55"
-      style={
-        {
-          '--calor': intensidad,
-          '--tono': `${210 - intensidad * 200}`,
-        } as React.CSSProperties
-      }
-    >
-      <div className="Dia55-dial">
-        <span className="Dia55-arco" />
-        <p className="Dia55-lectura">
-          {grados}
-          <span>°C</span>
-        </p>
-      </div>
+    <div className="Dia55">
+      <div className="Dia55-termostato">
+        <div className="Dia55-aro">
+          <div className="Dia55-tapa" />
+        </div>
 
-      <div className="Dia55-controles">
-        <button type="button" onClick={() => setGrados((g) => Math.max(MIN, g - 1))}>
-          −
-        </button>
-        <button type="button" onClick={() => setGrados((g) => Math.min(MAX, g + 1))}>
-          +
-        </button>
+        <div className="Dia55-control">
+          <div className="Dia55-aguja" />
+          <div className="Dia55-fuera">23°</div>
+          <div className="Dia55-dentro">
+            19<span>°</span>
+          </div>
+          <div className="Dia55-dentro dos">
+            20<span>°</span>
+          </div>
+          <div className="Dia55-sala">Bedroom</div>
+        </div>
       </div>
     </div>
   );
 }
+

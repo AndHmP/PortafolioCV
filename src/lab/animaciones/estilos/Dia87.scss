@@ -1,90 +1,133 @@
-$facetas: 6;
+/*
+ * Día 87 — Ruby.
+ *
+ * Medidas del pen de referencia, sobre 400×400: piedra de 192×126 centrada,
+ * con la corona de 42 de alto y el cuerpo de 84. Aquí el lienzo mide 270, así
+ * que todo va multiplicado por 0,675.
+ */
+
+$escala: 0.675;
 
 .Dia87 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: radial-gradient(circle at 50% 50%, #2a0f1c, #0d0509 72%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  background: #ffc902;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia87-gema {
-    position: relative;
-    width: 140px;
-    height: 140px;
-    /* El hexágono se recorta una sola vez y todas las facetas heredan la
-       silueta al quedar dentro. */
-    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
-    background: #7f1d3a;
-    overflow: hidden;
-    animation: Dia87Latir 4s ease-in-out infinite;
-  }
-
-  .Dia87-corona {
+  .Dia87-rubi {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(160deg, #ff4d6d, #b0143b 55%, #6b0f2a);
+    top: 50%;
+    left: 50%;
+    width: 192px * $escala;
+    height: 126px * $escala;
+    overflow: hidden;
+    transform: translate(-50%, -50%);
   }
 
   .Dia87-faceta {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 140px;
-    height: 140px;
-    margin: -70px 0 0 -70px;
-    clip-path: polygon(50% 50%, 100% 0, 100% 100%);
-
-    @for $i from 0 through $facetas - 1 {
-      &.f#{$i} {
-        transform: rotate($i * (360deg / $facetas));
-        background: rgba(255, 255, 255, 0.04 + ($i % 3) * 0.05);
-      }
-    }
+    width: 0;
+    height: 0;
+    border-style: solid;
   }
 
-  /* El "pulido": un destello que cruza la piedra en diagonal. */
-  .Dia87-pulido {
+  /* Cuerpo: tres triángulos que bajan en punta. */
+  .abajo-izquierda {
+    z-index: 2;
+    left: 0;
+    bottom: 0;
+    border-width: 84px * $escala 0 0 96px * $escala;
+    border-color: #890505 transparent transparent;
+  }
+
+  .abajo-derecha {
+    z-index: 2;
+    right: 0;
+    bottom: 0;
+    border-width: 84px * $escala 96px * $escala 0 0;
+    border-color: #c81718 transparent transparent;
+  }
+
+  .abajo-centro {
+    z-index: 3;
+    left: 54px * $escala;
+    bottom: 0;
+    border-width: 84px * $escala 42px * $escala 0;
+    border-color: #a51012 transparent transparent;
+  }
+
+  /* Corona: los biseles de los lados y las dos mesas. */
+  .arriba-izquierda-izquierda {
+    z-index: 2;
+    top: 0;
+    left: 0;
+    border-width: 0 22px * $escala 42px * $escala 32px * $escala;
+    border-color: transparent transparent #9e0707;
+  }
+
+  .arriba-centro {
+    z-index: 2;
+    top: 0;
+    left: 54px * $escala;
+    border-width: 0 42px * $escala 42px * $escala;
+    border-color: transparent transparent #bc0e0e;
+  }
+
+  .arriba-derecha-derecha {
+    z-index: 2;
+    top: 0;
+    right: 0;
+    border-width: 0 32px * $escala 42px * $escala 22px * $escala;
+    border-color: transparent transparent #b90b0c;
+  }
+
+  .arriba-izquierda,
+  .arriba-derecha {
+    z-index: 1;
+    top: 0;
+    width: 64px * $escala;
+    height: 42px * $escala;
+    border: none;
+  }
+
+  .arriba-izquierda {
+    left: 32px * $escala;
+    background: #dc2323;
+  }
+
+  /* La cara que da a la luz, y la única que recorta el destello. */
+  .arriba-derecha {
+    right: 32px * $escala;
+    background: #f58181;
+    overflow: hidden;
+  }
+
+  .Dia87-destello {
     position: absolute;
-    top: -40%;
-    left: -60%;
-    width: 45%;
-    height: 180%;
-    background: linear-gradient(100deg, transparent, rgb(255 255 255 / 55%), transparent);
-    transform: rotate(18deg);
-    animation: Dia87Pulir 4s ease-in-out infinite;
-  }
-
-  .Dia87-resplandor {
-    position: absolute;
-    width: 190px;
-    height: 190px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgb(255 77 109 / 26%), transparent 66%);
-    animation: Dia87Latir 4s ease-in-out infinite;
-    pointer-events: none;
+    top: -40px * $escala;
+    left: 30px * $escala;
+    width: 4px * $escala;
+    height: 80px * $escala;
+    background: #ffdfdf;
+    box-shadow: 0 0 5px * $escala 0 #ffdfdf;
+    transform: rotate(-44deg) translateX(-30px * $escala);
+    animation: Dia87Destello 3s linear infinite both;
   }
 }
 
-@keyframes Dia87Latir {
-  0%,
+/* Cruza en la primera décima del ciclo y espera fuera el resto. */
+@keyframes Dia87Destello {
+  0% {
+    transform: rotate(-44deg) translateX(-30px * $escala);
+  }
+  10%,
   100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
+    transform: rotate(-44deg) translateX(30px * $escala);
   }
 }
 
-@keyframes Dia87Pulir {
-  0%,
-  55% {
-    left: -60%;
-  }
-  85%,
-  100% {
-    left: 130%;
-  }
-}

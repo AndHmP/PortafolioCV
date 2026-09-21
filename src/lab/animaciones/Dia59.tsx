@@ -1,27 +1,32 @@
 import './estilos/Dia59.scss';
 
 /* Día 59 — Slice Transition
-   "No es la transición de cada día entre dos imágenes." */
+   "Una foto se convierte en otra en ocho tiras verticales."
 
-const TIRAS = 9;
+   El fondo del contenedor es la primera foto. Encima hay ocho tiras de 50 px,
+   todas con la segunda foto de fondo pero recortada en el punto que les toca,
+   así que al juntarse recomponen la imagen entera. Las impares bajan y las
+   pares suben, y ese peinado es lo que da la transición.
+
+   Los dos rótulos se separan al mismo tiempo, uno hacia cada lado. */
+
+const TIRAS = Array.from({ length: 8 }, (_, i) => i);
 
 export default function Dia59() {
   return (
     <div className="Dia59">
-      <div className="Dia59-marco">
-        {Array.from({ length: TIRAS }, (_, i) => (
-          <span
-            key={i}
-            className="Dia59-tira"
-            style={{
-              /* Cada tira muestra su porción de la imagen: el fondo se
-                 desplaza para que las nueve compongan una sola escena. */
-              backgroundPosition: `${(i / (TIRAS - 1)) * 100}% center`,
-              animationDelay: `${i * 0.09}s`,
-            }}
-          />
+      <div className="Dia59-tiras">
+        {TIRAS.map((i) => (
+          <div key={i} className={`Dia59-tira t${i}`} />
         ))}
+
+        <div className="Dia59-texto">
+          <div className="Dia59-titulo">Slice</div>
+          <div className="Dia59-subtitulo">transition</div>
+        </div>
       </div>
     </div>
   );
 }
+
+

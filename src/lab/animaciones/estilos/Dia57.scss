@@ -1,70 +1,105 @@
 /*
- * Respuesta a la pregunta del reto: los triángulos no se dibujan, se recortan.
- * Cada cara es un cuadrado al que `clip-path` le deja solo un triángulo, y
- * luego se coloca en el espacio girando alrededor del eje vertical.
+ * Día 57 — Icosahedron.
+ *
+ * Medidas del pen de referencia, sobre 400×400: caja de 160×280 y triángulos de
+ * 160 de base por 138,56 de alto, separados 129,2 px del centro. Aquí el lienzo
+ * mide 270, así que las distancias van por 0,675 —la perspectiva también—; los
+ * ángulos, claro, no.
  */
 
-$caras: 10;
+$escala: 0.675;
+$base: 80px * $escala;
+$alto: 138.56px * $escala;
+$radio: 129.2px * $escala;
 
 .Dia57 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: radial-gradient(circle at 50% 45%, #241f3f, #0c0b16 72%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 700px;
+  overflow: hidden;
+  background: #35485c;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia57-escena {
-    width: 150px;
-    height: 150px;
-    transform-style: preserve-3d;
-  }
-
-  .Dia57-cuerpo {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    animation: Dia57Girar 16s linear infinite;
-  }
-
-  .Dia57-cara {
+  .Dia57-centro {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 72px;
-    height: 62px;
-    margin: -31px 0 0 -36px;
-    clip-path: polygon(50% 0, 100% 100%, 0 100%);
-    opacity: 0.82;
+    transform: translate(-50%, -50%);
+    perspective: 1000px * $escala;
+  }
 
-    @for $i from 0 through $caras - 1 {
-      &.c#{$i} {
-        --giro: #{$i * 36deg};
-        background: hsl(258deg + $i * 11, 72%, 52% + ($i % 4) * 5%);
-      }
+  .Dia57-solido {
+    width: 160px * $escala;
+    height: 280px * $escala;
+    transform-style: preserve-3d;
+    transform: rotateX(-40deg) rotateY(-40deg);
+    transition: 3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: rotateX(-400deg) rotateY(-400deg);
     }
 
-    /* La corona superior se inclina hacia dentro; la inferior, invertida. */
-    &.norte {
-      transform: rotateY(var(--giro)) translateZ(46px) rotateX(32deg) translateY(-24px);
-    }
-
-    &.sur {
-      transform: rotateY(var(--giro)) translateZ(46px) rotateX(-32deg) translateY(24px)
-        rotate(180deg);
-      filter: brightness(0.75);
+    &:hover .Dia57-cara {
+      opacity: 0.5;
     }
   }
+
+  /* Triángulo de borde: caja de tamaño cero y un solo lado pintado. */
+  .Dia57-cara {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 $base $alto;
+    border-color: transparent transparent #eee;
+    transform-origin: 50% 100%;
+    transition: 3s ease-in-out;
+  }
+
+  /* Las pares un punto más oscuras: sin luces, la alternancia da el volumen. */
+  .c2,
+  .c4,
+  .c6,
+  .c8,
+  .c10,
+  .c12 {
+    border-bottom-color: #e1e1e1;
+  }
+
+  /* Las ocho de las puntas van invertidas: el triángulo apunta hacia abajo. */
+  .c13,
+  .c14,
+  .c15,
+  .c16,
+  .c17,
+  .c18,
+  .c19,
+  .c20 {
+    border-width: $alto $base 0;
+    border-color: #fff transparent transparent;
+  }
+
+  .c1 { transform: translateZ($radio) rotateZ(90deg) rotateX(159.095deg); }
+  .c2 { transform: translateZ($radio) rotateZ(-90deg) rotateX(159.095deg); }
+  .c3 { transform: translateZ(-$radio) rotateZ(90deg) rotateX(-159.095deg); }
+  .c4 { transform: translateZ(-$radio) rotateZ(-90deg) rotateX(-159.095deg); }
+  .c5 { transform: rotateY(-90deg) translateZ($radio) rotateX(20.905deg); }
+  .c6 { transform: rotateY(-90deg) translateZ($radio) rotateX(159.095deg); }
+  .c7 { transform: rotateY(-90deg) translateZ(-$radio) rotateX(-20.905deg); }
+  .c8 { transform: rotateY(-90deg) translateZ(-$radio) rotateX(-159.095deg); }
+  .c9 { transform: translateY($radio) rotateX(69.095deg); }
+  .c10 { transform: translateY($radio) rotateX(-69.095deg); }
+  .c11 { transform: translateY(-$radio) rotateX(110.905deg); }
+  .c12 { transform: translateY(-$radio) rotateX(-110.905deg); }
+  .c13 { transform: translateY(-$radio) translateX($base) rotateX(-135deg) rotateY(-35.264deg) rotateZ(-8deg); }
+  .c14 { transform: translateY(-$radio) translateX($base) rotateX(135deg) rotateY(35.264deg) rotateZ(-8deg); }
+  .c15 { transform: translateY(-$radio) translateX(-$base) rotateX(-135deg) rotateY(35.264deg) rotateZ(8deg); }
+  .c16 { transform: translateY(-$radio) translateX(-$base) rotateX(135deg) rotateY(-35.264deg) rotateZ(8deg); }
+  .c17 { transform: translateY($radio) translateX($base) rotateX(45deg) rotateY(-35.264deg) rotateZ(-8deg); }
+  .c18 { transform: translateY($radio) translateX($base) rotateX(-45deg) rotateY(35.264deg) rotateZ(-8deg); }
+  .c19 { transform: translateY($radio) translateX(-$base) rotateX(45deg) rotateY(35.264deg) rotateZ(8deg); }
+  .c20 { transform: translateY($radio) translateX(-$base) rotateX(-45deg) rotateY(-35.264deg) rotateZ(8deg); }
 }
 
-@keyframes Dia57Girar {
-  from {
-    transform: rotateX(-14deg) rotateY(0deg);
-  }
-  to {
-    transform: rotateX(-14deg) rotateY(360deg);
-  }
-}

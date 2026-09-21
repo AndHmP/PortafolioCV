@@ -1,44 +1,58 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 
 import './estilos/Dia27.scss';
 
 /* Día 27 — Checklist
-   "The relieving feeling when you can check off the tasks." */
+   "Lo bueno de ir tachando la lista de tareas: esa sensación de alivio."
 
-const TAREAS = ['Diseñar la interfaz', 'Escribir las pruebas', 'Revisar el PR', 'Desplegar'];
+   Los rótulos y las tareas son los del reto, en inglés, porque forman parte
+   del diseño que hay que reproducir. */
+
+const TAREAS = ['Create a list', 'Complete first task', 'Write some CSS code', 'Amaze the world'];
 
 export default function Dia27() {
-  const [hechas, setHechas] = useState<number[]>([0]);
+  const [hechas, setHechas] = useState<number[]>([]);
+  /* La pieza puede aparecer más de una vez en la página: los identificadores
+     que enlazan casilla y etiquetas tienen que ser únicos por instancia. */
+  const base = useId();
 
   const alternar = (i: number) =>
-    setHechas((actual) =>
-      actual.includes(i) ? actual.filter((n) => n !== i) : [...actual, i],
-    );
+    setHechas((actual) => (actual.includes(i) ? actual.filter((n) => n !== i) : [...actual, i]));
 
   return (
     <div className="Dia27">
-      <p className="Dia27-titulo">
-        Tareas <span>{hechas.length}/{TAREAS.length}</span>
-      </p>
+      <div className="Dia27-lista">
+        <div className="Dia27-cabecera">
+          <div className="Dia27-dia">Friday</div>
+          <div className="Dia27-fecha">March 4, 2016</div>
+        </div>
 
-      <ul className="Dia27-lista">
-        {TAREAS.map((tarea, i) => (
-          <li key={tarea}>
-            <button
-              type="button"
-              className={`Dia27-fila ${hechas.includes(i) ? 'hecha' : ''}`}
-              onClick={() => alternar(i)}
-            >
-              <span className="Dia27-caja">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M4 12.5 9.5 18 20 6.5" />
+        <ul>
+          {TAREAS.map((tarea, i) => {
+            const id = `${base}-${i}`;
+            return (
+              <li key={tarea} className={hechas.includes(i) ? 'hecha' : undefined}>
+                <input
+                  id={id}
+                  type="checkbox"
+                  checked={hechas.includes(i)}
+                  onChange={() => alternar(i)}
+                />
+                {/* Tanto el texto como el círculo marcan la tarea. */}
+                <label className="Dia27-texto" htmlFor={id}>
+                  {tarea}
+                </label>
+                <label className="Dia27-circulo" htmlFor={id}>
+                  <span className="Dia27-oculto">{tarea}</span>
+                </label>
+                <svg className="Dia27-tic" viewBox="0 0 15 10" aria-hidden="true">
+                  <polyline points="1,5 6,9 14,1" />
                 </svg>
-              </span>
-              <span className="Dia27-texto">{tarea}</span>
-            </button>
-          </li>
-        ))}
-      </ul>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }

@@ -1,69 +1,61 @@
 /*
- * Cada estrella sale del centro hacia afuera alargándose. Al combinar el
- * escalado en X con la traslación radial, las estrellas cercanas se estiran
- * más que las lejanas: eso es lo que se lee como velocidad.
+ * Día 83 — Warp Drive.
+ *
+ * Medidas del pen de referencia, sobre 400×400: caja de 200 en 100,100 y rayas
+ * de 2×20 en 90,99. Aquí el lienzo mide 270, así que todo va por 0,675; las
+ * distancias de cada raya las calcula el componente, ya escaladas.
  */
 
-$estelas: 60;
+$escala: 0.675;
 
 .Dia83 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: radial-gradient(circle at 50% 50%, #101a3a 0%, #03040c 70%);
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #1e3242;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia83-tunel {
+  .Dia83-warp {
     position: absolute;
-    inset: 0;
+    top: 100px * $escala;
+    left: 100px * $escala;
+    width: 200px * $escala;
+    height: 200px * $escala;
   }
 
-  .Dia83-estela {
+  .Dia83-anillo {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 42px;
-    height: 2px;
-    border-radius: 2px;
-    background: linear-gradient(90deg, transparent, #cfe4ff);
-    transform-origin: left center;
-    animation: Dia83Salir 1.6s linear infinite;
-
-    @for $i from 0 through $estelas - 1 {
-      &.e#{$i} {
-        /* Ángulos y desfases con multiplicadores primos, para que el patrón
-           no se repita de forma visible. */
-        --angulo: #{($i * 137) % 360}deg;
-        animation-delay: -($i % 16) * 0.1s;
-        animation-duration: 1.2s + (($i % 5) * 0.18s);
-      }
-    }
+    width: 200px * $escala;
+    height: 200px * $escala;
+    /* Casi todo el recorrido ocurre al final: de ahí el tirón. */
+    animation: Dia83Anillo 4s cubic-bezier(0.98, 0.02, 0.97, 0.12) infinite;
   }
 
-  .Dia83-nucleo {
-    position: relative;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 0 26px 8px rgb(190 220 255 / 65%);
+  .Dia83-raya {
+    position: absolute;
+    top: 90px * $escala;
+    left: 99px * $escala;
+    width: 2px * $escala;
+    height: 20px * $escala;
+    background: #c3dcec;
   }
 }
 
-@keyframes Dia83Salir {
+@keyframes Dia83Anillo {
   0% {
-    transform: rotate(var(--angulo)) translateX(6px) scaleX(0.05);
-    opacity: 0;
+    transform: scale(0);
+    opacity: 0.1;
   }
-  18% {
+  90% {
     opacity: 1;
   }
   100% {
-    transform: rotate(var(--angulo)) translateX(180px) scaleX(1.9);
-    opacity: 0;
+    transform: scale(4);
+    opacity: 1;
   }
 }
+

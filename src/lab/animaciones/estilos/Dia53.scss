@@ -1,103 +1,97 @@
 /*
- * El input nativo se deja transparente y encima se dibuja la pista propia.
- * Así se conserva todo el comportamiento accesible del control (teclado,
- * lectores de pantalla) sin heredar su apariencia.
+ * Día 53 — Range Slider.
+ *
+ * Medidas del pen de referencia, sobre 400×400: tarjeta de 300×40 en 180,50 y
+ * control de 270×30 dentro. Aquí el lienzo mide 270, así que todo va
+ * multiplicado por 0,675.
+ *
+ * Los pseudoelementos van sin agrupar a propósito: si un navegador no entiende
+ * uno de los selectores tira la regla entera, y con ellos separados cada motor
+ * se queda con el suyo.
  */
 
+$escala: 0.675;
+$verde: #7ad175;
+$pista: 4px * $escala;
+$tirador: 24px * $escala;
+
 .Dia53 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #1b1b28;
-  padding: 0 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+  background: #506172;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia53-valor {
-    margin: 0;
-    color: #fff;
-    font-size: 52px;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-
-    span {
-      margin-left: 4px;
-      color: #6ee7c8;
-      font-size: 22px;
-      font-weight: 400;
-    }
-  }
-
-  .Dia53-control {
-    position: relative;
-    width: 100%;
-    height: 34px;
-    display: flex;
-    align-items: center;
-  }
-
-  .Dia53-pista {
+  .Dia53-centro {
+    box-sizing: border-box;
     position: absolute;
-    left: 0;
-    right: 0;
-    height: 8px;
-    border-radius: 4px;
-    background: #2e2e42;
-    overflow: hidden;
+    top: 180px * $escala;
+    left: 50px * $escala;
+    width: 300px * $escala;
+    height: 40px * $escala;
+    padding: 5px * $escala 15px * $escala;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 2px 4px 8px 0 rgb(0 0 0 / 30%);
   }
 
-  .Dia53-relleno {
-    display: block;
-    height: 100%;
-    border-radius: 4px;
-    background: linear-gradient(90deg, #5f6bff, #6ee7c8);
-  }
-
-  input[type='range'] {
-    position: relative;
-    width: 100%;
-    margin: 0;
-    background: transparent;
+  [type='range'] {
     appearance: none;
-    cursor: pointer;
+    width: 270px * $escala;
+    height: 30px * $escala;
+    margin: 0;
+    background: none;
 
-    &::-webkit-slider-thumb {
-      appearance: none;
-      width: 22px;
-      height: 22px;
-      border: 3px solid #6ee7c8;
-      border-radius: 50%;
-      background: #1b1b28;
-      box-shadow: 0 0 0 0 rgb(110 231 200 / 35%);
-      transition:
-        box-shadow 0.2s,
-        transform 0.15s;
-    }
-
-    &::-moz-range-thumb {
-      width: 22px;
-      height: 22px;
-      border: 3px solid #6ee7c8;
-      border-radius: 50%;
-      background: #1b1b28;
-    }
-
-    &:hover::-webkit-slider-thumb,
-    &:focus-visible::-webkit-slider-thumb {
-      transform: scale(1.12);
-      box-shadow: 0 0 0 9px rgb(110 231 200 / 18%);
+    &:focus {
+      outline: none;
     }
   }
 
-  .Dia53-marcas {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    color: #55566f;
-    font-size: 11px;
+  [type='range']::-webkit-slider-runnable-track {
+    width: 270px * $escala;
+    height: $pista;
+    border: none;
+    border-radius: 2px * $escala;
+    background: $verde;
+    box-shadow: inset 0 1px 1px 0 rgb(0 0 0 / 20%);
+    cursor: pointer;
+  }
+
+  [type='range']::-moz-range-track {
+    width: 270px * $escala;
+    height: $pista;
+    border: none;
+    border-radius: 2px * $escala;
+    background: $verde;
+    cursor: pointer;
+  }
+
+  [type='range']::-webkit-slider-thumb {
+    appearance: none;
+    width: $tirador;
+    height: $tirador;
+    /* Centrarlo sobre una pista de 4: la mitad de la diferencia. */
+    margin-top: ($pista - $tirador) * 0.5;
+    border: 2px * $escala solid $verde;
+    border-radius: 50%;
+    background: var(--Dia53-agarre) center center / 50% 50% no-repeat #fff;
+    box-shadow: 1px 2px 4px 0 rgb(0 0 0 / 10%);
+    cursor: pointer;
+  }
+
+  [type='range']::-moz-range-thumb {
+    width: $tirador;
+    height: $tirador;
+    box-sizing: border-box;
+    border: 2px * $escala solid $verde;
+    border-radius: 50%;
+    background: var(--Dia53-agarre) center center / 50% 50% no-repeat #fff;
+    box-shadow: 1px 2px 4px 0 rgb(0 0 0 / 10%);
+    cursor: pointer;
   }
 }
+

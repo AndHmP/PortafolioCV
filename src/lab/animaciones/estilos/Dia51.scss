@@ -1,119 +1,152 @@
 /*
- * El conteo no lo lleva JavaScript: son tres cintas verticales con los
- * dígitos 0-9 que se desplazan. La de unidades da una vuelta completa en el
- * tiempo que la de decenas avanza un dígito, y así sucesivamente.
- * El botón solo alterna `animation-play-state`.
+ * Día 51 — CSS Counter.
+ *
+ * Medidas del pen de referencia, sobre 400×400: caja de 100×40 en 180,150 con
+ * cuatro columnas de 22 px y dígitos de 40 de alto; el icono de 16×20 va en
+ * 240,192. Aquí el lienzo mide 270, así que todo va multiplicado por 0,675.
  */
 
-$vuelta: 2s;
-$alto: 54px;
+$escala: 0.675;
+$paso: 40px * $escala;
 
 .Dia51 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #14141e;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 26px;
-  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+  background: #313c46;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia51-marcador {
-    display: flex;
-    gap: 6px;
-    padding: 10px 14px;
-    border-radius: 10px;
-    background: #0b0b12;
-    box-shadow: inset 0 3px 12px rgb(0 0 0 / 70%);
+  .Dia51-contador {
+    box-sizing: border-box;
+    position: absolute;
+    top: 180px * $escala;
+    left: 150px * $escala;
+    width: 100px * $escala;
+    height: 40px * $escala;
+    padding: 0 6px * $escala;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 2px 4px 8px 0 rgb(0 0 0 / 30%);
   }
 
-  .Dia51-rueda {
-    position: relative;
-    width: 34px;
-    height: $alto;
-    overflow: hidden;
+  .Dia51-columna {
+    float: left;
 
-    /* Difumina el borde superior e inferior para dar sensación de cilindro. */
+    span {
+      display: block;
+      width: 22px * $escala;
+      height: $paso;
+      color: #478bb8;
+      font-size: 30px * $escala;
+      line-height: $paso;
+      font-weight: 400;
+      text-align: center;
+    }
+
+    /* Una vuelta cada potencia de diez: 10 s, 100 s, 1000 s y 10000 s. */
+    &.unidades {
+      animation: Dia51Contar 10s steps(1) infinite;
+    }
+
+    &.decenas {
+      animation: Dia51Contar 100s steps(1) infinite;
+    }
+
+    &.centenas {
+      animation: Dia51Contar 1000s steps(1) infinite;
+    }
+
+    &.millares {
+      animation: Dia51Contar 10000s steps(1) infinite;
+    }
+  }
+
+  /* El pen deja corriendo la columna de los millares; aquí se paran las cuatro,
+     que es lo que promete el botón (a 10000 s no se nota, pero es lo suyo). */
+  &.pausado .Dia51-columna {
+    animation-play-state: paused;
+  }
+
+  .Dia51-icono {
+    position: absolute;
+    top: 240px * $escala;
+    left: 192px * $escala;
+    width: 16px * $escala;
+    height: 20px * $escala;
+    cursor: pointer;
+  }
+
+  .Dia51-pausa {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px * $escala;
+    height: 20px * $escala;
+    opacity: 1;
+    transform: scale(1);
+    transition: 0.3s ease-in-out;
+
     &::before,
     &::after {
       content: '';
       position: absolute;
-      left: 0;
-      right: 0;
-      height: 14px;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    &::before {
+      display: block;
       top: 0;
-      background: linear-gradient(#0b0b12, transparent);
+      left: 0;
+      width: 5px * $escala;
+      height: 20px * $escala;
+      background: #fff;
     }
 
     &::after {
-      bottom: 0;
-      background: linear-gradient(transparent, #0b0b12);
+      left: auto;
+      right: 0;
     }
   }
 
-  .Dia51-cinta {
-    display: flex;
-    flex-direction: column;
-    color: #4ade80;
-    font-size: 38px;
-    font-weight: 700;
-    line-height: $alto;
-    text-align: center;
-    font-variant-numeric: tabular-nums;
-    /* `steps(10)` hace que los dígitos salten en seco en vez de deslizarse. */
-    animation: Dia51Rodar linear infinite;
-    word-break: break-all;
+  /* El triángulo es un borde: ancho y alto cero, y el lado izquierdo pintado. */
+  .Dia51-play {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px * $escala 0 10px * $escala 16px * $escala;
+    border-color: transparent transparent transparent #fff;
+    opacity: 0;
+    transform: scale(0);
+    transition: 0.3s ease-in-out;
   }
 
-  .Dia51-rueda.unidades .Dia51-cinta {
-    animation-duration: $vuelta;
-    animation-timing-function: steps(10);
-  }
+  &.pausado {
+    .Dia51-pausa {
+      opacity: 0;
+      transform: scale(0);
+    }
 
-  .Dia51-rueda.decenas .Dia51-cinta {
-    animation-duration: $vuelta * 10;
-    animation-timing-function: steps(10);
-  }
-
-  .Dia51-rueda.centenas .Dia51-cinta {
-    animation-duration: $vuelta * 100;
-    animation-timing-function: steps(10);
-  }
-
-  &.pausado .Dia51-cinta {
-    animation-play-state: paused;
-  }
-
-  button {
-    padding: 10px 24px;
-    border: 1px solid #2f2f45;
-    border-radius: 24px;
-    background: transparent;
-    color: #9a9cbb;
-    font-family: inherit;
-    font-size: 12px;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition:
-      border-color 0.25s,
-      color 0.25s;
-
-    &:hover {
-      border-color: #4ade80;
-      color: #4ade80;
+    .Dia51-play {
+      opacity: 1;
+      transform: scale(1);
     }
   }
 }
 
-@keyframes Dia51Rodar {
-  to {
-    transform: translateY(-$alto * 10);
-  }
+@keyframes Dia51Contar {
+  0% { transform: translateY(0); }
+  10% { transform: translateY(-$paso); }
+  20% { transform: translateY(-$paso * 2); }
+  30% { transform: translateY(-$paso * 3); }
+  40% { transform: translateY(-$paso * 4); }
+  50% { transform: translateY(-$paso * 5); }
+  60% { transform: translateY(-$paso * 6); }
+  70% { transform: translateY(-$paso * 7); }
+  80% { transform: translateY(-$paso * 8); }
+  90% { transform: translateY(-$paso * 9); }
 }
+

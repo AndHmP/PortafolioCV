@@ -1,55 +1,59 @@
 /*
- * No hay ninguna espiral dibujada: son 22 cuadrados apilados, cada uno un
- * poco más pequeño, un poco más arriba y girado unos grados más que el
- * anterior. La espiral aparece sola al acumular esas diferencias.
+ * Día 44 — Twisted Pyramid.
+ *
+ * Medidas del pen de referencia, sobre 400×400: el marco exterior mide 200 en
+ * 100,100 y cada uno encoge 10 px, 5 por lado. Aquí el lienzo mide 270, así que
+ * todo va multiplicado por 0,675. El borde se queda en 1 px: es una línea de
+ * trazo, no una medida del dibujo.
  */
 
-$capas: 22;
+$escala: 0.675;
+$marcos: 20;
 
 .Dia44 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: radial-gradient(circle at 50% 65%, #262445, #0d0c1a 72%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 900px;
+  overflow: hidden;
+  background: #222;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia44-torre {
-    position: relative;
-    width: 130px;
-    height: 130px;
-    transform-style: preserve-3d;
-    transform: rotateX(64deg);
-    animation: Dia44Rotar 14s linear infinite;
+  &:hover .Dia44-marco {
+    animation-play-state: paused;
   }
 
-  .Dia44-capa {
+  .Dia44-marco {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    border-radius: 3px;
+    box-sizing: border-box;
+    border: 1px solid #888;
+    background: #222;
+    animation: Dia44Girar 2s ease-in-out infinite alternate;
+  }
 
-    @for $i from 0 through $capas - 1 {
-      &.c#{$i} {
-        $lado: 118px - $i * 4px;
-        width: $lado;
-        height: $lado;
-        margin: -$lado * 0.5 0 0 (-$lado * 0.5);
-        transform: translateZ($i * 9px) rotate($i * 11deg);
-        background: hsl(196deg + $i * 7, 78%, 42% + $i * 1.4%);
-        opacity: 0.92;
-      }
+  /* Cada marco: 10 px menos de lado, 5 px más de margen, un tono más claro y
+     1/30 s más de retraso que el anterior. */
+  @for $i from 1 through $marcos {
+    .Dia44-marco.m#{$i} {
+      z-index: $i;
+      width: (210px - $i * 10px) * $escala;
+      height: (210px - $i * 10px) * $escala;
+      top: (95px + $i * 5px) * $escala;
+      left: (95px + $i * 5px) * $escala;
+      border-color: rgb(70 + $i * 8, 70 + $i * 8, 70 + $i * 8);
+      animation-delay: $i * 0.0333333s;
     }
   }
 }
 
-@keyframes Dia44Rotar {
-  from {
-    transform: rotateX(64deg) rotateZ(0deg);
+@keyframes Dia44Girar {
+  0% {
+    transform: rotate(0deg);
   }
-  to {
-    transform: rotateX(64deg) rotateZ(360deg);
+  100% {
+    transform: rotate(360deg);
   }
 }
+

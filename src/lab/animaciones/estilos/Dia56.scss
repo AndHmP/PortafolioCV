@@ -1,100 +1,128 @@
-$petalos: 12;
+/*
+ * Día 56 — Flower.
+ *
+ * Medidas del pen de referencia, sobre 400×400: flor de 50 en 175,175 y
+ * pétalos de 50 que se apartan 35 px en diagonal. Aquí el lienzo mide 270, así
+ * que las distancias van por 0,675; las escalas y los grados no, que son
+ * proporciones del propio pétalo.
+ */
+
+$escala: 0.675;
+$petalos: 16;
+$aparta: 35px * $escala;
 
 .Dia56 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: linear-gradient(180deg, #cdeafd, #eaf7ff);
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .Dia56-tallo {
-    position: absolute;
-    bottom: 0;
-    width: 6px;
-    height: 130px;
-    border-radius: 3px;
-    background: linear-gradient(180deg, #4caf50, #2e7d32);
-    transform-origin: bottom center;
-    animation: Dia56Mecer 4.5s ease-in-out infinite;
-  }
-
-  .Dia56-hoja {
-    position: absolute;
-    bottom: 52px;
-    left: 50%;
-    width: 46px;
-    height: 24px;
-    margin-left: 2px;
-    border-radius: 0 100% 0 100%;
-    background: #43a047;
-    transform-origin: left center;
-    animation: Dia56Mecer 4.5s ease-in-out infinite;
-  }
+  background: #16a078;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
 
   .Dia56-flor {
     position: absolute;
-    bottom: 118px;
-    width: 130px;
-    height: 130px;
-    transform-origin: center bottom;
-    animation: Dia56Mecer 4.5s ease-in-out infinite;
+    top: 175px * $escala;
+    left: 175px * $escala;
+    width: 50px * $escala;
+    height: 50px * $escala;
+    transition: 0.5s ease-in-out;
+    animation: Dia56Flor 7s ease infinite;
+
+    /* Al pasar el ratón la flor se apaga entera, sin parar de girar. */
+    &:hover .Dia56-petalo,
+    &:hover .Dia56-corazon {
+      opacity: 0.3;
+    }
   }
 
-  /* Los pétalos parten del centro y se abren en abanico. El origen desplazado
-     hacia abajo es lo que los reparte en corona. */
   .Dia56-petalo {
     position: absolute;
-    top: 6px;
-    left: 50%;
-    width: 22px;
-    height: 52px;
-    margin-left: -11px;
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    background: linear-gradient(180deg, #fff, #ffe9f2);
-    transform-origin: center 59px;
-    animation: Dia56Abrir 5s ease-in-out infinite;
+    z-index: 1;
+    width: 50px * $escala;
+    height: 50px * $escala;
+    /* Una esquina en punta y la opuesta redonda: eso es el pétalo. */
+    border-radius: 2px 50px * $escala;
+    background: #fff;
+    opacity: 0.8;
+    box-shadow: 0 0 0 0 rgb(0 0 0 / 0%);
+    transition: 0.5s ease-in-out;
 
-    @for $i from 0 through $petalos - 1 {
-      &.p#{$i} {
-        --giro: #{$i * (360deg / $petalos)};
-        animation-delay: $i * 0.05s;
-      }
+    /* Los pares por delante: así el abanico se solapa de dos en dos. */
+    &:nth-child(2n + 2) {
+      z-index: 2;
     }
   }
 
   .Dia56-corazon {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 40px;
-    height: 40px;
-    margin: -20px 0 0 -20px;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 50px * $escala;
+    height: 50px * $escala;
     border-radius: 50%;
-    background: radial-gradient(circle at 38% 34%, #ffe082, #f9a825);
-    box-shadow: inset 0 -3px 8px rgb(0 0 0 / 12%);
+    background: #f1c40f;
+    opacity: 0.8;
+    transform: scale(0);
+    transition: opacity 0.5s ease-in-out;
+    animation: Dia56Corazon 7s ease-in-out infinite;
+  }
+
+  /* Cada pétalo con su giro y su turno: 45/16 % de ciclo entre vecinos. */
+  @for $i from 0 through $petalos - 1 {
+    .Dia56-petalo.p#{$i} {
+      transform: rotate($i * 22.5deg) translateY(0);
+      animation: Dia56Petalo#{$i} 7s ease infinite;
+    }
+
+    @keyframes Dia56Petalo#{$i} {
+      0%,
+      100% {
+        transform: rotate($i * 22.5deg) translateY(0);
+      }
+      #{10 + $i * 2.8125}%,
+      75% {
+        transform: rotate($i * 22.5deg) translate(-$aparta, -$aparta) scale(2);
+        box-shadow: -5px * $escala -5px * $escala 1px 0 rgb(0 0 0 / 6%);
+      }
+    }
   }
 }
 
-@keyframes Dia56Mecer {
-  0%,
-  100% {
-    transform: rotate(-3.5deg);
+@keyframes Dia56Flor {
+  0% {
+    transform: rotate(0deg);
   }
-  50% {
-    transform: rotate(3.5deg);
+  60% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
-@keyframes Dia56Abrir {
-  0%,
-  100% {
-    transform: rotate(var(--giro)) scaleY(0.94);
+/* Entra pasándose de largo cuando los pétalos ya están fuera, y se va al final. */
+@keyframes Dia56Corazon {
+  12% {
+    transform: scale(0);
   }
-  50% {
-    transform: rotate(calc(var(--giro) + 6deg)) scaleY(1.06);
+  20% {
+    transform: scale(1.1);
+  }
+  25% {
+    transform: scale(0.95);
+  }
+  30%,
+  55% {
+    transform: scale(1);
+  }
+  57.9% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0);
   }
 }
+

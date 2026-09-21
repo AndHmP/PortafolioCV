@@ -1,16 +1,20 @@
 import './estilos/Dia64.scss';
 
 /* Día 64 — Button
-   "Un efecto para botones muy importantes, con ese punto de wow." */
+   "Dos rectángulos y un desplazamiento: un botón con truco."
+
+   El botón no tiene fondo propio: son sus dos pseudoelementos. El `::before`
+   es la cara blanca y el `::after` la sombra morada, desplazada 13 y 12 px.
+
+   Al pasar el ratón, el botón entero se mueve a donde estaba la sombra y los
+   colores se intercambian; la sombra, además, salta al otro lado. Parece que
+   la pieza se ha dado la vuelta sin que nada haya rotado. */
 
 export default function Dia64() {
   return (
     <div className="Dia64">
-      <button type="button" className="Dia64-boton">
-        <span className="Dia64-borde" />
-        <span className="Dia64-brillo" />
-        <span className="Dia64-etiqueta">Contratar</span>
-      </button>
+      <div className="Dia64-boton">Hover me</div>
     </div>
   );
 }
+

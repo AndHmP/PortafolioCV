@@ -3,35 +3,40 @@ import { useState } from 'react';
 import './estilos/Dia40.scss';
 
 /* Día 40 — Gallery
-   "Mira más de cerca haciendo clic en las imágenes." */
+   "Una galería de fotos siempre es un buen ejercicio de maquetación."
 
-const PIEZAS = [
-  { nombre: 'Coral', color: 'linear-gradient(140deg, #ff9a8b, #ff6a88)' },
-  { nombre: 'Menta', color: 'linear-gradient(140deg, #43e97b, #38f9d7)' },
-  { nombre: 'Índigo', color: 'linear-gradient(140deg, #667eea, #764ba2)' },
-  { nombre: 'Ámbar', color: 'linear-gradient(140deg, #f6d365, #fda085)' },
-];
+   Rejilla de 3×3. Al pulsar una foto crece a escala 3,0625 —justo lo que hace
+   falta para que 128 px cubran los 392 de la rejilla— y las otras ocho se
+   desvanecen. Cada celda tiene su propio `transform-origin` según el lugar que
+   ocupa, así que todas se expanden hacia el mismo encuadre.
+
+   Se vuelve atrás pulsando la foto ampliada. */
+
+const FOTOS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Dia40() {
-  const [abierta, setAbierta] = useState<number | null>(null);
+  const [activa, setActiva] = useState<number | null>(null);
 
   return (
     <div className="Dia40">
-      <div className="Dia40-rejilla">
-        {PIEZAS.map((p, i) => (
-          <button
-            key={p.nombre}
-            type="button"
-            className={`Dia40-celda ${abierta === i ? 'abierta' : ''} ${
-              abierta !== null && abierta !== i ? 'oculta' : ''
+      <div className="Dia40-fotos">
+        {FOTOS.map((n) => (
+          <div
+            key={n}
+            className={`Dia40-foto f${n} ${activa === n ? 'activa' : ''} ${
+              activa !== null && activa !== n ? 'lejos' : ''
             }`}
-            style={{ background: p.color }}
-            onClick={() => setAbierta(abierta === i ? null : i)}
+            role="button"
+            tabIndex={0}
+            aria-label={`Foto ${n}`}
+            onClick={() => setActiva(activa === n ? null : n)}
+            onKeyDown={(e) => e.key === 'Enter' && setActiva(activa === n ? null : n)}
           >
-            <span>{p.nombre}</span>
-          </button>
+            <img src={`/lab/dia40/${n}.jpg`} alt="" />
+          </div>
         ))}
       </div>
     </div>
   );
 }
+

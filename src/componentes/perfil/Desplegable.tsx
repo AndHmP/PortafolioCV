@@ -5,8 +5,6 @@ import Icono from '@/componentes/iconos/Icono';
 interface Props {
   titulo: string;
   children: ReactNode;
-  /** Abierto por defecto. En móvil conviene cerrar las secciones largas. */
-  inicialAbierto?: boolean;
 }
 
 /**
@@ -17,8 +15,10 @@ interface Props {
  * ancho de pantalla lo desbordaba o dejaba un hueco. Aquí el alto lo resuelve
  * la animación de `grid-template-rows`, que se adapta al contenido real.
  */
-export default function Desplegable({ titulo, children, inicialAbierto = true }: Props) {
-  const [abierto, setAbierto] = useState(inicialAbierto);
+export default function Desplegable({ titulo, children }: Props) {
+  /* Todas las secciones arrancan abiertas: el perfil se lee de un tirón y el
+     plegado queda para quien quiera despejar lo que ya ha leído. */
+  const [abierto, setAbierto] = useState(true);
   const idContenido = useId();
 
   return (

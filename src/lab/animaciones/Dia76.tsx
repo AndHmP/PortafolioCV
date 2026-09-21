@@ -3,47 +3,42 @@ import { useState } from 'react';
 import './estilos/Dia76.scss';
 
 /* Día 76 — Reveal Key
-   "¿Puedes resolver el acertijo y descubrir el secreto? Sigue la instrucción." */
+   "Escribe la contraseña y el campo se da la vuelta."
 
-const CLAVE = ['C', 'S', 'S', '4', 'E', 'V', 'E', 'R'];
+   El campo y su reverso comparten caja con `backface-visibility: hidden`: al
+   girar 180° en X, el que estaba de frente desaparece y asoma el otro. Debajo
+   queda la clave, que hasta entonces estaba tapada por el propio campo.
+
+   La contraseña es literalmente «password», como en el reto. El pen la valida
+   con un `pattern` en el input y dispara el giro con `:valid`; aquí se compara
+   en el componente, que es lo mismo y no obliga a envolverlo en un `<form>`. */
+
+const CLAVE = 'password';
 
 export default function Dia76() {
-  const [descubiertas, setDescubiertas] = useState<number[]>([]);
-
-  const listo = descubiertas.length === CLAVE.length;
+  const [texto, setTexto] = useState('');
+  const abierto = texto.toLowerCase() === CLAVE;
 
   return (
-    <div className={`Dia76 ${listo ? 'resuelto' : ''}`}>
-      <p className="Dia76-instruccion">
-        {listo ? 'clave descubierta' : 'descubre las 8 casillas'}
-      </p>
+    <div className="Dia76">
+      <div className="Dia76-centro">
+        <div className="Dia76-caja">
+          <div className={`Dia76-giro ${abierto ? 'abierto' : ''}`}>
+            <input
+              className="Dia76-campo"
+              type="text"
+              placeholder={'Enter "password"'}
+              value={texto}
+              onChange={(e) => setTexto(e.target.value)}
+              aria-label="Contraseña"
+            />
+            <div className="Dia76-reverso">Secret Key</div>
+          </div>
 
-      <div className="Dia76-tablero">
-        {CLAVE.map((letra, i) => (
-          <button
-            key={i}
-            type="button"
-            className={`Dia76-ficha ${descubiertas.includes(i) ? 'girada' : ''}`}
-            onClick={() =>
-              setDescubiertas((a) => (a.includes(i) ? a : [...a, i]))
-            }
-            aria-label={`Casilla ${i + 1}`}
-          >
-            {/* Dos caras sobre el mismo eje: la trasera está pregirada 180°,
-                así al voltear la ficha una sustituye a la otra. */}
-            <span className="Dia76-cara frente">?</span>
-            <span className="Dia76-cara dorso">{letra}</span>
-          </button>
-        ))}
+          <div className="Dia76-clave">MD5-SU3-CX8</div>
+        </div>
       </div>
-
-      <button
-        type="button"
-        className="Dia76-reiniciar"
-        onClick={() => setDescubiertas([])}
-      >
-        Reiniciar
-      </button>
     </div>
   );
 }
+

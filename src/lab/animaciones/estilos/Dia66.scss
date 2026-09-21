@@ -1,96 +1,88 @@
+/*
+ * Día 66 — Sparkle Checkbox.
+ *
+ * Medidas del pen de referencia, sobre 400×400: casilla de 40 en 180,180 y
+ * chispas de 2×16 que salen a 50 px. Aquí el lienzo mide 270, así que todo va
+ * multiplicado por 0,675.
+ */
+
+$escala: 0.675;
 $chispas: 12;
 
 .Dia66 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #15151f;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
+  overflow: hidden;
+  background: #5a717b;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia66-caja {
-    position: relative;
-    width: 68px;
-    height: 68px;
-    padding: 0;
-    border: 3px solid #3c3d52;
-    border-radius: 18px;
+  .Dia66-casilla {
+    position: absolute;
+    top: 180px * $escala;
+    left: 180px * $escala;
+    width: 40px * $escala;
+    height: 40px * $escala;
+
+    input {
+      display: none;
+    }
+  }
+
+  .Dia66-aro {
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0;
+    border: 2px * $escala solid #fff;
+    border-radius: 50%;
     background: transparent;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition:
-      border-color 0.3s,
-      background-color 0.3s,
-      transform 0.25s cubic-bezier(0.68, -0.5, 0.27, 1.6);
+    transition: 0.3s ease-in-out;
+    box-shadow:
+      2px 2px 4px 0 rgb(0 0 0 / 20%),
+      inset 2px 2px 4px 0 rgb(0 0 0 / 20%);
+  }
 
-    svg {
-      width: 34px;
-      height: 34px;
-      fill: none;
-      stroke: #fff;
-      stroke-width: 3;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-dasharray: 26;
-      stroke-dashoffset: 26;
-      transition: stroke-dashoffset 0.3s ease 0.08s;
-    }
+  /* El borde crece hasta la mitad del radio: el hueco se cierra solo. */
+  .marcada .Dia66-aro {
+    border-width: 14px * $escala;
+    border-color: #5fd17a;
+    background: #5fd17a;
+    box-shadow:
+      2px 2px 4px 0 rgb(0 0 0 / 20%),
+      inset 2px 2px 4px 0 rgb(0 0 0 / 0%);
+  }
 
-    &.marcado {
-      border-color: #ffd166;
-      background: #ffd166;
-      transform: scale(1.06);
-
-      svg {
-        stroke-dashoffset: 0;
-        stroke: #15151f;
-      }
-    }
+  .Dia66-chispas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
   }
 
   .Dia66-chispa {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 6px;
-    height: 6px;
-    margin: -3px 0 0 -3px;
-    border-radius: 50%;
-    background: #ffd166;
-    animation: Dia66Estallar 0.65s ease-out forwards;
+    top: 12px * $escala;
+    left: 19px * $escala;
+    width: 2px * $escala;
+    height: 16px * $escala;
+    background: #fff;
+    /* Sin transición en reposo: vuelven de golpe, no se rebobinan. */
+    transition: none;
+  }
 
-    @for $i from 0 through $chispas - 1 {
-      &.c#{$i} {
-        --angulo: #{$i * (360deg / $chispas)};
-        --alcance: #{46px + ($i % 3) * 12px};
-        background: hsl(38deg + ($i % 4) * 22, 92%, 64%);
-        animation-delay: $i * 0.012s;
-      }
+  @for $i from 1 through $chispas {
+    .Dia66-chispa.ch#{$i} {
+      transform: rotate(($i - 1) * 30deg) translateY(-15px * $escala) scaleY(0);
+    }
+
+    .marcada .Dia66-chispa.ch#{$i} {
+      transform: rotate(($i - 1) * 30deg) translateY(-50px * $escala) scaleY(1);
+      opacity: 0;
+      transition: 0.5s ease-in-out;
     }
   }
-
-  .Dia66-texto {
-    margin: 0;
-    color: #7b7d9e;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 13px;
-    letter-spacing: 1px;
-    transition: color 0.3s;
-  }
 }
 
-@keyframes Dia66Estallar {
-  0% {
-    transform: rotate(var(--angulo)) translateX(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(var(--angulo)) translateX(var(--alcance)) scale(0);
-    opacity: 0;
-  }
-}

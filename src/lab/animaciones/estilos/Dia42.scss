@@ -1,87 +1,87 @@
 /*
- * Las 46 estrellas no se escriben una por una: un bucle de Sass reparte
- * posición, tamaño y desfase usando dos multiplicadores primos entre sí, de
- * modo que el patrón no se repita visiblemente.
+ * Día 42 — Stars.
+ *
+ * Medidas del pen de referencia, sobre 400×400: disco de 280 en 60,60. Aquí el
+ * lienzo mide 270, así que va por 0,675. Las estrellas se posicionan en
+ * porcentaje desde el componente, así que el disco puede cambiar de tamaño sin
+ * que haya que recalcular nada.
+ *
+ * El punto se queda en 1 px: escalarlo lo dejaría por debajo del píxel físico
+ * y desaparecería en pantallas normales.
+ *
+ * La estela de las fugaces es un degradado, no el PNG del pen: son 240×4 px de
+ * blanco que se desvanece hacia la cola, y a este tamaño no se distingue.
  */
 
-$estrellas: 46;
+$escala: 0.675;
 
 .Dia42 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: linear-gradient(180deg, #05060f 0%, #0d1030 55%, #1b1f4b 100%);
   overflow: hidden;
+  background: #fff;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  .Dia42-disco {
+    position: absolute;
+    top: 60px * $escala;
+    left: 60px * $escala;
+    width: 280px * $escala;
+    height: 280px * $escala;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(#1d4253 0%, #6bb5c4 100%);
+  }
+
+  /* Entra por fuera del disco, lo cruza en diagonal y sale por la otra punta;
+     el recorte circular del disco es lo que la hace aparecer y desaparecer. */
+  .Dia42-fugaz {
+    position: absolute;
+    left: -120px * $escala;
+    width: 120px * $escala;
+    height: 2px * $escala;
+    background: linear-gradient(to right, rgb(255 255 255 / 0%), #fff);
+    transform: rotate(20deg);
+    animation-name: Dia42Fugaz;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+  }
 
   .Dia42-estrella {
     position: absolute;
-    border-radius: 50%;
+    width: 1px;
+    height: 1px;
+    border-radius: 1px;
     background: #fff;
-    animation: Dia42Titilar ease-in-out infinite;
-
-    @for $i from 0 through $estrellas - 1 {
-      &.e#{$i} {
-        top: (($i * 37) % 88) * 1%;
-        left: (($i * 53) % 96) * 1%;
-        width: 1px + ($i % 3);
-        height: 1px + ($i % 3);
-        opacity: 0.35 + ($i % 5) * 0.13;
-        animation-duration: 1.8s + ($i % 7) * 0.45s;
-        animation-delay: -($i % 11) * 0.37s;
-      }
-    }
-  }
-
-  .Dia42-fugaz {
-    position: absolute;
-    top: 18%;
-    left: -12%;
-    width: 92px;
-    height: 2px;
-    border-radius: 2px;
-    background: linear-gradient(90deg, transparent, #fff);
-    opacity: 0;
-    transform: rotate(18deg);
-    animation: Dia42Fugaz 7s ease-in infinite;
-  }
-
-  .Dia42-horizonte {
-    position: absolute;
-    left: -10%;
-    right: -10%;
-    bottom: -46px;
-    height: 110px;
-    border-radius: 50% 50% 0 0;
-    background: #070812;
-    box-shadow: 0 -1px 24px rgb(120 140 255 / 22%);
+    animation-name: Dia42Parpadeo;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
   }
 }
 
-@keyframes Dia42Titilar {
+/* Cruza en el primer 10 % del ciclo y se queda fuera de plano el resto. */
+@keyframes Dia42Fugaz {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(20deg);
+  }
+  10%,
+  100% {
+    transform: translate3d(451px * $escala, 164px * $escala, 0) rotate(20deg);
+  }
+}
+
+@keyframes Dia42Parpadeo {
   0%,
   100% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-  50% {
-    transform: scale(1.7);
-    filter: brightness(1.9);
-  }
-}
-
-@keyframes Dia42Fugaz {
-  0%,
-  62% {
-    opacity: 0;
-    transform: translate(0, 0) rotate(18deg);
-  }
-  68% {
     opacity: 1;
   }
-  86%,
-  100% {
-    opacity: 0;
-    transform: translate(300px, 96px) rotate(18deg);
+  50% {
+    opacity: 0.2;
   }
 }
+
+

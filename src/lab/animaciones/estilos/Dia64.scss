@@ -1,95 +1,92 @@
+/*
+ * Día 64 — Button.
+ *
+ * Medidas del pen de referencia, sobre 400×400: botón de 200×70 en 160,100 con
+ * la sombra a 13,12. Aquí el lienzo mide 270, así que todo va multiplicado por
+ * 0,675.
+ */
+
+$escala: 0.675;
+$morado: #8e44ad;
+$ancho: 200px * $escala;
+$alto: 70px * $escala;
+$salto-x: 13px * $escala;
+$salto-y: 12px * $escala;
+
 .Dia64 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #0d0d16;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  background: #2c3e50;
+  color: #2c3e50;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
   .Dia64-boton {
-    position: relative;
-    padding: 18px 42px;
-    border: none;
-    border-radius: 14px;
-    background: #16162a;
-    color: #fff;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 1px;
+    position: absolute;
+    z-index: 2;
+    top: 160px * $escala;
+    left: 100px * $escala;
+    width: $ancho;
+    height: $alto;
+    color: #2c3e50;
+    font-size: 25px * $escala;
+    font-weight: 400;
+    line-height: 68px * $escala;
+    letter-spacing: 1px * $escala;
+    text-align: center;
+    text-transform: uppercase;
     cursor: pointer;
-    isolation: isolate;
-    transition: transform 0.18s;
+    transition: 0.3s ease-in-out;
 
-    &:active {
-      transform: scale(0.96);
+    /* La cara. */
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      display: block;
+      top: 0;
+      left: 0;
+      width: $ancho;
+      height: $alto;
+      background: #fff;
+      box-shadow: 2px 2px 4px 0 rgb(0 0 0 / 10%);
+      transform: translate(0, 0);
+      transition: 0.3s ease-in-out;
     }
-  }
 
-  /* Borde animado: un degradado cónico girando, recortado a un marco de 2px
-     con `mask` compuesta. Es lo que da el brillo que recorre el contorno. */
-  .Dia64-borde {
-    position: absolute;
-    inset: -2px;
-    z-index: -1;
-    border-radius: 16px;
-    background: conic-gradient(from 0deg, transparent 0deg 250deg, #5f6bff 310deg, #6ee7c8 360deg);
-    animation: Dia64Girar 3s linear infinite;
-  }
-
-  .Dia64-boton::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: 14px;
-    background: #16162a;
-  }
-
-  /* Destello diagonal que cruza el botón cada pocos segundos. */
-  .Dia64-brillo {
-    position: absolute;
-    inset: 0;
-    border-radius: 14px;
-    overflow: hidden;
-
+    /* La sombra, que en realidad es otra cara. */
     &::after {
       content: '';
       position: absolute;
+      z-index: -2;
+      display: block;
       top: 0;
-      left: -60%;
-      width: 45%;
-      height: 100%;
-      background: linear-gradient(
-        100deg,
-        transparent,
-        rgb(255 255 255 / 26%),
-        transparent
-      );
-      transform: skewX(-18deg);
-      animation: Dia64Destello 3s ease-in-out infinite;
+      left: 0;
+      width: $ancho;
+      height: $alto;
+      background: $morado;
+      box-shadow: 2px 2px 4px 0 rgb(0 0 0 / 20%);
+      transform: translate($salto-x, $salto-y);
+      transition: 0.3s ease-in-out;
+    }
+
+    &:hover {
+      color: #fff;
+      transform: translate($salto-x, $salto-y);
+
+      &::before {
+        background: $morado;
+        box-shadow: 4px 4px 8px 0 rgb(0 0 0 / 20%);
+      }
+
+      &::after {
+        background: #fff;
+        transform: translate(-15px * $escala, -10px * $escala);
+      }
     }
   }
-
-  .Dia64-etiqueta {
-    position: relative;
-  }
 }
 
-@keyframes Dia64Girar {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes Dia64Destello {
-  0%,
-  55% {
-    left: -60%;
-  }
-  85%,
-  100% {
-    left: 120%;
-  }
-}

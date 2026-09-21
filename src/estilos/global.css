@@ -109,3 +109,23 @@
     top: 0;
   }
 }
+
+/*
+ * Arrastre de la ola del perfil (`OlaPerfil`).
+ *
+ * Recorre un mosaico completo, que es donde el dibujo se repite: el final
+ * coincide con el principio y no se ve el salto.
+ */
+@keyframes ola-perfil-arrastre {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-1440px);
+  }
+}
+
+.ola-perfil {
+  animation: ola-perfil-arrastre 18s linear infinite;
+  will-change: transform;
+}

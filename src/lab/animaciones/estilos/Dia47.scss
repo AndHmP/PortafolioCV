@@ -1,66 +1,55 @@
+/*
+ * Día 47 — Pixel Art.
+ *
+ * Medidas del pen de referencia, sobre 400×400: 20×20 celdas de 20 px que
+ * llenan el lienzo justo.
+ *
+ * El original las flota. Aquí no vale: el lienzo mide 269,09, no 270, y con
+ * celdas de ancho fijo la última de cada fila se cae de línea y el dibujo sale
+ * cortado en diagonal. Se reparte con `grid` en veinte columnas iguales.
+ *
+ * El borde se queda en 1 px: es la retícula, no una medida del dibujo.
+ */
+
+$escala: 0.675;
+$rojo: #de4738;
+
 .Dia47 {
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #0c0c14;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
+  overflow: hidden;
+  background: $rojo;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia47-lienzo {
-    display: grid;
-    grid-template-columns: repeat(11, 1fr);
-    gap: 2px;
-    padding: 10px;
-    border-radius: 8px;
-    background: #16161f;
-  }
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
 
-  .Dia47-pixel {
-    width: 15px;
-    height: 15px;
-    padding: 0;
-    border: none;
-    border-radius: 2px;
-    background: #22222f;
+  /* La casilla se pinta a sí misma: sin `appearance` no es más que un cuadro
+     con borde, que es justo lo que pide la pieza. */
+  .Dia47-celda {
+    appearance: none;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    margin: 0;
+    border: 1px solid #e24e3f;
+    background: transparent;
     cursor: pointer;
-    transition:
-      background-color 0.18s,
-      transform 0.18s;
 
     &:hover {
-      background: #33334a;
-      transform: scale(1.18);
+      background: #ec5142;
+      border-color: #e24e3f;
     }
 
-    &.activo {
-      background: #4ade80;
-      box-shadow: 0 0 8px rgb(74 222 128 / 55%);
-      /* Rebote corto al encender, para que el clic se sienta. */
-      animation: Dia47Encender 0.28s ease;
+    &:checked {
+      background: #fff;
+      border-color: #fff;
     }
-  }
-
-  .Dia47-pista {
-    margin: 0;
-    color: #4a4b63;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
   }
 }
 
-@keyframes Dia47Encender {
-  0% {
-    transform: scale(0.5);
-  }
-  60% {
-    transform: scale(1.25);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
+

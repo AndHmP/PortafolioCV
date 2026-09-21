@@ -1,95 +1,99 @@
+/*
+ * Día 76 — Reveal Key.
+ *
+ * Medidas del pen de referencia, sobre 400×400: caja de 220×50 centrada, con
+ * perspectiva de 250. Aquí el lienzo mide 270, así que todo va por 0,675.
+ */
+
+$escala: 0.675;
+$pizarra: #34495e;
+$alto: 50px * $escala;
+$ancho: 220px * $escala;
+
 .Dia76 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #131322;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  font-family: 'Open Sans', sans-serif;
-  transition: background-color 0.6s;
+  overflow: hidden;
+  background: $pizarra;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  &.resuelto {
-    background: #16233a;
+  .Dia76-centro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
-  .Dia76-instruccion {
-    margin: 0;
-    color: #6b6d8c;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
-    transition: color 0.4s;
+  .Dia76-caja {
+    width: $ancho;
+    height: $alto;
+    perspective: 250px * $escala;
+    box-shadow: 2px 4px 8px 0 rgb(0 0 0 / 30%);
   }
 
-  &.resuelto .Dia76-instruccion {
-    color: #6ee7c8;
-  }
-
-  .Dia76-tablero {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-  }
-
-  .Dia76-ficha {
-    position: relative;
-    width: 46px;
-    height: 52px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    cursor: pointer;
+  .Dia76-giro {
+    position: absolute;
+    z-index: 2;
     transform-style: preserve-3d;
-    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    transform-origin: 50% 0;
+    transition: 0.5s ease-in-out;
 
-    &.girada {
-      transform: rotateY(180deg);
+    &.abierto {
+      transform: rotateX(180deg);
     }
   }
 
-  .Dia76-cara {
+  /* Al levantarse el campo, la clave recibe su sombra. */
+  .abierto ~ .Dia76-clave {
+    box-shadow: 2px -50px * $escala 8px 0 rgb(0 0 0 / 30%);
+  }
+
+  .Dia76-campo {
+    box-sizing: border-box;
+    appearance: none;
+    z-index: 2;
+    width: $ancho;
+    height: $alto;
+    padding: 15px * $escala 0;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    background: #fff;
+    color: $pizarra;
+    font-family: inherit;
+    font-size: 16px * $escala;
+    line-height: 20px * $escala;
+    text-align: center;
+    backface-visibility: hidden;
+  }
+
+  /* La cara de atrás, ya girada: al voltear la caja queda derecha. */
+  .Dia76-reverso {
     position: absolute;
     inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9px;
-    font-size: 19px;
+    background: #fff;
+    color: $pizarra;
     font-weight: 700;
-    /* Sin esto se verían las dos caras superpuestas. */
+    line-height: $alto;
+    text-align: center;
     backface-visibility: hidden;
-
-    &.frente {
-      background: #23233a;
-      color: #4a4b63;
-    }
-
-    &.dorso {
-      background: linear-gradient(150deg, #5f6bff, #6ee7c8);
-      color: #0f0f1a;
-      transform: rotateY(180deg);
-    }
+    transform: rotateX(-180deg);
   }
 
-  .Dia76-reiniciar {
-    padding: 8px 20px;
-    border: 1px solid #2f2f45;
-    border-radius: 20px;
-    background: transparent;
-    color: #6b6d8c;
-    font-family: inherit;
-    font-size: 11px;
-    cursor: pointer;
-    transition:
-      border-color 0.25s,
-      color 0.25s;
-
-    &:hover {
-      border-color: #6ee7c8;
-      color: #6ee7c8;
-    }
+  .Dia76-clave {
+    width: $ancho;
+    height: $alto;
+    background: #64c760;
+    color: #fff;
+    font-size: 16px * $escala;
+    line-height: $alto;
+    text-align: center;
+    box-shadow: 2px 0 8px 0 rgb(0 0 0 / 0%);
+    transition: 0.5s ease-in-out;
   }
 }
+

@@ -1,126 +1,69 @@
 /*
- * Tres estados en un solo control: reposo, en curso y resuelto. El botón se
- * contrae hasta ser un círculo mientras trabaja, que es la forma más directa
- * de decir "espera" sin añadir otro elemento.
+ * Día 82 — Action Button.
+ *
+ * Medidas del pen de referencia, sobre 400×400: botón de 100×50 en 175,150 con
+ * perspectiva de 150. Aquí el lienzo mide 270, así que todo va por 0,675.
  */
 
+$escala: 0.675;
+$pizarra: #34495e;
+
 .Dia82 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #14141f;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
+  overflow: hidden;
+  background: #bdcedb;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  perspective: 150px * $escala;
 
   .Dia82-boton {
-    position: relative;
-    width: 168px;
-    height: 54px;
-    border: none;
-    border-radius: 27px;
-    background: #5f6bff;
-    color: #fff;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition:
-      width 0.45s cubic-bezier(0.65, 0, 0.35, 1),
-      background-color 0.45s;
-  }
-
-  .Dia82-texto {
-    transition: opacity 0.2s;
-  }
-
-  .Dia82-aro,
-  .Dia82-check {
     position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.25s;
-  }
-
-  .Dia82-aro::after {
-    content: '';
-    width: 22px;
-    height: 22px;
-    border: 2.5px solid rgb(255 255 255 / 35%);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: Dia82Girar 0.8s linear infinite;
-  }
-
-  .Dia82-check svg {
-    width: 26px;
-    height: 26px;
-    fill: none;
-    stroke: #fff;
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 26;
-    stroke-dashoffset: 26;
-  }
-
-  .Dia82-boton.cargando {
-    width: 54px;
-
-    .Dia82-texto {
-      opacity: 0;
-    }
-
-    .Dia82-aro {
-      opacity: 1;
-    }
-  }
-
-  .Dia82-boton.hecho {
-    width: 54px;
-    background: #22c55e;
-
-    .Dia82-texto {
-      opacity: 0;
-    }
-
-    .Dia82-check {
-      opacity: 1;
-
-      svg {
-        animation: Dia82Trazar 0.4s ease forwards 0.1s;
-      }
-    }
-  }
-
-  .Dia82-pista {
-    margin: 0;
-    color: #4a4b63;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 10.5px;
+    display: block;
+    top: 175px * $escala;
+    left: 150px * $escala;
+    width: 100px * $escala;
+    height: 50px * $escala;
+    border-radius: 25px * $escala;
+    line-height: 46px * $escala;
+    font-weight: 600;
+    text-align: center;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    transform-style: preserve-3d;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+    box-shadow: 4px 8px 12px 0 rgb(0 0 0 / 10%);
+
+    /* Al voltear, la sombra pasa a proyectarse hacia arriba. */
+    &.enviado {
+      transform: rotateX(180deg);
+      box-shadow: 4px -8px * $escala 12px * $escala 0 rgb(0 0 0 / 10%);
+    }
+  }
+
+  .Dia82-cara,
+  .Dia82-reverso {
+    box-sizing: border-box;
+    position: absolute;
+    display: block;
+    z-index: 2;
+    inset: 0;
+    border: 2px solid #fff;
+    border-radius: 25px * $escala;
+    background: #fff;
+    color: $pizarra;
+    backface-visibility: hidden;
+    transform: rotateX(0deg);
+  }
+
+  .Dia82-reverso {
+    z-index: 1;
+    background: #64c760;
+    color: #fff;
+    transform: rotateX(180deg);
   }
 }
 
-@keyframes Dia82Girar {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes Dia82Trazar {
-  to {
-    stroke-dashoffset: 0;
-  }
-}

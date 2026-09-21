@@ -10,6 +10,7 @@ const RUTAS_FIJAS = [
   { ruta: '/', prioridad: '1.0' },
   { ruta: '/proyectos', prioridad: '0.9' },
   { ruta: '/perfil', prioridad: '0.8' },
+  { ruta: '/credenciales', prioridad: '0.7' },
   { ruta: '/laboratorio', prioridad: '0.7' },
 ];
 

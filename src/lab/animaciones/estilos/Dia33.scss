@@ -1,160 +1,82 @@
+/*
+ * Día 33 — Sunny Day.
+ *
+ * Medidas del pen de referencia, sobre 400×400: sol de 64 en 40,52 y tres
+ * nubes de 151×72, 114×57 y 66×30. Aquí el lienzo mide 270, así que todo va
+ * multiplicado por 0,675.
+ *
+ * Los desplazamientos van en porcentaje del propio elemento, así que esos no
+ * hay que escalarlos: el recorrido se adapta solo.
+ */
+
+$escala: 0.675;
+$cielo: #75c1e8;
+
 .Dia33 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: linear-gradient(180deg, #4fc3f7 0%, #b3e5fc 65%, #e1f5fe 100%);
+  background: $cielo;
   overflow: hidden;
 
   .Dia33-sol {
     position: absolute;
-    top: 46px;
-    left: 50%;
-    width: 54px;
-    height: 54px;
-    margin-left: -27px;
+    top: 40px * $escala;
+    left: 52px * $escala;
+    width: 64px * $escala;
+    height: 64px * $escala;
     border-radius: 50%;
-    background: #ffd54f;
-    box-shadow: 0 0 26px 6px rgb(255 213 79 / 60%);
-    animation: Dia33Girar 22s linear infinite;
+    background: #ffd93c;
+    animation: Dia33Derecha 60s linear infinite alternate both;
   }
 
-  /* Los ocho rayos son el mismo elemento rotado; el contenedor los gira. */
-  .Dia33-rayo {
+  .Dia33-nube-grande,
+  .Dia33-nube-mediana,
+  .Dia33-nube-pequena {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 4px;
-    height: 78px;
-    margin: -39px 0 0 -2px;
-    border-radius: 2px;
-    background: rgb(255 213 79 / 75%);
-
-    @for $i from 0 through 7 {
-      &.r#{$i} {
-        transform: rotate($i * 45deg);
-      }
-    }
+    z-index: 5;
+    fill: #fff;
+    animation: Dia33Izquierda 60s linear infinite alternate both;
   }
 
-  .Dia33-nube {
-    position: absolute;
-    height: 22px;
-    border-radius: 22px;
-    background: #fff;
-    animation: Dia33Derivar linear infinite;
-
-    /* Los dos bultos que convierten la píldora en nube. */
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      border-radius: 50%;
-      background: #fff;
-    }
-
-    &::before {
-      left: 14%;
-      width: 26px;
-      height: 26px;
-    }
-
-    &::after {
-      right: 18%;
-      width: 18px;
-      height: 18px;
-    }
-
-    &.n1 {
-      top: 40px;
-      width: 74px;
-      animation-duration: 26s;
-      animation-delay: -4s;
-    }
-
-    &.n2 {
-      top: 96px;
-      width: 56px;
-      opacity: 0.85;
-      animation-duration: 34s;
-      animation-delay: -18s;
-    }
-
-    &.n3 {
-      top: 148px;
-      width: 92px;
-      opacity: 0.7;
-      animation-duration: 44s;
-      animation-delay: -30s;
-    }
+  .Dia33-nube-grande {
+    top: 118px * $escala;
+    left: 280px * $escala;
+    width: 151px * $escala;
+    height: 72px * $escala;
   }
 
-  /* Cada pájaro es un borde superior en "v" que se abre y cierra. */
-  .Dia33-pajaro {
-    position: absolute;
-    width: 14px;
-    height: 6px;
-    border-top: 2px solid #37474f;
-    border-radius: 50%;
-    opacity: 0.55;
-    animation:
-      Dia33Volar 18s linear infinite,
-      Dia33Aletear 0.6s ease-in-out infinite;
-
-    &.p1 {
-      top: 74px;
-      animation-delay: -2s, 0s;
-    }
-
-    &.p2 {
-      top: 92px;
-      transform: scale(0.75);
-      animation-delay: -6s, -0.3s;
-    }
+  .Dia33-nube-mediana {
+    top: 89px * $escala;
+    left: 50px * $escala;
+    width: 114px * $escala;
+    height: 57px * $escala;
   }
 
-  .Dia33-colina {
-    position: absolute;
-    left: -20%;
-    right: -20%;
-    bottom: -60px;
-    height: 130px;
-    border-radius: 50% 50% 0 0;
-    background: #66bb6a;
+  .Dia33-nube-pequena {
+    top: 74px * $escala;
+    left: 195px * $escala;
+    width: 66px * $escala;
+    height: 30px * $escala;
   }
 }
 
-@keyframes Dia33Girar {
-  to {
-    transform: rotate(360deg);
+@keyframes Dia33Izquierda {
+  0% {
+    transform: translateX(0);
   }
-}
-
-@keyframes Dia33Derivar {
-  from {
-    left: -110px;
-  }
-  to {
-    left: 105%;
-  }
-}
-
-@keyframes Dia33Volar {
-  from {
-    left: 108%;
-  }
-  to {
-    left: -30px;
-  }
-}
-
-@keyframes Dia33Aletear {
-  0%,
   100% {
-    height: 6px;
-  }
-  50% {
-    height: 2px;
+    transform: translateX(-300%);
   }
 }
+
+@keyframes Dia33Derecha {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+

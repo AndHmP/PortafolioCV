@@ -1,96 +1,80 @@
 /*
- * El texto se dibuja dos veces: una copia solo con trazo, que se "escribe"
- * animando stroke-dashoffset, y otra sólida que aparece encima cuando el
- * trazo termina. Es el truco clásico de escritura a mano sobre SVG.
+ * Día 34 — Hello.
+ *
+ * Medidas del pen de referencia, sobre 400×400: rótulo de 224×53 centrado
+ * entre dos reglas de 225×2 separadas 15. Aquí el lienzo mide 270, así que las
+ * cajas van por 0,675; grosores y guiones viven en el viewBox y se escalan
+ * solos.
  */
+
+$rosa: #ea4c89;
 
 .Dia34 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #14141f;
+  background: $rosa;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
 
-  .Dia34-svg {
-    width: 88%;
-    overflow: visible;
+  .Dia34-centro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  text {
-    font-family: 'Kulim Park', 'Open Sans', sans-serif;
-    font-size: 68px;
-    font-weight: 700;
-    letter-spacing: 2px;
+  .Dia34-regla {
+    width: 151.9px;
+    height: 1.35px;
+    margin: 10.1px 0;
+    background: #fff;
+    animation: Dia34Regla 0.6s ease-out 1 both;
   }
 
-  .Dia34-trazo {
-    fill: none;
-    stroke: #64ffda;
-    stroke-width: 1.4;
-    stroke-dasharray: 340;
-    stroke-dashoffset: 340;
-    animation: Dia34Escribir 4.5s ease-in-out infinite;
-  }
+  .Dia34-texto {
+    width: 151.2px;
+    height: 35.8px;
+    /* El trazo es del color del fondo: al retirarlo asoma la letra. */
+    stroke: $rosa;
+    stroke-dasharray: 270;
 
-  .Dia34-relleno {
-    fill: #64ffda;
-    opacity: 0;
-    animation: Dia34Rellenar 4.5s ease-in-out infinite;
-  }
+    .a1 {
+      fill: #fff;
+      stroke-width: 6;
+      animation: Dia34Trazo 1.2s ease-in-out 1 both;
+    }
 
-  .Dia34-subrayado {
-    width: 130px;
-    height: 2px;
-    border-radius: 2px;
-    background: #64ffda;
-    transform: scaleX(0);
-    transform-origin: left;
-    animation: Dia34Subrayar 4.5s ease-in-out infinite;
+    /* Cada capa es más gruesa y tarda más, así el borde se abre en abanico. */
+    .a2 {
+      fill: none;
+      stroke-width: 12;
+      animation: Dia34Trazo 1.7s ease-in-out 1 both;
+    }
+
+    .a3 {
+      fill: none;
+      stroke-width: 18;
+      animation: Dia34Trazo 2.2s ease-in-out 1 both;
+    }
   }
 }
 
-@keyframes Dia34Escribir {
+@keyframes Dia34Trazo {
   0% {
-    stroke-dashoffset: 340;
-  }
-  45%,
-  85% {
     stroke-dashoffset: 0;
   }
   100% {
-    stroke-dashoffset: 340;
+    stroke-dashoffset: 270;
   }
 }
 
-@keyframes Dia34Rellenar {
-  0%,
-  45% {
-    opacity: 0;
-  }
-  60%,
-  85% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes Dia34Subrayar {
-  0%,
-  55% {
+@keyframes Dia34Regla {
+  0% {
     transform: scaleX(0);
   }
-  70%,
-  85% {
+  100% {
     transform: scaleX(1);
-  }
-  100% {
-    transform: scaleX(0);
   }
 }

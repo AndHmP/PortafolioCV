@@ -1,58 +1,64 @@
+/*
+ * Día 80 — Flexbox Accordeon.
+ *
+ * Las franjas se reparten en porcentaje, así que aquí no hay medidas del pen
+ * que trasladar; solo el cuerpo del rótulo va multiplicado por 0,675.
+ */
+
+$escala: 0.675;
+
 .Dia80 {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #0e0e18;
-  padding: 14px;
-  display: flex;
-  gap: 6px;
+  overflow: hidden;
+  background: #333;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia80-panel {
+  .Dia80-franja {
     position: relative;
-    flex: 1;
-    min-width: 0;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+    flex: 1 1 auto;
+    width: 20%;
+    background: grey;
     overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 16px;
-    /* La transición sobre flex-grow es lo que hace que el reparto se anime
-       en vez de saltar. */
-    transition:
-      flex-grow 0.55s cubic-bezier(0.65, 0, 0.35, 1),
-      filter 0.4s;
-    filter: saturate(0.65) brightness(0.75);
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
 
+    /* `width: 100%` con `flex: 1 1 auto`: flex reparte lo que sobra. */
     &:hover {
-      filter: saturate(0.85) brightness(0.9);
+      width: 100%;
     }
 
-    &.abierto {
-      flex-grow: 4;
-      filter: none;
+    &:hover .Dia80-texto {
+      color: #fff;
+      transform: translate(-50%, -50%) scale(1);
     }
   }
 
-  .Dia80-titulo {
-    color: #fff;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
+  .oscura {
+    background: #34495e;
+  }
+
+  .naranja {
+    background: #e67e22;
+  }
+
+  .Dia80-texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: transparent;
+    font-size: 30px * $escala;
+    font-weight: 700;
+    text-transform: uppercase;
     white-space: nowrap;
-    text-shadow: 0 1px 6px rgb(0 0 0 / 45%);
-    /* En los paneles cerrados el texto va vertical para que quepa. */
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    transition: all 0.45s;
-  }
-
-  .Dia80-panel.abierto .Dia80-titulo {
-    writing-mode: horizontal-tb;
-    transform: none;
-    font-size: 15px;
+    transform: translate(-50%, -50%) scale(0.5);
+    transition: 0.5s ease-in-out;
   }
 }
+

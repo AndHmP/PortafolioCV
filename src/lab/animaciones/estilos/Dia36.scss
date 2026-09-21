@@ -1,73 +1,127 @@
+/*
+ * Día 36 — Tabs.
+ *
+ * Medidas del pen de referencia, sobre 400×400: ventana de 320×240 en 80,40,
+ * barra de 40 de alto y pestañas cuadradas de 40. Aquí el lienzo mide 270, así
+ * que todo va multiplicado por 0,675.
+ */
+
+$escala: 0.675;
+$pizarra: #2b3642;
+$barra: #3d4d5e;
+$apagado: #8398ad;
+$azul: #5da2ed;
+
 .Dia36 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #262633;
-  padding: 24px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+  background: $pizarra;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia36-barra {
+  .Dia36-ventana {
+    position: absolute;
+    top: 80px * $escala;
+    left: 40px * $escala;
+    width: 320px * $escala;
+    height: 240px * $escala;
+    background: #fff;
+    box-shadow: 4px 8px 12px 0 rgb(0 0 0 / 30%);
+  }
+
+  .Dia36-top {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px * $escala;
+    background: $barra;
+  }
+
+  .Dia36-tab {
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-bottom: 1px solid #3b3b4f;
+    z-index: 5;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px * $escala;
+    height: 40px * $escala;
+    color: $apagado;
+    cursor: pointer;
+    transition: background 0.5s ease-in-out;
 
-    button {
-      padding: 12px 0;
-      border: none;
-      background: transparent;
-      color: #7b7d9e;
-      font-family: inherit;
-      font-size: 13px;
-      cursor: pointer;
-      transition: color 0.25s;
+    input {
+      display: none;
+    }
 
-      &:hover {
-        color: #b9bad6;
-      }
+    &:hover {
+      color: #fff;
+    }
 
-      &.activa {
-        color: #fff;
-      }
+    &.activa {
+      background: $azul;
+      color: #fff;
     }
   }
 
-  .Dia36-indicador {
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: calc(100% / 3);
-    height: 2px;
-    border-radius: 2px;
-    background: #5f6bff;
-    transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+  /* La lupa no selecciona nada: va suelta al otro extremo de la barra. */
+  .Dia36-tab-buscar {
+    float: right;
   }
 
-  .Dia36-panel {
-    flex: 1;
-    overflow: hidden;
+  .Dia36-contenido {
+    position: absolute;
+    top: 40px * $escala;
+    left: 0;
+    color: #000;
+  }
+
+  .Dia36-caja {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 320px * $escala;
+    padding: 25px * $escala;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(3px);
+    pointer-events: none;
+    transition: 0.3s ease-in;
+
+    /* El panel entrante espera a que el saliente termine de irse. */
+    &.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+      transition: 0.5s ease-out 0.4s;
+    }
+
+    /* Un div y no un encabezado: la pieza no debe meterse en el esquema de
+       títulos de la página que la enmarca. */
+    .Dia36-titulo {
+      margin: 0;
+      padding: 0;
+      color: #415868;
+      font-size: 16px * $escala;
+      font-weight: 400;
+    }
 
     p {
-      margin: 0;
-      color: #c9cade;
-      font-size: 13px;
-      line-height: 1.7;
-      /* La `key` en React remonta el nodo, y eso reinicia la animación. */
-      animation: Dia36Entrar 0.35s ease;
+      margin: 17px * $escala 0;
+    }
+
+    span {
+      display: block;
+      height: 4px * $escala;
+      margin: 6px * $escala 0;
+      background: #e9e9e9;
     }
   }
 }
 
-@keyframes Dia36Entrar {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+

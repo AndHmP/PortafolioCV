@@ -1,120 +1,82 @@
 /*
- * El principio de squash and stretch: el objeto se estira en la dirección del
- * movimiento cuando cae y se aplasta al chocar. Conservar el volumen aparente
- * (lo que se gana en alto se pierde en ancho) es lo que lo hace creíble.
+ * Día 50 — Easter Egg.
+ *
+ * Medidas del pen de referencia, sobre 400×400: huevo de 100×130 en 135,150.
+ * Aquí el lienzo mide 270, así que todo va multiplicado por 0,675 —también los
+ * 350 px de caída, que es una distancia como cualquier otra.
+ *
+ * Las escalas y los grados no se tocan: son proporciones del propio huevo.
  */
-$salto: 1.4s;
+
+$escala: 0.675;
+$caida: 350px * $escala;
 
 .Dia50 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: linear-gradient(180deg, #241f3d, #14121f);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-
-  .Dia50-pista {
-    position: relative;
-    width: 120px;
-    height: 170px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-  }
+  overflow: hidden;
+  background: #8e44ad;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
   .Dia50-huevo {
-    position: relative;
-    width: 56px;
-    height: 72px;
-    border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
-    background: linear-gradient(150deg, #ffe3a3, #ffb703);
-    transform-origin: center bottom;
-    animation: Dia50Saltar $salto cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    overflow: hidden;
-  }
-
-  .Dia50-mancha {
     position: absolute;
-    border-radius: 50%;
-    background: rgb(214 64 69 / 85%);
-
-    &.m1 {
-      top: 16px;
-      left: 8px;
-      width: 14px;
-      height: 14px;
-    }
-
-    &.m2 {
-      top: 38px;
-      right: 9px;
-      width: 10px;
-      height: 10px;
-    }
-
-    &.m3 {
-      bottom: 10px;
-      left: 20px;
-      width: 8px;
-      height: 8px;
-    }
-  }
-
-  .Dia50-sombra {
-    position: absolute;
-    bottom: -6px;
-    width: 66px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgb(0 0 0 / 45%);
-    filter: blur(5px);
-    animation: Dia50Sombra $salto cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  }
-
-  .Dia50-etiqueta {
-    margin: 0;
-    color: #6b6a8c;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
+    top: 135px * $escala;
+    left: 150px * $escala;
+    width: 100px * $escala;
+    height: 130px * $escala;
+    background: #fff;
+    /* Dos radios: 50 de ancho contra 80 arriba y 50 abajo. De ahí la punta. */
+    /* Original: 50px / 80px 80px 50px 50px, ya multiplicado por la escala. */
+    border-radius: 33.75px / 54px 54px 33.75px 33.75px;
+    transform-origin: 50% 80%;
+    animation: Dia50Huevo 3s ease-in-out infinite;
   }
 }
 
-@keyframes Dia50Saltar {
+@keyframes Dia50Huevo {
   0% {
-    transform: translateY(-95px) scale(0.94, 1.08);
+    transform: translate3d(0, -$caida, 0) scale(0.8, 1.2);
   }
-  38% {
-    /* En caída libre se estira. */
-    transform: translateY(-10px) scale(0.9, 1.14);
+  /* Aterriza aplastándose y rebota dos veces cada vez más flojo. */
+  25% {
+    transform: translate3d(0, 40px * $escala, 0) scale(1.05, 0.9);
   }
-  46% {
-    /* Impacto: se aplasta y se ensancha. */
-    transform: translateY(0) scale(1.24, 0.72);
+  30% {
+    transform: translate3d(0, -20px * $escala, 0) scale(0.95, 1.02);
   }
-  56% {
-    transform: translateY(-14px) scale(0.92, 1.12);
+  35% {
+    transform: translate3d(0, 10px * $escala, 0) scale(1.01, 0.98);
+  }
+  40%,
+  45% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  /* El contoneo. */
+  50% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(5deg);
+  }
+  55% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(-5deg);
+  }
+  60% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(5deg);
+  }
+  65%,
+  70% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  75% {
+    transform: translate3d(0, 10px * $escala, 0) scale(1.01, 0.98);
+  }
+  80% {
+    transform: translate3d(0, -20px * $escala, 0) scale(1.02, 0.95);
   }
   100% {
-    transform: translateY(-95px) scale(0.94, 1.08);
+    transform: translate3d(0, $caida, 0) scale(0.9, 1.1);
   }
 }
 
-@keyframes Dia50Sombra {
-  0% {
-    transform: scale(0.6);
-    opacity: 0.25;
-  }
-  46% {
-    transform: scale(1.15);
-    opacity: 0.55;
-  }
-  100% {
-    transform: scale(0.6);
-    opacity: 0.25;
-  }
-}

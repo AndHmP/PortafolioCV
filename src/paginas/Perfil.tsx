@@ -1,5 +1,7 @@
-import Icono from '@/componentes/iconos/Icono';
+import { Link } from 'react-router-dom';
+
 import { obtenerIconoIlustrado } from '@/componentes/iconos';
+import Icono from '@/componentes/iconos/Icono';
 import CarruselConocimientos from '@/componentes/perfil/CarruselConocimientos';
 import Desplegable from '@/componentes/perfil/Desplegable';
 import OlaPerfil from '@/componentes/perfil/OlaPerfil';
@@ -46,12 +48,12 @@ export default function Perfil() {
         El contenido va sobre la banda, nunca sobre la ola, para que el
         contraste del texto no dependa de la silueta.
       */}
-      <header className="relative overflow-hidden pb-10 md:pb-14">
+      <header className="relative overflow-hidden pb-20 md:pb-32">
         <div
-          className="absolute inset-x-0 top-0 bottom-10 bg-[var(--color-texto)] md:bottom-14"
+          className="absolute inset-x-0 top-0 bottom-20 bg-[var(--color-texto)] md:bottom-32"
           aria-hidden="true"
         />
-        <div className="absolute inset-x-0 bottom-0 h-10 md:h-14" aria-hidden="true">
+        <div className="absolute inset-x-0 bottom-0 h-20 md:h-32" aria-hidden="true">
           <OlaPerfil />
         </div>
 
@@ -138,7 +140,7 @@ export default function Perfil() {
           </Desplegable>
 
           {/* Formación académica */}
-          <Desplegable titulo={t.perfil.formacion} inicialAbierto={false}>
+          <Desplegable titulo={t.perfil.formacion}>
             <ol className="space-y-5">
               {formacion.map((etapa) => {
                 const ilustracion = obtenerIconoIlustrado(etapa.icono);
@@ -151,20 +153,47 @@ export default function Perfil() {
                       <p className="text-xs font-medium uppercase tracking-wide text-texto-suave">
                         {tr(etapa.periodo)}
                       </p>
-                      <h4 className="mt-0.5 font-display font-semibold">{tr(etapa.titulo)}</h4>
+                      <div className="mt-0.5 flex flex-wrap items-center gap-2">
+                        <h4 className="font-display font-semibold">{tr(etapa.titulo)}</h4>
+                        {etapa.estado === 'titulado' && (
+                          <Etiqueta tono="acento">
+                            <Icono nombre="verificado" tamano={12} />
+                            {t.perfil.estadoTitulado}
+                          </Etiqueta>
+                        )}
+                      </div>
                       <p className="text-sm text-acento">{etapa.institucion}</p>
                       <p className="mt-2 text-sm leading-relaxed text-texto-suave">
                         {tr(etapa.descripcion)}
                       </p>
+                      {etapa.credencial && (
+                        <p className="mt-2 text-xs text-texto-suave">
+                          <span className="font-semibold uppercase tracking-wide">
+                            {t.perfil.credencial}:
+                          </span>{' '}
+                          <span className="font-mono">{tr(etapa.credencial)}</span>
+                        </p>
+                      )}
                     </div>
                   </li>
                 );
               })}
             </ol>
+
+            {/* La formación es la línea de tiempo; las credenciales, el detalle
+                verificable de cada una. Se enlazan en vez de repetirse. */}
+            <Link
+              to="/credenciales"
+              className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-acento hover:underline"
+            >
+              <Icono nombre="verificado" tamano={14} />
+              {t.credenciales.desdePerfil}
+              <Icono nombre="flecha-derecha" tamano={14} />
+            </Link>
           </Desplegable>
 
           {/* Experiencia laboral */}
-          <Desplegable titulo={t.perfil.experiencia} inicialAbierto={false}>
+          <Desplegable titulo={t.perfil.experiencia}>
             <ol className="space-y-6">
               {experiencias.map((exp) => (
                 <li key={exp.clave} className="border-l-2 border-borde pl-4">
@@ -206,7 +235,7 @@ export default function Perfil() {
           </Desplegable>
 
           {/* Idiomas */}
-          <Desplegable titulo={t.perfil.idiomas} inicialAbierto={false}>
+          <Desplegable titulo={t.perfil.idiomas}>
             <ul className="grid gap-3 sm:grid-cols-2">
               {idiomas.map((idioma) => (
                 <li
@@ -221,7 +250,7 @@ export default function Perfil() {
           </Desplegable>
 
           {/* Valores */}
-          <Desplegable titulo={t.perfil.valores} inicialAbierto={false}>
+          <Desplegable titulo={t.perfil.valores}>
             <div className="grid gap-4 sm:grid-cols-2">
               {valores.map((valor) => (
                 <div key={valor.clave} className="rounded-lg bg-base-alt p-4">

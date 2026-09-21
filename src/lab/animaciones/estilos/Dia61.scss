@@ -1,76 +1,45 @@
 /*
- * Un degradado no se puede interpolar entre dos valores distintos, así que la
- * transición se finge apilando tres capas y cruzando su opacidad. Es el
- * "truco" clásico mientras `@property` no esté disponible en todas partes.
+ * Día 61 — CSS Gradient Transition.
+ *
+ * Las dos capas ocupan el lienzo entero, así que aquí no hay medidas del pen
+ * que trasladar: van al 100 %.
  */
 
-$ciclo: 12s;
-
 .Dia61 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #0c0c14;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 22px;
+  overflow: hidden;
+  background: #333;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia61-lienzo {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .Dia61-capa {
+  .Dia61-degradado {
     position: absolute;
     inset: 0;
-    animation: Dia61Cruzar $ciclo ease-in-out infinite;
-
-    &.c1 {
-      background: linear-gradient(135deg, #ff9a8b, #ff6a88, #ff99ac);
-    }
-
-    &.c2 {
-      background: linear-gradient(135deg, #43cea2, #185a9d);
-      animation-delay: -$ciclo / 3;
-    }
-
-    &.c3 {
-      background: linear-gradient(135deg, #f6d365, #fda085, #a06bff);
-      animation-delay: -$ciclo / 3 * 2;
-    }
   }
 
-  .Dia61-texto {
-    position: relative;
-    z-index: 1;
-    margin: 0;
-    color: rgb(255 255 255 / 92%);
-    font-family: 'Kulim Park', sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    mix-blend-mode: overlay;
+  .uno {
+    background: linear-gradient(135deg, #77c8c0 0%, #267aac 100%);
+  }
+
+  .dos {
+    z-index: 2;
+    opacity: 0;
+    background: linear-gradient(135deg, #4ad7b8 0%, #f39c12 100%);
+    animation: Dia61Cruce 4s ease-in-out infinite;
   }
 }
 
-@keyframes Dia61Cruzar {
+@keyframes Dia61Cruce {
   0%,
-  22% {
-    opacity: 1;
-  }
-  38%,
-  88% {
+  100% {
     opacity: 0;
   }
-  100% {
+  50% {
     opacity: 1;
   }
 }
+

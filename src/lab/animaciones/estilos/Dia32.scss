@@ -1,97 +1,169 @@
+/*
+ * Día 32 — Counter.
+ *
+ * Medidas del pen de referencia, sobre 400×400: píldora de 130×40 en 180,135,
+ * botones redondos de 32 y trazos de 18×2. Aquí el lienzo mide 270, así que
+ * todo va multiplicado por 0,675.
+ */
+
+$escala: 0.675;
+$rojo: #e26e6e;
+$verde: #8ed273;
+
 .Dia32 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #23233a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+  background: linear-gradient(to top right, #d2592a 0%, #fdb03a 100%);
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia32-etiqueta {
-    margin: 0;
-    color: #7b7d9e;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+  .Dia32-contador {
+    position: absolute;
+    top: 180px * $escala;
+    left: 135px * $escala;
+    width: 130px * $escala;
+    height: 40px * $escala;
+    border-radius: 20px * $escala;
+    background: #fff;
+    box-shadow: 4px 8px 12px 0 rgb(0 0 0 / 10%);
   }
 
-  /* El recorte es lo que hace que el número entre y salga por los bordes. */
-  .Dia32-marcador {
-    position: relative;
-    width: 140px;
-    height: 86px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .Dia32-menos,
+  .Dia32-mas {
+    position: absolute;
+    z-index: 10;
+    top: 4px * $escala;
+    width: 32px * $escala;
+    height: 32px * $escala;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+
+  .Dia32-menos {
+    left: 5px * $escala;
+
+    &:hover {
+      background: $rojo;
+    }
+
+    &:hover .Dia32-linea {
+      background: #fff;
+    }
+  }
+
+  .Dia32-mas {
+    right: 5px * $escala;
+
+    &:hover {
+      background: $verde;
+    }
+
+    &:hover .Dia32-linea-h,
+    &:hover .Dia32-linea-v {
+      background: #fff;
+    }
+  }
+
+  .Dia32-linea,
+  .Dia32-linea-h,
+  .Dia32-linea-v {
+    position: absolute;
+    transition: 0.3s ease-in-out;
+  }
+
+  .Dia32-linea {
+    top: 15px * $escala;
+    left: 7px * $escala;
+    width: 18px * $escala;
+    height: 2px * $escala;
+    background: $rojo;
+  }
+
+  .Dia32-linea-h {
+    top: 15px * $escala;
+    left: 7px * $escala;
+    width: 18px * $escala;
+    height: 2px * $escala;
+    background: $verde;
+  }
+
+  .Dia32-linea-v {
+    top: 7px * $escala;
+    left: 15px * $escala;
+    width: 2px * $escala;
+    height: 18px * $escala;
+    background: $verde;
   }
 
   .Dia32-numero {
-    position: absolute;
-    color: #fff;
-    font-size: 60px;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
+    position: relative;
+    width: 130px * $escala;
+    height: 40px * $escala;
+    color: #6a85a0;
+    font-size: 20px * $escala;
+    font-weight: 600;
+    line-height: 40px * $escala;
+    text-align: center;
 
-    &.sube {
-      animation: Dia32Sube 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    span {
+      display: block;
+      position: absolute;
+      inset: 0;
+      transform-origin: 50% 50%;
     }
 
-    &.baja {
-      animation: Dia32Baja 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    /* Sumar: el nuevo entra creciendo, el viejo se va agrandándose. */
+    span.fadeInUp {
+      transform: scale(1);
+      opacity: 1;
+      animation: Dia32Entrar 0.3s ease-out 0.15s 1 backwards;
     }
-  }
 
-  .Dia32-controles {
-    display: flex;
-    gap: 12px;
+    span.fadeOutUp {
+      transform: scale(1.4);
+      opacity: 0;
+      animation: Dia32Salir 0.3s ease-in 1;
+    }
 
-    button {
-      width: 46px;
-      height: 46px;
-      border: none;
-      border-radius: 14px;
-      background: #32324f;
-      color: #cfd0f0;
-      font-size: 22px;
-      cursor: pointer;
-      transition:
-        background-color 0.2s,
-        transform 0.12s;
+    /* Restar: el mismo par, pero cada animación en sentido inverso. */
+    span.fadeInDown {
+      transform: scale(1);
+      opacity: 1;
+      animation: Dia32Salir 0.3s ease-out 0.15s 1 reverse backwards;
+    }
 
-      &:hover {
-        background: #5f6bff;
-        color: #fff;
-      }
-
-      &:active {
-        transform: scale(0.92);
-      }
+    span.fadeOutDown {
+      transform: scale(0.6);
+      opacity: 0;
+      animation: Dia32Entrar 0.3s ease-in 1 reverse;
     }
   }
 }
 
-@keyframes Dia32Sube {
-  from {
-    transform: translateY(70px);
+@keyframes Dia32Entrar {
+  0% {
+    transform: scale(0.6);
     opacity: 0;
   }
-  to {
-    transform: translateY(0);
+  100% {
+    transform: scale(1);
     opacity: 1;
   }
 }
 
-@keyframes Dia32Baja {
-  from {
-    transform: translateY(-70px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
+@keyframes Dia32Salir {
+  0% {
+    transform: scale(1);
     opacity: 1;
   }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
 }
+

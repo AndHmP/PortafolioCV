@@ -1,122 +1,128 @@
 /*
- * La llama es un cuadrado con tres esquinas redondeadas al 50 % y la
- * superior en punta, girado 45°. No hace falta SVG: `border-radius` con
- * radios distintos por esquina da la forma de gota.
+ * Día 88 — Candle.
+ *
+ * Medidas del pen de referencia, sobre 400×400: vela de 60×100 en 160,170,
+ * mecha de 4×15 y llama de 16×26. Aquí el lienzo mide 270, así que todo va
+ * multiplicado por 0,675.
  */
+
+$escala: 0.675;
 
 .Dia88 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: radial-gradient(circle at 50% 42%, #2a2013, #0c0a08 68%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  background: #2c3e50;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia88-halo {
+  .Dia88-vela {
     position: absolute;
-    top: 26%;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgb(255 176 59 / 22%), transparent 62%);
-    animation: Dia88Titilar 2.4s ease-in-out infinite;
+    top: 160px * $escala;
+    left: 170px * $escala;
+    width: 60px * $escala;
+    height: 100px * $escala;
+    border-radius: 3px * $escala;
+    background: #fff;
+    /* La sombra interior por la derecha: el cilindro. */
+    box-shadow: inset -10px * $escala 0 0 0 #e0e5ff;
   }
 
-  .Dia88-conjunto {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 18px;
-  }
-
-  .Dia88-llama {
-    position: relative;
-    width: 34px;
-    height: 34px;
-    border-radius: 50% 50% 50% 50% / 68% 68% 32% 32%;
-    background: linear-gradient(180deg, #ffd166 0%, #ff9f1c 45%, #ef4444 100%);
-    transform: rotate(-45deg) scale(1, 1.55);
-    transform-origin: center bottom;
-    box-shadow: 0 0 24px 6px rgb(255 159 28 / 45%);
-    animation: Dia88Ondear 1.5s ease-in-out infinite;
-  }
-
-  .Dia88-nucleo {
+  .Dia88-sombra {
     position: absolute;
-    bottom: 6px;
-    left: 50%;
-    width: 14px;
-    height: 16px;
-    margin-left: -7px;
-    border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
-    background: rgb(147 197 253 / 75%);
-    filter: blur(1px);
+    left: -30px * $escala;
+    bottom: -8px * $escala;
+    width: 120px * $escala;
+    height: 8px * $escala;
+    border-radius: 3px * $escala;
+    background: #1b233e;
   }
 
   .Dia88-mecha {
-    width: 3px;
-    height: 12px;
-    margin-top: -2px;
-    border-radius: 2px;
-    background: #3f3f46;
-  }
-
-  .Dia88-vela {
-    position: relative;
-    width: 68px;
-    height: 118px;
-    border-radius: 8px 8px 6px 6px;
-    background: linear-gradient(90deg, #e8dcc8 0%, #fdf8ee 35%, #d9cbb2 100%);
-    box-shadow: inset 0 6px 10px rgb(0 0 0 / 10%);
-  }
-
-  /* Cera derramada por el borde: dos gotas de distinto largo. */
-  .Dia88-cera {
     position: absolute;
-    top: -2px;
-    left: 12px;
-    width: 10px;
-    height: 34px;
-    border-radius: 0 0 6px 6px;
-    background: #fdf8ee;
+    top: -15px * $escala;
+    left: 28px * $escala;
+    width: 4px * $escala;
+    height: 15px * $escala;
+    border-radius: 2px * $escala 2px * $escala 0 0;
+    background: #ad88a9;
+  }
 
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 26px;
-      width: 8px;
-      height: 20px;
-      border-radius: 0 0 5px 5px;
-      background: #fdf8ee;
-    }
+  /* Tres ciclos de 15, 20 y 5 s: la combinación no se repite nunca igual. */
+  .Dia88-llama {
+    position: absolute;
+    top: -32px * $escala;
+    left: 22px * $escala;
+    width: 16px * $escala;
+    height: 26px * $escala;
+    background: #ffad00;
+    /* Originales 8px / 20px 20px 8px 8px, ya multiplicados por la escala. Van
+       literales porque Sass lee la barra del `border-radius` como una división
+       en cuanto hay una operación al lado. */
+    border-radius: 5.4px / 13.5px 13.5px 5.4px 5.4px;
+    transform-origin: 50% 100%;
+    animation:
+      Dia88Viento 15s ease-in-out infinite,
+      Dia88Tamano 20s ease-in-out infinite,
+      Dia88Brillo 5s ease-in-out infinite;
   }
 }
 
-@keyframes Dia88Ondear {
+@keyframes Dia88Viento {
   0%,
+  22%,
+  49%,
+  62%,
+  81%,
   100% {
-    transform: rotate(-45deg) scale(1, 1.55);
+    border-radius: 1.35px 9.45px 5.4px 5.4px / 13.5px 13.5px 5.4px 5.4px;
   }
-  30% {
-    transform: rotate(-42deg) scale(0.94, 1.68);
-  }
-  60% {
-    transform: rotate(-48deg) scale(1.06, 1.46);
+  14%,
+  32%,
+  56%,
+  70%,
+  89% {
+    border-radius: 9.45px 1.35px 5.4px 5.4px / 13.5px 13.5px 5.4px 5.4px;
   }
 }
 
-@keyframes Dia88Titilar {
+@keyframes Dia88Tamano {
   0%,
+  22%,
+  49%,
+  62%,
+  81%,
   100% {
-    opacity: 0.75;
-    transform: scale(1);
+    transform: scale(1, 1);
   }
-  50% {
-    opacity: 1;
-    transform: scale(1.08);
+  14%,
+  32%,
+  56%,
+  70%,
+  89% {
+    transform: scale(0.9, 1.2);
   }
 }
+
+@keyframes Dia88Brillo {
+  0%,
+  22%,
+  49%,
+  62%,
+  81%,
+  100% {
+    box-shadow: 0 0 20px * $escala 0 rgb(255 202 0 / 70%);
+  }
+  14%,
+  32%,
+  56%,
+  70%,
+  89% {
+    box-shadow: 0 0 20px * $escala 0 rgb(255 202 0 / 80%);
+  }
+}
+
+

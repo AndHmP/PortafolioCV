@@ -1,101 +1,125 @@
 /*
- * La física está en la curva, no en los fotogramas: `ease-in` en la caída
- * (acelera) y `ease-out` en la subida (frena). Usar la misma curva en ambos
- * sentidos es lo que hace que un rebote parezca flotante.
+ * Día 81 — Jumping Ball.
+ *
+ * Medidas del pen de referencia, sobre 400×400: suelo de 130 de alto, pelota
+ * de 40 saliendo de left 400 y recorriendo 460 px. Aquí el lienzo mide 270, así
+ * que todo va multiplicado por 0,675.
  */
 
-$rebote: 1.1s;
+$escala: 0.675;
 
 .Dia81 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: linear-gradient(180deg, #1b2140, #0d1022);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .Dia81-escena {
-    position: relative;
-    width: 180px;
-    height: 200px;
-  }
-
-  .Dia81-pelota {
-    position: absolute;
-    bottom: 26px;
-    left: 50%;
-    width: 54px;
-    height: 54px;
-    margin-left: -27px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 34% 30%, #ffe08a, #f59e0b 62%, #b45309);
-    animation:
-      Dia81Caer $rebote cubic-bezier(0.7, 0, 0.9, 0.4) infinite alternate,
-      Dia81Deformar ($rebote * 2) linear infinite;
-  }
-
-  .Dia81-sombra {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    width: 60px;
-    height: 12px;
-    margin-left: -30px;
-    border-radius: 50%;
-    background: rgb(0 0 0 / 50%);
-    filter: blur(5px);
-    animation: Dia81Sombra ($rebote * 2) linear infinite;
-  }
+  overflow: hidden;
+  background: #9b59b6;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
   .Dia81-suelo {
     position: absolute;
     left: 0;
-    right: 0;
-    bottom: 20px;
-    height: 2px;
-    border-radius: 2px;
-    background: rgb(255 255 255 / 12%);
+    bottom: 0;
+    width: 400px * $escala;
+    height: 130px * $escala;
+    background: #49627c;
+  }
+
+  .Dia81-recorrido {
+    position: absolute;
+    top: 230px * $escala;
+    left: 400px * $escala;
+    width: 40px * $escala;
+    height: 40px * $escala;
+    animation: Dia81Cruzar 3s ease-out infinite;
+  }
+
+  /* Subida que frena y bajada que acelera: las dos curvas del salto. */
+  .Dia81-sube {
+    animation: Dia81Subir 3s cubic-bezier(0, 0, 0.38, 1) infinite;
+  }
+
+  .Dia81-baja {
+    animation: Dia81Bajar 3s cubic-bezier(0.38, 0, 1, 1) infinite;
+  }
+
+  .Dia81-pelota {
+    width: 40px * $escala;
+    height: 40px * $escala;
+    border-radius: 50%;
+    background: #fff;
+    animation: Dia81Aplastar 3s cubic-bezier(0.38, 0, 1, 1) infinite;
   }
 }
 
-@keyframes Dia81Caer {
-  from {
-    bottom: 150px;
+@keyframes Dia81Cruzar {
+  0% {
+    transform: translateX(0);
   }
-  to {
-    bottom: 26px;
-  }
-}
-
-/* El aplastamiento solo ocurre en el instante del impacto: ventanas muy
-   cortas al inicio y al final del ciclo doble. */
-@keyframes Dia81Deformar {
-  0%,
-  44%,
-  56%,
-  94%,
   100% {
-    transform: scale(1, 1);
-  }
-  48%,
-  52% {
-    transform: scale(1.28, 0.74);
-  }
-  22%,
-  74% {
-    transform: scale(0.92, 1.1);
+    transform: translateX(-460px * $escala);
   }
 }
 
-@keyframes Dia81Sombra {
+@keyframes Dia81Subir {
   0%,
-  100% {
-    transform: scale(0.55);
-    opacity: 0.25;
+  20% {
+    transform: translateY(0);
   }
+  35%,
   50% {
-    transform: scale(1.1);
-    opacity: 0.6;
+    transform: translateY(-105px * $escala);
+  }
+  65%,
+  80% {
+    transform: translateY(-168px * $escala);
+  }
+  90%,
+  100% {
+    transform: translateY(-190px * $escala);
   }
 }
+
+@keyframes Dia81Bajar {
+  0% {
+    transform: translateY(-200px * $escala);
+  }
+  20%,
+  35% {
+    transform: translateY(0);
+  }
+  50%,
+  65% {
+    transform: translateY(105px * $escala);
+  }
+  80%,
+  95% {
+    transform: translateY(168px * $escala);
+  }
+  100% {
+    transform: translateY(190px * $escala);
+  }
+}
+
+/* Solo se aplasta al tocar el suelo. */
+@keyframes Dia81Aplastar {
+  0%,
+  19%,
+  25%,
+  49%,
+  55%,
+  79%,
+  85%,
+  100% {
+    transform: scale(1);
+  }
+  20%,
+  50%,
+  80% {
+    transform: scale(1.1, 0.9);
+  }
+}
+

@@ -105,6 +105,16 @@ export const tecnologias: Tecnologia[] = [
     },
   },
   {
+    clave: 'primereact',
+    nombre: 'PrimeReact',
+    categoria: 'frontend',
+    nivel: 'intermedio',
+    descripcion: {
+      es: 'Catálogo de componentes empresariales: tablas de datos, formularios y temas propios.',
+      en: 'Enterprise component suite: data tables, forms and custom theming.',
+    },
+  },
+  {
     clave: 'styled-components',
     nombre: 'styled-components',
     categoria: 'frontend',
@@ -292,18 +302,27 @@ export const tecnologias: Tecnologia[] = [
     },
   },
 
-  /* ---------------- Desarrollo asistido por IA ---------------- */
+  /* ---------------- Diseño y UI/UX ---------------- */
   {
-    clave: 'claude-code',
-    nombre: 'Claude Code',
-    categoria: 'ia',
+    clave: 'figma',
+    nombre: 'Figma',
+    categoria: 'diseno',
     nivel: 'intermedio',
     descripcion: {
-      es: 'Desarrollo asistido por IA con planificación previa de tareas y documentación técnica en Markdown.',
-      en: 'AI-assisted development with upfront task planning and technical documentation in Markdown.',
+      es: 'Diseño de interfaces, sistemas de componentes y entrega de especificaciones al código.',
+      en: 'Interface design, component systems and handing specs over to code.',
     },
   },
-  /* ---------------- Diseño y UI/UX ---------------- */
+  {
+    clave: 'balsamiq',
+    nombre: 'Balsamiq',
+    categoria: 'diseno',
+    nivel: 'intermedio',
+    descripcion: {
+      es: 'Wireframes de baja fidelidad para validar flujos antes de invertir en la interfaz final.',
+      en: 'Low-fidelity wireframes to validate flows before investing in the final UI.',
+    },
+  },
   {
     clave: 'prototipado',
     nombre: 'Prototipado',
@@ -351,7 +370,6 @@ export const ordenCategorias: CategoriaTecnologia[] = [
   'infraestructura',
   'calidad',
   'diseno',
-  'ia',
 ];
 
 /** Devuelve el nombre legible de una clave; útil en tarjetas de proyecto. */

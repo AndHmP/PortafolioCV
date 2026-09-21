@@ -15,6 +15,7 @@ import Inicio from '@/paginas/Inicio';
 const Proyectos = lazy(() => import('@/paginas/Proyectos'));
 const ProyectoDetalle = lazy(() => import('@/paginas/ProyectoDetalle'));
 const Perfil = lazy(() => import('@/paginas/Perfil'));
+const Credenciales = lazy(() => import('@/paginas/Credenciales'));
 const Laboratorio = lazy(() => import('@/paginas/Laboratorio'));
 const LaboratorioSeccion = lazy(() => import('@/paginas/LaboratorioSeccion'));
 const NoEncontrado = lazy(() => import('@/paginas/NoEncontrado'));
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="/proyectos" element={<Proyectos />} />
             <Route path="/proyectos/:slug" element={<ProyectoDetalle />} />
             <Route path="/perfil" element={<Perfil />} />
+            <Route path="/credenciales" element={<Credenciales />} />
             <Route path="/laboratorio" element={<Laboratorio />} />
             <Route path="/laboratorio/:seccion" element={<LaboratorioSeccion />} />
             <Route path="*" element={<NoEncontrado />} />

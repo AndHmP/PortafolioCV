@@ -1,78 +1,185 @@
+/*
+ * Día 98 — Plopp.
+ *
+ * Medidas del pen de referencia, sobre 400×400: rombo de 160 en 120,120 y
+ * piezas de 30 en 185,185. Aquí el lienzo mide 270, así que todo va por 0,675;
+ * los destinos de cada pieza los calcula el componente, ya escalados.
+ *
+ * El pen escribe dieciséis `@keyframes`, uno por pieza. Aquí hay dos —uno para
+ * los cuadrados, que además giran, y otro para los círculos— y el destino llega
+ * como variable, que se resuelve por elemento.
+ */
+
+$escala: 0.675;
+$curva: cubic-bezier(0.19, 0.69, 0.4, 1);
+
 .Dia98 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #14141f;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  padding: 16px;
+  overflow: hidden;
+  background: #2c3e50;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia98-caja {
-    position: relative;
-    width: 100%;
-    flex: 1;
-    border: 2px solid #2f2f45;
-    border-top: none;
-    border-radius: 0 0 14px 14px;
-    overflow: hidden;
-  }
-
-  /* Cada bola cae desde arriba y aterriza en el fondo con un rebote corto.
-     La animación es `forwards` para que se quede donde cayó. */
-  .Dia98-bola {
+  .Dia98-caras {
     position: absolute;
-    bottom: 8px;
-    width: 30px;
-    height: 30px;
+    z-index: 10;
+    top: 120px * $escala;
+    left: 120px * $escala;
+    width: 160px * $escala;
+    height: 160px * $escala;
+  }
+
+  /* Las cuatro mitades del rombo, cada una hacia su lado. */
+  .Dia98-cara {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    animation-duration: 1.5s;
+    animation-timing-function: $curva;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+
+  .arriba {
+    top: 0;
+    left: 0;
+    border-width: 80px * $escala 80px * $escala 0;
+    border-color: #3f91c7 transparent transparent;
+    animation-name: Dia98Arriba;
+  }
+
+  .izquierda {
+    top: 0;
+    left: 0;
+    border-width: 80px * $escala 0 80px * $escala 80px * $escala;
+    border-color: transparent transparent transparent #3289c3;
+    animation-name: Dia98Izquierda;
+  }
+
+  .derecha {
+    top: 0;
+    right: 0;
+    border-width: 80px * $escala 80px * $escala 80px * $escala 0;
+    border-color: transparent #2b82bb transparent transparent;
+    animation-name: Dia98Derecha;
+  }
+
+  .abajo {
+    right: 0;
+    bottom: 0;
+    border-width: 0 80px * $escala 80px * $escala;
+    border-color: transparent transparent #2578ae;
+    animation-name: Dia98Abajo;
+  }
+
+  .Dia98-piezas {
+    position: absolute;
+    top: 185px * $escala;
+    left: 185px * $escala;
+    width: 30px * $escala;
+    height: 30px * $escala;
+  }
+
+  .Dia98-cuadrado,
+  .Dia98-circulo {
+    position: absolute;
+    top: 5px * $escala;
+    left: 5px * $escala;
+    width: 20px * $escala;
+    height: 20px * $escala;
+    animation-duration: 1.5s;
+    animation-timing-function: $curva;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+
+  .Dia98-cuadrado {
+    animation-name: Dia98Cuadrado;
+  }
+
+  .Dia98-circulo {
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 4px * $escala;
     border-radius: 50%;
-    box-shadow: inset -4px -4px 8px rgb(0 0 0 / 22%);
-    animation: Dia98Caer 0.6s cubic-bezier(0.5, 0, 0.55, 1.4) backwards;
+    animation-name: Dia98Circulo;
   }
 
-  .Dia98-acciones {
-    display: flex;
-    gap: 10px;
-
-    button {
-      padding: 9px 22px;
-      border: none;
-      border-radius: 22px;
-      background: #5f6bff;
-      color: #fff;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 12px;
-      cursor: pointer;
-      transition:
-        filter 0.2s,
-        transform 0.12s;
-
-      &:hover {
-        filter: brightness(1.12);
-      }
-
-      &:active {
-        transform: scale(0.94);
-      }
-
-      &.vaciar {
-        background: #2f2f45;
-        color: #9a9cbb;
-      }
-    }
+  .Dia98-cuadrado.pequeno,
+  .Dia98-circulo.pequeno {
+    top: 10px * $escala;
+    left: 10px * $escala;
+    width: 10px * $escala;
+    height: 10px * $escala;
   }
+
+  .Dia98-circulo.pequeno {
+    border-width: 2px * $escala;
+  }
+
+  .Dia98-cuadrado.grande,
+  .Dia98-circulo.grande {
+    top: 0;
+    left: 0;
+    width: 30px * $escala;
+    height: 30px * $escala;
+  }
+
+  .Dia98-circulo.grande {
+    border-width: 8px * $escala;
+  }
+
+  .Dia98-cuadrado.c1 { background: #f39c12; }
+  .Dia98-cuadrado.c2 { background: #e67e22; }
+  .Dia98-cuadrado.c3 { background: #1abc9c; }
+  .Dia98-circulo.c1 { border-color: #f39c12; }
+  .Dia98-circulo.c2 { border-color: #e67e22; }
+  .Dia98-circulo.c3 { border-color: #1abc9c; }
 }
 
-@keyframes Dia98Caer {
-  0% {
-    transform: translateY(-240px) scale(1, 1);
-  }
-  70% {
-    transform: translateY(0) scale(1.14, 0.86);
+@keyframes Dia98Arriba {
+  0%, 20% { transform: translateY(0); }
+  100% { transform: translateY(-180px * $escala); }
+}
+
+@keyframes Dia98Izquierda {
+  0%, 20% { transform: translateY(0); }
+  100% { transform: translateX(-180px * $escala); }
+}
+
+@keyframes Dia98Derecha {
+  0%, 20% { transform: translateY(0); }
+  100% { transform: translateX(180px * $escala); }
+}
+
+@keyframes Dia98Abajo {
+  0%, 20% { transform: translateY(0); }
+  100% { transform: translateY(180px * $escala); }
+}
+
+/* Las piezas no existen hasta el 20 % del ciclo: salen de dentro del rombo. */
+@keyframes Dia98Cuadrado {
+  0%,
+  20% {
+    transform: scale(0) translate(0) rotate(0deg);
   }
   100% {
-    transform: translateY(0) scale(1, 1);
+    transform: scale(1) translate(var(--Dia98-x), var(--Dia98-y)) rotate(var(--Dia98-giro));
   }
 }
+
+@keyframes Dia98Circulo {
+  0%,
+  20% {
+    transform: scale(0) translate(0);
+  }
+  100% {
+    transform: scale(1) translate(var(--Dia98-x), var(--Dia98-y));
+  }
+}
+

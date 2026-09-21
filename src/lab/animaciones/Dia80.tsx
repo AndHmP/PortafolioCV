@@ -1,36 +1,31 @@
-import { useState } from 'react';
-
 import './estilos/Dia80.scss';
 
 /* Día 80 — Flexbox Accordeon
-   "Lo hice con Flexbox, pero seguro se te ocurren muchas variantes." */
+   "Cuatro franjas y `flex`: la que señalas se come el resto."
 
-const PANELES = [
-  { nombre: 'Frontend', color: 'linear-gradient(180deg, #ff9a8b, #ff6a88)' },
-  { nombre: 'Backend', color: 'linear-gradient(180deg, #43cea2, #185a9d)' },
-  { nombre: 'Móvil', color: 'linear-gradient(180deg, #f6d365, #fda085)' },
-  { nombre: 'DevOps', color: 'linear-gradient(180deg, #667eea, #764ba2)' },
+   No hay cálculo de anchos: cada franja es `flex: 1 1 auto` con `width: 20%`,
+   y al pasar el ratón esa width salta al 100 %. Flexbox reparte lo que queda
+   entre las otras tres, y la transición hace el resto.
+
+   El rótulo entra a la vez: pasa de transparente y medio tamaño a blanco y
+   tamaño completo. */
+
+const FRANJAS = [
+  { tono: 'oscura', texto: 'First' },
+  { tono: 'naranja', texto: 'Second' },
+  { tono: 'oscura', texto: 'Third' },
+  { tono: 'naranja', texto: 'Fourth' },
 ];
 
 export default function Dia80() {
-  const [abierto, setAbierto] = useState(1);
-
   return (
     <div className="Dia80">
-      {/* Todo el acordeón es `flex-grow`: el panel activo pide más espacio y
-          los demás ceden. No hay anchos calculados en ningún sitio. */}
-      {PANELES.map((p, i) => (
-        <button
-          key={p.nombre}
-          type="button"
-          className={`Dia80-panel ${abierto === i ? 'abierto' : ''}`}
-          style={{ backgroundImage: p.color }}
-          onClick={() => setAbierto(i)}
-          aria-expanded={abierto === i}
-        >
-          <span className="Dia80-titulo">{p.nombre}</span>
-        </button>
+      {FRANJAS.map((franja) => (
+        <div key={franja.texto} className={`Dia80-franja ${franja.tono}`}>
+          <span className="Dia80-texto">{franja.texto}</span>
+        </div>
       ))}
     </div>
   );
 }
+

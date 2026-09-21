@@ -1,72 +1,56 @@
+@use 'sass:math';
+
 /*
- * La onda no la produce ninguna animación especial: los 12 péndulos oscilan
- * igual, pero cada uno tarda una fracción menos que el anterior. La diferencia
- * acumulada es la que dibuja el patrón. Ese es todo el truco matemático.
+ * Día 31 — Pendulum Wave.
+ *
+ * Medidas del pen de referencia, sobre 400×400: puntos de 12 px separados por
+ * márgenes de 5, la columna arranca en 28,194 y cada punto recorre ±50 px.
+ * Aquí el lienzo mide 270, así que todo va multiplicado por 0,675.
+ *
+ * Los márgenes verticales colapsan entre puntos contiguos —son bloques en
+ * flujo normal, no flex—, igual que en el original: 5 px entre puntos, no 10.
  */
 
-$pendulos: 12;
-$base: 3.6s;
+$morado: #4c4ba2;
+$escala: 0.675;
+$puntos: 20;
 
 .Dia31 {
-  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: linear-gradient(180deg, #1d1b32, #120f22);
+  background: $morado;
   overflow: hidden;
 
-  .Dia31-barra {
-    position: absolute;
-    top: 34px;
-    left: 24px;
-    right: 24px;
-    height: 3px;
-    border-radius: 2px;
-    background: #4b4a6b;
+  .Dia31-puntos {
+    padding-top: 28px * $escala;
+    padding-left: 194px * $escala;
   }
 
-  .Dia31-pendulo {
-    position: absolute;
-    top: 34px;
-    transform-origin: top center;
-    animation: Dia31Oscilar $base ease-in-out infinite;
-  }
-
-  .Dia31-hilo {
+  .Dia31-punto {
     display: block;
-    width: 1px;
-    height: 120px;
-    margin: 0 auto;
-    background: rgb(255 255 255 / 22%);
-  }
-
-  .Dia31-bola {
-    display: block;
-    width: 12px;
-    height: 12px;
-    margin: -2px auto 0;
+    width: 12px * $escala;
+    height: 12px * $escala;
+    margin: 5px * $escala 0;
     border-radius: 50%;
-    box-shadow: 0 0 10px 1px currentcolor;
-    background: currentcolor;
+    background: #fff;
+    animation: Dia31Punto ease-in-out infinite;
   }
 
-  @for $i from 0 through $pendulos - 1 {
-    .Dia31-pendulo.p#{$i} {
-      left: 24px + $i * 19px;
-      /* Cada péndulo completa un ciclo un 4 % más rápido que el anterior. */
-      animation-duration: $base - $i * 0.09s;
-      /* El tono recorre el espectro junto con la posición. */
-      color: hsl(180deg + $i * 14, 85%, 62%);
+  /* 59 oscilaciones por minuto el primero, 40 el último. */
+  @for $i from 1 through $puntos {
+    .Dia31-punto.p#{$i} {
+      animation-duration: math.div(60000, 60 - $i) * 1ms;
     }
   }
 }
 
-@keyframes Dia31Oscilar {
+@keyframes Dia31Punto {
   0%,
   100% {
-    transform: rotate(28deg);
+    transform: translateX(50px * $escala);
   }
   50% {
-    transform: rotate(-28deg);
+    transform: translateX(-50px * $escala);
   }
 }

@@ -1,74 +1,54 @@
 /*
- * La sensación de túnel sale de escalar cada aro y desvanecerlo al mismo
- * tiempo: los que "vienen de lejos" son pequeños y tenues. El desfase entre
- * aros es lo que produce el avance continuo.
+ * Día 63 — Hypnotic Ring.
+ *
+ * Medidas del pen de referencia, sobre 400×400: círculos de 200 en 100,100 que
+ * se desplazan 200 px en diagonal. Aquí el lienzo mide 270, así que van por
+ * 0,675; el borde de 2 px se queda, que es el punteado y no una medida.
  */
 
-$aros: 14;
-$puntos: 16;
-$ciclo: 4s;
+$escala: 0.675;
+$circulos: 50;
 
 .Dia63 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #07070f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
+  background: #27ae60;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia63-tunel {
-    position: relative;
-    width: 200px;
-    height: 200px;
-  }
-
-  .Dia63-aro {
+  .Dia63-circulo {
     position: absolute;
-    inset: 0;
-    animation: Dia63Acercar $ciclo linear infinite;
-
-    @for $a from 0 through $aros - 1 {
-      &.a#{$a} {
-        animation-delay: -$a * ($ciclo / $aros);
-      }
-    }
-  }
-
-  .Dia63-punto {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 6px;
-    height: 6px;
-    margin: -3px 0 0 -3px;
+    top: 100px * $escala;
+    left: 100px * $escala;
+    width: 200px * $escala;
+    height: 200px * $escala;
+    border: 2px dotted #fff;
     border-radius: 50%;
-    background: #7dd3fc;
+    transform-origin: 50% 50%;
+    animation: Dia63Caer 10s ease-in-out infinite both;
+  }
 
-    /* Cada punto se coloca en su ángulo y se empuja al radio del aro. */
-    @for $p from 0 through $puntos - 1 {
-      &.p#{$p} {
-        transform: rotate($p * (360deg / $puntos)) translateX(96px);
-        background: hsl(196deg + $p * 8, 92%, 66%);
-      }
+  /* Retrasos negativos: al cargar, el túnel ya está montado. */
+  @for $i from 1 through $circulos {
+    .Dia63-circulo.c#{$i} {
+      z-index: $i;
+      animation-delay: $i * -0.2s;
     }
   }
 }
 
-@keyframes Dia63Acercar {
+@keyframes Dia63Caer {
   0% {
-    transform: scale(0.06);
-    opacity: 0;
-  }
-  12% {
-    opacity: 1;
-  }
-  85% {
-    opacity: 0.9;
+    transform: scale(0) translate(-200px * $escala, -200px * $escala);
+    opacity: 0.4;
   }
   100% {
-    transform: scale(1.55);
-    opacity: 0;
+    transform: scale(3.5) translate(0, 0);
+    opacity: 1;
   }
 }
+

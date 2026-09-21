@@ -1,60 +1,59 @@
 /*
- * Nueve circunferencias del mismo tamaño repartidas en corona. Al girar el
- * conjunto y desfasar el latido de cada una, aparece el patrón floral que
- * se ve en los mandalas.
+ * Día 72 — The Rings.
+ *
+ * Medidas del pen de referencia, sobre 400×400: aros de 200 en 100,100. Aquí el
+ * lienzo mide 270, así que la caja va por 0,675; el borde de 1 px se queda.
  */
 
-$anillos: 9;
+$escala: 0.675;
+$aros: 10;
 
 .Dia72 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #0a0a14;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  background: #3498db;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia72-conjunto {
-    position: relative;
-    width: 180px;
-    height: 180px;
-    animation: Dia72Girar 26s linear infinite;
+  .Dia72-centro {
+    position: absolute;
+    top: 100px * $escala;
+    left: 100px * $escala;
+    width: 200px * $escala;
+    height: 200px * $escala;
+    transform-style: preserve-3d;
   }
 
-  .Dia72-anillo {
+  .Dia72-aro {
+    box-sizing: border-box;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 104px;
-    height: 104px;
-    margin: -52px 0 0 -52px;
-    border: 1.5px solid;
+    top: 0;
+    left: 0;
+    width: 200px * $escala;
+    height: 200px * $escala;
+    border: 1px solid #fff;
     border-radius: 50%;
-    animation: Dia72Respirar 5s ease-in-out infinite;
+    transform-origin: 50% 50%;
+  }
 
-    @for $i from 0 through $anillos - 1 {
-      &.a#{$i} {
-        --giro: #{$i * (360deg / $anillos)};
-        border-color: hsla(168deg + $i * 14, 82%, 62%, 0.6);
-        animation-delay: -$i * 0.28s;
+  @for $i from 1 through $aros {
+    .Dia72-aro.a#{$i} {
+      animation: Dia72Aro#{$i} 5s ease-in-out infinite;
+    }
+
+    /* Mismo destino para todos; lo que cambia es cuánto tardan en salir. */
+    @keyframes Dia72Aro#{$i} {
+      #{$i * 4}% {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      }
+      100% {
+        transform: rotateX(360deg) rotateY(-360deg) rotateZ(0deg);
       }
     }
   }
 }
 
-@keyframes Dia72Girar {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes Dia72Respirar {
-  0%,
-  100% {
-    transform: rotate(var(--giro)) translateX(18px) scale(0.86);
-  }
-  50% {
-    transform: rotate(var(--giro)) translateX(46px) scale(1.06);
-  }
-}

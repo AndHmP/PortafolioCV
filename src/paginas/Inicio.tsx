@@ -14,6 +14,7 @@ import {
   rol,
   RUTA_CV,
   titular,
+  titulacion,
   ubicacion,
 } from '@/contenido/perfil';
 import { proyectosDestacados, proyectosPublicados } from '@/contenido/proyectos';
@@ -61,6 +62,13 @@ export default function Inicio() {
               </span>
               {t.inicio.disponible}
             </span>
+
+            {titulacion && (
+              <span className="mb-5 ml-2 inline-flex items-center gap-1.5 rounded-full border border-acento/30 bg-acento-suave px-3 py-1.5 text-xs font-medium text-acento">
+                <Icono nombre="verificado" tamano={13} />
+                {t.perfil.estadoTitulado} · {titulacion.institucion.split('—')[0].trim()}
+              </span>
+            )}
 
             <h1 className="font-display text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl">
               {NOMBRE_COMPLETO}

@@ -9,6 +9,7 @@ export const en: Diccionario = {
     inicio: 'Home',
     proyectos: 'Projects',
     perfil: 'Profile',
+    credenciales: 'Credentials',
     laboratorio: 'UI Lab',
     abrirMenu: 'Open navigation menu',
     cerrarMenu: 'Close navigation menu',
@@ -108,6 +109,10 @@ export const en: Diccionario = {
     contacto: 'Contact',
     conocimientos: 'Skills',
     formacion: 'Education',
+    credencial: 'Credential',
+    estadoTitulado: 'Graduate',
+    estadoEgresado: 'Completed studies',
+    estadoEnCurso: 'In progress',
     experiencia: 'Work experience',
     valores: 'Values',
     edad: 'years old',
@@ -119,6 +124,21 @@ export const en: Diccionario = {
     idiomas: 'Languages',
   },
 
+  credenciales: {
+    titulo: 'Credentials',
+    subtitulo: 'Degrees and certificates, with verification where the issuer provides it.',
+    titulos: 'Degrees',
+    certificados: 'Certificates',
+    sinCertificados: 'No certificates published here yet.',
+    expedido: 'Issued',
+    codigo: 'Code',
+    verificar: 'Verify with the issuer',
+    verDocumento: 'View document',
+    abreEnPestana: 'opens in a new tab',
+    documentoDe: 'Document for',
+    desdePerfil: 'See degrees and certificates',
+  },
+
   laboratorio: {
     titulo: 'UI Lab',
     subtitulo:
@@ -128,6 +148,7 @@ export const en: Diccionario = {
     inputs: 'Fields',
     botones: 'Buttons',
     formularios: 'Forms',
+    cards: 'Cards',
     tecnica: 'Technique',
     contadorUno: 'piece',
     contadorVarios: 'pieces',

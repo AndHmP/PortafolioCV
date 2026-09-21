@@ -1,101 +1,78 @@
+/*
+ * Día 45 — Button.
+ *
+ * Medidas del pen de referencia, sobre 400×400: botón de 180×60 centrado. Aquí
+ * el lienzo mide 270, así que la caja va por 0,675; el trazo y los guiones
+ * viven en el viewBox y se escalan solos.
+ */
+
+$escala: 0.675;
+$azul: #5ca4ea;
+
 .Dia45 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #16161f;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
+  overflow: hidden;
+  background: $azul;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  .Dia45-centro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   .Dia45-boton {
     position: relative;
-    padding: 16px 34px;
-    border: 1.5px solid #5f6bff;
-    border-radius: 40px;
-    background: transparent;
-    color: #fff;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1px;
     cursor: pointer;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    gap: 0;
-    transition:
-      gap 0.4s cubic-bezier(0.65, 0, 0.35, 1),
-      border-color 0.4s,
-      box-shadow 0.4s;
+
+    span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      line-height: 58px * $escala;
+      font-size: 18px * $escala;
+      font-weight: 300;
+      letter-spacing: 1px * $escala;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    &:hover .fondo {
+      fill: #4f95da;
+    }
+
+    /* De 40 a −480: el segmento visible da la vuelta completa al perímetro. */
+    &:hover .luz {
+      stroke-dashoffset: -480;
+    }
   }
 
-  /* El relleno entra como un círculo que crece desde abajo, no como un
-     cambio de background: así el borde queda visible durante la transición. */
-  .Dia45-fondo {
-    position: absolute;
-    left: 50%;
-    bottom: -10px;
-    width: 240px;
-    height: 240px;
-    margin-left: -120px;
-    border-radius: 45%;
-    background: linear-gradient(140deg, #5f6bff, #a06bff);
-    transform: translateY(100%) rotate(0deg);
-    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
-  }
+  .Dia45-borde {
+    display: block;
+    width: 180px * $escala;
+    height: 60px * $escala;
+    fill: none;
+    stroke-width: 1;
 
-  .Dia45-texto,
-  .Dia45-flecha {
-    position: relative;
-    z-index: 1;
-  }
+    .fondo {
+      fill: $azul;
+      stroke: #91c9ff;
+      transition: 0.8s ease-in-out;
+    }
 
-  .Dia45-flecha {
-    display: flex;
-    width: 0;
-    opacity: 0;
-    transition:
-      width 0.4s cubic-bezier(0.65, 0, 0.35, 1),
-      opacity 0.3s;
-
-    svg {
-      width: 18px;
-      height: 18px;
-      fill: none;
+    .luz {
       stroke: #fff;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      stroke-dasharray: 40, 480;
+      stroke-dashoffset: 40;
+      transition: 0.8s ease-in-out;
     }
-  }
-
-  .Dia45-boton:hover {
-    gap: 12px;
-    border-color: transparent;
-    box-shadow: 0 12px 30px rgb(95 107 255 / 40%);
-
-    .Dia45-fondo {
-      transform: translateY(0) rotate(180deg);
-    }
-
-    .Dia45-flecha {
-      width: 18px;
-      opacity: 1;
-    }
-  }
-
-  .Dia45-boton:active {
-    transform: scale(0.96);
-  }
-
-  .Dia45-pista {
-    margin: 0;
-    color: #4a4b63;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
   }
 }
+

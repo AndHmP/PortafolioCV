@@ -1,157 +1,149 @@
 /*
- * La sensación de marioneta viene de encadenar orígenes de transformación:
- * el cuerpo cuelga de los hilos, los brazos del hombro y las piernas de la
- * cadera. Cada parte oscila sobre el punto del que "cuelga".
+ * Día 97 — Waving Puppet.
+ *
+ * Medidas del pen de referencia, sobre 400×400: cabeza de 40, cuerpo de 50×100,
+ * brazos de 16 de ancho y piernas de 24. Aquí el lienzo mide 270, así que todo
+ * va multiplicado por 0,675; los ángulos no.
  */
 
-$vaiven: 2.6s;
+$escala: 0.675;
 
 .Dia97 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: linear-gradient(180deg, #241d33, #14101f);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
   overflow: hidden;
+  background: #8e44ad;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia97-hilo {
+  .Dia97-monigote {
     position: absolute;
-    top: 0;
-    width: 1px;
-    height: 62px;
-    background: rgb(255 255 255 / 28%);
-
-    &.h1 {
-      left: 46%;
-    }
-    &.h2 {
-      left: 54%;
-    }
-  }
-
-  .Dia97-marioneta {
-    margin-top: 58px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transform-origin: top center;
-    animation: Dia97Colgar $vaiven ease-in-out infinite;
+    top: 90px * $escala;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 
   .Dia97-cabeza {
     position: relative;
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    background: #f4a261;
-    box-shadow: inset 0 -4px 8px rgb(0 0 0 / 12%);
-  }
-
-  .Dia97-ojo {
-    position: absolute;
-    top: 20px;
-    width: 8px;
-    height: 8px;
+    width: 40px * $escala;
+    height: 40px * $escala;
+    margin: 0 auto 10px * $escala;
     border-radius: 50%;
-    background: #2b2035;
-
-    &.izq {
-      left: 13px;
-    }
-    &.der {
-      right: 13px;
-    }
-  }
-
-  .Dia97-boca {
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    width: 22px;
-    height: 10px;
-    margin-left: -11px;
-    border-radius: 0 0 12px 12px;
-    background: #2b2035;
+    background: #fff;
   }
 
   .Dia97-cuerpo {
     position: relative;
-    width: 44px;
-    height: 58px;
-    margin-top: 4px;
-    border-radius: 10px;
-    background: #e76f51;
+    width: 50px * $escala;
+    height: 100px * $escala;
+    background: #fff;
   }
 
   .Dia97-brazo {
     position: absolute;
-    top: 6px;
-    width: 10px;
-    height: 44px;
-    border-radius: 6px;
-    background: #f4a261;
-    transform-origin: top center;
-    animation: Dia97Brazo $vaiven ease-in-out infinite;
+    top: 0;
 
-    &.izq {
-      left: -13px;
+    .Dia97-superior {
+      position: relative;
+      width: 16px * $escala;
+      height: 50px * $escala;
+      border-radius: 8px * $escala;
+      background: #fff;
+      /* El giro va en el hombro, no en el centro de la cápsula. */
+      transform-origin: 8px * $escala 8px * $escala;
     }
 
-    &.der {
-      right: -13px;
-      animation-direction: reverse;
+    .Dia97-inferior {
+      position: absolute;
+      bottom: -36px * $escala;
+      left: 0;
+      width: 16px * $escala;
+      height: 52px * $escala;
+      border-radius: 8px * $escala;
+      background: #fff;
+      transform-origin: 8px * $escala 8px * $escala;
     }
-  }
 
-  .Dia97-piernas {
-    display: flex;
-    gap: 8px;
-    margin-top: 2px;
+    &.izquierdo {
+      left: -10px * $escala;
+
+      .Dia97-superior {
+        transform: rotate(10deg);
+      }
+
+      .Dia97-inferior {
+        transform: rotate(-5deg);
+      }
+    }
+
+    /* El que saluda. */
+    &.derecho {
+      right: -10px * $escala;
+
+      .Dia97-superior {
+        transform: rotate(-75deg);
+        animation: Dia97Hombro 1s ease-in-out infinite alternate;
+      }
+
+      .Dia97-inferior {
+        transform: rotate(-75deg);
+        animation: Dia97Antebrazo 1s ease-in-out infinite alternate;
+      }
+    }
   }
 
   .Dia97-pierna {
-    width: 12px;
-    height: 42px;
-    border-radius: 6px;
-    background: #264653;
-    transform-origin: top center;
-    animation: Dia97Pierna $vaiven ease-in-out infinite;
+    position: absolute;
+    top: 78px * $escala;
 
-    &.der {
-      animation-direction: reverse;
+    .Dia97-superior {
+      position: relative;
+      width: 24px * $escala;
+      height: 70px * $escala;
+      border-radius: 12px * $escala;
+      background: #fff;
+      transform-origin: 12px * $escala 12px * $escala;
+    }
+
+    .Dia97-inferior {
+      position: absolute;
+      bottom: -46px * $escala;
+      left: 0;
+      width: 24px * $escala;
+      height: 70px * $escala;
+      border-radius: 12px * $escala;
+      background: #fff;
+      transform-origin: 12px * $escala 12px * $escala;
+    }
+
+    &.izquierda {
+      left: 0;
+    }
+
+    &.derecha {
+      right: 0;
     }
   }
 }
 
-@keyframes Dia97Colgar {
-  0%,
-  100% {
-    transform: rotate(-4deg) translateY(0);
+@keyframes Dia97Hombro {
+  0% {
+    transform: rotate(-75deg);
   }
-  50% {
-    transform: rotate(4deg) translateY(-6px);
+  100% {
+    transform: rotate(-85deg);
   }
 }
 
-@keyframes Dia97Brazo {
-  0%,
-  100% {
-    transform: rotate(14deg);
+@keyframes Dia97Antebrazo {
+  0% {
+    transform: rotate(-75deg);
   }
-  50% {
-    transform: rotate(-24deg);
+  100% {
+    transform: rotate(-105deg);
   }
 }
 
-@keyframes Dia97Pierna {
-  0%,
-  100% {
-    transform: rotate(-8deg);
-  }
-  50% {
-    transform: rotate(10deg);
-  }
-}

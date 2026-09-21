@@ -1,103 +1,102 @@
-$ciclo: 5.2s;
+/*
+ * Día 71 — Morse Code Keyboard.
+ *
+ * Medidas del pen de referencia, sobre 400×400: teclas de 34 con 3 de margen y
+ * luz de 30 a 120 px por encima del teclado. Aquí el lienzo mide 270, así que
+ * todo va multiplicado por 0,675.
+ *
+ * El original flota las teclas y cuenta con que entren diez por fila en 400 px
+ * justos. A 270 no salen las cuentas, así que la rejilla va en `grid` de diez
+ * columnas —como en el 40, el 47 y el 49— y la fila de las cifras se fuerza
+ * con `grid-column-start`, que es el `clear: both` del pen.
+ */
+
+$escala: 0.675;
 
 .Dia71 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #101827;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+  background: #333;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia71-titulo {
-    margin: 0;
-    color: #4ade80;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 10px;
-    text-indent: 10px;
-  }
-
-  .Dia71-cinta {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    height: 26px;
-  }
-
-  /* Cada signo se enciende en su turno; el retardo escalonado que llega desde
-     el componente es lo que reproduce el ritmo del morse. */
-  .Dia71-signo {
-    height: 12px;
-    border-radius: 6px;
-    background: #1f2b3f;
-    animation: Dia71Emitir $ciclo linear infinite;
-
-    &.punto {
-      width: 12px;
-    }
-
-    &.raya {
-      width: 30px;
-    }
-
-    &.espacio {
-      width: 10px;
-      background: transparent;
-      animation: none;
-    }
-  }
-
-  .Dia71-teclas {
-    display: flex;
-    gap: 12px;
+  .Dia71-teclado {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    justify-items: center;
+    padding: 5px * $escala 0;
+    background: #666;
+    border-top: 2px solid #888;
   }
 
   .Dia71-tecla {
-    width: 46px;
-    height: 34px;
-    border-radius: 8px;
-    background: #1f2b3f;
-    box-shadow: 0 3px 0 #16202f;
-    animation: Dia71Pulsar $ciclo ease-in-out infinite;
+    width: 34px * $escala;
+    height: 34px * $escala;
+    margin: 3px * $escala;
+    border-radius: 50%;
+    font-size: 16px * $escala;
+    line-height: 34px * $escala;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
 
-    &.larga {
-      width: 74px;
-      animation-delay: $ciclo / 3;
+    &:hover {
+      background: #999;
     }
   }
+
+  /* Las cifras empiezan fila nueva, como el `clear: both` del original. */
+  .primera-cifra {
+    grid-column-start: 1;
+  }
+
+  .Dia71-luz {
+    position: absolute;
+    top: -120px * $escala;
+    left: 185px * $escala;
+    width: 30px * $escala;
+    height: 30px * $escala;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 15px * $escala 0 #fff;
+    opacity: 0;
+  }
 }
 
-@keyframes Dia71Emitir {
+/* Punto y raya se distinguen solo en cuánto dura el encendido. */
+@keyframes Dia71Punto {
   0%,
-  6% {
-    background: #1f2b3f;
-    box-shadow: none;
-  }
-  9%,
-  16% {
-    background: #4ade80;
-    box-shadow: 0 0 12px rgb(74 222 128 / 60%);
-  }
-  20%,
+  40%,
+  60%,
   100% {
-    background: #1f2b3f;
-    box-shadow: none;
+    opacity: 0;
+  }
+  41%,
+  59% {
+    opacity: 1;
   }
 }
 
-@keyframes Dia71Pulsar {
+@keyframes Dia71Raya {
   0%,
-  10%,
+  15%,
+  85%,
   100% {
-    transform: translateY(0);
-    box-shadow: 0 3px 0 #16202f;
+    opacity: 0;
   }
-  4% {
-    transform: translateY(3px);
-    box-shadow: 0 0 0 #16202f;
+  16%,
+  84% {
+    opacity: 1;
   }
 }
+

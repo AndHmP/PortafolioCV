@@ -3,39 +3,30 @@ import { useState } from 'react';
 import './estilos/Dia82.scss';
 
 /* Día 82 — Action Button
-   "Una buena interfaz informa del resultado y del estado de una acción." */
+   "Pulsa SEND y el botón se da la vuelta para decir DONE."
 
-type Estado = 'listo' | 'cargando' | 'hecho';
+   Las dos caras comparten caja con `backface-visibility: hidden`, y la de atrás
+   ya viene girada 180°: al voltear el botón entero, queda derecha. La sombra
+   también cambia de lado —de 8 px por debajo a 8 por encima— para que parezca
+   que el botón se ha levantado. */
 
 export default function Dia82() {
-  const [estado, setEstado] = useState<Estado>('listo');
-
-  const ejecutar = () => {
-    if (estado !== 'listo') {
-      setEstado('listo');
-      return;
-    }
-    setEstado('cargando');
-    window.setTimeout(() => setEstado('hecho'), 1600);
-  };
-
-  const etiqueta = { listo: 'Guardar', cargando: 'Guardando', hecho: 'Guardado' }[estado];
+  const [enviado, setEnviado] = useState(false);
 
   return (
     <div className="Dia82">
-      <button type="button" className={`Dia82-boton ${estado}`} onClick={ejecutar}>
-        <span className="Dia82-texto">{etiqueta}</span>
-        <span className="Dia82-aro" />
-        <span className="Dia82-check">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 12.5 9.5 18 20 6.5" />
-          </svg>
-        </span>
-      </button>
-
-      <p className="Dia82-pista">
-        {estado === 'hecho' ? 'toca para reiniciar' : 'toca el botón'}
-      </p>
+      <div
+        className={`Dia82-boton ${enviado ? 'enviado' : ''}`}
+        role="button"
+        tabIndex={0}
+        aria-pressed={enviado}
+        onClick={() => setEnviado((v) => !v)}
+        onKeyDown={(e) => e.key === 'Enter' && setEnviado((v) => !v)}
+      >
+        <span className="Dia82-cara">send</span>
+        <span className="Dia82-reverso">done</span>
+      </div>
     </div>
   );
 }
+

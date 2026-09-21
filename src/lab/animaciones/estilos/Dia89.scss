@@ -1,38 +1,89 @@
+/*
+ * Día 89 — Animated Pattern.
+ *
+ * Medidas del pen de referencia, sobre 400×400: rayas de 40×10 con 15 px de
+ * margen, diez por fila y diez filas. Aquí el lienzo mide 270, así que las dos
+ * rejillas van en `grid` de diez columnas para que no se caiga ninguna por
+ * redondeo, y las medidas internas por 0,675.
+ */
+
+$escala: 0.675;
+
 .Dia89 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #0a0a12;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
+  background: #16a085;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia89-malla {
+  .Dia89-horizontales,
+  .Dia89-verticales {
+    position: absolute;
+    inset: 0;
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    gap: 4px;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    place-items: center;
   }
 
-  .Dia89-celda {
-    width: 24px;
-    height: 24px;
-    background: conic-gradient(from 0deg, #5f6bff 0deg 90deg, transparent 90deg 360deg);
-    animation: Dia89Girar 3s ease-in-out infinite;
+  .Dia89-horizontales .Dia89-raya {
+    width: 40px * $escala;
+    height: 10px * $escala;
+    background: #fff;
+    animation: Dia89Tumbada 4s ease-in-out infinite;
+  }
+
+  .Dia89-verticales .Dia89-raya {
+    width: 10px * $escala;
+    height: 40px * $escala;
+    background: #fff;
+    animation: Dia89DePie 4s ease-in-out infinite;
   }
 }
 
-@keyframes Dia89Girar {
+/* Las dos series hacen el mismo cuarto de vuelta, pero se estiran en ejes
+   distintos y se desplazan en sentidos contrarios. */
+@keyframes Dia89Tumbada {
   0% {
-    transform: rotate(0deg) scale(1);
-    filter: hue-rotate(0deg);
+    transform: rotate(0deg);
   }
-  50% {
-    transform: rotate(180deg) scale(0.6);
-    filter: hue-rotate(90deg);
+  20% {
+    transform: rotate(45deg);
+  }
+  40% {
+    transform: rotate(45deg) translateX(-20px * $escala);
+  }
+  60%,
+  80% {
+    transform: rotate(45deg) scaleY(2) scaleX(0.5);
   }
   100% {
-    transform: rotate(360deg) scale(1);
-    filter: hue-rotate(0deg);
+    transform: rotate(90deg);
   }
 }
+
+@keyframes Dia89DePie {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(45deg);
+  }
+  40% {
+    transform: rotate(45deg) translateX(10px * $escala);
+  }
+  60% {
+    transform: rotate(45deg) scaleX(2) scaleY(0.5);
+  }
+  80% {
+    transform: rotate(90deg) scaleX(2) scaleY(0.5);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+

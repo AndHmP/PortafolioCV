@@ -1,72 +1,93 @@
 /*
- * Nueve hojas repartidas cada 40°. Cada una gira sobre el centro del iris,
- * no sobre sí misma: por eso el conjunto se abre y cierra como un obturador
- * en lugar de girar en bloque.
+ * Día 46 — Iris Circles.
+ *
+ * Medidas del pen de referencia, sobre 400×400: anillos de 200 en 100,100 y
+ * puntos de 10 que giran alrededor de un origen a 100 px. Aquí el lienzo mide
+ * 270, así que todo va multiplicado por 0,675 —también la perspectiva, que es
+ * una distancia más.
  */
 
-$hojas: 9;
+$escala: 0.675;
+$radio: 100px * $escala;
 
 .Dia46 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #0f0f18;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  background: #27ae60;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  transform: perspective(60px * $escala);
+  transform-style: preserve-3d;
 
-  .Dia46-iris {
-    position: relative;
-    width: 190px;
-    height: 190px;
-    border-radius: 50%;
-    background: #1a1a26;
-    box-shadow:
-      inset 0 0 30px rgb(0 0 0 / 70%),
-      0 0 0 6px #23233a;
-    overflow: hidden;
+  .Dia46-anillo {
+    position: absolute;
+    top: 100px * $escala;
+    left: 100px * $escala;
+    width: 200px * $escala;
+    height: 200px * $escala;
+    animation: 6s ease-in-out infinite alternate;
   }
 
-  .Dia46-hoja {
+  .Dia46-punto {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100px;
-    height: 100px;
-    /* El origen fuera del propio elemento es lo que produce el barrido. */
-    transform-origin: 0 0;
-    clip-path: polygon(0 0, 100% 0, 100% 100%);
-    animation: Dia46Obturar 5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    top: 100px * $escala;
+    left: 100px * $escala;
+    width: 10px * $escala;
+    height: 10px * $escala;
+    border-radius: 50%;
+    background: #fff;
+  }
 
-    @for $i from 0 through $hojas - 1 {
-      &.h#{$i} {
-        background: hsl(178deg + $i * 9, 72%, 46% + $i * 1.6%);
-        --giro: #{$i * (360deg / $hojas)};
-        animation-delay: $i * 0.045s;
-      }
+  /* Los doce puntos: el mismo desplazamiento, girado 30° más cada vez. */
+  @for $p from 1 through 12 {
+    .Dia46-punto.p#{$p} {
+      transform: translate3d(0, -$radio, 0) rotate(($p - 1) * 30deg);
+      transform-origin: 0 $radio;
     }
   }
 
-  .Dia46-centro {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 26px;
-    height: 26px;
-    margin: -13px 0 0 -13px;
-    border-radius: 50%;
-    background: #0f0f18;
-    box-shadow: 0 0 18px 4px rgb(0 0 0 / 80%);
+  /* Cada anillo es un poco más tenue y corre su propia escala. */
+  @for $a from 1 through 6 {
+    .Dia46-anillo.a#{$a} {
+      animation-name: Dia46Anillo#{$a};
+
+      .Dia46-punto {
+        opacity: 1 - ($a - 1) * 0.1;
+      }
+    }
   }
 }
 
-@keyframes Dia46Obturar {
-  0%,
-  100% {
-    transform: rotate(var(--giro)) scale(1.55);
-  }
-  45%,
-  62% {
-    transform: rotate(calc(var(--giro) + 40deg)) scale(0.35);
-  }
+@keyframes Dia46Anillo1 {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1) rotate(360deg); }
 }
+
+@keyframes Dia46Anillo2 {
+  0% { transform: scale(0.857143) rotate(5deg); }
+  100% { transform: scale(0.954545) rotate(370deg); }
+}
+
+@keyframes Dia46Anillo3 {
+  0% { transform: scale(0.714286) rotate(10deg); }
+  100% { transform: scale(0.909091) rotate(380deg); }
+}
+
+@keyframes Dia46Anillo4 {
+  0% { transform: scale(0.571429) rotate(15deg); }
+  100% { transform: scale(0.863636) rotate(390deg); }
+}
+
+@keyframes Dia46Anillo5 {
+  0% { transform: scale(0.428571) rotate(20deg); }
+  100% { transform: scale(0.818182) rotate(400deg); }
+}
+
+@keyframes Dia46Anillo6 {
+  0% { transform: scale(0.285714) rotate(25deg); }
+  100% { transform: scale(0.772727) rotate(410deg); }
+}
+

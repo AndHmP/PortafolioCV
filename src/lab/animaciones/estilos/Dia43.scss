@@ -1,124 +1,63 @@
-/* Un único ciclo compartido: vidrio, filamento, halo y fondo se encienden y
-   apagan con los mismos porcentajes, así el parpadeo se percibe como uno solo. */
-$ciclo: 3.2s;
+/*
+ * Día 43 — Lightbulb.
+ *
+ * Medidas del pen de referencia, sobre 400×400: bombilla de 76×94 en 134,162,
+ * halo de 76 en la misma esquina y casquillo de 32×33 en 233,184. Aquí el
+ * lienzo mide 270, así que todo va multiplicado por 0,675, incluido el
+ * difuminado del halo.
+ */
+
+$escala: 0.675;
+$amarillo: #fff35c;
 
 .Dia43 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #12121c;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-  animation: Dia43Ambiente $ciclo ease-in-out infinite;
-
-  .Dia43-cable {
-    position: absolute;
-    top: 0;
-    width: 2px;
-    height: 62px;
-    background: #3a3a4d;
-  }
+  background: #404556;
 
   .Dia43-bombilla {
-    position: relative;
-    margin-top: 34px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+    position: absolute;
+    z-index: 2;
+    top: 134px * $escala;
+    left: 162px * $escala;
+    width: 76px * $escala;
+    height: 94px * $escala;
+    fill: $amarillo;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
 
-  .Dia43-vidrio {
-    position: relative;
-    width: 78px;
-    height: 78px;
-    border-radius: 50% 50% 46% 46%;
-    background: #2a2a3c;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: Dia43Vidrio $ciclo ease-in-out infinite;
-  }
+    &:hover {
+      fill: #8c8f99;
+    }
 
-  /* El filamento es un borde en "u": solo los lados y el fondo. */
-  .Dia43-filamento {
-    width: 22px;
-    height: 26px;
-    border: 2px solid #4a4a5e;
-    border-top: none;
-    border-radius: 0 0 12px 12px;
-    animation: Dia43Filamento $ciclo ease-in-out infinite;
-  }
-
-  .Dia43-rosca {
-    width: 30px;
-    height: 24px;
-    margin-top: -4px;
-    border-radius: 0 0 6px 6px;
-    background: repeating-linear-gradient(180deg, #8d8fa8 0 4px, #6d6f88 4px 8px);
+    /* El halo es hermano posterior, así que se apaga con el mismo hover. */
+    &:hover ~ .Dia43-halo {
+      opacity: 0;
+    }
   }
 
   .Dia43-halo {
     position: absolute;
-    top: 96px;
-    width: 190px;
-    height: 190px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgb(255 214 102 / 45%), transparent 62%);
-    opacity: 0;
-    animation: Dia43Halo $ciclo ease-in-out infinite;
+    top: 134px * $escala;
+    left: 162px * $escala;
+    width: 76px * $escala;
+    height: 76px * $escala;
+    border-radius: 50px * $escala;
+    background: $amarillo;
+    box-shadow: 0 0 50px * $escala 10px * $escala $amarillo;
+    transition: 0.5s ease-in-out;
+  }
+
+  .Dia43-casquillo {
+    position: absolute;
+    top: 233px * $escala;
+    left: 184px * $escala;
+    width: 32px * $escala;
+    height: 33px * $escala;
+    fill: #e5e5e5;
   }
 }
 
-@keyframes Dia43Ambiente {
-  0%,
-  42%,
-  100% {
-    background-color: #12121c;
-  }
-  52%,
-  92% {
-    background-color: #1e1a14;
-  }
-}
-
-@keyframes Dia43Vidrio {
-  0%,
-  42%,
-  100% {
-    background: #2a2a3c;
-    box-shadow: none;
-  }
-  52%,
-  92% {
-    background: #ffd666;
-    box-shadow: 0 0 40px 10px rgb(255 214 102 / 55%);
-  }
-}
-
-@keyframes Dia43Filamento {
-  0%,
-  42%,
-  100% {
-    border-color: #4a4a5e;
-  }
-  52%,
-  92% {
-    border-color: #fff6d8;
-  }
-}
-
-@keyframes Dia43Halo {
-  0%,
-  42%,
-  100% {
-    opacity: 0;
-  }
-  52%,
-  92% {
-    opacity: 1;
-  }
-}

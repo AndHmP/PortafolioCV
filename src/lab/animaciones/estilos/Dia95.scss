@@ -1,161 +1,158 @@
 /*
- * Todo son círculos, óvalos y triángulos recortados: ni una sola imagen.
- * Es el ejercicio de reducir una figura reconocible a formas primitivas.
+ * Día 95 — Pig.
+ *
+ * Medidas del pen de referencia, sobre 400×400: cabeza de 160 centrada, orejas
+ * de 60 y hocico de 60×50. Aquí el lienzo mide 270, así que todo va por 0,675.
  */
 
+$escala: 0.675;
+$piel: #f7949a;
+$claro: #ffb7bc;
+
 .Dia95 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: linear-gradient(180deg, #ffe3ec, #fff1f5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  background: #ffdcb5;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
   .Dia95-cerdo {
-    position: relative;
-    width: 170px;
-    height: 150px;
-    animation: Dia95Rebotar 2.6s ease-in-out infinite;
-  }
-
-  .Dia95-oreja {
     position: absolute;
-    top: 2px;
-    width: 42px;
-    height: 42px;
-    background: #f48fb1;
-    clip-path: polygon(50% 0, 100% 100%, 0 100%);
-
-    &.izq {
-      left: 16px;
-      transform: rotate(-18deg);
-    }
-
-    &.der {
-      right: 16px;
-      transform: rotate(18deg);
-    }
-  }
-
-  .Dia95-cara {
-    position: absolute;
-    top: 22px;
+    top: 50%;
     left: 50%;
-    width: 152px;
-    height: 122px;
-    margin-left: -76px;
+    transform: translate(-50%, -50%);
+  }
+
+  .Dia95-cabeza {
+    position: relative;
+    width: 160px * $escala;
+    height: 160px * $escala;
     border-radius: 50%;
-    background: #f8bbd0;
-    box-shadow: inset 0 -8px 16px rgb(0 0 0 / 6%);
+    background: $piel;
+  }
+
+  /* Cuadrado con una esquina redonda, girado y sesgado: la oreja. */
+  .Dia95-oreja {
+    box-sizing: border-box;
+    position: absolute;
+    z-index: -1;
+    top: -5px * $escala;
+    width: 60px * $escala;
+    height: 60px * $escala;
+    background: $claro;
+    border: 7px * $escala solid $piel;
+
+    &.izquierda {
+      left: 10px * $escala;
+      border-radius: 15px * $escala 0 0;
+      transform: rotate(-12deg) skewY(27deg);
+    }
+
+    &.derecha {
+      right: 10px * $escala;
+      border-radius: 0 15px * $escala 0 0;
+      transform: rotate(12deg) skewY(-27deg);
+    }
   }
 
   .Dia95-ojo {
     position: absolute;
-    top: 38px;
-    width: 13px;
-    height: 13px;
+    top: 42%;
+    width: 22px * $escala;
+    height: 22px * $escala;
     border-radius: 50%;
-    background: #3e2723;
-    animation: Dia95Parpadear 4s ease-in-out infinite;
+    background: #fff;
+    animation: Dia95Ojos 15s ease-in-out infinite;
 
-    &.izq {
-      left: 38px;
+    /* La pupila se estira mientras el ojo se cierra: así no desaparece. */
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 9px * $escala;
+      left: 9px * $escala;
+      width: 4px * $escala;
+      height: 4px * $escala;
+      border-radius: 50%;
+      background: #333;
+      animation: Dia95Pupilas 15s ease-in-out infinite;
     }
 
-    &.der {
-      right: 38px;
+    &.izquierdo {
+      left: 24%;
+    }
+
+    &.derecho {
+      right: 24%;
     }
   }
 
-  .Dia95-mejilla {
-    position: absolute;
-    top: 62px;
-    width: 20px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgb(244 143 177 / 75%);
-
-    &.izq {
-      left: 20px;
-    }
-
-    &.der {
-      right: 20px;
-    }
-  }
-
+  /* Óvalo de dos radios: más ancho que alto. */
   .Dia95-hocico {
     position: absolute;
-    bottom: 20px;
-    left: 50%;
-    width: 56px;
-    height: 40px;
-    margin-left: -28px;
-    border-radius: 50%;
-    background: #f48fb1;
-    box-shadow: inset 0 -3px 6px rgb(0 0 0 / 10%);
+    top: 55%;
+    left: 50px * $escala;
+    width: 60px * $escala;
+    height: 50px * $escala;
+    border-radius: 67.5px / 54px;
+    background: $claro;
   }
 
   .Dia95-fosa {
     position: absolute;
-    top: 12px;
-    width: 9px;
-    height: 15px;
+    top: 15px * $escala;
+    width: 12px * $escala;
+    height: 12px * $escala;
     border-radius: 50%;
-    background: #ad1457;
+    background: #ce666d;
 
-    &.izq {
-      left: 13px;
+    &.izquierda {
+      left: 14px * $escala;
     }
 
-    &.der {
-      right: 13px;
+    &.derecha {
+      right: 14px * $escala;
     }
-  }
-
-  /* El rabo en espiral: un borde parcial girado. */
-  .Dia95-rabo {
-    position: absolute;
-    top: 74px;
-    right: -14px;
-    width: 26px;
-    height: 26px;
-    border: 5px solid #f48fb1;
-    border-color: #f48fb1 #f48fb1 transparent transparent;
-    border-radius: 50%;
-    transform: rotate(45deg);
-    animation: Dia95Menear 1.4s ease-in-out infinite;
   }
 }
 
-@keyframes Dia95Rebotar {
+@keyframes Dia95Ojos {
   0%,
-  100% {
-    transform: translateY(0) scale(1, 1);
-  }
-  50% {
-    transform: translateY(-8px) scale(0.99, 1.02);
-  }
-}
-
-@keyframes Dia95Parpadear {
-  0%,
-  92%,
+  23%,
+  25%,
+  65%,
+  67%,
+  89%,
+  91%,
   100% {
     transform: scaleY(1);
   }
-  95% {
-    transform: scaleY(0.12);
+  24%,
+  66%,
+  90% {
+    transform: scaleY(0);
   }
 }
 
-@keyframes Dia95Menear {
+@keyframes Dia95Pupilas {
   0%,
+  23%,
+  25%,
+  65%,
+  67%,
+  89%,
+  91%,
   100% {
-    transform: rotate(45deg);
+    transform: scaleY(1);
   }
-  50% {
-    transform: rotate(75deg);
+  24%,
+  66%,
+  90% {
+    transform: scaleY(2);
   }
 }
+

@@ -1,88 +1,159 @@
 /*
- * El color y el arco se derivan de una sola variable, `--calor` (0 a 1), que
- * React actualiza. Todo lo demás lo calcula CSS: así no hay dos fuentes de
- * verdad para el estado visual.
+ * Día 55 — Thermostat.
+ *
+ * Medidas del pen de referencia, sobre 400×400: disco de 200 en 100,100, aro
+ * de 180 y control de 130. Aquí el lienzo mide 270, así que todo va
+ * multiplicado por 0,675, tipografías y espaciados incluidos.
  */
 
+$escala: 0.675;
+$hueso: #f2f2f2;
+
 .Dia55 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #171722;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  font-family: 'Open Sans', sans-serif;
-  transition: background-color 0.5s;
-  background-color: hsl(var(--tono), 32%, calc(9% + var(--calor) * 6%));
+  overflow: hidden;
+  background: #2b4147;
+  color: #7a7a7a;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  line-height: 130%;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia55-dial {
-    position: relative;
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    background: rgb(255 255 255 / 4%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* El degradado cónico avanza tantos grados como marque `--calor`. */
-  .Dia55-arco {
+  .Dia55-termostato {
     position: absolute;
-    inset: 0;
+    top: 100px * $escala;
+    left: 100px * $escala;
+    width: 200px * $escala;
+    height: 200px * $escala;
     border-radius: 50%;
-    background: conic-gradient(
-      from 145deg,
-      hsl(var(--tono), 85%, 58%) calc(var(--calor) * 250deg),
-      rgb(255 255 255 / 7%) calc(var(--calor) * 250deg) 250deg,
-      transparent 250deg
-    );
-    mask: radial-gradient(circle, transparent 62px, #000 63px);
-    transition: background 0.4s;
+    background: $hueso;
+    box-shadow: 2px 4px 8px 0 rgb(0 0 0 / 30%);
+    cursor: pointer;
   }
 
-  .Dia55-lectura {
-    margin: 0;
-    color: #fff;
-    font-size: 44px;
+  .Dia55-aro {
+    position: absolute;
+    top: 10px * $escala;
+    left: 10px * $escala;
+    width: 180px * $escala;
+    height: 180px * $escala;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #672b95 0%, #ce2e5f 100%);
+    box-shadow: inset 2px 4px 4px 0 rgb(0 0 0 / 30%);
+  }
+
+  /* Un cuadrado del color de la esfera, girado 45°, muerde el arco por abajo. */
+  .Dia55-tapa {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 95px * $escala;
+    height: 95px * $escala;
+    background: $hueso;
+    border-radius: 0 0 95px * $escala;
+    transform-origin: 0 0;
+    transform: rotate(45deg);
+  }
+
+  .Dia55-control {
+    position: absolute;
+    z-index: 5;
+    top: 35px * $escala;
+    left: 35px * $escala;
+    width: 130px * $escala;
+    height: 130px * $escala;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 1px 2px 4px 0 rgb(0 0 0 / 20%);
+  }
+
+  .Dia55-aguja {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 12px * $escala;
+    background: #6c6c6c;
+    transform-origin: 0 65px * $escala;
+    transform: rotate(-50deg);
+    transition: 0.5s ease-in-out;
+  }
+
+  .Dia55-fuera {
+    position: absolute;
+    top: 18px * $escala;
+    left: 6px * $escala;
+    right: 0;
+    font-size: 12px * $escala;
     font-weight: 300;
-    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
+
+  .Dia55-dentro {
+    position: absolute;
+    top: 34px * $escala;
+    left: 0;
+    right: 0;
+    padding-right: 12px * $escala;
+    color: #873183;
+    font-size: 60px * $escala;
+    line-height: 60px * $escala;
+    font-weight: 400;
+    letter-spacing: -8px * $escala;
+    text-align: center;
+    opacity: 1;
+    transform: translateX(0);
+    transition: 0.5s ease-in-out;
 
     span {
-      margin-left: 2px;
-      font-size: 18px;
-      color: hsl(var(--tono), 85%, 68%);
-      transition: color 0.4s;
+      position: absolute;
+      top: 0;
+      right: 37px * $escala;
+      padding-left: 7px * $escala;
+      font-size: 20px * $escala;
+      line-height: 34px * $escala;
+    }
+
+    /* El grado siguiente espera fuera de plano, a la derecha y encogido. */
+    &.dos {
+      padding-right: 2px * $escala;
+      color: #98317a;
+      letter-spacing: -6px * $escala;
+      opacity: 0;
+      transform: translateX(50px * $escala) scale(0.5);
+
+      span {
+        right: 30px * $escala;
+      }
     }
   }
 
-  .Dia55-controles {
-    display: flex;
-    gap: 14px;
+  .Dia55-sala {
+    position: absolute;
+    bottom: 18px * $escala;
+    left: 0;
+    right: 0;
+    font-size: 12px * $escala;
+    font-weight: 300;
+    text-align: center;
+  }
 
-    button {
-      width: 44px;
-      height: 44px;
-      border: 1px solid rgb(255 255 255 / 14%);
-      border-radius: 50%;
-      background: transparent;
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
-      transition:
-        background-color 0.2s,
-        transform 0.12s;
+  .Dia55-termostato:hover {
+    .Dia55-aguja {
+      transform: rotate(-20deg);
+    }
 
-      &:hover {
-        background: rgb(255 255 255 / 10%);
-      }
+    .Dia55-dentro {
+      opacity: 0;
+      transform: translateX(-50px * $escala) scale(0.5);
+    }
 
-      &:active {
-        transform: scale(0.9);
-      }
+    .Dia55-dentro.dos {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
 }
+

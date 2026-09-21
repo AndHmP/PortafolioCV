@@ -1,36 +1,58 @@
+/*
+ * Día 52 — Dot Wave.
+ *
+ * Medidas del pen de referencia, sobre 400×400: anillos de 80 en 160,160 y
+ * puntos de 8. Aquí el lienzo mide 270, así que todo va multiplicado por 0,675.
+ *
+ * Los radios y los ángulos de cada punto se calculan en el componente —son
+ * doscientos y pico— y el retraso de cada anillo viaja con él; aquí solo queda
+ * la forma.
+ */
+
+$escala: 0.675;
+
 .Dia52 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #0b0b14;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  background: #27ae60;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia52-malla {
-    display: grid;
-    grid-template-columns: repeat(13, 1fr);
-    gap: 7px;
+  .Dia52-anillo {
+    position: absolute;
+    top: 160px * $escala;
+    left: 160px * $escala;
+    width: 80px * $escala;
+    height: 80px * $escala;
   }
 
   .Dia52-punto {
-    width: 9px;
-    height: 9px;
+    position: absolute;
+    top: 40px * $escala;
+    left: 40px * $escala;
+    width: 8px * $escala;
+    height: 8px * $escala;
+  }
+
+  .Dia52-relleno {
+    width: 8px * $escala;
+    height: 8px * $escala;
     border-radius: 50%;
-    background: #5f6bff;
-    animation: Dia52Onda 2.4s ease-in-out infinite;
+    background: #fff;
+    /* El retraso lo fija el anillo en `--Dia52-retraso`, que sí se hereda. */
+    animation: Dia52Latir 2s ease-in-out var(--Dia52-retraso, 0s) infinite alternate both;
   }
 }
 
-@keyframes Dia52Onda {
-  0%,
-  100% {
-    transform: scale(0.35);
-    background: #2a2c55;
+@keyframes Dia52Latir {
+  0% {
+    transform: scale(0);
   }
-  45% {
-    transform: scale(1.15);
-    background: #7dd3fc;
-    box-shadow: 0 0 10px rgb(125 211 252 / 60%);
+  100% {
+    transform: scale(1);
   }
 }
+

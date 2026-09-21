@@ -1,73 +1,91 @@
-$palabras: 5;
-$alto: 42px;
-$paso: 2.2s;
+/*
+ * Día 73 — Word Carousel.
+ *
+ * Medidas del pen de referencia, sobre 400×400: línea de 45 px de alto a
+ * cuerpo 30, centrada en el 49,5 % con −22,5 de corrección. Aquí el lienzo mide
+ * 270, así que todo va multiplicado por 0,675.
+ */
+
+$escala: 0.675;
+$linea: 45px * $escala;
 
 .Dia73 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #16161f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 26px;
+  overflow: hidden;
+  background: #f39c12;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia73-frase {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-family: 'Kulim Park', sans-serif;
-    font-size: 30px;
-    font-weight: 700;
+  .Dia73-centro {
+    position: absolute;
+    top: 49.5%;
+    left: 0;
+    right: 0;
+    margin-top: -22.5px * $escala;
   }
 
-  .Dia73-fijo {
-    color: #6b6d8c;
+  .Dia73-carrusel {
+    position: relative;
+    width: 100%;
+    height: $linea;
+    font-size: 30px * $escala;
+    line-height: $linea;
+    text-align: center;
   }
 
+  .Dia73-previo {
+    position: absolute;
+    top: 0;
+    right: 56%;
+    height: $linea;
+    text-shadow: 2px 2px 2px #e67e22;
+  }
+
+  /* El recorte: solo se ve una palabra de la columna. */
   .Dia73-ventana {
-    height: $alto;
+    position: absolute;
+    top: 0;
+    left: 46%;
+    height: $linea;
     overflow: hidden;
+    text-align: left;
   }
 
-  .Dia73-cinta {
-    display: flex;
-    flex-direction: column;
-    animation: Dia73Rodar ($paso * $palabras) cubic-bezier(0.76, 0, 0.24, 1) infinite;
+  .Dia73-columna {
+    position: relative;
+    animation: Dia73Pasar 8s ease-in-out infinite;
+  }
 
-    span {
-      height: $alto;
-      line-height: $alto;
-      color: #6ee7c8;
-      white-space: nowrap;
-    }
+  .Dia73-palabra {
+    display: block;
+    font-weight: 700;
+    text-shadow: 2px 2px 2px #e67e22;
   }
 }
 
-/* Cinco pasos con pausa: cada palabra se detiene antes de ceder el turno. */
-@keyframes Dia73Rodar {
+@keyframes Dia73Pasar {
   0%,
-  16% {
+  20% {
     transform: translateY(0);
   }
-  20%,
-  36% {
-    transform: translateY(-$alto);
+  25%,
+  45% {
+    transform: translateY(-$linea);
   }
-  40%,
-  56% {
-    transform: translateY(-$alto * 2);
+  50%,
+  70% {
+    transform: translateY(-$linea * 2);
   }
-  60%,
-  76% {
-    transform: translateY(-$alto * 3);
-  }
-  80%,
-  96% {
-    transform: translateY(-$alto * 4);
+  75%,
+  95% {
+    transform: translateY(-$linea * 3);
   }
   100% {
-    transform: translateY(-$alto * 5);
+    transform: translateY(-$linea * 4);
   }
 }
+

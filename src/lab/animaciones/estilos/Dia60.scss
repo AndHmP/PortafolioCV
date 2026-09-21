@@ -1,97 +1,68 @@
+/*
+ * Día 60 — Blurry Overlay.
+ *
+ * Medidas del pen de referencia, sobre 400×400: panel de 400 de ancho y el
+ * rótulo a 169 px de arriba, a cuerpo 60. Aquí el lienzo mide 270, así que
+ * todo va multiplicado por 0,675.
+ *
+ * El alto del panel va en porcentaje y lo fija el componente: así el corte cae
+ * donde está el ratón sin depender del tamaño del lienzo.
+ */
+
+$escala: 0.675;
+
 .Dia60 {
   position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #12101f;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #34495e;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
 
-  /* Manchas de color en movimiento: sin algo vivo detrás, el desenfoque no
-     se aprecia. */
-  .Dia60-mancha {
+  .Dia60-panel {
     position: absolute;
-    border-radius: 50%;
-    filter: blur(26px);
-    animation: Dia60Flotar 12s ease-in-out infinite;
-
-    &.m1 {
-      top: 12%;
-      left: 8%;
-      width: 130px;
-      height: 130px;
-      background: #ff6b6b;
-    }
-
-    &.m2 {
-      bottom: 6%;
-      right: 4%;
-      width: 150px;
-      height: 150px;
-      background: #4ecdc4;
-      animation-delay: -4s;
-    }
-
-    &.m3 {
-      top: 40%;
-      right: 26%;
-      width: 100px;
-      height: 100px;
-      background: #a06bff;
-      animation-delay: -8s;
-    }
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    background: #e67e22;
+    transform-origin: 50% 0%;
+    pointer-events: none;
+    transition: 0.4s ease-in-out;
   }
 
-  .Dia60-tarjeta {
-    position: relative;
-    z-index: 1;
-    width: 78%;
-    padding: 24px 22px;
-    border: 1px solid rgb(255 255 255 / 22%);
-    border-radius: 18px;
-    background: rgb(255 255 255 / 10%);
-    backdrop-filter: blur(14px) saturate(160%);
-    box-shadow: 0 10px 34px rgb(0 0 0 / 30%);
+  &.siguiendo .Dia60-panel {
+    transition: none;
+  }
+
+  .Dia60-texto {
+    position: absolute;
+    top: 169px * $escala;
+    width: 100%;
+    font-size: 60px * $escala;
+    line-height: 60px * $escala;
+    font-weight: 700;
     text-align: center;
-    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    pointer-events: none;
   }
 
-  .Dia60-avatar {
-    display: block;
-    width: 52px;
-    height: 52px;
-    margin: 0 auto 14px;
-    border-radius: 50%;
-    background: linear-gradient(140deg, #fff, rgb(255 255 255 / 45%));
-    box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
-  }
-
-  .Dia60-nombre {
-    margin: 0 0 6px;
+  /* Detrás del panel: solo se ve donde el naranja no llega. */
+  .detras {
+    z-index: 2;
     color: #fff;
-    font-size: 15px;
-    font-weight: 600;
   }
 
-  .Dia60-detalle {
-    margin: 0;
-    color: rgb(255 255 255 / 72%);
-    font-size: 11.5px;
-    line-height: 1.6;
+  /* Delante: sin relleno, solo el halo. Se ve únicamente sobre el naranja. */
+  .delante {
+    z-index: 10;
+    color: transparent;
+    text-shadow: 0 0 10px * $escala rgb(255 255 255 / 70%);
   }
 }
 
-@keyframes Dia60Flotar {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(34px, -26px) scale(1.14);
-  }
-  66% {
-    transform: translate(-26px, 22px) scale(0.9);
-  }
-}

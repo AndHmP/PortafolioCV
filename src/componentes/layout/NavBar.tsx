@@ -6,10 +6,15 @@ import { useIdioma } from '@/hooks/useIdioma';
 import { useTema } from '@/hooks/useTema';
 import type { ClaveIconoUI } from '@/componentes/iconos/Icono';
 
-const ENLACES: { a: string; clave: 'inicio' | 'proyectos' | 'perfil' | 'laboratorio'; icono: ClaveIconoUI }[] = [
+const ENLACES: {
+  a: string;
+  clave: 'inicio' | 'proyectos' | 'perfil' | 'credenciales' | 'laboratorio';
+  icono: ClaveIconoUI;
+}[] = [
   { a: '/', clave: 'inicio', icono: 'inicio' },
   { a: '/proyectos', clave: 'proyectos', icono: 'proyectos' },
   { a: '/perfil', clave: 'perfil', icono: 'perfil' },
+  { a: '/credenciales', clave: 'credenciales', icono: 'verificado' },
   { a: '/laboratorio', clave: 'laboratorio', icono: 'laboratorio' },
 ];
 

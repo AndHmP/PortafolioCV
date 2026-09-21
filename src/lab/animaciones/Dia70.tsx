@@ -1,38 +1,28 @@
-import { useState } from 'react';
-
 import './estilos/Dia70.scss';
 
 /* Día 70 — Calendar Days
-   "Una prueba de profundidad en las acciones del usuario." */
+   "Cuatro días grandes, sin calendario alrededor."
 
-const DIAS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
-const NUMEROS = Array.from({ length: 28 }, (_, i) => i + 1);
+   Cuatro cuadrados de 200 px que llenan el lienzo. Al pasar el ratón la tarjeta
+   se encoge al 95 % y recibe una sombra interior: parece que se hunde. */
+
+const DIAS = [
+  { nombre: 'Friday', numero: 15 },
+  { nombre: 'Saturday', numero: 16 },
+  { nombre: 'Sunday', numero: 17 },
+  { nombre: 'Monday', numero: 18 },
+];
 
 export default function Dia70() {
-  const [elegido, setElegido] = useState(11);
-
   return (
     <div className="Dia70">
-      <p className="Dia70-mes">Septiembre</p>
-
-      <div className="Dia70-cabecera">
-        {DIAS.map((d, i) => (
-          <span key={`${d}-${i}`}>{d}</span>
-        ))}
-      </div>
-
-      <div className="Dia70-rejilla">
-        {NUMEROS.map((n) => (
-          <button
-            key={n}
-            type="button"
-            className={`Dia70-dia ${elegido === n ? 'elegido' : ''}`}
-            onClick={() => setElegido(n)}
-          >
-            {n}
-          </button>
-        ))}
-      </div>
+      {DIAS.map((dia) => (
+        <div key={dia.nombre} className="Dia70-tarjeta">
+          <span className="Dia70-texto">{dia.nombre}</span>
+          <span className="Dia70-numero">{dia.numero}</span>
+        </div>
+      ))}
     </div>
   );
 }
+

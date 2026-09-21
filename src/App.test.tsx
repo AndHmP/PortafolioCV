@@ -69,6 +69,16 @@ describe('App', () => {
     ).toBeInTheDocument();
   });
 
+  it('carga las credenciales con el título de SENATI', async () => {
+    montar('/credenciales');
+
+    expect(
+      await screen.findByRole('heading', { level: 1, name: /Credenciales/ }),
+    ).toBeInTheDocument();
+    // La resolución directoral es el dato que hace verificable el título.
+    expect(await screen.findByText(/RD-482143-2026/)).toBeInTheDocument();
+  });
+
   it('carga el laboratorio con sus piezas', async () => {
     montar('/laboratorio');
 

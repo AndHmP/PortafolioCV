@@ -1,20 +1,42 @@
+import { useState } from 'react';
+
 import './estilos/Dia60.scss';
 
 /* Día 60 — Blurry Overlay
-   "El desenfoque de fondo está de moda, pero no es fácil sin trucos." */
+   "La palabra cambia de nitidez según por dónde la cortes."
+
+   Hay dos veces la misma palabra, una encima de otra: la de detrás es blanca y
+   sólida; la de delante es transparente y solo deja su halo. Entre las dos, un
+   panel naranja cuya altura sigue al ratón. Donde el panel tapa se ve el halo
+   borroso; donde no llega, la palabra nítida.
+
+   El pen lo resuelve con 201 tiras invisibles y otras tantas reglas `:hover ~`.
+   Aquí basta con leer la posición del ratón, que es lo mismo con dos órdenes. */
 
 export default function Dia60() {
-  return (
-    <div className="Dia60">
-      <span className="Dia60-mancha m1" />
-      <span className="Dia60-mancha m2" />
-      <span className="Dia60-mancha m3" />
+  const [alto, setAlto] = useState(50);
+  const [siguiendo, setSiguiendo] = useState(false);
 
-      <div className="Dia60-tarjeta">
-        <span className="Dia60-avatar" />
-        <p className="Dia60-nombre">Vidrio esmerilado</p>
-        <p className="Dia60-detalle">backdrop-filter sobre un fondo en movimiento</p>
-      </div>
+  return (
+    <div
+      /* Mientras sigue al ratón el corte va sin transición, para que no se
+         quede atrás; al soltar, vuelve al centro en 0,4 s. Igual que el pen,
+         que pone `transition: initial` en las reglas de hover. */
+      className={`Dia60 ${siguiendo ? 'siguiendo' : ''}`}
+      onMouseMove={(e) => {
+        const caja = e.currentTarget.getBoundingClientRect();
+        setSiguiendo(true);
+        setAlto(((e.clientY - caja.top) / caja.height) * 100);
+      }}
+      onMouseLeave={() => {
+        setSiguiendo(false);
+        setAlto(50);
+      }}
+    >
+      <div className="Dia60-panel" style={{ height: `${alto}%` }} />
+      <div className="Dia60-texto detras">Hover</div>
+      <div className="Dia60-texto delante">Hover</div>
     </div>
   );
 }
+

@@ -1,118 +1,164 @@
+/*
+ * Día 62 — Price Table.
+ *
+ * Medidas del pen de referencia, sobre 400×400: tarjetas de 110×160 en 30,25 /
+ * 145 / 265 y panel de 380×160 en 220,10. Aquí el lienzo mide 270, así que todo
+ * va multiplicado por 0,675, tipografías incluidas.
+ */
+
+$escala: 0.675;
+$azul: #7dd0ed;
+$azul-fuerte: #27a6d2;
+$papel: #e9edef;
+
 .Dia62 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #14141f;
-  padding: 14px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+  background: $papel;
+  color: #5e5e5e;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
   .Dia62-plan {
-    position: relative;
-    flex: 1;
-    padding: 18px 10px;
-    border: 1px solid #2b2b3d;
-    border-radius: 12px;
-    background: #1c1c2a;
-    text-align: center;
-    transition:
-      transform 0.3s cubic-bezier(0.65, 0, 0.35, 1),
-      border-color 0.3s,
-      box-shadow 0.3s;
+    position: absolute;
+    top: 30px * $escala;
+    left: 25px * $escala;
+    width: 110px * $escala;
+    height: 160px * $escala;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 2px 2px 4px 0 rgb(0 0 0 / 10%);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    &.pro {
+      left: 145px * $escala;
+    }
+
+    &.premium {
+      left: 265px * $escala;
+    }
 
     &:hover {
-      transform: translateY(-8px);
-      border-color: #5f6bff;
-      box-shadow: 0 14px 28px rgb(0 0 0 / 45%);
+      transform: scale(1.1);
+      box-shadow: 4px 4px 8px 0 rgb(0 0 0 / 10%);
     }
 
-    /* El plan recomendado nace ya elevado, para que se lea primero. */
-    &.destacado {
-      background: linear-gradient(165deg, #2a2a4d, #1c1c2a);
-      border-color: #5f6bff;
-      transform: scale(1.06);
-
-      &:hover {
-        transform: scale(1.06) translateY(-8px);
-      }
+    &:hover .Dia62-titulo {
+      background: $azul-fuerte;
     }
 
-    h4 {
-      margin: 0 0 10px;
-      color: #9a9cbb;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-
-    ul {
-      list-style: none;
-      margin: 0 0 14px;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-
-      li {
-        color: #7b7d9e;
-        font-size: 10px;
-        line-height: 1.4;
-      }
-    }
-
-    button {
-      width: 100%;
-      padding: 8px 0;
-      border: none;
-      border-radius: 7px;
-      background: #2f2f45;
-      color: #cfd0f0;
-      font-family: inherit;
-      font-size: 11px;
-      cursor: pointer;
-      transition: background-color 0.25s;
-
-      &:hover {
-        background: #5f6bff;
-        color: #fff;
-      }
-    }
-
-    &.destacado button {
-      background: #5f6bff;
-      color: #fff;
+    &:hover .Dia62-precio {
+      color: $azul-fuerte;
     }
   }
 
-  .Dia62-precio {
-    margin: 0 0 14px;
+  .Dia62-titulo {
+    height: 36px * $escala;
+    background: $azul;
     color: #fff;
-    font-size: 28px;
+    font-size: 14px * $escala;
+    font-weight: 600;
+    line-height: 36px * $escala;
+    text-align: center;
+    transition: 0.3s ease-in-out;
+  }
+
+  .Dia62-precio {
+    padding: 16px * $escala 0 17px * $escala;
+    font-size: 30px * $escala;
+    line-height: 30px * $escala;
     font-weight: 700;
+    text-align: center;
+    transition: 0.3s ease-in-out;
 
     span {
-      margin-right: 2px;
-      color: #6ee7c8;
-      font-size: 13px;
+      display: block;
+      font-size: 12px * $escala;
+      line-height: 12px * $escala;
       font-weight: 400;
     }
   }
 
-  .Dia62-cinta {
+  .Dia62-renglon {
+    height: 3px * $escala;
+    margin: 0 auto 7px * $escala;
+    background: #e4e4e4;
+  }
+
+  .Dia62-datos {
     position: absolute;
-    top: -9px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 3px 10px;
-    border-radius: 10px;
-    background: #5f6bff;
-    color: #fff;
-    font-size: 8.5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    white-space: nowrap;
+    top: 220px * $escala;
+    left: 10px * $escala;
+    width: 380px * $escala;
+    height: 160px * $escala;
+    background: #fff;
+    box-shadow: 2px 2px 4px 0 rgb(0 0 0 / 10%);
+  }
+
+  .Dia62-dato {
+    margin: 17px * $escala 15px * $escala 0;
+  }
+
+  .Dia62-texto {
+    height: 20px * $escala;
+    font-size: 12px * $escala;
+
+    .izquierda {
+      float: left;
+    }
+
+    .derecha {
+      float: right;
+    }
+  }
+
+  .Dia62-barra {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 10px * $escala;
+    border-radius: 5px * $escala;
+    overflow: hidden;
+    background: $papel;
+  }
+
+  .Dia62-relleno {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 10px * $escala;
+    border-radius: 3px * $escala;
+    background: $azul;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: 0.3s ease-in-out;
+  }
+
+  /* Los planes son hermanos del panel: el `~` basta, sin estado en React. */
+  .basic:hover ~ .Dia62-datos .Dia62-relleno {
+    transform: scaleX(0.05);
+  }
+
+  /* El Pro no da lo mismo en las tres: 30 %, 70 % y 50 %. */
+  .pro:hover ~ .Dia62-datos .usuarios .Dia62-relleno {
+    transform: scaleX(0.3);
+  }
+
+  .pro:hover ~ .Dia62-datos .gb .Dia62-relleno {
+    transform: scaleX(0.7);
+  }
+
+  .pro:hover ~ .Dia62-datos .proyectos .Dia62-relleno {
+    transform: scaleX(0.5);
+  }
+
+  .premium:hover ~ .Dia62-datos .Dia62-relleno {
+    transform: scaleX(1);
   }
 }
+

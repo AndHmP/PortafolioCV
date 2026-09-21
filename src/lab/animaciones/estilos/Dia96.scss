@@ -1,83 +1,137 @@
 /*
- * Variante del día 50, pero sobre un cuadrado y con giro: aquí el squash se
- * combina con una rotación de 90° por salto, así que la deformación tiene que
- * respetar el eje que toca el suelo en cada momento.
+ * Día 96 — Jumping Square.
+ *
+ * Medidas del pen de referencia, sobre 400×400: cuadrado de 100 centrado en el
+ * 55 % de alto, con saltos de 100 px. Aquí el lienzo mide 270, así que todo va
+ * multiplicado por 0,675.
  */
 
-$salto: 1.6s;
+$escala: 0.675;
+$salto: 100px * $escala;
 
 .Dia96 {
+  position: relative;
   height: 90%;
   aspect-ratio: 1;
   border-radius: 4px;
-  background: #101822;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 26px;
+  overflow: hidden;
+  background: #3498db;
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  .Dia96-pista {
+  .Dia96-centro {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Una capa por gesto: así cada una lleva su propia curva. */
+  .Dia96-cae {
     position: relative;
-    width: 170px;
-    height: 170px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    animation: Dia96Caer 1.6s ease-in infinite both;
+  }
+
+  .Dia96-sube {
+    animation: Dia96Subir 1.6s ease-in-out infinite both;
+  }
+
+  .Dia96-aplasta {
+    transform-origin: 50% 100%;
+    animation: Dia96Aplastar 1.6s cubic-bezier(0.72, 0.03, 0.28, 0.97) infinite both;
+  }
+
+  .Dia96-gira-entra {
+    animation: Dia96GirarEntra 1.6s ease-out infinite both;
+  }
+
+  .Dia96-gira-sale {
+    animation: Dia96GirarSale 1.6s ease-in infinite both;
   }
 
   .Dia96-cuadrado {
-    width: 56px;
-    height: 56px;
-    margin-bottom: 22px;
-    border-radius: 10px;
-    background: linear-gradient(145deg, #6ee7c8, #22d3ee);
-    box-shadow: 0 0 22px rgb(34 211 238 / 35%);
-    transform-origin: center bottom;
-    animation: Dia96Saltar $salto cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    width: $salto;
+    height: $salto;
+    background: #fff;
   }
 
-  .Dia96-marca {
+  .Dia96-sombra {
     position: absolute;
-    left: 22px;
-    right: 22px;
-    bottom: 20px;
-    height: 2px;
-    border-radius: 2px;
-    background: rgb(255 255 255 / 12%);
-  }
-
-  .Dia96-nota {
-    margin: 0;
-    color: #3d4d5c;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    z-index: -1;
+    bottom: -2px * $escala;
+    left: -4px * $escala;
+    right: -4px * $escala;
+    height: 2px * $escala;
+    border-radius: 50%;
+    background: rgb(0 0 0 / 20%);
+    box-shadow: 0 0 0 8px * $escala rgb(0 0 0 / 20%);
+    animation: Dia96Sombra 1.6s ease-in-out infinite both;
   }
 }
 
-@keyframes Dia96Saltar {
+@keyframes Dia96Caer {
   0% {
-    transform: translateY(0) scale(1, 1) rotate(0deg);
+    transform: translateY(-$salto);
   }
-  8% {
-    /* Anticipación: se agacha antes de despegar. */
-    transform: translateY(0) scale(1.22, 0.76) rotate(0deg);
+  20%,
+  100% {
+    transform: translateY(0);
   }
-  22% {
-    transform: translateY(-46px) scale(0.86, 1.2) rotate(30deg);
-  }
-  50% {
-    transform: translateY(-96px) scale(1, 1) rotate(90deg);
-  }
-  78% {
-    transform: translateY(-46px) scale(0.86, 1.2) rotate(150deg);
-  }
-  92% {
-    transform: translateY(0) scale(1.26, 0.72) rotate(180deg);
+}
+
+@keyframes Dia96Subir {
+  0%,
+  75% {
+    transform: translateY(0);
   }
   100% {
-    transform: translateY(0) scale(1, 1) rotate(180deg);
+    transform: translateY(-$salto);
   }
 }
+
+@keyframes Dia96Aplastar {
+  0%,
+  4% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.8, 0.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes Dia96GirarEntra {
+  0% {
+    transform: rotate(-135deg);
+  }
+  20%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes Dia96GirarSale {
+  0%,
+  80% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(135deg);
+  }
+}
+
+/* Se ensancha justo cuando el cuadrado toca el suelo. */
+@keyframes Dia96Sombra {
+  0%,
+  100% {
+    transform: scaleX(0.5);
+  }
+  45%,
+  50% {
+    transform: scaleX(1.8);
+  }
+}
+
